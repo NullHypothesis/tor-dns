@@ -1,0 +1,48 @@
+\section{Methodology}
+\label{sec:methodology}
+
+\subsection{Threat model}
+We consider the following adversaries.
+\begin{description}
+	\item[Network-level adversary] An adversary that monitors at least
+		one autonomous system, e.g., ISP, VPS provider, government.
+	\item[Relay-level adversary] An adversary that runs at least one Tor relay.
+	\item[DNS provider] An adversary that operates the DNS resolver used
+		by exit relays, e.g., Google.
+\end{description}
+
+\subsection{DNS resolver dataset}
+\label{sec:dns-resolver-dataset}
+\begin{itemize}
+	\item Resolve domain under our control over all exit relays.
+	\item Record requester's IP address on authoritative DNS server.
+\end{itemize}
+
+\subsection{Traceroute dataset}
+\label{sec:traceroute-dataset}
+\begin{itemize}
+	\item Find machines that are topologically close to DNS resolvers
+		used by exit relays.
+	\begin{itemize}
+		\item RIPE Atlas probes.
+		\item Virtual private systems.
+		\item PlanetLab nodes.
+		\item Ask exit operators to run traceroutes for us.
+	\end{itemize}
+	\item Run traceroutes to DNS servers to determine path coverage.
+	\item Determine ``AS inflation factor.''
+\end{itemize}
+
+\subsection{DNS root dataset}
+\label{sec:dns-root-dataset}
+\begin{itemize}
+	\item Learn what kind of domains are resolved by exit relays to learn where
+		we should traceroute to.
+\end{itemize}
+
+\subsection{DNS packet sizes at entry guard}
+\begin{itemize}
+	\item Send many DNS requests over entry guard.
+	\item Capture them on the wire and look at them.
+	\item What's the best way to filter out the noise?
+\end{itemize}

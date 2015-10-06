@@ -2,9 +2,12 @@
 \label{sec:introduction}
 
 \begin{itemize}
-	\item Past traffic analysis attempts focused on TCP streams only.
+	\item Past traffic analysis attempts focused only on TCP streams.
 	\item Associated traffic such as DNS is an issue, because its distributed
-		nature greatly increases path coverage.
+		nature greatly increases path coverage, i.e., the number of ASes that
+		are traversed by IP packets.
+	\item As a result, past work might have underestimated the impact of
+		network-level adversaries.
 \end{itemize}
 
 Questions:
@@ -21,13 +24,6 @@ Questions:
 	\item What resolvers are used by exit relays?
 \end{itemize}
 
-Adversaries to consider in threat model:
-\begin{enumerate}
-	\item Passive network-level adversary (ISP, VPS provider, government)
-	\item Relay-level adversaries
-	\item Malicious DNS provider (Google, ISP)
-\end{enumerate}
-
 Possible contributions:
 \begin{itemize}
 	\item We show how DNS can help adversaries perform end-to-end correlation.
@@ -36,9 +32,9 @@ Possible contributions:
 
 Available data:
 \begin{itemize}
-	\item DNS resolvers of exit relays over time.
-	\item DNS responses by exit relays over time.
-	\item DNS requests captured by DNS root.
+	\item DNS resolvers of exit relays over time (see \S~\ref{sec:dns-resolver-dataset}).
+	\item DNS requests captured by DNS root (see \S~\ref{sec:dns-root-dataset}).
+	\item Traceroutes from (near) exits to destinations (see \S~\ref{sec:traceroute-dataset}).
 \end{itemize}
 
 Things that could help us demonstrate an attack:
