@@ -38,6 +38,12 @@ We consider the following adversaries.
 \begin{itemize}
 	\item Learn what kind of domains are resolved by exit relays to learn where
 		we should traceroute to.
+	\item Minimize risks.
+	\begin{itemize}
+		\item Get rid of timestamps if at all possible, otherwise the dataset
+			could be used to deanonymize people after publishing it.  Nick W.
+			said that these could be useful to learn about caching, though.
+	\end{itemize}
 \end{itemize}
 
 \subsection{DNS packet sizes at entry guard}
