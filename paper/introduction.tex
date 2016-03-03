@@ -2,58 +2,54 @@
 \label{sec:introduction}
 
 \begin{itemize}
-	\item Past traffic analysis attempts focused only on TCP streams.
-	\item Associated traffic such as DNS is an issue, because its distributed
-		nature greatly increases path coverage, i.e., the number of ASes that
-		are traversed by IP packets.
+	\item Tor's threat model excludes global passive adversaries, but they are a
+		real-world threat that research has to quantify.
+
+	\item Past research only focused on TCP flow between client and destination.
+		Accompanying DNS requests were ignored because they are difficult to
+		measure.
+
+	\item DNS must not be ignored, because its distributed nature greatly
+		increases path coverage, i.e., the number of ASes that are traversed by
+		IP packets.
+
 	\item As a result, past work might have underestimated the impact of
 		network-level adversaries.
+
+	\item In this paper, we quantify the threat.  Using
+		exitmap~\cite{Winter2014b}, we are able to enumerate the DNS resolvers
+		of exit relays.  We write a tool to quantify path exposure, and build
+		practical attacks using Web site fingerprinting.
 \end{itemize}
 
-Questions:
+Our contribution is to answer a number of questions:
 \begin{itemize}
-	\item What's the additional path coverage of DNS requests, i.e., how much
-		easier does the job of a network-level adversary become?
-	\item Can a global passive adversary correlate single DNS requests?  What's
-		the false positive rate?
-	\item How do we best mitigate these issues?  What can we recommend to exit
-		relay operators?
-	\item What's the probability of ending up with a guard/exit combination that
-		makes us fall prey to relay-level adversaries?
-	\item How many exit relays use EDNS?
-	\item What resolvers are used by exit relays?
-\end{itemize}
+	\item What advantage do relay-level and network-level adversaries gain when
+		they consider DNS exposure?
 
-Possible contributions:
-\begin{itemize}
-	\item We show how DNS can help adversaries perform end-to-end correlation.
-	\item We shed light on how Tor exit relays perform DNS resolution.
-\end{itemize}
+	\item How many more autonomous systems are DNS requests exposed to, compared
+		to end-to-end TCP flows?
 
-Available data:
-\begin{itemize}
-	\item DNS resolvers of exit relays over time (see \S~\ref{sec:dns-resolver-dataset}).
-	\item DNS requests captured by DNS root (see \S~\ref{sec:dns-root-dataset}).
-	\item Traceroutes from (near) exits to destinations (see \S~\ref{sec:traceroute-dataset}).
-\end{itemize}
-
-Things that could help us demonstrate an attack:
-\begin{itemize}
-	\item Traffic analysis done on an entry guard.  Can DNS requests be isolated
-		reliably?
-	\item Access to DNS root, .com, and .net.
-	\item Ability to use DNS resolver's cache as an oracle.
-	\item Ability to enumerate what resolver's an exit relay uses.
-	\item Resolvers using EDNS.
-	\item Users in country X are likely to resolve domains of country X.
+	\item How should Tor exit relays be configured to mitigate this issue?
 \end{itemize}
 
 \begin{figure}[t]
 	\centering
-	\includegraphics[width=0.45\textwidth]{figures/overview.pdf}
+	\includegraphics[width=\linewidth]{figures/overview.pdf}
 	\label{fig:overview}
 	\caption{Traditional approaches to traffic analysis have focused on linking
 	the TCP stream entering the network to the one exiting the network (green,
 	solid lines).  We show that associated DNS traffic (blue, dotted lines) can
 	also be linked, and is exposed to more parties than the TCP stream.}
+\end{figure}
+
+\begin{figure}[t]
+	\centering
+	\includegraphics[width=\linewidth]{figures/as-exposure.pdf}
+	\label{fig:as-exposure}
+	\caption{Before a relay can establish a TCP connection to a web server, it
+		has to resolve its domain name.  Ignoring caching, the relay begins by
+		contacting a root server, which delegates the resolver to a TLD DNS
+		server.  Finally, the relay contacts the authoritative DNS server that
+		has an A record for the domain baidu.com.}
 \end{figure}

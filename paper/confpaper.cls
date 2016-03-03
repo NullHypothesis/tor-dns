@@ -18,7 +18,7 @@
 %%%  Custom variables to be set appropriately.
 %%%
 \newcommand{\AUTHORS}{}
-\newcommand{\TITLE}{Traffic analysis of anonymity networks using DNS}
+\newcommand{\TITLE}{Traffic correlation attacks using DNS\\{\Large---Work in Progress---}}
 \newcommand{\KEYWORDS}{tor, dns, anonymity, traffic analysis}
 \newcommand{\CONFERENCE}{Conference}
 \newcommand{\PAGENUMBERS}{yes} % "yes" or "no"
@@ -198,6 +198,8 @@
 \RequirePackage{float}  % Must appear before hyperref to
                         % avoid weird PDF compile issues
 
+\definecolor{darkblue}{rgb}{0,0,0.4}
+
 %%%
 %%%  Fonts
 %%%
@@ -208,7 +210,7 @@
 %%%
 %%%  PDF setup
 %%%
-\RequirePackage[breaklinks=true,filecolor=black,citecolor=blue,urlcolor=blue,linkcolor=blue,colorlinks,pdfpagelabels,pdfpagelayout=SinglePage]{hyperref}
+\RequirePackage[breaklinks=true,filecolor=black,citecolor=darkblue,urlcolor=darkblue,linkcolor=darkblue,colorlinks,pdfpagelabels,pdfpagelayout=SinglePage]{hyperref}
 
 % \renewcommand*{\backref}[1]{}
 % \renewcommand*{\backrefalt}[4]{

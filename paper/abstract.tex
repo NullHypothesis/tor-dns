@@ -1,2 +1,15 @@
 \begin{abstract}
+Many research projects investigated end-to-end correlation attacks on the Tor
+network.  However, all this work was limited to the TCP flow between client and
+server.  The accompanying DNS traffic was ignored.
+%
+In this work, we analyze the impact of DNS for correlation attacks.  We
+(\emph{i}) enumerate what DNS resolvers exit relays use, we (\emph{ii}) quantify
+the additional exposure of DNS requests to network-level adversaries, and we
+(\emph{iii}) investigate how DNS requests can be combined with Web site
+fingerprinting attacks to deanonymize Tor connections.
+%
+Our results show that Google's DNS server observes around 25\% of DNS requests
+exiting the Tor network.  Also, on average DNS requests traverse $X$ times more
+autonomous systems than end-to-end TCP flows.
 \end{abstract}

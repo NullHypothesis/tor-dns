@@ -9,6 +9,9 @@
 \addbibresource{references.bib}
 \urlstyle{sf}
 
+\usepackage{import}
+\graphicspath{{figures/}}
+
 %%%%%%%%%%%%%%%%%%%%  LOCALS  %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \newcommand{\system}{{\em NetASM}}
@@ -44,6 +47,8 @@
 
 \input{background}
 
+\input{attack}
+
 \input{methodology}
 
 \input{analysis}
@@ -55,7 +60,10 @@
 \end{sloppypar}
 
 %\vspace{-0.1in}
-%\section*{Acknowledgments}
+\section*{Acknowledgments}
+This research was supported in part by the Center for Information Technology
+Policy at Princeton University.
+We want to thank Jed Crandall for providing infrastructure for our measurements.
 % Comments for people we need to acknowledge in the final version.
 
 \pagebreak

@@ -1,4 +1,27 @@
 \section{Background}
 \label{sec:background}
 
-\subsection{How exit relays handle DNS}
+\subsection{How Tor handles DNS}
+To preserve their anonymity and prevent DNS leakage, Tor clients must send their
+DNS requests also over Tor.  Since Tor does not transport UDP packets, there is
+a workaround to ensure that DNS requests go over Tor.
+
+First, applications such as Tor Browser establish a connection to the SOCKS
+proxy exposed by the local Tor client.  Using the SOCKS protocol, applications
+instruct the Tor client to establish a circuit to a given domain and
+port.\footnote{SOCKS in version 4a and 5 supports connection initiations using
+domain names in addition to IP addresses.} The Tor client then selects an exit
+relay whose exit policy matches the given domain and port.  Next, the client
+sends a \texttt{BEGIN\_DIR} Tor cell to the exit relay, instructing it to
+resolve the domain name and establish a TCP connection to the given port.  After
+successfully establishing a connection, the exit relay responds with a
+\texttt{RELAY\_CONNECTED} cell to the local Tor client.  From then on, data can
+be exchanged with the intended destination.
+
+As of Dec 2015, exit relays resolve domain asynchronously and both the exit
+relay and the client maintain a caching layer around the resolution code to
+speed up repeated lookups.  Exit relays send their DNS requests to the system
+resolver, which is in \texttt{/etc/resolv.conf} on Linux systems.  The system
+resolver is not set by Tor, and contains whatever the exit relay operator
+configured, e.g., the ISP's resolver, or well-known, public resolvers such as
+8.8.8.8.

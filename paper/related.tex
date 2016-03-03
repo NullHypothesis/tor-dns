@@ -1,5 +1,22 @@
-\section{Related Work}
-\label{sec:related}
+\section{Related work}
+\label{sec:related_work}
+
+\begin{table*}[t]
+	\centering
+	\begin{tabular}{lp{7cm}}
+	\textbf{Paper} & \textbf{Focus} \\
+	\hline
+	Johnson et al.~\cite{Johnson2013a}, 2013 & Set of 372 unique IP addresses for
+	various kinds of activity, e.g., web search, IRC, and BitTorrent. \\
+	\hline
+	Murdoch et al.~\cite{Murdoch2007a}, 2007 & Protocol-agnostic, focusing on a
+	sampled packets flowing between source and destination. \\
+	\hline
+	Murdoch et al.~\cite{Murdoch2005a}, 2005 & Foo \\
+	\end{tabular}
+	\caption{An overview of related work on its focus.}
+	\label{tab:related-focus}
+\end{table*}
 
 We focus on related work that covers low-latency anonymity networks.
 
@@ -15,9 +32,34 @@ are among the major issues, reducing location diversity.  Tor's current
 safeguard to select relays in disjoint /16 networks is not sufficient to defend
 against large autonomous systems.
 
+Murdoch and Zieli\'{n}ski pointed out that Feamster and Dingledine's work did
+not consider Internet exchange points (IXPs)~\cite{Murdoch2007a}.  The authors
+showed that IXPs are a practical threat---even if only sampled traffic is used
+for traffic analysis.
+
+Johnson et al.~\cite{Johnson2013a} simulated different types of network
+activity, including web, IRC, and BitTorrent.  We only focus on web activity,
+and investigate it in much more detail than the authors.
+
+\paragraph{Traffic analysis methods}
+Serjantov and Sewell proposed a simple flow correlation approach based on
+counting packets that are sent to and from an anonymity node in a small time
+interval~\cite{Serjantov2003a}.
+
+\O{}verlier and Syverson~\cite{Overlier2006a} used the packet counting approach
+described by Serjantov and Sewell~\cite{Serjantov2003a}.
+
+\cite{Goldberg2010a}
+
+\cite{Juen2015a}
+
+\paragraph{Countermeasures}
+\cite{Edman2009a}
+\cite{Nithyanand2016a}
+\cite{Akhoondi2012a}
+
+
 \cite{Mathewson2004a}
-\cite{Murdoch2005a}
-\cite{Murdoch2007a}
 \cite{Mittal2011a}
 \cite{Wacek2013a}
 \cite{Johnson2013a}
@@ -26,3 +68,9 @@ against large autonomous systems.
 \cite{Levine2004a}
 \cite{Bauer2007a}
 \cite{Dingledine2009a}
+
+
+Johnson et al.~\cite{Johnson2015a} proposed TAPS, a trust-aware path selection
+client for Tor relays.
+
+\cite{torstinks}
