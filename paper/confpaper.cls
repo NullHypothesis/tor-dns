@@ -193,7 +193,7 @@
 %%%  Tables
 %%%
 \RequirePackage{booktabs}
-\RequirePackage{color}
+\RequirePackage{xcolor}
 \RequirePackage{colortbl}
 \RequirePackage{float}  % Must appear before hyperref to
                         % avoid weird PDF compile issues
