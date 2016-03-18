@@ -1,5 +1,5 @@
-\section{Methodology}
-\label{sec:methodology}
+\section{Methods}
+\label{sec:methods}
 
 \subsection{Threat model}
 We consider the following adversaries.
@@ -9,19 +9,27 @@ We consider the following adversaries.
 	\item[Relay-level adversary] An adversary that runs at least one Tor relay.
 	\item[DNS provider] An adversary that operates the DNS resolver used
 		by exit relays, e.g., Google.
+	\item[Active] To which extent to we consider active, content-modifying
+		adversaries?  Attackers that see DNS can poison response and redirect
+		victim to attacker-controlled domain.  That turns problem into trivial,
+		classical end-to-end correlation.  Still, probably reason enough to tell
+		exit relays that they should use DNSSEC.  Also, we might spot these
+		attacks using exitmap.
 \end{description}
 
 \begin{table}[t]
 	\centering
-	\begin{tabular}{ccc}
+	\begin{tabular}{l r r}
+	\toprule
 	\textbf{Type} & \textbf{Number of ASs} & \textbf{Percentage} \\
-	\hline
-	DNS & 369 & 70.4\% \\
-	Web & 351 & 67.0\% \\
-	DNS $\setminus$ Web & 173 & 33.0\% \\
-	Web $\setminus$ DNS & 155 & 29.6\% \\
-	DNS $\cap$ Web & 196 & 37.4\% \\
-	DNS $\cup$ Web & 524 & 100\% \\
+	\midrule
+	DNS & 369 & 70.4 \\
+	Web & 351 & 67.0 \\
+	DNS $\setminus$ Web & 173 & 33.0 \\
+	Web $\setminus$ DNS & 155 & 29.6 \\
+	DNS $\cap$ Web & 196 & 37.4 \\
+	DNS $\cup$ Web & 524 & 100.0 \\
+	\bottomrule
 	\end{tabular}
 	\caption{The set relations between unique traversed ASs for DNS and unique
 	traversed ASs for Web.}
@@ -90,9 +98,10 @@ We ran this experiment from Sep 2015 to Jan 2016, six times a day.
 
 \begin{table}[t]
 	\centering
-	\begin{tabular}{rcc}
-	\textbf{Pct.} & \textbf{Organization} & \textbf{Country} \\
-	\hline
+	\begin{tabular}{r l l}
+	\toprule
+	\textbf{Percentage} & \textbf{Organization} & \textbf{Country} \\
+	\midrule
 21.6 & Google & US \\ % -> 21.56 bw pct.
 13.1 & Local resolver & --- \\ % -> 14.14 bw pct.
 6.5 & OpenDNS & US \\ % -> 6.46 bw pct.
@@ -117,6 +126,7 @@ We ran this experiment from Sep 2015 to Jan 2016, six times a day.
 % 	7 & 0.8\% & PlusServer & DE \\
 % 	\hline
 % 	71 & 7.7\% & Local resolver & \\
+	\bottomrule
 	\end{tabular}
 	\caption{The top ten resolvers used by all exit relays by capacity on Jan 1,
 	2016.  More than 20\% of all exit bandwidth at the time used Google's DNS
