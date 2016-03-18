@@ -33,3 +33,34 @@ following building blocks:
 		could be part of the encrypted ingress traffic.  Note that the DNS query
 		itself does not tell us what \emph{page} a user is going to.
 \end{description}
+
+\subsection{Egress sniffing}
+
+How many DNS requests does an exit relay see in $n$ minutes?
+\begin{itemize}
+	\item We can measure request frequency \emph{without} capturing payload.
+	\item We further reduce noise by taking timestamp modulo $m$.
+	\item We can do this on an exit relay, or on the DNS root.
+	\item \texttt{tshark -f 'udp port 53' -T fields -e frame.time\_epoch -Y 'dns.qry.type == 1 and dns.flags.response == 0'}
+	\item Number of requests probably depends on current bandwidth load (which
+		we can obtain from the consensus) and the exit policy (which we can
+		obtain from the descriptor).
+	\item We can limit our exit policy to 80 and 443, so we have a decent
+		baseline for requests caused by web traffic.
+	\item Fetch relayed traffic from descriptors and use it to normalise
+		observed DNS requests.
+\end{itemize}
+
+\subsection{Website fingerprinting}
+We have to overcome the following problems:
+\begin{itemize}
+	\item DNS sniffing only tells us what \emph{domains}, but not what
+		\emph{pages} a user visits.  Can be a big problem, e.g., with Wikipedia.
+	\item DNS records are cached by the resolver for the duration of the TTL.
+\end{itemize}
+
+The following aspects might work in our favor:
+\begin{itemize}
+	\item When visiting a page, your browser sends \emph{multiple} DNS queries.
+		However, many of these are probably resolved for many sites.
+\end{itemize}
