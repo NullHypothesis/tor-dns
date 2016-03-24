@@ -1,0 +1,143 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+  <title>DNS-based traffic correlation attacks</title>
+  <link rel="stylesheet" type="text/css" href="../article.css"/>
+</head>
+
+<body>
+
+<div class="centered">
+<h1>DNS-based traffic correlation attacks</h1>
+
+<a href="#overview">Overview</a>&nbsp;&nbsp;&bull;&nbsp;
+<a href="#writing">Writing</a>&nbsp;&nbsp;&bull;&nbsp;
+<a href="#code">Code</a>&nbsp;&nbsp;&bull;&nbsp;
+<a href="#data">Data</a>&nbsp;&nbsp;&bull;&nbsp;
+<a href="#contact">Contact</a>
+</div>
+
+<hr/>
+
+<h2><a name="overview">Overview</a></h2>
+<p>
+<img alt="Overview" class="toprightimg" src="img/overview.png"/>
+This research project investigates how the <i>domain name system</i> (DNS) can
+be used to improve end-to-end correlation attacks on low-latency anonymity
+networks such as <a href="https://www.torproject.org">Tor</a>.  Traditional
+correlation attacks have focused on linking together point-to-point TCP
+traffic between the Tor client and its destination.  In practice, however, there
+is more going on.  Before exit relays can establish a connection to the
+destination server, they must resolve the domain name.  Depending on how the
+exit relay is configured, the resulting DNS resolution traffic can traverse
+parts of the Internet that the subsequent TCP connection does not traverse.
+This exposure could facilitate correlation attacks as an AS-level attacker is
+more likely to see both &ldquo;ends&rdquo; of the Tor connection.  The diagram
+to the right illustrates this problem.  The solid green lines represent TCP
+connections while the dashed blue lines represent DNS traffic.
+</p>
+
+<p>
+In particular, we are interested in the following questions:
+</p>
+<ul>
+	<li>Are single DNS requests sufficient for correlation attacks?</li>
+	<li>How much easier do <a href="http://www.ohmygodel.com/publications/usersrouted-ccs13.pdf">traditional TCP-based correlation attacks</a> become when considering DNS? </li>
+	<li>How are the resolvers of Tor exit relays configured?</li>
+	<li>What can Tor exit relay operators do to improve the situation?</li>
+</ul>
+
+<h2><a name="writing">Writing</a></h2>
+<p>
+To date, our writing is limited to mailing list postings that give an
+overview of our preliminary research results.
+</p>
+<ul>
+	<li>2016-02-23: <a href="https://lists.torproject.org/pipermail/metrics-team/2016-February/000078.html">Exit relays' DNS resolvers over time</a></li>
+</ul>
+
+<h2><a name="code">Code</a></h2>
+<p>
+We have developed a tool,
+<a href="https://github.com/NullHypothesis/ddptr"><tt>ddptr</tt></a>, which
+stands for &ldquo;DNS Delegation Path Traceroute.&rdquo;  The tool determines
+the DNS delegation path for a fully qualified domain name, and then runs UDP
+traceroutes to all DNS servers on the path.  These traceroutes are then compared
+to a TCP traceroute to the web server behind the same fully qualified domain
+name.
+</p>
+
+<p>
+<a href="img/baidu-web.png"><img alt="Baidu web path" class="toprightimg" src="img/baidu-web-small.png"/></a>
+<a href="img/baidu-dns.png"><img alt="Baidu DNS path" class="toprightimg" src="img/baidu-dns-small.png"/></a>
+Now imagine that our machine is trying to establish a TCP connection to
+baidu.com.  How many autonomous systems will our network packets traverse?  The
+two images to the right show an example.  (Click on the images for a larger
+version.)  First, our machine has to resolve the domain before it can send
+packets to the IP address.  The left image shows UDP traceroutes to all
+DNS servers in the delegation path for &ldquo;baidu.com,&rdquo; namely
+192.58.128.30, 192.43.172.30, and 202.108.22.220.  In total, these traceroutes
+traversed 13 different autonomous systems, illustrated by the rectangular boxes.
+The right image shows a TCP traceroute to &ldquo;baidu.com.&rdquo;  The
+traceroute traversed at least four autonomous systems.  In this simple example,
+we see that the DNS resolution process for baidu.com exposes our traffic to more
+autonomous system than the actual TCP connection, provided we run our own DNS
+resolver.
+</p>
+
+<p>
+In addition to <tt>ddptr</tt> we maintain a
+<a href="https://github.com/NullHypothesis/tor-dns-tools">GitHub repository</a>
+that contains code snippets that we use to process the datasets that we will
+eventually publish.  You can clone this git repository as follows:
+</p>
+
+<div class="centered">
+<pre>
+git clone https://github.com/NullHypothesis/tor-dns-tools.git
+</pre>
+</div>
+
+<h2><a name="data">Data</a></h2>
+<p>
+We maintain a project page on the
+<a href="https://osf.io/52nrp/">Open Science Framework</a>
+to make available data fragments such as code patches.
+</p>
+
+<h2><a name="contact">Contact</a></h2>
+<p>
+At <a href="https://cs.princeton.edu/">Princeton University</a>:
+</p>
+<ul>
+	<li><a href="https://cs.princeton.edu/~feamster/">Nick Feamster</a> &mdash; <img alt="Nick" src="img/nick.png"/></li>
+	<li>Jonathan Metzman &mdash; <img alt="Jonathan" src="img/jonathan.png"/></li>
+	<li>Laura M. Roberts &mdash; <img alt="Laura" src="img/laura.png"/></li>
+	<li><a href="https://cs.princeton.edu/~pwinter/">Philipp Winter</a> &mdash; <img alt="Philipp" src="img/philipp.png"/></li>
+</ul>
+
+<p>
+At <a href="https://www.kau.se/en/cs">Karlstad University</a>:
+</p>
+<ul>
+	<li><a href="https://www.kau.se/forskare/tobias-pulls">Tobias Pulls</a> &mdash; <img alt="Tobias" src="img/tobias.png"/></li>
+</ul>
+
+<p>
+At <a href="https://www.kth.se/en/csc">KTH</a>:
+</p>
+<ul>
+	<li><a href="https://www.csc.kth.se/~bgre/">Benjamin Greschbach</a> &mdash; <img alt="Benjamin" src="img/benjamin.png"/></li>
+</ul>
+
+<hr/>
+<p>
+<i>Last update: 2016-03-24</i>
+</p>
+</body>
+
+</html>
