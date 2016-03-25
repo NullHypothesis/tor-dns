@@ -64,3 +64,10 @@ The following aspects might work in our favor:
 	\item When visiting a page, your browser sends \emph{multiple} DNS queries.
 		However, many of these are probably resolved for many sites.
 \end{itemize}
+
+Other facts that are relevant here:
+\begin{itemize}
+	\item Tor Browser does not prefetch domain names, but seems to honor
+		\texttt{dns-prefetch}.  Therefore, content providers can make Tor
+		Browser prefetch arbitrary (?) domains.
+\end{itemize}
