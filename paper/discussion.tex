@@ -5,6 +5,10 @@
 \begin{itemize}
 	\item What do we recommend to exit relay operators to mitigate the issue?
 	\item Is it better to run your own, local resolver?
+		\begin{itemize}
+			\item Could be dangerous since some resolvers write stuff to disk:
+		\url{https://github.com/NullHypothesis/exitmap/commit/fa1cd0ba6ce3389d3d6fe1dfc7144e2747320944#commitcomment-16886249}
+		\end{itemize}
 	\item Or should you use your provider's resolver?
 	\item \ldots or something else?
 	\item Would qname minimisation help?
