@@ -79,7 +79,7 @@ median 60, min 60, and max 1800. In other words: for half of the sites in
 Alexa top-10,000, there is at least one unique domain with TTL 60 seconds.
 This means that if the site has not been requested within the last minute
 by a tor exit then the tor exit will send at least one DNS request containing
-a uniquely identifying domain for half of the sites in Alexa top-10,000. 
+a uniquely identifying domain for half of the sites in Alexa top-10,000.
 
 \begin{figure}[t]
 	\centering
@@ -91,7 +91,7 @@ a uniquely identifying domain for half of the sites in Alexa top-10,000.
 
 Other facts that are relevant here:
 \begin{itemize}
-	\item Tor Browser does not prefetch domain names, but seems to honor
-		\texttt{dns-prefetch}.  Therefore, content providers can make Tor
-		Browser prefetch arbitrary (?) domains.
+	\item Tor Browser does not prefetch domain names, but content providers can
+	make Tor Browser resolve arbitrary domains by including images or scripts
+	with sources of their choice into pages. 
 \end{itemize}
