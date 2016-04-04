@@ -19,6 +19,20 @@
 
 We focus on related work that covers low-latency anonymity networks.
 
+As mentioned earlier, Tor's threat model excludes the ``global passive adversary'' 
+and instead assumes an adversary that can launch both passive and active attacks 
+on ``some fraction of network traffic''~\cite{dingledine2004tor}. They differentiate between traffic 
+\textit{confirmation} attacks and traffic \textit{analysis} attacks. They state, ``Rather than focusing on these 
+\textit{traffic confirmation} attacks, we aim to prevent \textit{traffic analysis} attacks, 
+where the adversary uses traffic patterns to learn which points in the network 
+he should attack''~\cite{dingledine2004tor}.
+The authors provide examples of traffic confirmation attacks which 
+include end-to-end size correlation (e.g., packet counting) and end-to-end timing correlation, 
+which are ``effective in confirming endpoints of a stream''~\cite{dingledine2004tor}. They provide website 
+fingerprinting as an example of a traffic analysis attack, and they mention that it 
+``may be less effective against Tor, since streams are multiplexed within the same circuit, 
+and fingerprinting will be limited to the granularity of cells (currently 512 bytes)''~\cite{dingledine2004tor}.
+
 Serjantov and Sewell discussed packet counting attacks for low-latency networks
 in 2003~\cite{Serjantov2003a}.  They focused on single nodes in an anonymity
 network and conjectured that their technique is harder to apply to an anonymity
