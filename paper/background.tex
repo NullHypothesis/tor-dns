@@ -1,7 +1,23 @@
 \section{Background}
 \label{sec:background}
+We now give a brief introduction to the pillars our attack is resting
+on---website fingerprinting and the process of DNS resolution over the Tor
+network.
 
 \subsection{Website fingerprinting attacks}
+The Tor network encrypts relayed traffic as it travels from the client to the
+exit relay.  Therefore, intermediate parties such as the user's Internet service
+provider (ISP) are not able to read any packet content.  However, Tor does not
+protect meta information such as data timing, frequency, and length.  Exploiting
+these properties, the ISP can use a classifier to guess what sites the user is
+visiting---despite Tor's encryption.  The literature calls this kind of attack a
+\emph{website fingerprinting attack}.
+
+Tor---and any other anonymity network---could eliminate website fingerprinting
+attacks by employing leak-resistant, constant-rate channels between a Tor client
+and its guard.  Unfortunately, the Tor network's limited spare capacity does not
+allow for such an expensive defense, but some research has worked on making it
+cheaper~\cite{Cai2014a}.
 
 \subsection{How Tor handles DNS}
 To preserve their anonymity and prevent DNS leakage, Tor clients must send their
