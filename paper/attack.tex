@@ -57,6 +57,22 @@ How many DNS requests does an exit relay see in $n$ minutes?
 		observed DNS requests.
 \end{itemize}
 
+There are several layers of caching that we have to consider.  On the client
+side:
+\begin{itemize}
+	\item Tor Browser has its own cache.  See the settings
+		\texttt{network.dnsCache*} in \url{about:config}.
+	\item The local Tor client probably (?) also has its own cache.  See the
+		code in src/or/dns.c.
+\end{itemize}
+
+On the exit side:
+\begin{itemize}
+	\item The exit relay maintains its own caching layer around eventdns.c.  See
+		the code in src/or/dns.c.
+	\item The exit relay's resolver also does its own caching.
+\end{itemize}
+
 \subsection{Website fingerprinting}
 We have to overcome the following problems:
 \begin{itemize}
