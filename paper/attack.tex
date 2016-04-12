@@ -1,4 +1,12 @@
-\section{Attack}\label{sec:attack}
+\section{Attack overview}
+\label{sec:attack}
+We begin by summarizing our attack.  Our attack is based on traffic correlation,
+so it requires an attacker to observe traffic that is both entering and exiting
+the Tor network.  In contrast to earlier work, we consider DNS instead of just
+end-to-end TCP packets.
+
+Our attack is illustrated in Figure~\ref{fig:attack-scenario} and requires the
+following building blocks:
 
 \begin{figure}[t]
 	\centering
@@ -11,8 +19,6 @@
 	\label{fig:attack-scenario}
 \end{figure}
 
-Our attack is illustrated in Figure~\ref{fig:attack-scenario} and requires the
-following building blocks:
 \begin{description}
 	\item[Ingress sniffing] An attacker must observe traffic that is entering
 		the Tor network.  The attacker can operate on the network level, i.e.,
