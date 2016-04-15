@@ -63,7 +63,7 @@ DNS requests unintentionally.
 		work~\cite{Houmansadr2011a}
 \end{itemize}
 
-\subsection{What resolvers do exits use?}
+\subsection{Mapping DNS resolvers}
 Figure~\ref{fig:dnsenum} shows how we can identify an exit relay's DNS resolver.
 Over each exit relay, we resolve a unique domain \texttt{PREFIX.tor.nymity.ch}
 for which we control the authoritative DNS server.  As a result, we can learn
@@ -146,6 +146,39 @@ We ran this experiment from Sep 2015 to Jan 2016, six times a day.
 	\label{fig:exit-resolvers}
 \end{figure}
 
+\subsection{Mapping resolver configuration}
+In addition to identifying an exit relay's DNS resolver, our technique can
+ascertain parts of its configuration.  Resolvers with poor or broken
+configuration pose a security risk as attackers could poison or enumerate their
+cache.  Therefore, it is important to identify broken resolvers because they
+jeopardize the anonymity of Tor users.
+
+\paragraph{Random source ports}
+To impede cache poisoning attacks, DNS resolvers should use random source ports
+instead of always using UDP port 53.  By inspecting ports, our data allows for
+verifying if a given resolver randomizes its source ports.  We classify a
+resolver as ``uses randomization'' if the source port does not equal 53.  Note
+that this strategy causes a small number of false positives because a
+randomizing resolver could use port 53 simply by chance.  However, the
+probability of that happening is only $\frac{1}{65535}$.
+
+\paragraph{0x20 encoding}
+Resolver can further reduce the chance of cache poisoning by employing 0x20
+encoding, i.e., randomizing the capitalization of domain names.  For example,
+the domain name foo.com is turned into fOo.CoM, and if the DNS response does not
+mirror the randomly chosen capitalization, it is considered unauthentic.  We
+classify a resolver as ``uses 0x20'' if it has at least one lowercase and one
+uppercase character.  Again, there is a chance of false positives, which depends
+on the domain name length.  A 0x20-encoded domain name of $n$ characters
+(excluding periods) can be all-uppercase or all-lowercase with probability
+$2 \cdot 0.5^n$.
+
+\paragraph{DNSSEC validation}
+We can verify if a resolver is validating DNSSEC-signed records by resolving a
+domain whose signature is deliberately malformed.  Such a service is provided by
+dnssec-failed.org.  A validating resolver would not return an A record while a
+non-validating resolver would.  Therefore, we resolve dnssec-failed.org over all
+exit relays and check if we get an A record in response.
 
 \subsection{Internet map}
 \begin{itemize}
