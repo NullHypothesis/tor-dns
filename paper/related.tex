@@ -21,17 +21,17 @@ We focus on related work that covers low-latency anonymity networks.
 
 As mentioned earlier, Tor's threat model excludes the ``global passive adversary'' 
 and instead assumes an adversary that can launch both passive and active attacks 
-on ``some fraction of network traffic''~\cite{dingledine2004tor}. They differentiate between traffic 
+on ``some fraction of network traffic''~\cite{Dingledine2004a}. They differentiate between traffic 
 \textit{confirmation} attacks and traffic \textit{analysis} attacks. They state, ``Rather than focusing on these 
 \textit{traffic confirmation} attacks, we aim to prevent \textit{traffic analysis} attacks, 
 where the adversary uses traffic patterns to learn which points in the network 
-he should attack''~\cite{dingledine2004tor}.
+he should attack''~\cite{Dingledine2004a}.
 The authors provide examples of traffic confirmation attacks which 
 include end-to-end size correlation (e.g., packet counting) and end-to-end timing correlation, 
-which are ``effective in confirming endpoints of a stream''~\cite{dingledine2004tor}. They provide website 
+which are ``effective in confirming endpoints of a stream''~\cite{Dingledine2004a}. They provide website 
 fingerprinting as an example of a traffic analysis attack, and they mention that it 
 ``may be less effective against Tor, since streams are multiplexed within the same circuit, 
-and fingerprinting will be limited to the granularity of cells (currently 512 bytes)''~\cite{dingledine2004tor}.
+and fingerprinting will be limited to the granularity of cells (currently 512 bytes)''~\cite{Dingledine2004a}.
 
 Serjantov and Sewell discussed packet counting attacks for low-latency networks
 in 2003~\cite{Serjantov2003a}.  They focused on single nodes in an anonymity
@@ -94,9 +94,9 @@ were able to get traceroutes from actual Tor relays (guards and exits) by asking
 Tor operators to run the traceroutes for them. They found that ``only 20\% of predicted paths 
 match paths seen in traceroutes.'' However, their traceroute data came from 
 only ``28 Tor relays,'' and they note that their traceroutes only went 
-in one direction (from the Tor relays outward). The authors of \cite{sun2015raptor} 
+in one direction (from the Tor relays outward). The authors of \cite{Sun2015a} 
 actually use the asymmetry of both directions to their advantage in creating their 
-RapTor class of attacks. 
+RAPTOR class of attacks. 
 [I believe this sentence requires an explanation of ``both directions'' in a Background section perhaps.]
 
 \paragraph{Traffic analysis methods}
