@@ -64,19 +64,35 @@ DNS requests unintentionally.
 \end{itemize}
 
 \subsection{Mapping DNS resolvers}
-Figure~\ref{fig:dnsenum} shows how we can identify an exit relay's DNS resolver.
-Over each exit relay, we resolve a unique domain \texttt{PREFIX.tor.nymity.ch}
-for which we control the authoritative DNS server.  As a result, we can learn
-the IP address of all resolvers that ask for a domain in
-\texttt{*.tor.nymity.ch}.
+As outlined in Section~\ref{sec:tordns}, Tor clients instruct exit relays to
+establish a TCP connection to a hostname, and the exit relay simply responds
+that the connection succeeded.  There is no way for Tor clients to learn what
+DNS resolver handled name resolution.  Identifying these resolvers is a complex
+task, and has not been covered in past work~\cite{Johnson2013a}.
+
+We answer this question by using exitmap~\cite{exitmap} and our own DNS server.
+Exitmap is a scanner for Tor exit relays.  It can execute a task---e.g., the
+retrieval of a web page---over all one thousand exit relays, allowing for seeing
+the Internet through the ``eyes'' of every single exit relay.  Leveraging
+exitmap, we resolve unique, relay-specific domains over each exit relay, to a
+DNS server under our control.  This experiment is visualized in
+Figure~\ref{fig:dnsenum}.  To improve reliability, we configured exitmap to use
+two-hop circuits instead of the standard three-hop circuits.  The first hop was
+a guard relay under our control.  Over each exit relay, we resolve a unique
+domain PREFIX.tor.nymity.ch whose authoritative DNS server we control.  The
+prefix consists of the relay's unique 160-bit fingerprint concatenated to a
+random 40-bit string whose purpose is to prevent caching, so exit relays indeed
+resolve each query instead of responding with a cached element.  We control the
+authoritative DNS server of nymity.ch, so we can observe the IP address and
+packet content of every single query for nymity.ch.
 
 \begin{figure}[t]
 	\centering
 	\includegraphics[width=0.8\linewidth]{figures/dns-resolver-enumeration.pdf}
-	\caption{Our method to identify the DNS resolver of exit relays.  We resolve
-	unique domain names under our control over each exit relay.  We then extract
-	the IP address of all resolvers that contacts our DNS server, and map them
-	to the respective exit relay.}
+	\caption{Our method to identify the DNS resolvers of exit relays.  Over each
+	exit relay, we resolve relay-specific domain names that are under our control.
+	Inspecting our DNS server logs, we can then identify the IP address of all
+	exit relay resolvers.}
 	\label{fig:dnsenum}
 \end{figure}
 
@@ -85,19 +101,10 @@ Fig.~\ref{fig:dnsenum}), or use a third-party resolver such as the one provided
 by its ISP (see the top relay in Fig.~\ref{fig:dnsenum}).  If an exit relay runs
 its own resolver, we expect to receive a DNS request from the exit relay's IP
 address, but if an exit relay uses a third-party resolver, we expect to receive
-a request from an unrelated IP address.
-
-We can map DNS requests to exit relays because we encode the relay's 160-bit
-unique fingerprint in \texttt{PREFIX}.  We also encode a 40-bit random value in
-\texttt{PREFIX} make sure that our requests are not cached anywhere.  As a
-result, we send DNS requests of the form
-\texttt{FINGERPRINT.RAND.tor.nymity.ch}.
-
-We used the tool exitmap~\cite{Winter2014b} to resolve our domain over all exit
-relays.  For performance and reliability, we used only two-hop circuits,
-consisting of a static guard relay under our control, and the exit relay.
-
-We ran this experiment from Sep 2015 to Jan 2016, six times a day.
+a request from an unrelated IP address.  Having encoded relay-specific
+fingerprints in the query names, we are able to map queries to exit relays in
+such cases.  We ran this experiment from September 2015 to XXX 2016, six times a
+day.
 
 \begin{table}[t]
 	\centering
@@ -149,9 +156,10 @@ We ran this experiment from Sep 2015 to Jan 2016, six times a day.
 \subsection{Mapping resolver configuration}
 In addition to identifying an exit relay's DNS resolver, our technique can
 ascertain parts of its configuration.  Resolvers with poor or broken
-configuration pose a security risk as attackers could poison or enumerate their
-cache.  Therefore, it is important to identify broken resolvers because they
-jeopardize the anonymity of Tor users.
+configuration pose a security risk to Tor users as attackers could poison or
+enumerate their cache, allowing them to redirect users or profile them.
+Therefore, it is important to identify broken resolvers because they jeopardize
+the anonymity of Tor users.
 
 \paragraph{Random source ports}
 To impede cache poisoning attacks, DNS resolvers should use random source ports
