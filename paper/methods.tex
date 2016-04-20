@@ -20,6 +20,86 @@ We consider the following adversaries.
 We do not consider the case where Tor users misconfigure their client and leak
 DNS requests unintentionally.
 
+\subsection{Measuring AS exposure of DNS queries}
+How many more ASs do DNS queries traverse than subsequent web traffic?  If a
+network adversary can see both types of traffic, she can ignore DNS because she
+would do just fine with traditional TCP-based correlation attacks.  But if a
+network adversary can only observe DNS traffic, she would have to invest in our
+more complex attack to correlate streams.  We are interested in how many
+adversaries are in this situation, i.e., how many ASs see DNS traffic, but no
+web traffic.
+
+We quantify the exposure of DNS compared to web traffic as follows.  We begin
+with Alexa's Top 1,000, a list of the 1,000 most popular web sites as seen by
+the Alexa search engine.  For each web site, we conduct two experiments.  First,
+we run a TCP traceroute to the site, targeting port 80 to mimic web traffic.
+Second, we determine the site's DNS delegation path using the dig command's
+\texttt{+trace} feature.  The delegation path of a FQDN, say www.example.com, is
+a list of authoritative DNS servers, e.g., the authoritative server for .com
+pointing to the authoritative server of example.com, pointing to the
+authoritative server responsible for www.example.com.  We run UDP traceroutes to
+each server in the delegation path, targeting port 53 to mimic DNS queries.
+
+For both experiments, we then map all IP addresses that we observed in the
+traceroute to AS numbers, and generate a set of traversed ASs for DNS
+traceroutes ($\mathcal{D}$), and a set of traversed ASs for web traceroutes
+($\mathcal{W}$).  We are interested in the fraction of ASs that are \emph{only}
+traversed for DNS traffic, but \emph{not} for web traffic.  To this end, we
+define an exposure metric $\lambda$ that Equation~\ref{equ:exposure} shows.  The
+metric approaches 1 as the number of ASs that are only traversed for DNS
+increases.
+
+\begin{equation}
+\label{equ:exposure}
+\lambda \in [0, 1] =
+\frac{|\mathcal{D} \setminus \mathcal{W}|}
+     {|\mathcal{D} \cup \mathcal{W}|}
+\end{equation}
+
+For example, if $\mathcal{D} = \{1,2,3\}$ and $\mathcal{W} = \{2,3,4\}$, then
+$\lambda = \frac{|\{1\}|}{|\{1,2,3,4\}|} = \frac{1}{4} = 0.25$.  We determine
+$\lambda$ for each site in the Alexa Top 1,000.  We ran these experiments on a
+French VPS in AS 16276, owned by OVH SAS.  We chose this AS because as of April
+2016, it is the most popular AS by exit bandwidth.  It sees $8.88\%$ of exit
+traffic, closely followed by AS 3223 that sees $8.79\%$ of exit traffic.  The
+result of the experiment is 1,000 $\lambda$ values.  We ran the same experiment
+on a vantage point at our instutition, achieving similar results: While a
+two-sample Kolmogorov-Smirnov test determined a statistically significant
+difference between both distributions ($p < 0.01$), the medians (0.590 and
+0.584) and standard deviations (0.149 and 0.118) are similar.
+
+Figure~\ref{fig:exposure} shows the empirical CDF of all 1,000 $\lambda$ values
+that we calculated for Alexa's Top 1,000 web sites.  In total, this experiment
+traversed 350 unique ASs for DNS and 339 unique ASs for web.  The figure shows
+that for half of Alexa's Top 1,000 domains, DNS-only ASs account for around 70\%
+of all traversed ASs.  Note that this result is only relevant for exit relays
+that handle their own DNS resolution.  If they use a third-party resolver, what
+matters is the ASs that are traversed between the exit relay and the DNS
+resolver.  Since we are not able to run traceroutes from an exit relay, it is
+difficult to estimate this number.
+
+% d1 <- read.csv("top-1k-ddptr-2016-04-19-ovh.csv")
+% ecdf(d1$exposure)(0.5)
+% 0.3050672
+
+\begin{figure}[t]
+	\centering
+	\includegraphics[width=0.75\linewidth]{figures/dns-exposure.pdf}
+	\caption{Our AS exposure metric $\lambda$ for all web sites in the Alexa Top
+	1,000.  For 50\% of all sites, DNS traffic traverses XXX times more ASs than
+	web traffic.}
+	\label{fig:exposure}
+\end{figure}
+
+\begin{figure}[t]
+	\centering
+	\includegraphics[width=0.75\linewidth]{figures/exitbw-per-as.pdf}
+	\caption{The empirical CDF of the exit bandwidth for all ASs hosting exit
+	relays as of April 2016.  Around 90\% of all ASs handle less than 1\% of
+	exit bandwidth.  The top two ASs handle 8.88\% and 8.79\%, respectively.}
+	\label{fig:exitbw-as}
+\end{figure}
+
 \begin{table}[t]
 	\centering
 	\begin{tabular}{l r r}
@@ -38,21 +118,6 @@ DNS requests unintentionally.
 	traversed ASs for Web.}
 	\label{tab:traversed-ass}
 \end{table}
-
-\subsection{Exposure at the Exit side}
-\begin{itemize}
-	\item Rented VPS from OVH, representative for exit relay.
-	\item Ran ddptr to Alexa top 1,000 sites.
-	\item In total, traversed 30,872 ASs for DNS and 10,707 ASs for web,
-		including duplicates.
-	\item Eliminating duplicates, we traversed 369 unique DNS ASs and 351 unique
-		web ASs.
-	\item Among the 369 unique DNS ASes, 173 (46.9\%) were \emph{only} traversed
-		for DNS, and not for web.
-	\item Among the 351 unique web ASes, 155 (44.2\%) were \emph{only} traversed
-		for web, and not for DNS.
-	\item 196 ASes were part of both web and DNS ASes.
-\end{itemize}
 
 \subsection{Exposure at the Guard side}
 \begin{itemize}
@@ -88,7 +153,7 @@ packet content of every single query for nymity.ch.
 
 \begin{figure}[t]
 	\centering
-	\includegraphics[width=0.8\linewidth]{figures/dns-resolver-enumeration.pdf}
+	\includegraphics[width=0.7\linewidth]{figures/dns-resolver-enumeration.pdf}
 	\caption{Our method to identify the DNS resolvers of exit relays.  Over each
 	exit relay, we resolve relay-specific domain names that are under our control.
 	Inspecting our DNS server logs, we can then identify the IP address of all
