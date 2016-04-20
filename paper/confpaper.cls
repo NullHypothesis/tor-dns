@@ -203,7 +203,7 @@
 %%%
 %%%  Fonts
 %%%
-\RequirePackage{mathptmx} % Times/Times-like math symbols
+\RequirePackage{txfonts} % Times/Times-like math symbols
 \RequirePackage{courier}
 \RequirePackage[scaled=0.92]{helvet}
 
