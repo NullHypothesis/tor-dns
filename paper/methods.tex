@@ -21,6 +21,7 @@ We do not consider the case where Tor users misconfigure their client and leak
 DNS requests unintentionally.
 
 \subsection{Measuring AS exposure of DNS queries}
+\label{sec:as-exposure}
 How many more ASs do DNS queries traverse than subsequent web traffic?  If a
 network adversary can see both types of traffic, she can ignore DNS because she
 would do just fine with traditional TCP-based correlation attacks.  But if a
@@ -171,6 +172,28 @@ fingerprints in the query names, we are able to map queries to exit relays in
 such cases.  We ran this experiment from September 2015 to XXX 2016, six times a
 day.
 
+\subsubsection{Results}
+Figure~\ref{fig:exit-resolvers} illustrates the percentage of DNS requests that
+the four most popular resolvers can observe.  Google's public DNS resolver sees
+one quarter of all DNS requests exiting the Tor network, a considerable number
+for a single organization.  After Google comes ``Local,'' i.e., exit relays that
+run their own resolver.  Local resolvers trade off exposure to third-party
+resolvers to the network, as we show in Section~\ref{sec:as-exposure}.  Followed
+by local resolvers is OVH, a VPS provider that currently runs the AS that relays
+the most traffic in the Tor network.  Note that OVH resolvers are only meant for
+OVH customers, and hence not public.  Number four is OpenDNS, an organization
+that operates public DNS resolvers.  Apart from the top four resolvers, the
+distribution has a long tail, presumably consisting of many ISP resolvers.
+
+\begin{figure}[t]
+	\centering
+	\includegraphics[width=\linewidth]{figures/exit-resolvers.pdf}
+	\caption{The amount of the most popular DNS resolvers of exit relays over
+	time, weighted by bandwidth.  Google's DNS server is by far the most popular
+	resolver of exit relays, followed by a local resolver, OVH, and OpenDNS.}
+	\label{fig:exit-resolvers}
+\end{figure}
+
 \begin{table}[t]
 	\centering
 	\begin{tabular}{r l l}
@@ -209,14 +232,6 @@ day.
 	\label{tab:dns-resolvers}
 \end{table}
 
-\begin{figure}[t]
-	\centering
-	\includegraphics[width=\linewidth]{figures/exit-resolvers.pdf}
-	\caption{The amount of the most popular DNS resolvers of exit relays over
-	time, weighted by bandwidth.  Google's DNS server is by far the most popular
-	resolver of exit relays, followed by a local resolver, OVH, and OpenDNS.}
-	\label{fig:exit-resolvers}
-\end{figure}
 
 \subsection{Mapping resolver configuration}
 In addition to identifying an exit relay's DNS resolver, our technique can
