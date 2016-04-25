@@ -35,7 +35,7 @@
 \newfont{\secfnt}{ptmb8t at 12pt}
 \newfont{\secit}{ptmbi8t at 12pt}     %13 Jan 00 gkmt
 \newfont{\subsecfnt}{ptmri8t at 11pt}
-\newfont{\subsecit}{ptmbi8t at 11pt}  % 
+\newfont{\subsecit}{ptmbi8t at 11pt}  %
 \newfont{\ttlfnt}{phvb8t at 18pt}
 \newfont{\ttlit}{phvbo8t at 18pt}     % GM 2/4/2000
 \newfont{\subttlfnt}{phvr8t at 14pt}
@@ -57,7 +57,7 @@
 %%%
 
 %
-% \renewcommand{\thesection}{\Roman{section}} 
+% \renewcommand{\thesection}{\Roman{section}}
 % \renewcommand{\thesubsection}{\thesection.\Alph{subsection}}
 %
 % \titleformat{\section}%                     % IEEE/ACM: caps + period
@@ -203,7 +203,6 @@
 %%%
 %%%  Fonts
 %%%
-\RequirePackage{txfonts} % Times/Times-like math symbols
 \RequirePackage{courier}
 \RequirePackage[scaled=0.92]{helvet}
 
@@ -248,6 +247,7 @@ bookmarksopen = {true}
 \RequirePackage{subcaption}
 \RequirePackage{amsthm}
 \RequirePackage{amssymb}
+\RequirePackage{txfonts} % Times/Times-like math symbols
 \RequirePackage{listings}
 \RequirePackage{tikz}
 \usetikzlibrary{arrows}
