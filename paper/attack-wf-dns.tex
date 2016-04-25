@@ -15,7 +15,7 @@ The following aspects might work in our favor:
 
 
 \subsubsection{Preliminaries}
-The adversary considers a set of webpages that we call \textbf{DNS
+The adversary considers a set of webpages that we call \emph{DNS
 Analyzed Webpages (DAW)}. Note that this set might be different from the
 set of monitored/unmonitored webpages that the adversary collected
 traffic traces on the ingress side for.
@@ -23,26 +23,27 @@ For each webpage the adversary observes which domains are requested by
 the browser when loading the webpage. The set of domains requested,
 their order, uniqueness, how stable they are over several repetitions of
 loading the webpage, and what TTL they have, comprises the
-\textbf{Webpage DNS Fingerprint (WDF)} of the webpage.
+\emph{Webpage DNS Fingerprint (WDF)} of the webpage.
 The adversary constructs a dataset that maps each webpage in the DAW set
 to it's WDF.
 
 \subsubsection{The DAW dataset}
-We built our DAW dataset by using Tor Browser Bundle (TBB) 5.5.4
-configured to not browse over Tor: TBB ensures that the browser behaviour is
+We build our DAW dataset by using Tor Browser Bundle (TBB) 5.5.4
+configured to not browse over Tor: TBB ensures that the browser behavior is
 identical to a TBB user over Tor, and by not using Tor we bypass IP-blacklists
 and CAPTCHAs triggered by IP-addresses of Tor-exits \cite{Khattak2016a}.
-During week 16 in 2016 we browsed Alexa top-one-million websites from a
-university network in Sweden, collecting five samples from each website. We
-collected in rounds, where each round uniformly randomly browsed all one
+During week 16 in 2016 we browsed Alexa top one million websites from a
+university network in Sweden, collecting five samples from each website.
+Collection was done in rounds, where each round uniformly randomly browsed all one
 million websites before visiting the same website again. We collected in total
-X distinct domain names over Y DNS requests.
+X distinct domain names over Y DNS requests. There are
 
-Table~\ref{tab:dns-overview} -- makes sense for adversary to (also?) collect
-without Tor.
+Table~\ref{tab:dns-censor} shows the percentage of websites in our dataset that
+risks censorship by CloudFlare or Akami if collecting data over Tor, as
+identified by Khattak et al.~\cite{Khattak2016a}.
 
 Table~\ref{tab:daw-ttls} -- TTLs in entire data set, raw and adjusted for Tor,
-also for unique domains. 
+also for unique domains.
 
 \begin{table}[t]
 	\centering
@@ -51,30 +52,47 @@ also for unique domains.
 	\textbf{Description} & \textbf{Percentage} \\
 	\midrule
 	Website behind CloudFlare IP & X \\
-	Domain on website resolves to CloudFlare & Y \\
+	Domain on website uses CloudFlare & Y \\
 	Domain on website uses Akamai & Z \\
-	Domain on website uses Amazon & Z \\
-	Domain on website uses Google & Z \\
 	\bottomrule
 	\end{tabular}
-	\caption{The percentage of websites on Alexa top-one-million using notable
-	online services.}
-	\label{tab:dns-overview}
+	\caption{The percentage of websites on Alexa top-one-million using providers
+	involved in censoring access from Tor~\cite{Khattak2016a}.}
+	\label{tab:dns-censor}
 \end{table}
 
 \begin{table}[t]
 	\centering
 	\begin{tabular}{l c c c c}
 	\toprule
-	\textbf{Domain TTLs (s)} & \textbf{Median} & \textbf{Mean} & \textbf{Min} & \textbf{Max} \\
+	\textbf{DNS Requests} & \textbf{Median} & \textbf{Mean} & \textbf{Min} & \textbf{Max} \\
 	\midrule
-	raw & 5 & $10 \pm 5$ & 2 & 10 \\
-	Tor & 262.0 & $713.0 \pm 756.6$ & 60.0 & 1800.0 \\
-	unique raw & 5 & $10 \pm 5$ & 1 & 10 \\
-	unique Tor & 600.0 & $966.8, \pm 784.8$ & 60.0 & 1800.0 \\
+	per site & X & $X.4\pm15.0$ & 1 & 391 \\
+	unique per site & X4 & $17.4\pm15.0$ & 0 & 391 \\
 	\bottomrule
 	\end{tabular}
-	\caption{}
+	\caption{Statistics on the number of DNS requests.}
+	\label{tab:daw-unique}
+\end{table}
+
+
+\begin{table}[t]
+	\centering
+	\begin{tabular}{l c c c c}
+	\toprule
+	\textbf{TTLs (s)} & \textbf{Median} & \textbf{Mean} & \textbf{Min} & \textbf{Max} \\
+	\midrule
+	raw & 5 & $10 \pm 5$ & 2 & 10 \\
+	Tor & 262 & $713.0 \pm 756.6$ & 60 & 1800 \\
+	unique raw & 5 & $10 \pm 5$ & 1 & 10 \\
+	unique Tor & 600 & $966.8, \pm 784.8$ & 60 & 1800 \\
+	unique min raw & 5 & $10 \pm 5$ & 1 & 10 \\
+	unique min Tor & 600 & $966.8, \pm 784.8$ & 60 & 1800 \\
+	\bottomrule
+	\end{tabular}
+	\caption{The TTL of DNS records observed in our DAW dataset.
+	Raw TTLs are unprocessed while Tor TTLs adhere to the Tor min and max TTL.
+	The unique prefix is for the TTL of unique domains.}
 	\label{tab:daw-ttls}
 \end{table}
 
@@ -95,10 +113,10 @@ or sniffing traffic from several exit relays to one or more DNS
 resolvers).
 %
 % terminology observe/un-observed/client's exits
-We distinguish between \textbf{observed exits}, \ie exit relays that use
+We distinguish between \emph{observed exits}, \ie exit relays that use
 DNS resolvers that are controlled or monitored by the adversary,
-\textbf{un-observed exits}, \ie all exit relays except the observed
-exits, and the \textbf{client's exit}, \ie the exit relay used by the
+\emph{un-observed exits}, \ie all exit relays except the observed
+exits, and the \emph{client's exit}, \ie the exit relay used by the
 client for the current request.
 %
 % client's exit unknown
