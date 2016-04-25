@@ -243,23 +243,32 @@ the anonymity of Tor users.
 
 \paragraph{Random source ports}
 To impede cache poisoning attacks, DNS resolvers should use random source ports
-instead of always using UDP port 53.  By inspecting ports, our data allows for
-verifying if a given resolver randomizes its source ports.  We classify a
-resolver as ``uses randomization'' if the source port does not equal 53.  Note
-that this strategy causes a small number of false positives because a
-randomizing resolver could use port 53 simply by chance.  However, the
-probability of that happening is only $\frac{1}{65535}$.
+instead of always using UDP port 53.  Our data allows for verifying if a given
+resolver randomizes its source ports.  We classify a resolver as ``uses
+randomization'' if the source port does not equal 53.  Note that this method
+causes a small number of false positives because a randomizing resolver could
+use port 53 simply by chance.  However, the probability of that happening is
+only $\frac{1}{65535}$.
+
+We found 135 DNS resolvers that did not use random source ports.  These
+resolvers were located in the networks of Vodafone, Germany (95\%), MTNL, India
+(4\%), and Cogent, U.S. (1\%).
 
 \paragraph{0x20 encoding}
-Resolver can further reduce the chance of cache poisoning by employing 0x20
-encoding, i.e., randomizing the capitalization of domain names.  For example,
-the domain name foo.com is turned into fOo.CoM, and if the DNS response does not
-mirror the randomly chosen capitalization, it is considered unauthentic.  We
-classify a resolver as ``uses 0x20'' if it has at least one lowercase and one
-uppercase character.  Again, there is a chance of false positives, which depends
-on the domain name length.  A 0x20-encoded domain name of $n$ characters
-(excluding periods) can be all-uppercase or all-lowercase with probability
-$2 \cdot 0.5^n$.
+Resolvers can further reduce the chance of cache poisoning by employing 0x20
+encoding, i.e., randomizing the capitalization of domain names.  For example, to
+resolve foo.com, a resolver would send a request for fOo.CoM.  If the DNS
+response does not reflect the randomly chosen capitalization, the resolver
+considers unauthentic.  We classify a resolver as ``uses 0x20'' if it has at
+least one lowercase and one uppercase character.  Again, there is a chance of
+false positives, which depends on the domain name length.  A 0x20-encoded domain
+name of $n$ characters (excluding periods) can be all-uppercase or all-lowercase
+with probability $2 \cdot 0.5^n$.
+
+We found 427 DNS resolvers that did not use 0x20 encoding for at least one
+query.  The top five resolvers were located in the networks of Google, U.S.
+(38\%), AT\&T, U.S. (22\%), Deutsche Telekom, Germany (7\%), Yandex, Russia
+(7\%), OpenDNS, U.S. (4\%).
 
 \paragraph{DNSSEC validation}
 We can verify if a resolver is validating DNSSEC-signed records by resolving a
