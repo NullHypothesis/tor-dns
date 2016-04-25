@@ -14,29 +14,69 @@ The following aspects might work in our favor:
 \end{itemize}
 
 
-\subsubsection{DNS dataset}
-%TODO: Tobias
-
+\subsubsection{Preliminaries}
 The adversary considers a set of webpages that we call \textbf{DNS
 Analyzed Webpages (DAW)}. Note that this set might be different from the
 set of monitored/unmonitored webpages that the adversary collected
 traffic traces on the ingress side for.
-
 For each webpage the adversary observes which domains are requested by
 the browser when loading the webpage. The set of domains requested,
 their order, uniqueness, how stable they are over several repetitions of
 loading the webpage, and what TTL they have, comprises the
 \textbf{Webpage DNS Fingerprint (WDF)} of the webpage.
-
 The adversary constructs a dataset that maps each webpage in the DAW set
-to it's WDF. We built our DAW dataset by using Tor Browser Bundle (TBB) 5.5.4
+to it's WDF.
+
+\subsubsection{The DAW dataset}
+We built our DAW dataset by using Tor Browser Bundle (TBB) 5.5.4
 configured to not browse over Tor: TBB ensures that the browser behaviour is
 identical to a TBB user over Tor, and by not using Tor we bypass IP-blacklists
 and CAPTCHAs triggered by IP-addresses of Tor-exits \cite{Khattak2016a}.
 During week 16 in 2016 we browsed Alexa top-one-million websites from a
 university network in Sweden, collecting five samples from each website. We
 collected in rounds, where each round uniformly randomly browsed all one
-million websites before visiting the same website again. 
+million websites before visiting the same website again. We collected in total
+X distinct domain names over Y DNS requests.
+
+Table~\ref{tab:dns-overview} -- makes sense for adversary to (also?) collect
+without Tor.
+
+Table~\ref{tab:daw-ttls} -- TTLs in entire data set, raw and adjusted for Tor,
+also for unique domains. 
+
+\begin{table}[t]
+	\centering
+	\begin{tabular}{l r}
+	\toprule
+	\textbf{Description} & \textbf{Percentage} \\
+	\midrule
+	Website behind CloudFlare IP & X \\
+	Domain on website resolves to CloudFlare & Y \\
+	Domain on website uses Akamai & Z \\
+	Domain on website uses Amazon & Z \\
+	Domain on website uses Google & Z \\
+	\bottomrule
+	\end{tabular}
+	\caption{The percentage of websites on Alexa top-one-million using notable
+	online services.}
+	\label{tab:dns-overview}
+\end{table}
+
+\begin{table}[t]
+	\centering
+	\begin{tabular}{l c c c c}
+	\toprule
+	\textbf{Domain TTLs (s)} & \textbf{Median} & \textbf{Mean} & \textbf{Min} & \textbf{Max} \\
+	\midrule
+	raw & 5 & $10 \pm 5$ & 2 & 10 \\
+	Tor & 262.0 & $713.0 \pm 756.6$ & 60.0 & 1800.0 \\
+	unique raw & 5 & $10 \pm 5$ & 1 & 10 \\
+	unique Tor & 600.0 & $966.8, \pm 784.8$ & 60.0 & 1800.0 \\
+	\bottomrule
+	\end{tabular}
+	\caption{}
+	\label{tab:daw-ttls}
+\end{table}
 
 
 \subsubsection{Enhancing WF Attacks with DNS Data}
