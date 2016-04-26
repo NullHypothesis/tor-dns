@@ -61,15 +61,22 @@ There are several layers of caching that we have to consider.  On the client
 side:
 \begin{itemize}
 	\item Tor Browser has its own cache.  See the settings
-		\texttt{network.dnsCache*} in \url{about:config}.
-	\item The local Tor client probably (?) also has its own cache.  See the
-		code in src/or/dns.c.
+		\texttt{network.dnsCache*} in \url{about:config}. For TBB 5.5.5, the
+		cache keeps up to 400 entries for 60 seconds with a grace period of
+		60 additional seconds (or minutes? need confirmation) in which Tor
+		Browser will use the cached (but expired) entry in the cache but
+		asynchronously resolve the domain again.
+	\item The local Tor client does not have its own cache?  See the
+		code in src/or/dnsserv.c (read top comment in file)
 \end{itemize}
 
 On the exit side:
 \begin{itemize}
-	\item The exit relay maintains its own caching layer around eventdns.c.  See
-		the code in src/or/dns.c.
+	\item The exit relay maintains its own caching layer around eventdns.c.
+	See the code in src/or/dns.c. the DNS cache enforces a minimum TTL of
+	60 seconds and a maximum TTL of 30 minutes (see src/or/dns.c:278).
 	\item The exit relay's resolver also does its own caching.
+	\item DNS records are cached by the resolver for the duration of the TTL.
+	\item DNS sniffing only tells us what \emph{domains}, but not what
+		\emph{pages} a user visits.  Can be a big problem, e.g., with Wikipedia.
 \end{itemize}
-
