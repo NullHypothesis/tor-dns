@@ -25,7 +25,7 @@ their order, uniqueness, how stable they are over several repetitions of
 loading the webpage, and what TTL they have, comprises the
 \emph{Webpage DNS Fingerprint (WDF)} of the webpage.
 The adversary constructs a dataset that maps each webpage in the DAW set
-to it's WDF.
+to its WDF.
 
 \subsubsection{The DAW dataset}
 We build our DAW dataset by using Tor Browser Bundle (TBB) 5.5.4
@@ -105,7 +105,7 @@ one client to attack\footnote{This is a simplification and might underestimate
 the adversary's power, because monitoring the traffic of several users
 on the ingress-side is easily possible, for example when the adversary
 operates one or more Tor entry guards.}.
-
+%
 % see several exits
 We assume that the adversary observes DNS traffic from several exit
 relays (either by operating a DNS resolver used by several exit relays,
@@ -137,7 +137,7 @@ and grouped per exit relay (\eg labelled with the exit relay's IP
 address).
 
 When observing a new website request on the ingress side, that is a
-traffic trace starting at time $t_0$, the adversary takes a snapshot
+traffic trace starting at time $t_0$, the adversary takes a \emph{snapshot}
 of the continuously recorded DNS traffic data, including only those queries
 that have timestamps in the time-period from $t_0 - c$ to $t_0 + d$,
 where $c$ is the maximum TTL (30 min) and $d$ is the maximum delay
@@ -153,7 +153,37 @@ it must have been queried for during the last $c$ minutes, otherwise its
 TTL would have expired and it would have been requested again (latest
 $d$ minutes after the website request was issued).
 
+The adversary can compare this snapshot set to the WDF of webpages in
+the DAW dataset in order to derive the probability that a certain
+webpage was loaded by the client. 
+
+\begin{itemize}
+  \item exit labels: if we find all domains of a wepage's WDF in the
+		  snapshot set, we must additionally check that the exit label
+		  sets of all these entries in the snapshot set have at least
+		  one exit in common (because one page load happens from only
+		  one exit)
+  \item ordering: the webpages main domain must be requested first (but
+		  order in snapshop set can be permuted due to cached other
+		  requests for the same domain in different orders during the
+		  last 30 minutes). For fresh domains (timestamps in the
+		  snapshot set greater than $t_0$) require ordering as measured
+		  (at least for first domain entry, maybe for more if
+		  measurements show that order is robust over repetitions).
+  \item cache-time and TTL information: assign lower weight to domain
+		  entries in the snapshot set that have been cached longer, take
+		  measured TTL into account (not only max tor caching time) 
+  \item weighting by uniqueness: assign lower weight to domains in the
+		  snapshot set that have lower uniqueness (\eg
+		  font.api.google.com should get a lower weight than
+		  aftonbladet.se).
+\end{itemize}
+
+We describe different approaches, how an adversary could make use of the
+snapshot set data.
+
 \subsubsection{Two-classifier Approach}
+
 (use DNS data as a separate classifier, that is look what websites fit
 to the snapshot set, and combine the resulting probability distribution
 with the one of a traditional WF classifier taking the website request
