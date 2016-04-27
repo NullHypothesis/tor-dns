@@ -170,14 +170,57 @@ snapshot set data.
 
 \subsubsection{Two-classifier Approach}
 
-(use DNS data as a separate classifier, that is look what websites fit
-to the snapshot set, and combine the resulting probability distribution
-with the one of a traditional WF classifier taking the website request
-on the ingress side as input)
-%TODO: Benjamin (copy+paste+polish from wiki)
+The analysis of the DNS data as described above can be considered to be
+a separate website fingerprinting classifier. This classifier is build
+using the DAW dataset. It takes the continuous recordings of all
+observed DNS requests and a point in time $t_0$ as input. It then
+constructs the snapshot set and outputs a probability distribution
+$D_{egress}$, describing the probability for each webpage in the DAW
+that the client visited this webpage.
+%
+Using state of the art, classical website fingerprinting techniques on
+the traffic trace observed on the ingress side (\eg~cite Panchenko et al.,
+Hayes et al. and Wang?), the adversary can obtain a probability distribution
+$D_{ingress}$, describing the probability for each webpage in the
+monitored set that the client visited this webpage. 
+%
+So when the adversary observes a new webpage request from the client 
+(to delineate between browsing sessions is a difficult task, though, say
+\cite{Coull2007a}), she uses a classical WF classifier to obtain $D_{ingress}$
+from the observed traffic trace on the ingress side. At the same time,
+she uses the DNS data observed at the egress side to obtain $D_{egress}$.
+%
+Finally the adversary combines the two distributions and outputs the 
+webpage with the highest probability in the resulting joint distribution.
+%
+When combining $D_{ingress}$ and $D_{egress}$, the adversary can take
+knowledge about the accuracy of the classifiers into account, \eg~weight
+the $D_{ingress}$ distribution higher if the classical WF is more reliable
+then the DNS data analysis.
+%
+Classical WF techniques have high recall but only mediocre precision.
+The DNS data provides very high precision if the client's exit is among
+the observed exit and most of the WDF have unique domain sets (refer to
+uniqueness statistic here when analysis is done). So a combination of
+the two could result in a technique with both high recall and high
+precision.
 
 
 \subsubsection{Close-the-world Approach}
-(use snapshot set domains to inform the construction of the training set
-for a WF classifier working on the ingress side)
-%TODO: Benjamin (copy+paste+polish from wiki)
+
+Another approach is to use the DNS data to inform the construction
+of the training set for a classical WF classifier.
+%
+If the adversary happens to observe the client's exit, then the game
+changes to a closed-world setting because the adversary knows that the
+client must have visited one of the webpages whose WDF is compatible 
+with the snapshot set. 
+%TODO: Benjamin (continue)
+
+
+\subsubsection{Simulating the Snapshot Set}
+(We want to estimate how much better WF becomes using DNS data. But we
+are not 8.8.8.8 and don't have real data to do experiments. Therefore we
+need to at least simulate the state of the snapshot set at the time of a
+page load.) %TODO 
+
