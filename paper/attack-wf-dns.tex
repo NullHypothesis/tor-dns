@@ -22,11 +22,13 @@ During week 16 in 2016 we browsed Alexa top one million websites from a
 university network in Sweden, collecting five samples from each website.
 Collection was done in rounds, where each round uniformly randomly browsed all one
 million websites before visiting the same website again. We collected in total
-X distinct domain names over Y DNS requests. There are
+2,540,941 distinct domain names over 60,828,453 DNS requests. There are
 
 Table~\ref{tab:dns-censor} shows the percentage of websites in our dataset that
 risks censorship by CloudFlare or Akami if collecting data over Tor, as
-identified by Khattak et al.~\cite{Khattak2016a}.
+identified by Khattak et al.~\cite{Khattak2016a}. We also include Google, which
+reportedly restricts access to Tor users (if performing search queries), due to
+their prevalance in the dataset.
 
 Table~\ref{tab:daw-ttls} -- TTLs in entire data set, raw and adjusted for Tor,
 also for unique domains.
@@ -37,13 +39,14 @@ also for unique domains.
 	\toprule
 	\textbf{Description} & \textbf{Percentage} \\
 	\midrule
-	Website behind CloudFlare IP & X \\
-	Domain on website uses CloudFlare & Y \\
-	Domain on website uses Akamai & Z \\
+	Website behind CloudFlare IP & 6.44 \\
+	Domain on website uses CloudFlare & 25.81 \\
+	Domain on website uses Akamai & 33.86 \\
+	Domain on website uses Google & 77.43 \\
 	\bottomrule
 	\end{tabular}
 	\caption{The percentage of websites on Alexa top-one-million using providers
-	involved in censoring access from Tor~\cite{Khattak2016a}.}
+	involved in censoring or restricting access to Tor~\cite{Khattak2016a}.}
 	\label{tab:dns-censor}
 \end{table}
 
@@ -53,8 +56,8 @@ also for unique domains.
 	\toprule
 	\textbf{DNS Requests} & \textbf{Median} & \textbf{Mean} & \textbf{Min} & \textbf{Max} \\
 	\midrule
-	per site & X & $X.4\pm15.0$ & 1 & 391 \\
-	unique per site & X4 & $17.4\pm15.0$ & 0 & 391 \\
+	per site & 10 & $12.2\pm11.2$ & 1 & 397 \\
+	unique per site & 2 & $2.3\pm1.8$ & 0 & 363 \\
 	\bottomrule
 	\end{tabular}
 	\caption{Statistics on the number of DNS requests.}
@@ -64,21 +67,28 @@ also for unique domains.
 
 \begin{table}[t]
 	\centering
-	\begin{tabular}{l c c c c}
+	\begin{tabular}{l c c}
 	\toprule
-	\textbf{TTLs (s)} & \textbf{Median} & \textbf{Mean} & \textbf{Min} & \textbf{Max} \\
+	\textbf{TTLs (s)} & \textbf{Median} & \textbf{Mean} \\
 	\midrule
-	raw & 5 & $10 \pm 5$ & 2 & 10 \\
-	Tor & 262 & $713.0 \pm 756.6$ & 60 & 1800 \\
-	unique raw & 5 & $10 \pm 5$ & 1 & 10 \\
-	unique Tor & 600 & $966.8, \pm 784.8$ & 60 & 1800 \\
-	unique min raw & 5 & $10 \pm 5$ & 1 & 10 \\
-	unique min Tor & 600 & $966.8, \pm 784.8$ & 60 & 1800 \\
+	% 2016/04/28 15:52:39 DNS records TTL mean 9780.0, std 42930.5, median 255.0, min 0.0, max 604800.0
+	raw & 255 & $9780.0\pm42930.5$ \\ % & 0 & 604800 \\
+	% 2016/04/28 15:44:05 DNS records TTL mean 701.5, std 755.3, median 255.0, min 60.0, max 1800.0
+	Tor & 255 & $701.5\pm755.3$ \\ %& 60 & 1800 \\
+	% 2016/04/28 15:52:39 	unique domain TTL mean 13022.2, std 35054.4, median 900.0, min 0.0, max 604800.0
+	unique raw & 900 & $13022.2\pm35054.4$ \\ %& 0 & 604800 \\
+	% 2016/04/28 15:44:05 	unique domain TTL mean 1005.3, std 789.6, median 900.0, min 60.0, max 1800.0
+	unique Tor & 900 & $1005.3\pm789.6$ \\ %& 60 & 1800 \\
+	% 2016/04/28 15:52:39 	unique domain _min_ TTL mean 3833.9, std 11073.6, median 60.0, min 0.0, max 604800.0
+	min unique raw & 60 & $3833.9\pm11073.6$ \\ % & 0 & 604800 \\
+	% 2016/04/28 15:44:05 	unique domain _min_ TTL mean 644.2, std 763.8, median 60.0, min 60.0, max 1800.0
+	min unique Tor & 60 & $644.2\pm763.8$ \\ %& 60 & 1800 \\
 	\bottomrule
 	\end{tabular}
-	\caption{The TTL of DNS records observed in our DAW dataset.
-	Raw TTLs are unprocessed while Tor TTLs adhere to the Tor min and max TTL.
-	The unique prefix is for the TTL of unique domains.}
+	\caption{%The TTL of DNS records observed in our DAW dataset.
+	Raw TTLs are unprocessed while Tor TTLs adhere to Tor's TTL clipping.
+	The unique prefix is for the TTL of unique domains while min unique only
+	considers the unique domains with the minimum TTL for each website.}
 	\label{tab:daw-ttls}
 \end{table}
 
@@ -182,15 +192,15 @@ Using state of the art, classical website fingerprinting techniques on
 the traffic trace observed on the ingress side (\eg~cite Panchenko et al.,
 Hayes et al. and Wang?), the adversary can obtain a probability distribution
 $D_{ingress}$, describing the probability for each webpage in the
-monitored set that the client visited this webpage. 
+monitored set that the client visited this webpage.
 %
-So when the adversary observes a new webpage request from the client 
+So when the adversary observes a new webpage request from the client
 (to delineate between browsing sessions is a difficult task, though, say
 \cite{Coull2007a}), she uses a classical WF classifier to obtain $D_{ingress}$
 from the observed traffic trace on the ingress side. At the same time,
 she uses the DNS data observed at the egress side to obtain $D_{egress}$.
 %
-Finally the adversary combines the two distributions and outputs the 
+Finally the adversary combines the two distributions and outputs the
 webpage with the highest probability in the resulting joint distribution.
 %
 When combining $D_{ingress}$ and $D_{egress}$, the adversary can take
@@ -213,8 +223,8 @@ of the training set for a classical WF classifier.
 %
 If the adversary happens to observe the client's exit, then the game
 changes to a closed-world setting because the adversary knows that the
-client must have visited one of the webpages whose WDF is compatible 
-with the snapshot set. 
+client must have visited one of the webpages whose WDF is compatible
+with the snapshot set.
 %TODO: Benjamin (continue)
 
 
@@ -222,5 +232,4 @@ with the snapshot set.
 (We want to estimate how much better WF becomes using DNS data. But we
 are not 8.8.8.8 and don't have real data to do experiments. Therefore we
 need to at least simulate the state of the snapshot set at the time of a
-page load.) %TODO 
-
+page load.) %TODO
