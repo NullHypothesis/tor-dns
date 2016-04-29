@@ -66,15 +66,15 @@ side:
 		60 additional seconds (or minutes? need confirmation) in which Tor
 		Browser will use the cached (but expired) entry in the cache but
 		asynchronously resolve the domain again.
-	\item The local Tor client does not have its own cache?  See the
-		code in src/or/dnsserv.c (read top comment in file)
+	\item The local Tor client does not have its own cache? TODO
 \end{itemize}
 
 On the exit side:
 \begin{itemize}
 	\item The exit relay maintains its own caching layer around eventdns.c.
 	See the code in src/or/dns.c. the DNS cache enforces a minimum TTL of
-	60 seconds and a maximum TTL of 30 minutes (see src/or/dns.c:278).
+	60 seconds and a maximum TTL of 30 minutes (see src/or/dns.c:278). We
+	refer to this as Tor's \emph{TTL clipping}.
 	\item The exit relay's resolver also does its own caching.
 	\item DNS records are cached by the resolver for the duration of the TTL.
 	\item DNS sniffing only tells us what \emph{domains}, but not what

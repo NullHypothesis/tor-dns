@@ -36,9 +36,25 @@ particular website. Figure~\ref{fig:unique-domains} shows the percentage of site
 with unique domains for different parts of Alexa top one million.
 For 96.8\% of all sites there exists at least one uniqe domain, and the more popular
 a site is the less likely it is to have a unique domain.
+Table~\ref{tab:daw-unique} shows statistics for the number of DNS requests per site.
+For at least half of the dataset we have ten requests per website where two of them
+are unique.
+% TODO: how stable are (unique) domains? percentage of domains that appear less than
+% five times?
 
-Table~\ref{tab:daw-ttls} -- TTLs in entire data set, raw and adjusted for Tor,
-also for unique domains.
+Table~\ref{tab:daw-ttls} shows statistics on the TTL of DNS records in our dataset
+for:
+\begin{itemize}
+	\item the TTL as-is (raw) and when clipped by Tor,
+	\item for unique domains, and
+	\item when only considering the unique domain for each website with the lowest
+	TTL.
+\end{itemize}
+Note that for about half of the websites on Alexa top one million, there is at least
+one unique domain with a TTL of 60 seconds. Tor's TTL clipping has no impact on
+the median TTL, but significantly influences the mean TTL.
+(There appears to be a clear trade-off between protecting against WF+DNS attacks
+and cache poisoning?)
 
 \begin{figure}[t]
 	\centering
@@ -251,9 +267,9 @@ domains that are requested when loading the wepage (\ie~all domains
 contained in the WDF of the wepage) have corresponding entries in that
 snapshot set. We say that a webpage is compatible with the set of all
 snapshot sets, or simply ``with the snapshot sets'', from all observed
-exits, if it is compatible with at least one of them. 
+exits, if it is compatible with at least one of them.
 %
-The adversary cannot know though, if she observes the client's exit. 
+The adversary cannot know though, if she observes the client's exit.
 %
 To account for this, the adversary can first apply a classifier that is
 only trained on those webpages that are compatible with the snapshot
