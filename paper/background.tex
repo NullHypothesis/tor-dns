@@ -19,6 +19,18 @@ and its guard.  Unfortunately, the Tor network's limited spare capacity does not
 allow for such an expensive defense, but some research has worked on making it
 cheaper~\cite{Cai2014a}.
 
+\subsection{The Tor network}
+The Tor network is an overlay network that anonymizes TCP streams such as web
+traffic.  As of April 2016, it counts approximately 7,000 relays and around two
+million users.  Clients send data over the Tor network by randomly selecting
+three relays---typically called the guard, middle, and exit relay---that then
+form a virtual tunnel called \emph{circuit}.  The guard relay gets to learn the
+client's IP address, but not its web activity, while the exit relay gets to
+learn the client's web activity, but not its IP address.  Relays and clients
+talk to each other using the Tor protocol, which uses 512-byte \emph{cells}.
+Finally, each relay is uniquely identified by its \emph{fingerprint}, a hash
+function over its public key.
+
 \subsection{How Tor handles DNS}
 \label{sec:tordns}
 Tor clients must send DNS requests over Tor to prevent DNS leakage.  Tor
