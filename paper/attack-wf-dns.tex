@@ -286,8 +286,49 @@ after the classifier has been re-trained on the modified training set
 (that was adapted to the egress DNS observations as described above).
 
 
-\subsubsection{Simulating the snapshot Set}
-(We want to estimate how much better WF becomes using DNS data. But we
-are not 8.8.8.8 and don't have real data to do experiments. Therefore we
-need to at least simulate the state of the snapshot sets at the time of
-a page load.) %TODO
+\subsubsection{Simulating the snapshot set}
+As we do not have real Tor egress traffic data available we need to
+simulate the snapshot set that an adversary is able to compute. For
+this, we first simulate user browsing behaviour (which webpages are
+visited at what times by Tor users), then we can derive which DNS
+queries are seen by the adversary and can be used to compute the
+snapshot set. Figure~\ref{fig:snapshot-simulator-concept} illustrates
+the simulation process.
+
+\begin{figure}[t]
+	\centering
+	\includegraphics[width=\linewidth]{figures/snapshot-simulator-concept.pdf}
+	\caption{Concept of the snapshot set simulation process.}
+	\label{fig:snapshot-simulator-concept}
+\end{figure}
+
+
+We formalize the DNS data as following. 
+%
+Let $E$ be set set of all exit relays, $E_{obs}$ the set of observed
+exits, $E_{unob} = E \setminus E_{obs}$ the set of unobserved exits and
+$e_{client}$ the client's exit.
+
+We represent a DNS query that the adversary observed to or on a DNS
+resolver as a tuple $q_i = (t_i, fqdn_i, ttl_i, exit_i)$ where $t_i$ is
+the timestamp of the query, $fqdn_i$ is the fully qualified domain name
+that was queried for, $ttl_i$ is the time-to-live value reported in the
+response and $exit_i$ is a unique identifier (\eg ip address or
+fingerprint) of the exit relay that issued the query.
+[Is it ok to ignore the time-difference of query and response here?]
+
+We denote the set of DNS queries originating from one observed exit $e
+\in E_{obs}$ as $S_{e}$.
+
+We define a snapshot function 
+\begin{equation}
+  \label{equ:snapshot}
+  \mathrm{snapshot}(S_e,t,c,d) = \left\{q_k = (t_k,fqdn_k,ttl_k,exit_e)
+		  \mid t-c \leq t_k \leq t+d \right\}
+\end{equation}
+that takes the set of queries $S_e$ from exit relay $e$, point in time
+$t$, the maximum caching timespan $c$ in seconds and a maximum delay $d$
+in seconds as input. It outputs a subset of $S_e$ that contains only
+those queries that have been issued by this exit relay $e$ at most $c$
+seconds in the past and $d$ seconds in the future.
+
