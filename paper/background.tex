@@ -4,7 +4,7 @@ We now give a brief introduction to the pillars our attack is resting
 on---website fingerprinting and the process of DNS resolution over the Tor
 network.
 
-\subsection{Website fingerprinting attacks}
+\paragraph{Website fingerprinting attacks}
 The Tor network encrypts relayed traffic as it travels from the client to the
 exit relay.  Therefore, intermediate parties such as the user's Internet service
 provider (ISP) are not able to read any packet content.  However, Tor does not
@@ -19,7 +19,7 @@ and its guard.  Unfortunately, the Tor network's limited spare capacity does not
 allow for such an expensive defense, but some research has worked on making it
 cheaper~\cite{Cai2014a}.
 
-\subsection{The Tor network}
+\paragraph{The Tor network}
 The Tor network is an overlay network that anonymizes TCP streams such as web
 traffic.  As of April 2016, it counts approximately 7,000 relays and around two
 million users.  Clients send data over the Tor network by randomly selecting
@@ -31,8 +31,7 @@ talk to each other using the Tor protocol, which uses 512-byte \emph{cells}.
 Finally, each relay is uniquely identified by its \emph{fingerprint}, a hash
 function over its public key.
 
-\subsection{How Tor handles DNS}
-\label{sec:tordns}
+\paragraph{How Tor handles DNS}
 Tor clients must send DNS requests over Tor to prevent DNS leakage.  Tor
 does not transport UDP traffic, but it implements a workaround to ensure that
 DNS requests can go over Tor.
