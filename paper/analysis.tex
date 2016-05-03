@@ -6,30 +6,3 @@
 	\item How hard is it for a passive adversary that sees both ends to link DNS
 		requests?
 \end{itemize}
-
-\subsection{Resolver query quality}
-We want to learn how many exit relays use poorly configured resolvers that are
-vulnerable to off-path poisoning attacks.  These relays are not only a security
-but also an anonymity threat because if an adversary manages to poison the
-resolver's cache, she can redirect Tor users to her own Web server, enabling
-end-to-end correlation attacks.
-
-\begin{table}[t]
-	\centering
-	\begin{tabular}{l r r r}
-	\toprule
-	\textbf{Type} & \textbf{Min.} & \textbf{Median} & \textbf{Max.} \\
-	\midrule
-	0x20 encoding & 0.9757 & 0.9840 & 0.9930 \\
-	Random ports & 0.9947 & 0.9974 & 1.0000 \\
-	\bottomrule
-	\end{tabular}
-	\caption{Summary statistics for many days worth of DNS experiments.  The
-	majority of exit relay resolvers employs both 0x20 encoding and random
-	source ports.}
-	\label{tab:query-quality}
-\end{table}
-
-How many resolvers are open and allow cache snooping attacks?
-
-As of March 24, 2016, 61\% of resolvers validate DNSSEC while 33\% don't.
