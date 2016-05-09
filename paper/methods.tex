@@ -136,15 +136,15 @@ that the connection succeeded.  There is no way for Tor clients to learn what
 DNS resolver handled name resolution.  Identifying these resolvers is a complex
 task, and has not been covered in past work~\cite{Johnson2013a}.
 
-We answer this question by using exitmap~\cite{exitmap} and our own DNS server.
-Exitmap is a scanner for Tor exit relays.  It can execute a task---e.g., the
-retrieval of a web page---over all one thousand exit relays, allowing for seeing
-the Internet through the ``eyes'' of every single exit relay.  Leveraging
-exitmap, we resolve unique, relay-specific domains over each exit relay, to a
-DNS server under our control.  This experiment is visualized in
-Figure~\ref{fig:dnsenum}.  To improve reliability, we configured exitmap to use
-two-hop circuits instead of the standard three-hop circuits.  The first hop was
-a guard relay under our control.  Over each exit relay, we resolve a unique
+For the first time, we answer this question by using exitmap~\cite{exitmap} and
+our own DNS server.  Exitmap is a scanner for Tor exit relays.  It can execute
+a task---e.g., the retrieval of a web page---over all one thousand exit relays,
+allowing for seeing the Internet through the ``eyes'' of every single exit
+relay.  Leveraging exitmap, we resolve unique, relay-specific domains over each
+exit relay, to a DNS server under our control.  This experiment is visualized
+in Figure~\ref{fig:dnsenum}.  To improve reliability, we configured exitmap to
+use two-hop circuits instead of the standard three-hop circuits.  The first hop
+was a guard relay under our control.  Over each exit relay, we resolve a unique
 domain PREFIX.tor.nymity.ch whose authoritative DNS server we control.  The
 prefix consists of the relay's unique 160-bit fingerprint concatenated to a
 random 40-bit string whose purpose is to prevent caching, so exit relays indeed
@@ -169,28 +169,54 @@ its own resolver, we expect to receive a DNS request from the exit relay's IP
 address, but if an exit relay uses a third-party resolver, we expect to receive
 a request from an unrelated IP address.  Having encoded relay-specific
 fingerprints in the query names, we are able to map queries to exit relays in
-such cases.  We ran this experiment from September 2015 to XXX 2016, six times a
-day.
+such cases.  We ran this experiment from September 2015 to \fixme 2016, six
+times a day.  Finally, we encountered the following two difficulties.
 
-\subsubsection{Results}
-Figure~\ref{fig:exit-resolvers} illustrates the percentage of DNS requests that
-the four most popular resolvers can observe.  Google's public DNS resolver sees
-one quarter of all DNS requests exiting the Tor network, a considerable number
-for a single organization.  After Google comes ``Local,'' i.e., exit relays that
-run their own resolver.  Local resolvers trade off exposure to third-party
-resolvers to the network, as we show in Section~\ref{sec:as-exposure}.  Followed
-by local resolvers is OVH, a VPS provider that currently runs the AS that relays
-the most traffic in the Tor network.  Note that OVH resolvers are only meant for
-OVH customers, and hence not public.  Number four is OpenDNS, an organization
-that operates public DNS resolvers.  Apart from the top four resolvers, the
-distribution has a long tail, presumably consisting of many ISP resolvers.
+\paragraph{DNS proxies}
+Manual inspection of our data revealed that several exit relays used DNS
+proxies, i.e., machines that passed on DNS requests to an actual resolver
+instead of resolving it themselves.  Google's resolver 8.8.8.8 is a popular
+example of a DNS proxy; the actual resolution is documented to be done by
+several dozen machines in the background~\cite{google-proxies}.  It is
+difficult to identify DNS proxies, so we ignored them in our data collection.
+We believe that ignoring DNS proxies will not distort our results significantly
+because we expect that proxies and resolvers are frequently located in the same
+autonomous system.
+
+\paragraph{Multiple DNS resolvers}
+On Linux systems, DNS resolution is controlled by the file
+\texttt{/etc/resolv.conf}.  It contains a list of up to three DNS resolvers
+that are queried in order.  If the primary resolver does not respond within a
+time limit, the system falls back to the second, and finally the third
+resolver, if available.  Our data whos that several exit relays used different
+resolvers in subsequent exitmap scans---one relay, for example, used both
+Google's DNS resolver and one provided by its ISP.  For our visualization, we
+only consider the first resolver we observed for an exit relay, which might not
+be the primary resolver.  We believe that this method makes for the most
+realistic estimate as the primary resolver handles the bulk of all DNS requests
+of an exit relay.
+
+\subsubsection{Visualizing results}
+Figure~\ref{fig:exit-resolvers} illustrates the fraction of DNS requests that
+all ASs that were ever in the top three could observe.  Google averages at
+33\%, but at times it saw more than 40\% of all DNS requests exiting the Tor
+network, a considerable number for a single organization.  Second to Google is
+``Local,'' i.e., exit relays that run their own resolver, averaging at 12\%.
+Next is OVH which used to be as popular as local resolvers, but slowly lost its
+fraction over time.  Note that OVH resolvers are only meant for OVH customers,
+and hence not public.  Between 0 and 5\% are seven more ASs, namely Level 3,
+Visual Online, Init7, OpenDNS, Cyberdyne, NForce, and LeaseWeb.  Apart from the
+illustrated top resolvers, the distribution has a long tail, presumably
+consisting of many ISP resolvers.
 
 \begin{figure*}[t]
 	\centering
 	\includegraphics[width=\linewidth]{figures/exit-resolvers.pdf}
 	\caption{The amount of the most popular DNS resolvers of exit relays over
 	time, weighted by bandwidth.  Google's DNS server is by far the most popular
-	resolver of exit relays, followed by a local resolver, OVH, and OpenDNS.}
+	resolver of exit relays, followed by a local resolver, OVH, and OpenDNS.
+	The category ``Other'' consists of the ASs Level 3, Visual Online, Init7,
+	OpenDNS, Cyberdyne, NForce, and LeaseWeb.}
 	\label{fig:exit-resolvers}
 \end{figure*}
 
