@@ -1,129 +1,61 @@
 \section{Related work}
 \label{sec:related_work}
 
-We focus on related work that covers low-latency anonymity networks.
-
-As mentioned earlier, Tor's threat model excludes the ``global passive adversary''
-and instead assumes an adversary that can launch both passive and active attacks
-on ``some fraction of network traffic''~\cite{Dingledine2004a}. They differentiate between traffic
-\textit{confirmation} attacks and traffic \textit{analysis} attacks. They state, ``Rather than focusing on these
-\textit{traffic confirmation} attacks, we aim to prevent \textit{traffic analysis} attacks,
-where the adversary uses traffic patterns to learn which points in the network
-he should attack''~\cite{Dingledine2004a}.
-The authors provide examples of traffic confirmation attacks which
-include end-to-end size correlation (e.g., packet counting) and end-to-end timing correlation,
-which are ``effective in confirming endpoints of a stream''~\cite{Dingledine2004a}. They provide website
-fingerprinting as an example of a traffic analysis attack, and they mention that it
-``may be less effective against Tor, since streams are multiplexed within the same circuit,
-and fingerprinting will be limited to the granularity of cells (currently 512 bytes)''~\cite{Dingledine2004a}.
-
-Serjantov and Sewell discussed packet counting attacks for low-latency networks
-in 2003~\cite{Serjantov2003a}.  They focused on single nodes in an anonymity
-network and conjectured that their technique is harder to apply to an anonymity
-network.
-
-In 2004, Feamster and Dingledine~\cite{Feamster2004a} investigated Tor's and
-Mixmaster's topological diversity against an adversary that controls an
-autonomous system.  The authors found that tier-1 ISPs and path asymmetry reduce
-are among the major issues, reducing location diversity.  Tor's current
-safeguard to select relays in disjoint /16 networks is not sufficient to defend
-against large autonomous systems. In ~\cite{Feamster2004a}, the authors discovered
-that users of anonymity networks must take into account the AS-level path along
-which their traffic will flow from node to node lest they be deanonymized by a
-single AS that can see traffic that goes into the anonymity network and traffic that flows out.
-(This paper talks about intra-network attacks and endpoint attacks, and
-I wasn't clear on what the findings were for intra-network attacks. Additionally,
-does this fall into the traffic analysis category or traffic confirmation category or neither?)
-The authors used AS path estimation based on the work of Mao et al.~\cite{} and
-mentioned that future work could include running traceroutes in order to compare
-their AS path estimation technique with ``ground truth.'' They discussed the asymmetry
-they observed in forward paths vs. reverse paths and touched upon how Web hosting companies
-like Akamai that ``serve content from locations that are close to any given user''~\cite{Feamster2004a}
-and have a global presence can throw off AS-level path estimations and can themselves
-be powerful adversaries worthy of consideration. The point of this paper was that
-the seemingly diverse locations of the nodes, which anonymity networks depend on
-in order to fool observers of the traffic, were actually not that diverse once administrative
-entities, i.e., ASes, were taken into account, and the authors proposed ways for
-such networks to choose nodes with better diversity. (An aside: I like how the authors
-point out that if diversity is indeed achieved, that in itself reveals information
-to an attacker because if an attacker sees traffic at an AS, he/she knows that the
-traffic must have come from a different AS than itself.)
-
-Murdoch and Zieli\'{n}ski pointed out that Feamster and Dingledine's work did
-not consider Internet exchange points (IXPs)~\cite{Murdoch2007a}.  The authors
-showed that IXPs are a practical threat---even if only sampled traffic is used
-for traffic analysis.
-
-Johnson et al.~\cite{Johnson2013a} simulated different types of network
-activity, including web, IRC, and BitTorrent.  We only focus on web activity,
-and investigate it in much more detail than the authors.
-
-Johnson et al.~\cite{Johnson2013a} did a comprehensive study on how
-different kinds of adversaries (e.g., relay-level adversaries, AS-level adversaries,
-IXP-level adversaries, and IXP organization-level adversaries) can deanonymize Tor
-users whose network activity follows certain patterns. They developed TorPS (Tor Path Simulator)
-[add citation for this?] and simulated different types of network activity that users
-might perform over Tor, including web, IRC, and BitTorrent, to see how the activities
-would affect users' probability of becoming deanonymized. We only focus on web
-activity and investigate it in much more detail than the authors.
-
-Juen et al.~\cite{Juen2015a} wrote a follow-up paper to~\cite{Johnson2013a}
-in which they showed that using autonomous system path inference to generate
-the paths from the client to the guard and from the exit to the destination
-as the authors of~\cite{Johnson2013a} did was not very accurate at all
-[This sentence requires that we explain why~\cite{Johnson2013a} was using path inference--
-I'm thinking a ``Background'' section might be appropriate to set the stage
-before launching into related works . . .]. The authors of~\cite{Juen2015a}
-were able to get traceroutes from actual Tor relays (guards and exits) by asking
-Tor operators to run the traceroutes for them. They found that ``only 20\% of predicted paths
-match paths seen in traceroutes.'' However, their traceroute data came from
-only ``28 Tor relays,'' and they note that their traceroutes only went
-in one direction (from the Tor relays outward). The authors of \cite{Sun2015a}
-actually use the asymmetry of both directions to their advantage in creating their
-RAPTOR class of attacks.
-[I believe this sentence requires an explanation of ``both directions'' in a Background section perhaps.]
-
 \paragraph{Traffic analysis methods}
-Serjantov and Sewell proposed a simple flow correlation approach based on
-counting packets that are sent to and from an anonymity node in a small time
-interval~\cite{Serjantov2003a}.
+Tor's threat model excludes global adversaries~\cite{Dingledine2004a}, but the
+practical threat of such adversaries is an important question that academia has
+spent considerable effort on answering.  In 2004, when the Tor network counted
+only 33 relays, Feamster and Dingledine investigated the practical threat that
+network-level adversaries pose to anonymity networks~\cite{Feamster2004a}.  In
+particular, the authors considered an attacker that controls an autonomous
+system that is traversed both for ingress and egress traffic, allowing the
+attacker to correlate both streams.  Using AS path prediction~\cite{Gao2001a},
+Feamster and Dingledine found that powerful tier-1 ISPs reduce location
+diversity of anonymity networks.
 
-\O{}verlier and Syverson~\cite{Overlier2006a} used the packet counting approach
-described by Serjantov and Sewell~\cite{Serjantov2003a}.
+In 2007, Murdoch and Zieli\'{n}ski drew attention to IXP-level adversaries, a
+class of adversaries that was missing in Feamster and Dingledine's
+work~\cite{Murdoch2007a}.  Murdoch and Zieli\'{n}skishowed showed that IXP
+adversaries are able to correlate traffic streams, even in the presence of
+packet sampling rates as low as one in 2,000.
 
-\cite{Goldberg2010a}
+In 2013, Johnson et al.~\cite{Johnson2013a} presented the first large-scale
+study on the risk of Tor users facing relay-level and network-level
+adversaries.  The authors developed a Tor path simulator (TorPS~\cite{TorPS})
+that simulates Tor circuits for a number of user models the authors developed.
+By combining TorPS with AS path prediction, Johnson et al. could answer
+questions such as the average time until a Tor user's circuit is linked
+together by an AS or IXP.
 
-\cite{Juen2015a}
+In 2015, Juen et al.~\cite{Juen2015a} questioned the accuracy of path
+prediction algorithms that prior work~\cite{Johnson2013a,Feamster2004a} used to
+estimate the threat of correlation attacks.  The authors compared AS path
+predictions to millions of traceroutes they initiated from 25\% of Tor relays
+by bandwidth at the AS level.  Only 20\% of predicted paths matched the paths
+observed in traceroute, calling into question the results of prior work.  A
+limitation of Juen et al.'s work is that they could not consider the reverse
+path in traceroutes.  This shortcoming was addressed in 2015 by Sun et
+al.~\cite{Sun2015a}.  While past work treated routing as static, Sun et al.
+leveraged the dynamic nature of routing to show that network adversaries are a
+bigger threat than thought.
 
+Most recently in 2016, Nithyanand et al.~\cite{Nithyanand2016a} used AS path
+prediction to evaluate the practical threat faced by users in the top 10
+countries using Tor.
 
-
-\paragraph{Countermeasures}
-\cite{Edman2009a}
-\cite{Nithyanand2016a}
-\cite{Akhoondi2012a}
-
-
-\cite{Mathewson2004a}
-\cite{Mittal2011a}
-\cite{Wacek2013a}
-\cite{Johnson2013a}
-\cite{Juen2015a}
-\cite{Danezis2004a}
-\cite{Levine2004a}
-\cite{Bauer2007a}
-\cite{Dingledine2009a}
-
-
-Johnson et al.~\cite{Johnson2015a} proposed TAPS, a trust-aware path selection
-client for Tor relays.
-
-\cite{torstinks}
+We improve on previous work in two significant ways; (\emph{i}) we are the
+first to consider the DNS protocol for traffic analysis and evaluate its
+practical threat, and (\emph{ii}) we propose a method to scale the measurement
+method proposed by Juen et al.~\cite{Juen2015a}.  Our method leverages the
+volunteer-run RIPE Atlas measurement platform~\cite{atlas} instead of
+convincing relay operators to run third-party scripts.  This allows us to fully
+automate our method and achieve previously unprecedented scale.
 
 \paragraph{Website fingerprinting}
 \cite{Juarez2014a}
 Showed that many variables are ignored that have large impact on classification
 and running WF system is expensive.
 
-Most recently, Panchenko et al. show that \emph{webpage} fingerprinting lacks
- \emph{precision} in the open world, while \emph{website} fingerprinting remains practical.
-\cite{Panchenko2016a} [We should probably introduce precision and recall here.]
+Most recently, in 2016, Panchenko et al. show that web\emph{page}
+fingerprinting lacks precision in the open world while web\emph{site}
+fingerprinting remains practical~\cite{Panchenko2016a}.
