@@ -37,11 +37,9 @@ limitation of Juen et al.'s work is that they could not consider the reverse
 path in traceroutes.  This shortcoming was addressed in 2015 by Sun et
 al.~\cite{Sun2015a}.  While past work treated routing as static, Sun et al.
 leveraged the dynamic nature of routing to show that network adversaries are a
-bigger threat than thought.
-
-Most recently in 2016, Nithyanand et al.~\cite{Nithyanand2016a} used AS path
-prediction to evaluate the practical threat faced by users in the top 10
-countries using Tor.
+bigger threat than thought.  Most recently in 2016, Nithyanand et
+al.~\cite{Nithyanand2016a} used AS path prediction to evaluate the practical
+threat faced by users in the top 10 countries using Tor.
 
 We improve on previous work in two significant ways; (\emph{i}) we are the
 first to consider the DNS protocol for traffic analysis and evaluate its
@@ -52,10 +50,33 @@ convincing relay operators to run third-party scripts.  This allows us to fully
 automate our method and achieve previously unprecedented scale.
 
 \paragraph{Website fingerprinting}
-\cite{Juarez2014a}
-Showed that many variables are ignored that have large impact on classification
-and running WF system is expensive.
+In 2009, Hermann, Wendolsky, and Federrath~\cite{Hermann2009a} demonstrated the
+first website fingerprinting attack against anonymity systems---including
+Tor---in a closed-world setting.  In 2011, Panchenko et
+al.~\cite{Panchenko2011a} greatly improved on Hermann et al.'s detection rate
+and provided insight into an open-world setting.  In 2012, Cai et
+al.~\cite{Cai2012a} improved on prior work by proposing an attack that used
+Hidden Markov Models to determine if a sequence of page requests all come from
+the same site.  The authors used an open-world setting for their evaluation.
 
-Most recently, in 2016, Panchenko et al. show that web\emph{page}
-fingerprinting lacks precision in the open world while web\emph{site}
-fingerprinting remains practical~\cite{Panchenko2016a}.
+Wang and Goldberg~\cite{Wang2013a} proposed an improved attack that employed a
+new method for data gathering.  Instead of working with TCP segments, the
+authors extracted Tor cells from packet traces and managed to remove flow
+control cells from the traces.  In 2014, Wang et al.~\cite{Wang2014a} further
+improved on their results.
+
+Cai et al.~\cite{Cai2014b} analyzed what traffic features provide the most
+predictive power, proved a lower bound of any defense that achieves a certain
+level of security, and provided a framework to investigate the performance of
+fingerprinting attacks.
+
+Juarez~\cite{Juarez2014a} critically evaluated past fingerprinting attacks,
+showing that they all made numerous simplifying assumptions.  The authors
+suggest that fingerprinting attacks are still difficult to run outside a lab
+setting as an attacker will have to consider operating system differences, page
+changes, and background traffic.  Most recently in 2016, Panchenko et
+al.~\cite{Panchenko2016a} showed that web\emph{page} fingerprinting lacks
+precision in the open world while web\emph{site} fingerprinting remains
+practical.
+
+\fixme{What are we doing better than past work?}
