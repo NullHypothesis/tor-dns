@@ -42,14 +42,3 @@ Our contribution is to answer a number of questions:
 		show that an adversary can also link the associated DNS traffic, which
 		can be exposed to many more ASs than the TCP stream.}
 \end{figure}
-
-\begin{figure}[t]
-	\centering
-	\includegraphics[width=\linewidth]{figures/as-exposure.pdf}
-	\label{fig:as-exposure}
-	\caption{Before a relay can establish a TCP connection to a web server, it
-		has to resolve its domain name.  Ignoring caching, the relay begins by
-		contacting a root server, which delegates the resolver to a TLD DNS
-		server.  Finally, the relay contacts the authoritative DNS server that
-		has an A record for the domain baidu.com.}
-\end{figure}
