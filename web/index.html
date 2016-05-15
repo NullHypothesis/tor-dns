@@ -29,16 +29,15 @@
 This research project investigates how the <i>domain name system</i> (DNS) can
 be used to improve end-to-end correlation attacks on low-latency anonymity
 networks such as <a href="https://www.torproject.org">Tor</a>.  Traditional
-correlation attacks have focused on linking together point-to-point TCP
-traffic between the Tor client and its destination.  In practice, however, there
-is more going on.  Before exit relays can establish a connection to the
-destination server, they must resolve the domain name.  Depending on how the
-exit relay is configured, the resulting DNS resolution traffic can traverse
-parts of the Internet that the subsequent TCP connection does not traverse.
-This exposure could facilitate correlation attacks as an AS-level attacker is
-more likely to see both &ldquo;ends&rdquo; of the Tor connection.  The diagram
-to the right illustrates this problem.  The solid green lines represent TCP
-connections while the dashed blue lines represent DNS traffic.
+correlation attacks have focused on linking together TCP traffic between the
+Tor client and its destination, but in practice there is more going on.
+Before exit relays can establish a connection to the destination server, they
+must resolve the domain name.  Depending on how the exit relay is configured,
+the resulting DNS resolution traffic can traverse parts of the Internet that
+the subsequent TCP connection does not traverse.  This exposure could
+facilitate correlation attacks as an AS-level attacker is more likely to see
+both &ldquo;ends&rdquo; of the Tor connection.  The diagram to the right
+illustrates this problem.
 </p>
 
 <p>
