@@ -324,6 +324,7 @@ exit relays and check if we get an A record in response.
 	\end{itemize}
 	\item Run traceroutes to DNS servers to determine path coverage.
 	\item Determine ``AS inflation factor.''
+\end{itemize}
 
 In this analysis we assume that an AS that can see traffic entering the Tor network and 
 DNS traffic at the other end can use this information in order to deanonymize the 
@@ -351,7 +352,7 @@ in.
 In this analysis, we completely ignore caching of any type. TorPS is based on Tor version X. 
 For each sample, it uses one guard which will expire after 270 days. We have TorPS simulate
 the behavior of a Tor client for the month of March 2016.
-\end{itemize}
+
 
 \subsection{DNS packet sizes at entry guard}
 \begin{itemize}
