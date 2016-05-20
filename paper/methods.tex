@@ -324,6 +324,33 @@ exit relays and check if we get an A record in response.
 	\end{itemize}
 	\item Run traceroutes to DNS servers to determine path coverage.
 	\item Determine ``AS inflation factor.''
+
+In this analysis we assume that an AS that can see traffic entering the Tor network and 
+DNS traffic at the other end can use this information in order to deanonymize the 
+entering traffic. Here we seek to measure the chances an AS will be in the ``correct'' 
+position to carry out such an attack.
+
+A Tor exit can carry out DNS name resolution in two different ways: it can either do it
+itself by running a name server locally, or it can rely on a 3rd-party name server, 
+such as its ISP's name server or a public DNS name server like Google's 8.8.8.8.
+
+Let us examine these two different scenarios: local resolution vs. 3rd-party 
+resolution. With local resolution, a good position for an AS is to be on the path between 
+a Tor client and a Tor guard and on the path between a Tor exit and any of the name 
+servers the exit has to communicate with in order to resolve the name. These name servers 
+can include the root name server, the TLD servers, and the other ones**fix this. The ASes 
+along the way from the exit relay to the name servers will be able to see the names that 
+are being queried.
+
+For 3rd party resolution, a good position for an AS is to be on the path between 
+a Tor client and a Tor guard and on the path between the exit relay and that 3rd party 
+name server. Beyond that, the queries will look like they're coming from the IP address 
+of the name server and not the IP address of the exit relay, which is what we're interested 
+in. 
+
+In this analysis, we completely ignore caching of any type. TorPS is based on Tor version X. 
+For each sample, it uses one guard which will expire after 270 days. We have TorPS simulate
+the behavior of a Tor client for the month of March 2016.
 \end{itemize}
 
 \subsection{DNS packet sizes at entry guard}
