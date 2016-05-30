@@ -1,44 +1,81 @@
 \section{Introduction}
 \label{sec:introduction}
 
-\begin{itemize}
-	\item Tor's threat model excludes global passive adversaries, but they are a
-		real-world threat~\cite{torstinks} that research has to quantify.
+% High-level motivation.
+Low-latency anonymity networks such as Tor~\cite{Dingledine2004a} trade off
+strong anonymity for lower latency, making the network useful for all sorts of
+web activity.  This comes at the cost of not being able to protect against
+powerful adversaries that can observe both ends of the communication, allowing
+them to link ingress to egress traffic, thus deanonymizing users.  While
+low-latency networks do not consider such adversaries in their threat models,
+we know that they are a reality.  In a classified document, an NSA analyst
+wrote ``With manual analysis we can de-anonymize a very small fraction of Tor
+users.''~\cite{torstinks} Understanding and mitigating the threat of such
+adversaries is an important research topic.
 
-	\item Past research only focused on TCP flow between client and destination.
-		Accompanying DNS requests were ignored because they are difficult to
-		measure.
-
-	\item DNS must not be ignored, because its distributed nature greatly
-		increases path coverage, i.e., the number of ASes that are traversed by
-		IP packets.
-
-	\item As a result, past work might have underestimated the impact of
-		network-level adversaries.
-
-	\item In this paper, we quantify the threat.  Using
-		exitmap~\cite{Winter2014b}, we are able to enumerate the DNS resolvers
-		of exit relays.  We write a tool to quantify path exposure, and build
-		practical attacks using Web site fingerprinting.
-\end{itemize}
-
-Our contribution is to answer a number of questions:
-\begin{itemize}
-	\item What advantage do relay-level and network-level adversaries gain when
-		they consider DNS exposure?
-
-	\item How many more autonomous systems are DNS requests exposed to, compared
-		to end-to-end TCP flows?
-
-	\item How should Tor exit relays be configured to mitigate this issue?
-\end{itemize}
+% More specific problem.
+Academia has spent considerable effort on quantifying the threat of correlation
+attacks.  Past work only focused on \emph{TCP flows} between a client and its
+destination such as HTTP requests, BitTorrent connections, or IRC sessions.
+Preceding \emph{DNS requests}, however, have been ignored entirely.  This is a
+critical oversight because the nature of DNS differs in fundamental ways from
+subsequent TCP flows.  Depending on the setup of a Tor exit relay, DNS requests
+can traverse different parts of the Internet than the subsequent TCP
+connection, allowing an attacker that can observe occasional DNS requests but
+no exit traffic to link both ends of the communication.
+Figure~\ref{fig:overview} illustrates an example.
 
 \begin{figure}[t]
 	\centering
 	\includegraphics[width=0.8\linewidth]{figures/attack-concept.pdf}
-	\label{fig:overview}
 	\caption{Past traffic correlation studies have focused on linking the TCP
 		stream entering the Tor network to the one(s) exiting the network.  We
 		show that an adversary can also link the associated DNS traffic, which
 		can be exposed to many more ASs than the TCP stream.}
+	\label{fig:overview}
 \end{figure}
+
+% Contributions.
+In this paper, we first set out to quantify the issue.  Deploying a new method
+to identify the DNS resolvers that Tor exit relays use, we show that Google
+currently handles 40\% of all DNS requests of the Tor network.  Around 10\% of
+DNS requests are handled by resolvers on exit relays, but these resolvers send
+requests that traverse large parts of the Internet.  According to our results,
+the iterative DNS resolution process for half of Alexa's top 1,000 domains
+traverses numerous autonomous systems that are not traversed for the subsequent
+HTTP connection to the web site.  Armed with a better understanding of how Tor
+exit relays use DNS, we adapt a website fingerprinting classifier that takes as
+input captured traffic that is entering the Tor network, augmented with DNS
+requests that are captured somewhere else on the Internet.  We evaluate our
+website fingerprinting attack, and investigate the impact at Internet-scale
+using the TorPS simulator in combination with a novel approach to run
+traceroutes from exit relays.
+
+% Comparison to past work.
+We improve on the state of the art by showing that DNS requests pose a threat
+that future work on correlation attacks should consider.  Our measurements
+provide us with a better understanding of the Tor network that can aide in
+future design decisions.  Finally, we propose a new measurement method to
+evaluate the impact of traffic correlation attack, significantly improving on
+past work.
+
+In summary, our work makes the following contributions:
+\begin{itemize}
+	\item We shed light on how Tor exit relays resolve domains, revealing that
+		40\% of DNS request exiting the Tor network go to Google's public DNS
+		resolver.
+
+	\item We present a novel website fingerprinting attack.  We augment our
+		classifiers input data with DNS requests observed by a network-level
+		adversary to reduce the open world scenario.
+
+	\item We develop a new measurement method to evaluate the threat of
+		network-level adversaries.  We employ the RIPE Atlas~\cite{atlas}
+		platform to achieve previously unprecedented path coverage.
+
+	\item We quantify the threat of DNS-based traffic correlation attacks by 
+\end{itemize}
+
+The rest of this paper is structured as follows.
+Section~\ref{sec:related_work} begins by presenting related work, followed by
+background in Section~\ref{sec:background}.
