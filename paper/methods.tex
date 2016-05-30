@@ -391,7 +391,9 @@ client for the month of March 2016. We use 50,000 samples for the same reasons g
 the problem we found with their user models?) For our simulation, we had each sample 
 visit nymity.ch once per hour for the entire month of March 2016. Thus, each sample had 
 a total of 744 opportunites to be compromised (this assumes that the circuit changes 
-every time the sample/user visits nymity.ch).
+every time the sample/user visits nymity.ch). It is much better to use a tool like TorPS 
+in order to measure these chances instead of just using all permutations of guard and 
+exits.
 
 In this analysis, we completely ignore caching of any type, so our results are overly 
 pessimistic.
