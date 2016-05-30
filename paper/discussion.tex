@@ -23,8 +23,36 @@
 	\item T-DNS~\cite{Zhu2015a}
 \end{itemize}
 
-\subsection{Ethics}
-\begin{itemize}
-	\item IRB approval for DNS statistics.
-	\item Consulted with ethics review board and Tor developers.
-\end{itemize}
+\subsection{Short-term solutions}
+Exit relays seem stuck in a predicament, having to choose between running their
+own resolver (which exposes DNS queries to network adversaries) or using a
+third-party resolver (which exposes DNS queries to a third party).
+
+It appears tempting to have exit relays use third-party resolvers such as
+Google's 8.8.8.8.  This resolver has three key advantages; (\emph{i}) it does
+not filter DNS requests; (\emph{ii}) it is fast and well-maintained; and
+(\emph{iii}) it is anycast using world-wide data centers, which minimizes
+exposure to network-level adversaries.
+
+Indeed, figure~\ref{fig:exit-resolvers} shows that Google occasionally gets to see more
+than 40\% of all DNS requests exiting the Tor network.
+Note that one variant of Fifield et al.'s~\cite{Fifield2015a} censorship
+circumvention system meek leverages Google's cloud infrastructure to reach the
+Tor network.  Inevitably, many of the thousands of meek clients will select
+exit relays that use Google's DNS resolver, which means that Google gets to see
+both traffic entering and, partially, exiting the Tor network.
+
+
+\subsection{Long-term solutions}
+
+Practical defenses are on the horizon.  Zhu et al.~\cite{Zhu2015a} proposed
+T-DNS, which transports the DNS protocol over TLS and TCP.  Since the protocol
+uses TCP, it can be sent over Tor without any modification.  The TLS layer
+guarantees confidentiality between Tor clients and their resolvers.
+
+Meanwhile, Google is experimenting with DNS over HTTPS.
+
+
+Better fingerprinting defenses.
+
+More onion services.
