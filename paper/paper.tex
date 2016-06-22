@@ -1,48 +1,58 @@
-\documentclass[10pt,twocolumn]{confpaper}
+\documentclass[conference]{IEEEtran}
 
-%%%%%%%%%%%%%%%%%%%%  INCLUDES  %%%%%%%%%%%%%%%%%%%%%%%%%%
+\pagestyle{plain}
 
-\usepackage[backref=true,backend=biber]{biblatex}
 \usepackage[T1]{fontenc}
-\usepackage[scaled=0.8]{beramono}
-\usepackage[defaultsans,scale=0.9]{cantarell}
-\usepackage{booktabs} % For pretty tables.
+\usepackage[scaled=0.8]{beramono} % For a pretty monospaced font.
+\usepackage[pdftex]{graphicx}
+\usepackage{booktabs}        % For pretty tables.
+\usepackage{xcolor}          % For colorful links.
+\usepackage{xspace}          % For reasonable spacing in custom commands.
+\usepackage{hyperref}        % For clickable links.
+\usepackage{cite}            % For reasonably sorting citations.
+\usepackage[cmex10]{amsmath} % For reasonable rendering of math symbols.
 
-\addbibresource{references.bib}
-\urlstyle{sf}
-
-\usepackage{import}
-\graphicspath{{figures/}}
-
-%%%%%%%%%%%%%%%%%%%%  LOCALS  %%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\newcommand{\system}{{\em NetASM}}
-\newcommand{\fixme}[1]{\textcolor{red}{{\bf FIXME:} #1}\xspace}
-
-%%%%%%%%%%%%%%%%%%%%  TITLE/AUTHORS  %%%%%%%%%%%%%%%%%%%%%
-
-\date{}
-\title{\ttlfnt{
-\TITLE}}
-\author{
-\aufnt{\AUTHORS} \\
-\affaddr{}
+\definecolor{darkblue}{rgb}{0,0,0.5}
+\hypersetup{
+	pdftitle={Traffic correlation attacks using DNS},
+	pdfauthor={Anonymous},
+	pdfkeywords={Tor, DNS, traffic correlation, anonymity},
+	colorlinks=true,
+	urlcolor=darkblue,
+	linkcolor=darkblue,
+	citecolor=darkblue
 }
 
-%%%%%%%%%%%%%%%%%%%%  START OF DOCUMENT  %%%%%%%%%%%%%%%%%
+\newcommand{\fixme}[1]{\textcolor{red}{{\bf FIXME:} #1}\xspace}
+\newcommand{\ie}{{i.e.}}
+\newcommand{\eg}{{e.g.}}
+\newcommand{\ea}{{et al.}}
 
 \begin{document}
 
+\title{Traffic correlation attacks using DNS}
+
+\author{Anonymous}
+
+\IEEEoverridecommandlockouts
+\makeatletter\def\@IEEEpubidpullup{9\baselineskip}\makeatother
+\IEEEpubid{\parbox{\columnwidth}{Permission to freely reproduce all or part
+    of this paper for noncommercial purposes is granted provided that
+    copies bear this notice and the full citation on the first
+    page. Reproduction for commercial purposes is strictly prohibited
+    without the prior written consent of the Internet Society, the
+    first-named author (for reproduction of an entire paper only), and
+    the author's employer if the paper was prepared within the scope
+    of employment.  \\
+    NDSS '16, 21-24 February 2016, San Diego, CA, USA\\
+    Copyright 2016 Internet Society, ISBN 1-891562-41-X\\
+    http://dx.doi.org/10.14722/ndss.2016.23xxx
+}
+\hspace{\columnsep}\makebox[\columnwidth]{}}
+
 \maketitle
 
-%\AcmCopyright
-%\ToAppear
-
-\begin{sloppypar}
-
 \input{abstract}
-
-\ifthenelse{\equal{\onlyAbstract}{no}}{% !onlyAbstract
 
 \input{introduction}
 
@@ -53,6 +63,7 @@
 \input{landscape}
 
 \input{attack}
+
 \input{attack-wf-dns}
 
 \input{methods}
@@ -61,34 +72,11 @@
 
 \input{discussion}
 
-\balance\input{conclusion}\label{lastpage}
+\input{conclusion}
 
-\end{sloppypar}
+% \input{acknowledgements}
 
-%\vspace{-0.1in}
-\section*{Acknowledgments}
-This research was supported in part by the Center for Information Technology
-Policy at Princeton University.
-We want to thank Jed Crandall for providing infrastructure for our measurements.
-Thanks to Aaron Johnson for helpful feedback.
-% Comments for people we need to acknowledge in the final version.
-
-\pagebreak
-
-\small
-%\setlength{\bibsep}{0pt}
-\setlength{\parskip}{-1pt}
-\setlength{\itemsep}{-1pt}
-% \footnotesize % SPACE
-\balance%
-\printbibliography
-%\bibliography{references}
-%\bibliographystyle{plain}
-%\bibliographystyle{abbrvnat_noaddr} % SPACE
-%\theendnotes % ENDNOTES
-}{% onlyAbstract
-}
+\bibliographystyle{IEEEtranS}
+\bibliography{references.bib}
 
 \end{document}
-
-%%%%%%%%%%%%%%%%%%%%  END OF DOCUMENT  %%%%%%%%%%%%%%%%%%%%
