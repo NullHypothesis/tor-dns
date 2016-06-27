@@ -40,43 +40,29 @@ following building blocks:
 		itself does not tell us what \emph{page} a user is going to.
 \end{description}
 
-\subsection{Egress sniffing}
+\subsection{Egress sniffing -- simulating Tor-exits' DNS traffic}
+% TODO: bgre
+% the angle is: we have to simulate all DNS traffic from all Tor exits,
+% the goal is to convince that we'ev made reasonable assumptions
 
-How many DNS requests does an exit relay see in $n$ minutes?
-\begin{itemize}
-	\item We can measure request frequency \emph{without} capturing payload.
-	\item We further reduce noise by taking timestamp modulo $m$.
-	\item We can do this on an exit relay, or on the DNS root.
-	\item \texttt{tshark -f 'udp port 53' -T fields -e frame.time\_epoch -Y 'dns.qry.type == 1 and dns.flags.response == 0'}
-	\item Number of requests probably depends on current bandwidth load (which
-		we can obtain from the consensus) and the exit policy (which we can
-		obtain from the descriptor).
-	\item We can limit our exit policy to 80 and 443, so we have a decent
-		baseline for requests caused by web traffic.
-	\item Fetch relayed traffic from descriptors and use it to normalise
-		observed DNS requests.
-\end{itemize}
+% phw's numbers extrapolated
+% powerlaw, not uniform
 
-There are several layers of caching that we have to consider.  On the client
-side:
-\begin{itemize}
-	\item Tor Browser has its own cache.  See the settings
-		\texttt{network.dnsCache*} in \url{about:config}. For TBB 5.5.5, the
-		cache keeps up to 400 entries for 60 seconds with a grace period of
-		60 additional seconds (or minutes? need confirmation) in which Tor
-		Browser will use the cached (but expired) entry in the cache but
-		asynchronously resolve the domain again.
-	\item The local Tor client does not have its own cache? TODO
-\end{itemize}
+% exit caching only (limitation: client-side caching negligible?)
+% we ignore caching by having a window of X minutes
 
-On the exit side:
-\begin{itemize}
-	\item The exit relay maintains its own caching layer around eventdns.c.
-	See the code in src/or/dns.c. the DNS cache enforces a minimum TTL of
-	60 seconds and a maximum TTL of 30 minutes (see src/or/dns.c:278). We
-	refer to this as Tor's \emph{TTL clipping}.
-	\item The exit relay's resolver also does its own caching.
-	\item DNS records are cached by the resolver for the duration of the TTL.
-	\item DNS sniffing only tells us what \emph{domains}, but not what
-		\emph{pages} a user visits.  Can be a big problem, e.g., with Wikipedia.
-\end{itemize}
+% The exit relay maintains its own caching layer around eventdns.c.
+% See the code in src/or/dns.c. the DNS cache enforces a minimum TTL of
+% 60 seconds and a maximum TTL of 30 minutes (see src/or/dns.c:278). We
+% refer to this as Tor's \emph{TTL clipping}.
+
+\subsubsection{DNS 1Mx5 dataset}
+% TODO: pulls
+% unique domain names are useful + TTL distribution (?)
+
+\subsubsection{A naive website classifier}
+% TODO: whomever gets here first :-)
+% we only look for unique domain names
+% + naive, but already good enough for our purposes
+% we note that we can significantly improve attacks by digging deeper
+% into TTLs (even with window) and requests
