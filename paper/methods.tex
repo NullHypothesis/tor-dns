@@ -153,7 +153,8 @@ in order to get the AS-level paths.
 
 TODO: Get the numbers from my data for the fan-out.
 
-As you can see in Figure~\ref{fig:num-compromises} and Figure~\ref{fig:time-to-first-comp}, 
+As you can see in Figure~\subref{fig:compromised-streams} and
+Figure~\subref{fig:time-until-compromise}, 
 Google fared much better than the other situations. This might lead you to believe that 
 Tor exit relays should use 8.8.8.8 for all of their name resolution needs, but then you've 
 given Google A LOT of power. It might actually be better to tell Tor exit relay operators 
@@ -164,19 +165,20 @@ The Status Quo results are significantly better than the Local results because o
 of Tor exit relays actually do their own resolution.
 
 \begin{figure}[t]
-	\centering
-	\includegraphics[width=0.75\linewidth]{figures/num-compromised-streams.pdf}
-	\caption{The number of compromises for March 2016.}
-	\label{fig:num-compromises}
+\centering
+\subfigure[The number of compromised streams for March 2016.]{
+	\includegraphics[width=0.466\linewidth]{figures/num-compromised-streams.pdf}
+    \label{fig:compromised-streams}
+}
+\subfigure[The time to first compromise for March 2016.]{
+	\includegraphics[width=0.466\linewidth]{figures/time-until-compromised.pdf}
+    \label{fig:time-until-compromise}
+}
+\caption{Two simulations for March 2016 that show the number of compromised
+	streams (Figure~\subref{fig:compromised-streams}) and the time until the
+	first compromised stream (Figure~\subref{fig:time-until-compromise}).}
+\label{fig:compromise-stream-time}
 \end{figure}
-
-\begin{figure}[t]
-	\centering
-	\includegraphics[width=0.75\linewidth]{figures/time-until-compromised.pdf}
-	\caption{The time to the first compromise for March 2016.}
-	\label{fig:time-to-first-comp}
-\end{figure}
-
 
 \subsection{DNS packet sizes at entry guard}
 \begin{itemize}
