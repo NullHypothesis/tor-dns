@@ -41,12 +41,60 @@ following building blocks:
 \end{description}
 
 \subsection{Egress sniffing -- simulating Tor-exits' DNS traffic}
-% TODO: bgre
 % the angle is: we have to simulate all DNS traffic from all Tor exits,
 % the goal is to convince that we'ev made reasonable assumptions
+To estimate the capability of an attacker, we need to investigate what
+DNS data is observable for the attacker, that is what DNS request are
+emerging from Tor exit relays.
+
+We cannot use real data because there are no logs of outgoing traffic
+from Tor exit relays available to us and ethical considerations kept us
+from trying to collect them (\eg by operating exit relays and recording
+the outgoing traffic). We therefore \emph{simulate} the DNS traffic
+emerging from Tor exit relays. 
+
+% powerlaw, not uniform
+First, we model \emph{what websites} are visited by Tor users.
+Currently, there are about 170 billion active
+websites\footnote{\url{http://news.netcraft.com/archives/2016/06/22/june-2016-web-server-survey.html}}
+in the world and the Alexa ranking gives insights into their popularity
+based on the browsing behaviour of a sample of all internet users
+\footnote{\url{https://support.alexa.com/hc/en-us/articles/200449744}}.  
+It has been shown that the popularity of a website follows a powerlaw
+distribution based on the rank of the website\fixme{citation needed}. So
+we fit a powerlaw distribution to the page view numbers of the Alexa top
+10\,000 websites\footnote{We used the python powerlaw package
+		\url{https://github.com/jeffalstott/powerlaw} for fitting, the
+		resulting powerlaw distribution had an $\alpha$ parameter of
+		$1.10291152854$. Page view numbers as collected by Alexa ignore
+		multiple visits by the same user on the same day, so the ranking
+		might be slightly off for our purposes.} and use the result to
+model which websites are visited by Tor users. 
+This might overestimate the popularity of higher-ranked websites because
+Tor users might be visiting less popular websites, such as websites that
+are censored in different parts of the world, more often than the
+average internet users and we will discuss the implications of this for
+our results later on.
 
 % phw's numbers extrapolated
-% powerlaw, not uniform
+Second, we determine \emph{how many websites} are visited by Tor users in a
+certain time span. We use (less intrusive) statistics on the number of
+outgoing DNS requests collected on a Tor exit relay under our control
+and interpolate these numbers to all Tor exit relays based on the
+published bandwidth statistics of all Tor exit relays\footnote{We found
+		our exit relay \texttt{746BE73579F274AFEFA5E12C4ADACD53784D0762}
+		to have on average 119.3 outgoing DNS requests per 5 minutes
+		during a two week period, which corresponds to about 1.583 page
+		visits per minute (taking caching into account and assuming a
+		powerlaw distribution of site popularity as described above). We
+		then used the self-reported bandwidth information from Tor exit
+		relays collected in the ``extra-info'' descriptors available on
+		\url{https://collector.torproject.org/} to estimate the number
+		of page loads on each of the about 1200 exit relays active at
+		that time.}.
+
+% TODO: bgre: continue here
+% collected DNS requests for each Alexa 1M, able to simulate cache
 
 % exit caching only (limitation: client-side caching negligible?)
 % we ignore caching by having a window of X minutes
