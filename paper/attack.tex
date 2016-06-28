@@ -51,7 +51,7 @@ We cannot use real data because there are no logs of outgoing traffic
 from Tor exit relays available to us and ethical considerations kept us
 from trying to collect them (\eg by operating exit relays and recording
 the outgoing traffic). We therefore \emph{simulate} the DNS traffic
-emerging from Tor exit relays. 
+emerging from Tor exit relays.
 
 % powerlaw, not uniform
 First, we model \emph{what websites} are visited by Tor users.
@@ -59,7 +59,7 @@ Currently, there are about 170 billion active
 websites\footnote{\url{http://news.netcraft.com/archives/2016/06/22/june-2016-web-server-survey.html}}
 in the world and the Alexa ranking gives insights into their popularity
 based on the browsing behaviour of a sample of all internet users
-\footnote{\url{https://support.alexa.com/hc/en-us/articles/200449744}}.  
+\footnote{\url{https://support.alexa.com/hc/en-us/articles/200449744}}.
 It has been shown that the popularity of a website follows a powerlaw
 distribution based on the rank of the website\fixme{citation needed}. So
 we fit a powerlaw distribution to the page view numbers of the Alexa top
@@ -69,7 +69,7 @@ we fit a powerlaw distribution to the page view numbers of the Alexa top
 		$1.10291152854$. Page view numbers as collected by Alexa ignore
 		multiple visits by the same user on the same day, so the ranking
 		might be slightly off for our purposes.} and use the result to
-model which websites are visited by Tor users. 
+model which websites are visited by Tor users.
 This might overestimate the popularity of higher-ranked websites because
 Tor users might be visiting less popular websites, such as websites that
 are censored in different parts of the world, more often than the
@@ -107,6 +107,7 @@ published bandwidth statistics of all Tor exit relays\footnote{We found
 \subsubsection{DNS 1Mx5 dataset}
 % TODO: pulls
 % unique domain names are useful + TTL distribution (?)
+TL;DR: unique domains are useful.
 
 \subsubsection{A naive website classifier}
 % TODO: whomever gets here first :-)
@@ -114,3 +115,5 @@ published bandwidth statistics of all Tor exit relays\footnote{We found
 % + naive, but already good enough for our purposes
 % we note that we can significantly improve attacks by digging deeper
 % into TTLs (even with window) and requests
+In the end, we get a list of observed sites. We only look for sites that are
+on the monitored list for the WF attack.
