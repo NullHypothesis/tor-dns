@@ -2,15 +2,79 @@
 \label{sec:discussion}
 
 \subsection{Mitigation}
+We now discuss strategies to mitigate the issues raised by our work.  We
+distinguish between short-term solution that could be implemented quickly
+(\S~\ref{sec:short-term}), and long-term solution that need significantly more
+work (\S~\ref{sec:long-term}).
+
+\subsubsection{Short-term solutions}
+\label{sec:short-term}
+Exit relays seem stuck in a predicament, having to choose between running their
+own resolver (which exposes DNS queries to network adversaries) or using a
+third-party resolver (which exposes DNS queries to a third party).  If we were
+given the choice to reconfigure the DNS setup of all exit relays, what would we
+do?  Clearly, the goal is to minimize exposure of DNS requests, but there are
+several dimensions to this.  Ignoring substantial DNS protocol improvements for
+now, we can envision three extreme scenarios, in which \emph{all} exit relays
+use either \first Google's DNS resolver; \second their own, local resolver; or
+\third the resolver provided by their ISP.  If all exit relays would use Google,
+the company would obtain metadata about the activity of all Tor users, a clear
+violation of Tor's design goal of distributing trust.  We believe that this
+scenario is clearly to avoid.\footnote{To make matters worse, Fifield et
+al.'s~\cite{Fifield2015a} censorship circumvention system meek leverages
+Google's cloud infrastructure to reach the Tor network.  Inevitably, many of
+the thousands of meek clients will select exit relays that use Google's DNS
+resolver, which means that Google gets to see both traffic entering and,
+partially, exiting the Tor network.} Next, let us imagine a Tor network that
+only uses local resolvers.  In that case, Tor is fully independent of
+third-party resolvers, at the cost of the DNS resolution process being exposed
+to the network, allowing several parties to learn what domain a Tor user is
+looking up.  Finally, all exit relays could simply use their ISP-provided
+resolver.  This would minimize the exposure of DNS requests as resolvers are
+frequently in the same AS as exit relays, and network-level adversaries would be
+unable to distinguish between DNS requests from exit relays and unrelated ISP
+customers.  This setup comes at the cost of potentially broken DNS resolvers.
+Besides, just a few ASs---OVH, for example---host a disproportionate amount of
+exit relays, turning them into the very centralized data trough we seek to
+avoid.  Table~\ref{tab:setup-comparison} compares the key aspects of all three
+setups.
+
+\begin{table}[t]
+	\caption{A comparison between three hypothetical DNS setups for all exit
+	relays.  Full circles are desirable.}
+	\label{tab:setup-comparison}
+	\centering
+	\begin{tabular}{l c c c}
+	\toprule
+	\textbf{Setup} &
+	\begin{tabular}{@{}c@{}}\textbf{Network-level}\\\textbf{protection}\end{tabular} &
+	\begin{tabular}{@{}c@{}}\textbf{Level of}\\\textbf{Centralization}\end{tabular} &
+	\begin{tabular}{@{}c@{}}\textbf{Response}\\\textbf{quality}\end{tabular} \\
+	\midrule
+	All Google & \RIGHTcircle & \Circle & \CIRCLE \\
+	All Local & \Circle & \CIRCLE & \CIRCLE\\
+	All ISP & \CIRCLE & \RIGHTcircle & \RIGHTcircle \\
+	\bottomrule
+	\end{tabular}
+\end{table}
+
+Considering the above, we believe that exit relay operators should avoid
+third-party resolvers such as Google and OpenDNS.  Instead, they should either
+use the resolvers provided by their ISP, or run their own---in particular, if
+their ISP already hosts many other exit relays.
+
+Besides making recommendations to exit relay operators, we can remotely
+influence the cache of each exit relay's resolver.  For example, using exitmap,
+we can resolve the domain sensitive.org over each exit relay continuously, right
+before its TTL is about to expire.  That way, once a Tor user connects to
+sensitive.org, the exit relay can serve the request from its cache instead of
+exposing it to third parties.  Clearly, this approach does not scale, but it
+allows us to eliminate DNS-based correlation attacks for a select number of
+sites.
+
 \begin{itemize}
-	\item What do we recommend to exit relay operators to mitigate the issue?
-	\item Is it better to run your own, local resolver?
-		\begin{itemize}
-			\item Could be dangerous since some resolvers write stuff to disk:
+	\item Running local resolver could be dangerous since some resolvers write stuff to disk:
 		\url{https://github.com/NullHypothesis/exitmap/commit/fa1cd0ba6ce3389d3d6fe1dfc7144e2747320944#commitcomment-16886249}
-		\end{itemize}
-	\item Or should you use your provider's resolver?
-	\item \ldots or something else?
 	\item Would qname minimisation help?
 	\item Ideally, use only onion services, or perhaps OnionNS, or the GNU Name
 		System~\cite{Wachs2014a}.
@@ -23,35 +87,14 @@
 	\item T-DNS~\cite{Zhu2015a}
 \end{itemize}
 
-\subsection{Short-term solutions}
-Exit relays seem stuck in a predicament, having to choose between running their
-own resolver (which exposes DNS queries to network adversaries) or using a
-third-party resolver (which exposes DNS queries to a third party).
-
-It appears tempting to have exit relays use third-party resolvers such as
-Google's 8.8.8.8.  This resolver has three key advantages; (\emph{i}) it does
-not filter DNS requests; (\emph{ii}) it is fast and well-maintained; and
-(\emph{iii}) it is anycast using world-wide data centers, which minimizes
-exposure to network-level adversaries.
-
-Indeed, figure~\ref{fig:exit-resolvers} shows that Google occasionally gets to see more
-than 40\% of all DNS requests exiting the Tor network.
-Note that one variant of Fifield et al.'s~\cite{Fifield2015a} censorship
-circumvention system meek leverages Google's cloud infrastructure to reach the
-Tor network.  Inevitably, many of the thousands of meek clients will select
-exit relays that use Google's DNS resolver, which means that Google gets to see
-both traffic entering and, partially, exiting the Tor network.
-
-
-\subsection{Long-term solutions}
-
+\subsubsection{Long-term solutions}
+\label{sec:long-term}
 Practical defenses are on the horizon.  Zhu et al.~\cite{Zhu2015a} proposed
 T-DNS, which transports the DNS protocol over TLS and TCP.  Since the protocol
 uses TCP, it can be sent over Tor without any modification.  The TLS layer
 guarantees confidentiality between Tor clients and their resolvers.
 
 Meanwhile, Google is experimenting with DNS over HTTPS.
-
 
 Better fingerprinting defenses.
 
