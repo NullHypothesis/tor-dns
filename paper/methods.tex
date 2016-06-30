@@ -77,26 +77,48 @@ in.
 
 In order to do our analysis, we need to have some way of figuring out the AS-level paths. 
 We considered two options: the use of AS path inference and the use of traceroute data. 
-We decided against AS path inference because it has been shown to be inaccurate [cite 
-Juen paper?]. Thus, we decided to go with actual traceroute data. Here, again, we had 
-to consider our options on how to obtain this data. We considered the PlanetLab and RIPE 
-Atlas measurement platforms and asking Tor relay operators to run traceroutes for us. 
-We decided against using Tor relay operators to run traceroutes for us because of the 
-inconvenience (Murdoch paper did this and Juen paper did this). We decided against 
-PlanetLab because its nodes tend to be in university networks. Hence, we decided to use 
-RIPE Atlas. RIPE Atlas has probes in many ASes that have Tor relays. For a day in May 
-2016, we found that RIPE Atlas had probes in 52\% of ASes that contain Tor exit relays. 
-We found that RIPE Atlas has probes in 51\% of ASes that contain Tor guard relays. More 
-importantly, we found that Atlas ASes cover 58\% of Tor exit bandwidth and 74\% of Tor 
-guard bandwidth. This is important because Tor relay usage is not evenly split among 
-all of the relays. This coverage is significant because as the Murdoch paper states, 
-``As Tor does not currently implement a a mechanism for performing traceroutes, the 
-operator of the node must do so manually. Furthermore, the Juen paper was only able to 
-cover around 28\% of exit bandwidth by asking operators to run traceroutes for them. 
-Thus, we find that RIPE Atlas gives us a great way to study the paths that Tor circuits 
-might traverse. (I'm wondering if a table might be better for those percentages . . .)
-In order to get our traceroutes, we ran traceroutes from probes that that were in the 
-same ASes as Tor guards and exits. TODO: Mention why we picked AS 6128 as our client AS.
+We decided against AS path inference because Juen et al. showed that it can be quite
+inaccurate~\cite{Juen2015a}.  Thus, we decided to go with actual traceroute data. Here,
+again, we had to consider our options on how to obtain this data. We considered the
+PlanetLab and RIPE Atlas measurement platforms and asking Tor relay operators to run
+traceroutes for us.  We decided against using Tor relay operators to run traceroutes for
+us because of the inconvenience (Murdoch paper did this and Juen paper did this). We
+decided against PlanetLab because its nodes tend to be in university networks. Hence, we
+decided to use RIPE Atlas~\cite{atlas}. RIPE Atlas has probes in many ASes that have Tor
+relays. As shown in Table~\ref{tab:atlas-coverage}, for a day in May 2016, we found that
+RIPE Atlas had probes in 52\% of ASes that contain Tor exit relays.  We found that RIPE
+Atlas has probes in 51\% of ASes that contain Tor guard relays. More importantly, we found
+that Atlas ASes cover 58\% of Tor exit bandwidth and 74\% of Tor guard bandwidth. This is
+important because Tor relay usage is not evenly split among all of the relays. This
+coverage is significant because as the Murdoch paper states, ``As Tor does not currently
+implement a a mechanism for performing traceroutes, the operator of the node must do so
+manually. Furthermore, the Juen paper was only able to cover around 28\% of exit bandwidth
+by asking operators to run traceroutes for them.  Thus, we find that RIPE Atlas gives us a
+great way to study the paths that Tor circuits might traverse. (I'm wondering if a table
+might be better for those percentages .  . .) In order to get our traceroutes, we ran
+traceroutes from probes that that were in the same ASes as Tor guards and exits. TODO:
+Mention why we picked AS 6128 as our client AS.
+
+% - 197 out of all 377 (52%) Tor exit ASs have Atlas probes.
+% - 220 out of all 434 (51%) Tor guard ASs have Atlas probes.
+
+% - Atlas ASs cover 57.53% of Tor exit bandwidth.
+% - Atlas ASs cover 73.59% of Tor guard bandwidth.
+
+\begin{table}[t]
+	\caption{The coverage of RIPE Atlas nodes that are colocated with Tor guard and exit
+	relays.}
+	\label{tab:atlas-coverage}
+	\centering
+	\begin{tabular}{l|r r}
+	\toprule
+	\textbf{Atlas probe coverage} & \textbf{Tor guard ASs} & \textbf{Tor exit ASs} \\
+	\midrule
+	By bandwidth & 73.59\% & 57.53\% \\
+	By number & 50.69\% & 52.25\% \\
+	\bottomrule
+	\end{tabular}
+\end{table}
 
 We also had to consider what method we'd use to translate the IP addresses in our 
 traceroutes to ASes. The options we considered were Team Cymru and pyasn. We decided to 
