@@ -7,7 +7,8 @@ end-to-end TCP packets.
 
 Our attack is illustrated in Figure~\ref{fig:attack-scenario} and requires the
 following building blocks:
-
+\fixme{Figure is great, but text below needs to be reworked to fit structure
+of section.}
 \begin{figure}[t]
 	\centering
 	\includegraphics[width=\linewidth]{figures/attack-scenario.pdf}
@@ -40,7 +41,7 @@ following building blocks:
 		itself does not tell us what \emph{page} a user is going to.
 \end{description}
 
-\subsection{Egress sniffing -- simulating Tor-exits' DNS traffic}
+\subsection{Simulating Tor-exits' DNS traffic}
 % the angle is: we have to simulate all DNS traffic from all Tor exits,
 % the goal is to convince that we'ev made reasonable assumptions
 To estimate the capability of an attacker, we need to investigate what
@@ -160,6 +161,7 @@ the cache corresponds to a domain name that would have been resolved by
 the exit relay during the past 60 seconds.
 
 
+\subsection{From DNS requests to websites}
 \subsubsection{DNS 1Mx5 dataset}
 % TODO: pulls
 % unique domain names are useful + TTL distribution (?)
@@ -174,7 +176,8 @@ TL;DR: unique domains are useful.
 In the end, we get a list of observed sites. We only look for sites that are
 on the monitored list for the WF attack.
 
-\subsection{Website fingerprinting and DNS correlation}
+\subsection{Augmenting WF attacks with DNS data}
+\fixme{Our approaches are generic for any WF attack (with minor caveats)}
 As a baseline we use the Wa-kNN website fingerprinting attack by
 Wang et al.~\cite{Wang2014a}. Wa-kNN is a k-nearest neighbour classifier with
 a custom weightlearning algorithm (WLLCC~\cite{WangThesis}). From traffic traces
