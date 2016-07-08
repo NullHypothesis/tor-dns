@@ -45,7 +45,10 @@ HTTP connection to the web site.  Armed with a better understanding of how Tor
 exit relays use DNS, we adapt a website fingerprinting classifier that takes as
 input captured traffic that is entering the Tor network, augmented with DNS
 requests that are captured somewhere else on the Internet.  We evaluate our
-website fingerprinting attack, and investigate the impact at Internet-scale
+website fingerprinting attack
+\fixme{We don't create a new WF attack, we show how to use one when the
+attacker can also observe DNS.}
+, and investigate the impact at Internet-scale
 using the TorPS simulator in combination with a novel approach to run
 traceroutes from exit relays.
 
@@ -65,13 +68,13 @@ In summary, our work makes the following contributions:
 
 	\item We present a novel website fingerprinting attack.  We augment our
 		classifiers input data with DNS requests observed by a network-level
-		adversary to reduce the open world scenario.
+		adversary to reduce the open world scenario.\fixme{rephrase}
 
 	\item We develop a new measurement method to evaluate the threat of
 		network-level adversaries.  We employ the RIPE Atlas~\cite{atlas}
 		platform to achieve previously unprecedented path coverage.
 
-	\item We quantify the threat of DNS-based traffic correlation attacks by 
+	\item We quantify the threat of DNS-based traffic correlation attacks by
 \end{itemize}
 
 The rest of this paper is structured as follows.
