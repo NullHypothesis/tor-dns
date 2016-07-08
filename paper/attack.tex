@@ -173,3 +173,48 @@ TL;DR: unique domains are useful.
 % into TTLs (even with window) and requests
 In the end, we get a list of observed sites. We only look for sites that are
 on the monitored list for the WF attack.
+
+\subsection{Website fingerprinting and DNS correlation}
+As a baseline we use the Wa-kNN website fingerprinting attack by
+Wang et al.~\cite{Wang2014a}. Wa-kNN is a k-nearest neighbour classifier with
+a custom weightlearning algorithm (WLLCC~\cite{WangThesis}). From traffic traces
+between Tor clients and their guard, Wa-kNN extracts a number of features used
+for site classification.
+In the training phase, WLLCC adjusts weights of features extracted from sites
+of known classes such that the distance between instances of the same site (class) are minimized (collapsed).
+In the testing phase, Wa-kNN determines the distance of a testing trace to all
+known training traces. The distance calculation produced the $k$ nearest
+classes: if all classes are the same, then the testing trace is classified as
+that (monitored) class, otherwise it is classified as unmonitored.
+For all our classifiers, unless otherwise noted, we set $k=2$. Next, we propose
+a number of classifiers that combine Wa-kNN with DNS correlation, followed by
+an experimental evaluation.
+
+\subsubsection{Confirmation-based classifiers}
+We define three classifiers that confirm the output of Wa-kNN with the observed
+sites in the DNS data with different goals: high precision (HP), high
+ recall (HR), and a merge of HP and HR.
+
+ \begin{description}
+ 	\item[HP] When Wa-kNN classifies a trace as a monitored site, confirm
+	that we observed the same site in the DNS data. If not, overrule Wa-kNN and
+	make the final classification unmonitored.
+	\item[HR] When Wa-kNN classifies a trace as an unmonitored site, we re-run
+	Wa-kNN with $k+1$ and look if there is any class that occured $k$ times.
+	If that was the case, and we observed the site (class) in the DNS data,
+	then we overrule Wa-kNN and make the final classification the observed class.
+	\item[Merge] If the Wa-kNN classifies a trace as a monitored site, take the
+	output of HP, otherwise the output from HR.
+ \end{description}
+
+The HP classifier increases false negatives but reduces the number of false
+positives. The HR classifier reduces confusion with one close neighbour in
+Wa-kNN, reducing false negatives but increasing false positives.
+
+\subsubsection{Close-the-world classifier}
+Observing DNS requests results in a list of observed sites that are a subset of
+the monitored sites.
+For our close-the-world classifier we ``close the world''
+on a modified Wa-kNN classifier by only considering the distance to observed
+sites when calculating the $k$-nearest neighbours. The classifier still
+considers the distance to all open instances to capture unmonitored sites.
