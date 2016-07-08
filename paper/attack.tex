@@ -116,7 +116,9 @@ caching\footnote{The Tor browser, built on Mozilla Firefox, caches up to
 because in most cases the local cache entries expire before the user
 re-visits the same website \fixme{How can we argue better here? maybe
 		relate this to the Alexa-way of measuring page visits, ie.
-		ignoring multiple visits of the same user on the same day?}.
+		ignoring multiple visits of the same user on the same day?
+		Is the cache active for different circuits? If not, then the caches are
+		irrelevant due to our sliding window of DNS requests.}.
 On the exit relays, where the actual DNS resolution takes place, caching
 becomes more relevant as the requests of all users that choose a certain
 exit relay for a connection will be handled by this exit relay. An exit
