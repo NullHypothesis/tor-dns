@@ -109,6 +109,7 @@ whose purpose is to prevent caching, so exit relays indeed resolve each query
 instead of responding with a cached element.  We controlled the authoritative
 DNS server of tor.nymity.ch, so we could capture both the IP address and packet
 content of every single query for tor.nymity.ch.
+\fixme{Do we need to anonymise nymity.ch for submission?}
 
 \begin{figure}[t]
 	\centering
@@ -148,7 +149,7 @@ resolver, if available.  Our data suggests that several exit relays used
 different resolvers in subsequent exitmap scans---one relay, for example, used
 both Google's DNS resolver and one provided by its ISP.  For our visualization,
 we only consider the first resolver we observed for an exit relay, which might
-not be the primary resolver.  
+not be the primary resolver.
 
 \subsubsection{Visualizing results}
 Figure~\ref{fig:exit-resolvers} illustrates the fraction of DNS requests that
