@@ -17,7 +17,7 @@ Tor---and any other anonymity network---could eliminate website fingerprinting
 attacks by employing leak-resistant, constant-rate channels between a Tor client
 and its guard.  Unfortunately, the Tor network's limited spare capacity does not
 allow for such an expensive defense, but some research has worked on making it
-cheaper~\cite{Cai2014a}.
+cheaper~\cite{Cai2014a,DBLP:journals/corr/JuarezIPDW15,WangThesis}. % ugly
 
 \paragraph{The Tor network}
 The Tor network is an overlay network that anonymizes TCP streams such as web
@@ -51,9 +51,10 @@ destination.  The \texttt{RELAY\_RESOLVE} cell supports pure name resolution,
 without establishing a subsequent TCP connection~\cite[\S~6.4]{tor-spec}.  The
 exit relay responds with a \texttt{RELAY\_RESOLVED} cell.
 
-As of December 2015, exit relays resolve domain asynchronously and both the exit
-relay and the client maintain a caching layer around the resolution code to
+As of December 2015, exit relays resolve domains asynchronously, and both the
+exit relay and the client maintain a caching layer around the resolution code to
 speed up repeated lookups.  Exit relays send their DNS requests to the system
 resolver, which is in \texttt{/etc/resolv.conf} on Linux systems.  The system
 resolver is not modified by Tor, and contains whatever the exit relay operator
-configured, e.g., the ISP's resolver, or public resolvers such as 8.8.8.8.
+configured, e.g., the ISP's resolver, or public resolvers such as Google's
+8.8.8.8.
