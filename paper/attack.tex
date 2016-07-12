@@ -224,12 +224,12 @@ impact on the median TTL, but significantly influences the mean TTL.
 \begin{table}[t]
 	\centering
 	\caption{Statistics on the number of DNS requests.}
-	\begin{tabular}{l c c c c}
+	\begin{tabular}{l r r r r}
 	\toprule
 	\textbf{DNS Requests} & \textbf{Median} & \textbf{Mean} & \textbf{Min} & \textbf{Max} \\
 	\midrule
 	per site & 10 & $12.2\pm11.2$ & 1 & 397 \\
-	unique per site & 2 & $2.3\pm1.8$ & 0 & 363 \\
+	unique per site & 2 & $2.3\pm\phantom{0}1.8$ & 0 & 363 \\
 	\bottomrule
 	\end{tabular}
 	\label{tab:dns-requests}
@@ -240,22 +240,22 @@ impact on the median TTL, but significantly influences the mean TTL.
 	The unique prefix is for the TTL of unique domains while min unique only
 	considers the unique domains with the minimum TTL for each website.}
 	\centering
-	\begin{tabular}{l c c}
+	\begin{tabular}{l r r}
 	\toprule
 	\textbf{TTLs (s)} & \textbf{Median} & \textbf{Mean} \\
 	\midrule
 	% 2016/04/28 15:52:39 DNS records TTL mean 9780.0, std 42930.5, median 255.0, min 0.0, max 604800.0
 	raw & 255 & $9780.0\pm42930.5$ \\ % & 0 & 604800 \\
 	% 2016/04/28 15:44:05 DNS records TTL mean 701.5, std 755.3, median 255.0, min 60.0, max 1800.0
-	Tor & 255 & $701.5\pm755.3$ \\ %& 60 & 1800 \\
+	Tor & 255 & $701.5\pm\phantom{00}755.3$ \\ %& 60 & 1800 \\
 	% 2016/04/28 15:52:39 	unique domain TTL mean 13022.2, std 35054.4, median 900.0, min 0.0, max 604800.0
 	unique raw & 900 & $13022.2\pm35054.4$ \\ %& 0 & 604800 \\
 	% 2016/04/28 15:44:05 	unique domain TTL mean 1005.3, std 789.6, median 900.0, min 60.0, max 1800.0
-	unique Tor & 900 & $1005.3\pm789.6$ \\ %& 60 & 1800 \\
+	unique Tor & 900 & $1005.3\pm\phantom{00}789.6$ \\ %& 60 & 1800 \\
 	% 2016/04/28 15:52:39 	unique domain _min_ TTL mean 3833.9, std 11073.6, median 60.0, min 0.0, max 604800.0
 	min unique raw & 60 & $3833.9\pm11073.6$ \\ % & 0 & 604800 \\
 	% 2016/04/28 15:44:05 	unique domain _min_ TTL mean 644.2, std 763.8, median 60.0, min 60.0, max 1800.0
-	min unique Tor & 60 & $644.2\pm763.8$ \\ %& 60 & 1800 \\
+	min unique Tor & 60 & $644.2\pm\phantom{00}763.8$ \\ %& 60 & 1800 \\
 	\bottomrule
 	\end{tabular}
 	\label{tab:ttls}
