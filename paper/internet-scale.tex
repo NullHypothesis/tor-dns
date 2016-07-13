@@ -1,5 +1,24 @@
 \section{Internet-scale analysis}
 \label{sec:internet-scale}
+After having presented and evaluated our attack in an isolated setting, we are
+left with one final question.  How does the attack impact the entirety of Tor
+users?  We answer this question by combining and improving state-of-the-art
+techniques, illustrated in Figure~\ref{fig:simulations}.  We model the activity
+of Tor users and simulate corresponding Tor path selection using
+TorPS~\cite{TorPS}.  TorPS returns guard and exit relays, which we then feed as
+input---together with source and destination addresses---into our framework that
+runs traceroutes from RIPE Atlas nodes.  The following subsection discuss our
+setup in detail.
+
+\begin{figure}[t]
+	\centering
+	\includegraphics[width=\linewidth]{figures/simulations.pdf}
+	\caption{The relation among our simulation components.  Our goal is to
+	determine the ASs a Tor user's traffic traverses into and out of the Tor
+	network.  Duplicate ASs on both sides can deanonymize streams.}
+	\label{fig:simulations}
+\end{figure}
+
 In this analysis we assume that an AS that can see traffic entering the Tor network and 
 DNS traffic at the other end can use this information in order to deanonymize the 
 entering traffic. Here we seek to measure the chances an AS will be in the ``correct'' 
