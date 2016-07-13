@@ -137,10 +137,11 @@ one guard which will expire after 270 days. We have TorPS simulate the behavior 
 client for the month of March 2016. We use 50,000 samples for the same reasons given in
 ``Users Get Routed.'' (Should we mention the fixes we made to TorPS? Should we mention 
 the problem we found with their user models?) For our simulation, we had each sample 
-visit nymity.ch once per hour for the entire month of March 2016. Thus, each sample had 
-a total of 744 opportunites to be compromised (this assumes that the circuit changes 
-every time the sample/user visits nymity.ch). It is much better to use a tool like TorPS 
-in order to measure these chances instead of just using all permutations of guard and 
+visit domain.com---a website under our control---once per hour for the entire
+month of March 2016. Thus, each sample had a total of 744 opportunites to be
+compromised (this assumes that the circuit changes every time the sample/user
+visits domain.com). It is much better to use a tool like TorPS in order to
+measure these chances instead of just using all permutations of guard and
 exits.
 
 In this analysis, we completely ignore caching of any type, so our results are overly 
@@ -151,7 +152,7 @@ Describe the four scenarios in the graph here: 1) Traditional, 2) Google, 3) Loc
 4) Status Quo.
 
 Traditional: ``Traditional'' represents the paths between all exit ASes that RIPE Atlas 
-has coverage for and nymity.ch. That is, this measurement doesn't take DNS into account 
+has coverage for and domain.com. That is, this measurement doesn't take DNS into account 
 at all, as has been traditionally done.
 
 Google (8.8.8.8): ``Google'' represents what would happen if all exit relays used 
@@ -160,9 +161,9 @@ ASes that RIPE Atlas had coverage for to 8.8.8.8.
 
 Local: ``Local'' represents what would happen if all exit relays ran their own name 
 servers locally (e.g., the use of unbound) on their own machines. In order to figure out 
-what ASes would be traversed on the way to resolve nymity.ch. In order to figure out the 
+what ASes would be traversed on the way to resolve domain.com. In order to figure out the 
 DNS delegation path, we use part of the ddptr tool. Assuming no caching and assuming 
-iterative resolution, for nymity.ch the name server will have to visit three name servers:
+iterative resolution, for domain.com the name server will have to visit three name servers:
 a root name server, a top level domain name server, and a second level domain name server. 
 
 Status Quo: ``Status Quo'' represents to the best of our ability the type of name resolution 
