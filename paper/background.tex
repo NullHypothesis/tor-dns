@@ -1,30 +1,30 @@
 \section{Background}
 \label{sec:background}
-We now give a brief introduction to the pillars our attack is resting
-on---website fingerprinting and the process of DNS resolution over the Tor
-network.
+We now give a brief introduction to website fingerprinting and DNS resolution
+over the Tor network.
 
 \paragraph{Website fingerprinting attacks}
 The Tor network encrypts relayed traffic as it travels from the client to the
 exit relay.  Therefore, intermediate parties such as the user's Internet service
 provider (ISP) are not able to read any packet content.  However, Tor does not
-protect meta information such as data timing, frequency, and length.  Exploiting
-these properties, the ISP can use a classifier to guess what sites the user is
-visiting---despite Tor's encryption.  The literature calls this kind of attack a
-\emph{website fingerprinting attack}.
+protect meta information such as packet inter-arrival timing, frequency, and
+length.  Exploiting these properties, the ISP can use a classifier to guess what
+sites the user is visiting.  The literature calls this attack \emph{website
+fingerprinting}.
 
 Tor---and any other anonymity network---could eliminate website fingerprinting
-attacks by employing leak-resistant, constant-rate channels between a Tor client
-and its guard.  Unfortunately, the Tor network's limited spare capacity does not
+attacks by employing encrypted, constant-rate channels between a Tor client and
+its guard.  Unfortunately, the Tor network's limited spare capacity does not
 allow for such an expensive defense, but some research has worked on making it
-cheaper~\cite{Cai2014a,DBLP:journals/corr/JuarezIPDW15,WangThesis}. % ugly
+more efficient~\cite{Cai2014a,DBLP:journals/corr/JuarezIPDW15,WangThesis}.
+\fixme{We should explain the difference between open and closed world.}
 
 \paragraph{The Tor network}
 The Tor network is an overlay network that anonymizes TCP streams such as web
-traffic.  As of April 2016, it counts approximately 7,000 relays and around two
+traffic.  As of April 2016, it counts approximately 7,000 relays and about two
 million users.  Clients send data over the Tor network by randomly selecting
 three relays---typically called the guard, middle, and exit relay---that then
-form a virtual tunnel called \emph{circuit}.  The guard relay gets to learn the
+form a virtual tunnel called a \emph{circuit}.  The guard relay learns the
 client's IP address, but not its web activity, while the exit relay gets to
 learn the client's web activity, but not its IP address.  Relays and clients
 talk to each other using the Tor protocol, which uses 512-byte \emph{cells}.
@@ -32,11 +32,10 @@ Finally, each relay is uniquely identified by its \emph{fingerprint}, a hash
 function over its public key.
 
 \paragraph{How Tor handles DNS}
-Tor clients must send DNS requests over Tor to prevent DNS leakage.  Tor
-does not transport UDP traffic, but it implements a workaround to ensure that
-DNS requests can go over Tor.
-
-After the user types in a domain, say foo.com, Tor Browser establish a
+Tor clients must send DNS requests over Tor to prevent DNS leakage, \ie, have a
+DNS request escape its encrypted connection.  Tor does not transport UDP
+traffic, but it implements a workaround to wrap DNS requests into Tor cells.
+After the user types in a domain, say foo.com, Tor Browser establishes a
 connection to the SOCKS proxy exposed by the local Tor client.  Using the SOCKS
 protocol, applications instruct the Tor client to establish a circuit to a given
 domain and port.\footnote{SOCKS in version 4a and 5 supports connection
@@ -46,15 +45,14 @@ the client sends a \texttt{RELAY\_BEGIN} Tor cell to the exit relay, instructing
 it to first resolve foo.com, and then establish a TCP connection to the resolved
 address at port 443~\cite[\S~6.2]{tor-spec}.  After successfully establishing a
 connection, the exit relay responds with a \texttt{RELAY\_CONNECTED} cell to the
-local Tor client.  From then on, data can be exchanged with the intended
+local Tor client.  Subsequently, data can be exchanged with the intended
 destination.  The \texttt{RELAY\_RESOLVE} cell supports pure name resolution,
 without establishing a subsequent TCP connection~\cite[\S~6.4]{tor-spec}.  The
 exit relay responds with a \texttt{RELAY\_RESOLVED} cell.
 
-As of December 2015, exit relays resolve domains asynchronously, and both the
-exit relay and the client maintain a caching layer around the resolution code to
-speed up repeated lookups.  Exit relays send their DNS requests to the system
-resolver, which is in \texttt{/etc/resolv.conf} on Linux systems.  The system
-resolver is not modified by Tor, and contains whatever the exit relay operator
-configured, e.g., the ISP's resolver, or public resolvers such as Google's
-8.8.8.8.
+As of December 2015, both exit relays and Tor clients maintain a caching layer
+around the DNS resolution code to speed up repeated lookups.  Exit relays send
+their DNS requests to the system resolver, which Linux systems read from
+\texttt{/etc/resolv.conf}.  The system resolver is not modified by Tor, and
+contains whatever the exit relay operator configured, e.g., the ISP's resolver,
+or public resolvers such as Google's 8.8.8.8.
