@@ -11,12 +11,14 @@ following building blocks:
 of section.}
 \begin{figure}[t]
 	\centering
-	\includegraphics[width=\linewidth]{figures/attack-scenario.pdf}
-	\caption{An overview of our correlation attack.  Ingress traffic is
-	monitored either by a network-level adversary or the guard relay.  Egress
-	traffic is monitored either by a network-level adversary or a DNS server.
-	Captured DNS queries then serve as the candidate set for a Website
-	fingerprinting attack.}
+	\includegraphics[width=0.8\linewidth]{figures/attack-scenario.pdf}
+	\caption{An overview of our correlation attack.  An adversary must monitor
+		both ingress and egress traffic.  A network-level adversary between the
+		client and its guard monitors ingress traffic.  The same adversary
+		monitors egress traffic between the exit and a DNS server, or the DNS
+		server itself.  Both ingress (encrypted Tor traffic) and egress (DNS
+		requests) traffic then serve as input to a Website fingerprinting
+		attack.}
 	\label{fig:attack-scenario}
 \end{figure}
 
