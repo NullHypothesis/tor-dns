@@ -167,11 +167,14 @@ consisting of many ISP resolvers.
 \begin{figure*}[t]
 	\centering
 	\includegraphics[width=\linewidth]{figures/exit-resolvers.pdf}
-	\caption{The amount of the most popular DNS resolvers of exit relays over
-		time, weighted by bandwidth.  Google's DNS server is by far the most
-		popular resolver of exit relays, followed by a local resolver, OVH, and
-		OpenDNS.  The category ``Other'' consists of the ASs Level 3, Visual
-		Online, Init7, OpenDNS, Cyberdyne, NForce, and LeaseWeb.}
+	\caption{The popularity of some of the most popular DNS resolvers of exit
+		relays over time.  The $y$ axis depicts the fraction of exit bandwidth
+		that the respective resolver is responsible for.  Google's DNS resolver
+		is by far the most popular, at times serving more than 40\% of all DNS
+		requests coming out of the Tor network.  Google is followed by local
+		resolvers, which average at around 12\%.  Once serving a fair amount of
+		traffic, OVH dropped in popularity, and is now close to OpenDNS, an
+		organization that runs an open resolver.}
 	\label{fig:exit-resolvers}
 \end{figure*}
 
