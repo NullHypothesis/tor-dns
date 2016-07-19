@@ -1,0 +1,86 @@
+wfdns run at 2016-07-19 17:01:22.486694262 +0200 CEST for 10x100+1000 at alexa1000
+
+k2-ctw attack
+pct,recall,precision,f1score,fpr,accuracy
+100,0.768,0.983,0.862,0.013,0.878
+	tp81,fpp0,fnp0,fn19,tn100
+	tp75,fpp0,fnp1,fn25,tn99
+	tp80,fpp0,fnp0,fn20,tn100
+	tp82,fpp1,fnp2,fn17,tn98
+	tp80,fpp0,fnp0,fn20,tn100
+	tp81,fpp0,fnp2,fn19,tn98
+	tp71,fpp0,fnp1,fn29,tn99
+	tp73,fpp0,fnp2,fn27,tn98
+	tp72,fpp0,fnp3,fn28,tn97
+	tp73,fpp0,fnp1,fn27,tn99
+
+k2-hp attack
+pct,recall,precision,f1score,fpr,accuracy
+100,0.691,0.983,0.811,0.012,0.840
+	tp71,fpp0,fnp0,fn29,tn100
+	tp70,fpp0,fnp1,fn30,tn99
+	tp72,fpp0,fnp0,fn28,tn100
+	tp75,fpp1,fnp2,fn24,tn98
+	tp73,fpp0,fnp0,fn27,tn100
+	tp71,fpp0,fnp2,fn29,tn98
+	tp67,fpp0,fnp0,fn33,tn100
+	tp67,fpp0,fnp2,fn33,tn98
+	tp61,fpp0,fnp3,fn39,tn97
+	tp64,fpp0,fnp1,fn36,tn99
+
+k2-wf attack
+pct,recall,precision,f1score,fpr,accuracy
+100,0.714,0.830,0.767,0.147,0.795
+	tp72,fpp2,fnp16,fn26,tn84
+	tp74,fpp2,fnp10,fn24,tn90
+	tp74,fpp2,fnp8,fn24,tn92
+	tp78,fpp2,fnp10,fn20,tn90
+	tp74,fpp2,fnp17,fn24,tn83
+	tp73,fpp2,fnp17,fn25,tn83
+	tp73,fpp6,fnp11,fn21,tn89
+	tp68,fpp2,fnp9,fn30,tn91
+	tp64,fpp2,fnp15,fn34,tn85
+	tp64,fpp2,fnp10,fn34,tn90
+
+k4-ctw attack
+pct,recall,precision,f1score,fpr,accuracy
+100,0.644,0.995,0.781,0.003,0.821
+	tp67,fpp0,fnp0,fn33,tn100
+	tp60,fpp0,fnp0,fn40,tn100
+	tp69,fpp0,fnp0,fn31,tn100
+	tp68,fpp0,fnp0,fn32,tn100
+	tp67,fpp0,fnp0,fn33,tn100
+	tp67,fpp0,fnp0,fn33,tn100
+	tp60,fpp0,fnp0,fn40,tn100
+	tp68,fpp0,fnp1,fn32,tn99
+	tp56,fpp0,fnp1,fn44,tn99
+	tp62,fpp0,fnp1,fn38,tn99
+
+k4-hp attack
+pct,recall,precision,f1score,fpr,accuracy
+100,0.540,0.994,0.699,0.003,0.769
+	tp55,fpp0,fnp0,fn45,tn100
+	tp49,fpp0,fnp0,fn51,tn100
+	tp60,fpp0,fnp0,fn40,tn100
+	tp61,fpp0,fnp0,fn39,tn100
+	tp58,fpp0,fnp0,fn42,tn100
+	tp53,fpp0,fnp0,fn47,tn100
+	tp52,fpp0,fnp0,fn48,tn100
+	tp57,fpp0,fnp1,fn43,tn99
+	tp46,fpp0,fnp1,fn54,tn99
+	tp49,fpp0,fnp1,fn51,tn99
+
+k4-wf attack
+pct,recall,precision,f1score,fpr,accuracy
+100,0.558,0.915,0.692,0.052,0.756
+	tp56,fpp1,fnp7,fn43,tn93
+	tp53,fpp2,fnp4,fn45,tn96
+	tp61,fpp1,fnp2,fn38,tn98
+	tp63,fpp0,fnp4,fn37,tn96
+	tp59,fpp2,fnp7,fn39,tn93
+	tp54,fpp1,fnp2,fn45,tn98
+	tp56,fpp0,fnp4,fn44,tn96
+	tp58,fpp0,fnp4,fn42,tn96
+	tp49,fpp0,fnp6,fn51,tn94
+	tp49,fpp0,fnp5,fn51,tn95
+

@@ -287,12 +287,12 @@ In the testing phase, Wa-kNN determines the distance of a testing trace to all
 known training traces. The distance calculation produced the $k$ nearest
 classes: if all classes are the same, then the testing trace is classified as
 that (monitored) class, otherwise it is classified as unmonitored.
-For all our classifiers, unless otherwise noted, we set $k=2$. Next, we propose
-a number of classifiers that combine Wa-kNN with DNS correlation, followed by
+For all our attacks, unless otherwise noted, we set $k=2$. Next, we propose
+a number of attacks that augment Wa-kNN with DNS data, followed by
 an experimental evaluation.
 
 \subsubsection{Confirmation-based attacks}
-We define three classifiers that confirm the output of Wa-kNN with the observed
+We define three attacks that confirm the output of Wa-kNN with the observed
 sites in the DNS data with different goals: high precision (HP), high
  recall (HR), and a merge of HP and HR.
 
@@ -308,11 +308,11 @@ sites in the DNS data with different goals: high precision (HP), high
 	output of HP, otherwise the output from HR.
  \end{description}
 
-The HP classifier increases false negatives but reduces the number of false
-positives. The HR classifier reduces confusion with one close neighbour in
+The HP attack increases false negatives but reduces the number of false
+positives. The HR attack reduces confusion with one close neighbour in
 Wa-kNN, reducing false negatives but increasing false positives.
 
-\subsubsection{Close-the-world attacks}
+\subsubsection{Close-the-world attack}
 Observing DNS requests results in a list of observed sites that are a subset of
 the monitored sites.
 For our close-the-world classifier we ``close the world''

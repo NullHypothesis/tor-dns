@@ -1,0 +1,86 @@
+wfdns run at 2016-07-19 17:05:03.271181407 +0200 CEST for 10x100+1000 at alexa1000000
+
+k2-ctw attack
+pct,recall,precision,f1score,fpr,accuracy
+100,0.772,1.000,0.871,0.000,0.886
+	tp84,fpp0,fnp0,fn16,tn100
+	tp81,fpp0,fnp0,fn19,tn100
+	tp74,fpp0,fnp0,fn26,tn100
+	tp79,fpp0,fnp0,fn21,tn100
+	tp79,fpp0,fnp0,fn21,tn100
+	tp82,fpp0,fnp0,fn18,tn100
+	tp74,fpp0,fnp0,fn26,tn100
+	tp74,fpp0,fnp0,fn26,tn100
+	tp75,fpp0,fnp0,fn25,tn100
+	tp70,fpp0,fnp0,fn30,tn100
+
+k2-hp attack
+pct,recall,precision,f1score,fpr,accuracy
+100,0.693,1.000,0.818,0.000,0.847
+	tp72,fpp0,fnp0,fn28,tn100
+	tp75,fpp0,fnp0,fn25,tn100
+	tp72,fpp0,fnp0,fn28,tn100
+	tp71,fpp0,fnp0,fn29,tn100
+	tp71,fpp0,fnp0,fn29,tn100
+	tp70,fpp0,fnp0,fn30,tn100
+	tp68,fpp0,fnp0,fn32,tn100
+	tp66,fpp0,fnp0,fn34,tn100
+	tp65,fpp0,fnp0,fn35,tn100
+	tp63,fpp0,fnp0,fn37,tn100
+
+k2-wf attack
+pct,recall,precision,f1score,fpr,accuracy
+100,0.712,0.829,0.766,0.147,0.795
+	tp72,fpp3,fnp15,fn25,tn85
+	tp76,fpp3,fnp9,fn21,tn91
+	tp77,fpp2,fnp7,fn21,tn93
+	tp74,fpp2,fnp13,fn24,tn87
+	tp73,fpp3,fnp14,fn24,tn86
+	tp71,fpp2,fnp15,fn27,tn85
+	tp69,fpp6,fnp11,fn25,tn89
+	tp69,fpp1,fnp11,fn30,tn89
+	tp66,fpp2,fnp16,fn32,tn84
+	tp65,fpp1,fnp11,fn34,tn89
+
+k4-ctw attack
+pct,recall,precision,f1score,fpr,accuracy
+100,0.657,1.000,0.792,0.000,0.829
+	tp69,fpp0,fnp0,fn31,tn100
+	tp66,fpp0,fnp0,fn34,tn100
+	tp66,fpp0,fnp0,fn34,tn100
+	tp67,fpp0,fnp0,fn33,tn100
+	tp70,fpp0,fnp0,fn30,tn100
+	tp69,fpp0,fnp0,fn31,tn100
+	tp66,fpp0,fnp0,fn34,tn100
+	tp65,fpp0,fnp0,fn35,tn100
+	tp59,fpp0,fnp0,fn41,tn100
+	tp60,fpp0,fnp0,fn40,tn100
+
+k4-hp attack
+pct,recall,precision,f1score,fpr,accuracy
+100,0.544,1.000,0.704,0.000,0.772
+	tp53,fpp0,fnp0,fn47,tn100
+	tp54,fpp0,fnp0,fn46,tn100
+	tp56,fpp0,fnp0,fn44,tn100
+	tp60,fpp0,fnp0,fn40,tn100
+	tp61,fpp0,fnp0,fn39,tn100
+	tp53,fpp0,fnp0,fn47,tn100
+	tp56,fpp0,fnp0,fn44,tn100
+	tp53,fpp0,fnp0,fn47,tn100
+	tp49,fpp0,fnp0,fn51,tn100
+	tp49,fpp0,fnp0,fn51,tn100
+
+k4-wf attack
+pct,recall,precision,f1score,fpr,accuracy
+100,0.557,0.920,0.693,0.049,0.757
+	tp53,fpp1,fnp8,fn46,tn92
+	tp55,fpp2,fnp4,fn43,tn96
+	tp59,fpp1,fnp3,fn40,tn97
+	tp63,fpp0,fnp4,fn37,tn96
+	tp62,fpp1,fnp6,fn37,tn94
+	tp54,fpp1,fnp2,fn45,tn98
+	tp56,fpp1,fnp2,fn43,tn98
+	tp55,fpp0,fnp4,fn45,tn96
+	tp50,fpp0,fnp5,fn50,tn95
+	tp50,fpp0,fnp4,fn50,tn96
+

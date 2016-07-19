@@ -7,6 +7,7 @@ from pylab import *
 import matplotlib
 import matplotlib.pyplot as plt
 import random
+from itertools import cycle
 import csv
 import sys
 
@@ -21,26 +22,26 @@ def get_data(path):
 
 if __name__ == '__main__':
     fig, ax = plt.subplots()
-    data, metric, ymin, output = sys.argv[1], sys.argv[2], sys.argv[3], sys.argv[4]
+    data, ymin, output = sys.argv[1], sys.argv[2], sys.argv[3]
     lengths, d, names = get_data(data)
 
     # see http://matplotlib.org/api/lines_api.html
-    linestyles = ["-.", "-", ":", "--", "-.", "-", ":", "--"]
-    markerstyles = ['o', 'v', '^', '<', '>', '8',
-    's', 'p', '*', 'h', 'H', 'D', 'd']
+    linestyles = cycle(["-.", "-", ":", "--", "-.", "-", ":", "--"])
+    markerstyles = cycle(['o', 'v', '^', '<', '>', '8',
+    's', 'p', '*', 'h', 'H', 'D', 'd'])
     ax.set_prop_cycle(cycler('color', ['c', 'm', 'y', 'k',
     'tomato', 'lightskyblue', 'limegreen', 'chocolate']))
 
     for j in xrange(len(d)):
-        plot(lengths, d[j], label=names[j], ls=linestyles[j],
-         marker=markerstyles[j], markersize=8, lw=1)
+        plot(lengths, d[j], label=names[j], ls=next(linestyles),
+         marker=next(markerstyles), markersize=10, lw=1)
 
-    plt.xlabel('pct of exit bandwidth', labelpad=7.0, fontsize=16)
-    plt.ylabel(metric, labelpad=9.0, fontsize=16)
+    plt.xlabel('pct of exit bandwidth', labelpad=7.0, fontsize=22)
+    plt.ylabel('recall', labelpad=9.0, fontsize=22)
     plt.grid()
     plt.ylim(float(ymin), 1)
-    plt.legend(prop={'size':12}, loc=4, ncol=2)
-    fig.set_size_inches(5,4)
+    plt.legend(prop={'size':16}, loc=2, ncol=2)
+    fig.set_size_inches(6,5)
     plt.tight_layout()
 
     if output in ['--pdf','--png','--svg']:

@@ -1,0 +1,1406 @@
+wfdns run at 2016-07-19 17:44:04.253327442 +0200 CEST for 10x100+1000 at alexa10000
+
+k2-ctw attack
+pct,recall,precision,f1score,fpr,accuracy
+0,0.000,0.000,0.000,0.000,0.500
+	tp0,fpp0,fnp0,fn100,tn100
+	tp0,fpp0,fnp0,fn100,tn100
+	tp0,fpp0,fnp0,fn100,tn100
+	tp0,fpp0,fnp0,fn100,tn100
+	tp0,fpp0,fnp0,fn100,tn100
+	tp0,fpp0,fnp0,fn100,tn100
+	tp0,fpp0,fnp0,fn100,tn100
+	tp0,fpp0,fnp0,fn100,tn100
+	tp0,fpp0,fnp0,fn100,tn100
+	tp0,fpp0,fnp0,fn100,tn100
+5,0.048,0.986,0.091,0.001,0.524
+	tp4,fpp0,fnp0,fn96,tn100
+	tp7,fpp0,fnp0,fn93,tn100
+	tp3,fpp0,fnp0,fn97,tn100
+	tp5,fpp0,fnp0,fn95,tn100
+	tp4,fpp0,fnp0,fn96,tn100
+	tp6,fpp0,fnp1,fn94,tn99
+	tp4,fpp0,fnp0,fn96,tn100
+	tp4,fpp0,fnp0,fn96,tn100
+	tp6,fpp0,fnp0,fn94,tn100
+	tp5,fpp0,fnp0,fn95,tn100
+10,0.070,1.000,0.129,0.000,0.535
+	tp4,fpp0,fnp0,fn96,tn100
+	tp9,fpp0,fnp0,fn91,tn100
+	tp6,fpp0,fnp0,fn94,tn100
+	tp11,fpp0,fnp0,fn89,tn100
+	tp2,fpp0,fnp0,fn98,tn100
+	tp6,fpp0,fnp0,fn94,tn100
+	tp10,fpp0,fnp0,fn90,tn100
+	tp5,fpp0,fnp0,fn95,tn100
+	tp11,fpp0,fnp0,fn89,tn100
+	tp6,fpp0,fnp0,fn94,tn100
+15,0.113,0.994,0.201,0.001,0.557
+	tp5,fpp0,fnp0,fn95,tn100
+	tp6,fpp0,fnp0,fn94,tn100
+	tp11,fpp0,fnp0,fn89,tn100
+	tp15,fpp1,fnp0,fn84,tn100
+	tp12,fpp0,fnp0,fn88,tn100
+	tp12,fpp0,fnp0,fn88,tn100
+	tp11,fpp0,fnp0,fn89,tn100
+	tp17,fpp0,fnp0,fn83,tn100
+	tp12,fpp0,fnp0,fn88,tn100
+	tp12,fpp0,fnp0,fn88,tn100
+20,0.147,1.000,0.255,0.000,0.573
+	tp15,fpp0,fnp0,fn85,tn100
+	tp16,fpp0,fnp0,fn84,tn100
+	tp12,fpp0,fnp0,fn88,tn100
+	tp11,fpp0,fnp0,fn89,tn100
+	tp10,fpp0,fnp0,fn90,tn100
+	tp18,fpp0,fnp0,fn82,tn100
+	tp14,fpp0,fnp0,fn86,tn100
+	tp11,fpp0,fnp0,fn89,tn100
+	tp20,fpp0,fnp0,fn80,tn100
+	tp20,fpp0,fnp0,fn80,tn100
+25,0.169,1.000,0.287,0.000,0.585
+	tp16,fpp0,fnp0,fn84,tn100
+	tp27,fpp0,fnp0,fn73,tn100
+	tp12,fpp0,fnp0,fn88,tn100
+	tp22,fpp0,fnp0,fn78,tn100
+	tp17,fpp0,fnp0,fn83,tn100
+	tp15,fpp0,fnp0,fn85,tn100
+	tp15,fpp0,fnp0,fn85,tn100
+	tp17,fpp0,fnp0,fn83,tn100
+	tp13,fpp0,fnp0,fn87,tn100
+	tp15,fpp0,fnp0,fn85,tn100
+30,0.228,0.992,0.369,0.002,0.613
+	tp20,fpp0,fnp1,fn80,tn99
+	tp20,fpp0,fnp0,fn80,tn100
+	tp26,fpp0,fnp0,fn74,tn100
+	tp20,fpp0,fnp0,fn80,tn100
+	tp28,fpp0,fnp1,fn72,tn99
+	tp32,fpp0,fnp0,fn68,tn100
+	tp21,fpp0,fnp0,fn79,tn100
+	tp19,fpp0,fnp0,fn81,tn100
+	tp20,fpp0,fnp0,fn80,tn100
+	tp22,fpp0,fnp0,fn78,tn100
+35,0.256,1.000,0.407,0.000,0.628
+	tp28,fpp0,fnp0,fn72,tn100
+	tp29,fpp0,fnp0,fn71,tn100
+	tp26,fpp0,fnp0,fn74,tn100
+	tp25,fpp0,fnp0,fn75,tn100
+	tp32,fpp0,fnp0,fn68,tn100
+	tp25,fpp0,fnp0,fn75,tn100
+	tp23,fpp0,fnp0,fn77,tn100
+	tp25,fpp0,fnp0,fn75,tn100
+	tp23,fpp0,fnp0,fn77,tn100
+	tp20,fpp0,fnp0,fn80,tn100
+40,0.296,1.000,0.455,0.000,0.648
+	tp26,fpp0,fnp0,fn74,tn100
+	tp29,fpp0,fnp0,fn71,tn100
+	tp35,fpp0,fnp0,fn65,tn100
+	tp31,fpp0,fnp0,fn69,tn100
+	tp34,fpp0,fnp0,fn66,tn100
+	tp28,fpp0,fnp0,fn72,tn100
+	tp23,fpp0,fnp0,fn77,tn100
+	tp24,fpp0,fnp0,fn76,tn100
+	tp35,fpp0,fnp0,fn65,tn100
+	tp31,fpp0,fnp0,fn69,tn100
+45,0.353,0.997,0.519,0.001,0.676
+	tp39,fpp0,fnp0,fn61,tn100
+	tp40,fpp0,fnp0,fn60,tn100
+	tp31,fpp0,fnp0,fn69,tn100
+	tp40,fpp0,fnp0,fn60,tn100
+	tp32,fpp0,fnp0,fn68,tn100
+	tp42,fpp0,fnp0,fn58,tn100
+	tp33,fpp0,fnp0,fn67,tn100
+	tp38,fpp1,fnp0,fn61,tn100
+	tp32,fpp0,fnp0,fn68,tn100
+	tp26,fpp0,fnp0,fn74,tn100
+50,0.413,1.000,0.582,0.000,0.706
+	tp47,fpp0,fnp0,fn53,tn100
+	tp45,fpp0,fnp0,fn55,tn100
+	tp32,fpp0,fnp0,fn68,tn100
+	tp47,fpp0,fnp0,fn53,tn100
+	tp46,fpp0,fnp0,fn54,tn100
+	tp51,fpp0,fnp0,fn49,tn100
+	tp39,fpp0,fnp0,fn61,tn100
+	tp36,fpp0,fnp0,fn64,tn100
+	tp36,fpp0,fnp0,fn64,tn100
+	tp34,fpp0,fnp0,fn66,tn100
+55,0.447,1.000,0.617,0.000,0.724
+	tp47,fpp0,fnp0,fn53,tn100
+	tp39,fpp0,fnp0,fn61,tn100
+	tp52,fpp0,fnp0,fn48,tn100
+	tp45,fpp0,fnp0,fn55,tn100
+	tp45,fpp0,fnp0,fn55,tn100
+	tp46,fpp0,fnp0,fn54,tn100
+	tp40,fpp0,fnp0,fn60,tn100
+	tp42,fpp0,fnp0,fn58,tn100
+	tp48,fpp0,fnp0,fn52,tn100
+	tp43,fpp0,fnp0,fn57,tn100
+60,0.439,0.997,0.607,0.001,0.719
+	tp46,fpp0,fnp0,fn54,tn100
+	tp40,fpp0,fnp0,fn60,tn100
+	tp43,fpp0,fnp0,fn57,tn100
+	tp55,fpp0,fnp0,fn45,tn100
+	tp45,fpp0,fnp0,fn55,tn100
+	tp48,fpp0,fnp0,fn52,tn100
+	tp36,fpp0,fnp1,fn64,tn99
+	tp39,fpp0,fnp0,fn61,tn100
+	tp53,fpp0,fnp0,fn47,tn100
+	tp34,fpp0,fnp0,fn66,tn100
+65,0.500,1.000,0.665,0.000,0.750
+	tp49,fpp0,fnp0,fn51,tn100
+	tp46,fpp0,fnp0,fn54,tn100
+	tp58,fpp0,fnp0,fn42,tn100
+	tp53,fpp0,fnp0,fn47,tn100
+	tp56,fpp0,fnp0,fn44,tn100
+	tp53,fpp0,fnp0,fn47,tn100
+	tp42,fpp0,fnp0,fn58,tn100
+	tp51,fpp0,fnp0,fn49,tn100
+	tp48,fpp0,fnp0,fn52,tn100
+	tp44,fpp0,fnp0,fn56,tn100
+70,0.530,0.998,0.691,0.001,0.765
+	tp54,fpp0,fnp0,fn46,tn100
+	tp62,fpp1,fnp0,fn37,tn100
+	tp56,fpp0,fnp0,fn44,tn100
+	tp51,fpp0,fnp0,fn49,tn100
+	tp55,fpp0,fnp0,fn45,tn100
+	tp49,fpp0,fnp0,fn51,tn100
+	tp53,fpp0,fnp0,fn47,tn100
+	tp52,fpp0,fnp0,fn48,tn100
+	tp51,fpp0,fnp0,fn49,tn100
+	tp47,fpp0,fnp0,fn53,tn100
+75,0.589,0.998,0.740,0.001,0.794
+	tp63,fpp0,fnp0,fn37,tn100
+	tp62,fpp0,fnp1,fn38,tn99
+	tp60,fpp0,fnp0,fn40,tn100
+	tp61,fpp0,fnp0,fn39,tn100
+	tp58,fpp0,fnp0,fn42,tn100
+	tp62,fpp0,fnp0,fn38,tn100
+	tp57,fpp0,fnp0,fn43,tn100
+	tp58,fpp0,fnp0,fn42,tn100
+	tp57,fpp0,fnp0,fn43,tn100
+	tp51,fpp0,fnp0,fn49,tn100
+80,0.612,1.000,0.759,0.000,0.806
+	tp61,fpp0,fnp0,fn39,tn100
+	tp60,fpp0,fnp0,fn40,tn100
+	tp60,fpp0,fnp0,fn40,tn100
+	tp60,fpp0,fnp0,fn40,tn100
+	tp60,fpp0,fnp0,fn40,tn100
+	tp69,fpp0,fnp0,fn31,tn100
+	tp62,fpp0,fnp0,fn38,tn100
+	tp56,fpp0,fnp0,fn44,tn100
+	tp63,fpp0,fnp0,fn37,tn100
+	tp61,fpp0,fnp0,fn39,tn100
+85,0.637,0.998,0.776,0.001,0.819
+	tp65,fpp0,fnp0,fn35,tn100
+	tp67,fpp0,fnp0,fn33,tn100
+	tp62,fpp0,fnp0,fn38,tn100
+	tp71,fpp0,fnp0,fn29,tn100
+	tp61,fpp0,fnp0,fn39,tn100
+	tp75,fpp0,fnp0,fn25,tn100
+	tp51,fpp1,fnp0,fn48,tn100
+	tp59,fpp0,fnp0,fn41,tn100
+	tp67,fpp0,fnp0,fn33,tn100
+	tp59,fpp0,fnp0,fn41,tn100
+90,0.688,0.999,0.814,0.001,0.843
+	tp75,fpp0,fnp0,fn25,tn100
+	tp71,fpp0,fnp0,fn29,tn100
+	tp63,fpp0,fnp0,fn37,tn100
+	tp72,fpp0,fnp1,fn28,tn99
+	tp67,fpp0,fnp0,fn33,tn100
+	tp76,fpp0,fnp0,fn24,tn100
+	tp69,fpp0,fnp0,fn31,tn100
+	tp66,fpp0,fnp0,fn34,tn100
+	tp67,fpp0,fnp0,fn33,tn100
+	tp62,fpp0,fnp0,fn38,tn100
+95,0.725,0.999,0.839,0.001,0.863
+	tp69,fpp0,fnp0,fn31,tn100
+	tp75,fpp0,fnp0,fn25,tn100
+	tp70,fpp0,fnp0,fn30,tn100
+	tp76,fpp0,fnp0,fn24,tn100
+	tp73,fpp0,fnp0,fn27,tn100
+	tp82,fpp0,fnp0,fn18,tn100
+	tp70,fpp1,fnp0,fn29,tn100
+	tp73,fpp0,fnp0,fn27,tn100
+	tp71,fpp0,fnp0,fn29,tn100
+	tp66,fpp0,fnp0,fn34,tn100
+100,0.765,0.999,0.866,0.001,0.882
+	tp80,fpp0,fnp0,fn20,tn100
+	tp82,fpp0,fnp0,fn18,tn100
+	tp76,fpp0,fnp0,fn24,tn100
+	tp80,fpp0,fnp0,fn20,tn100
+	tp75,fpp0,fnp0,fn25,tn100
+	tp82,fpp0,fnp0,fn18,tn100
+	tp75,fpp1,fnp0,fn24,tn100
+	tp72,fpp0,fnp0,fn28,tn100
+	tp76,fpp0,fnp0,fn24,tn100
+	tp67,fpp0,fnp0,fn33,tn100
+
+k2-hp attack
+pct,recall,precision,f1score,fpr,accuracy
+0,0.000,0.000,0.000,0.000,0.500
+	tp0,fpp0,fnp0,fn100,tn100
+	tp0,fpp0,fnp0,fn100,tn100
+	tp0,fpp0,fnp0,fn100,tn100
+	tp0,fpp0,fnp0,fn100,tn100
+	tp0,fpp0,fnp0,fn100,tn100
+	tp0,fpp0,fnp0,fn100,tn100
+	tp0,fpp0,fnp0,fn100,tn100
+	tp0,fpp0,fnp0,fn100,tn100
+	tp0,fpp0,fnp0,fn100,tn100
+	tp0,fpp0,fnp0,fn100,tn100
+5,0.043,1.000,0.082,0.000,0.521
+	tp4,fpp0,fnp0,fn96,tn100
+	tp6,fpp0,fnp0,fn94,tn100
+	tp3,fpp0,fnp0,fn97,tn100
+	tp3,fpp0,fnp0,fn97,tn100
+	tp4,fpp0,fnp0,fn96,tn100
+	tp6,fpp0,fnp0,fn94,tn100
+	tp4,fpp0,fnp0,fn96,tn100
+	tp4,fpp0,fnp0,fn96,tn100
+	tp5,fpp0,fnp0,fn95,tn100
+	tp4,fpp0,fnp0,fn96,tn100
+10,0.065,1.000,0.121,0.000,0.533
+	tp3,fpp0,fnp0,fn97,tn100
+	tp9,fpp0,fnp0,fn91,tn100
+	tp6,fpp0,fnp0,fn94,tn100
+	tp10,fpp0,fnp0,fn90,tn100
+	tp2,fpp0,fnp0,fn98,tn100
+	tp6,fpp0,fnp0,fn94,tn100
+	tp9,fpp0,fnp0,fn91,tn100
+	tp4,fpp0,fnp0,fn96,tn100
+	tp10,fpp0,fnp0,fn90,tn100
+	tp6,fpp0,fnp0,fn94,tn100
+15,0.101,1.000,0.182,0.000,0.550
+	tp5,fpp0,fnp0,fn95,tn100
+	tp6,fpp0,fnp0,fn94,tn100
+	tp9,fpp0,fnp0,fn91,tn100
+	tp14,fpp0,fnp0,fn86,tn100
+	tp10,fpp0,fnp0,fn90,tn100
+	tp10,fpp0,fnp0,fn90,tn100
+	tp8,fpp0,fnp0,fn92,tn100
+	tp16,fpp0,fnp0,fn84,tn100
+	tp12,fpp0,fnp0,fn88,tn100
+	tp11,fpp0,fnp0,fn89,tn100
+20,0.130,1.000,0.229,0.000,0.565
+	tp13,fpp0,fnp0,fn87,tn100
+	tp14,fpp0,fnp0,fn86,tn100
+	tp12,fpp0,fnp0,fn88,tn100
+	tp10,fpp0,fnp0,fn90,tn100
+	tp10,fpp0,fnp0,fn90,tn100
+	tp16,fpp0,fnp0,fn84,tn100
+	tp11,fpp0,fnp0,fn89,tn100
+	tp10,fpp0,fnp0,fn90,tn100
+	tp15,fpp0,fnp0,fn85,tn100
+	tp19,fpp0,fnp0,fn81,tn100
+25,0.147,1.000,0.254,0.000,0.574
+	tp14,fpp0,fnp0,fn86,tn100
+	tp24,fpp0,fnp0,fn76,tn100
+	tp11,fpp0,fnp0,fn89,tn100
+	tp19,fpp0,fnp0,fn81,tn100
+	tp14,fpp0,fnp0,fn86,tn100
+	tp13,fpp0,fnp0,fn87,tn100
+	tp12,fpp0,fnp0,fn88,tn100
+	tp15,fpp0,fnp0,fn85,tn100
+	tp11,fpp0,fnp0,fn89,tn100
+	tp14,fpp0,fnp0,fn86,tn100
+30,0.202,1.000,0.334,0.000,0.601
+	tp18,fpp0,fnp0,fn82,tn100
+	tp16,fpp0,fnp0,fn84,tn100
+	tp25,fpp0,fnp0,fn75,tn100
+	tp20,fpp0,fnp0,fn80,tn100
+	tp24,fpp0,fnp0,fn76,tn100
+	tp28,fpp0,fnp0,fn72,tn100
+	tp19,fpp0,fnp0,fn81,tn100
+	tp17,fpp0,fnp0,fn83,tn100
+	tp17,fpp0,fnp0,fn83,tn100
+	tp18,fpp0,fnp0,fn82,tn100
+35,0.236,1.000,0.381,0.000,0.618
+	tp25,fpp0,fnp0,fn75,tn100
+	tp28,fpp0,fnp0,fn72,tn100
+	tp24,fpp0,fnp0,fn76,tn100
+	tp23,fpp0,fnp0,fn77,tn100
+	tp29,fpp0,fnp0,fn71,tn100
+	tp23,fpp0,fnp0,fn77,tn100
+	tp23,fpp0,fnp0,fn77,tn100
+	tp22,fpp0,fnp0,fn78,tn100
+	tp20,fpp0,fnp0,fn80,tn100
+	tp19,fpp0,fnp0,fn81,tn100
+40,0.261,1.000,0.412,0.000,0.630
+	tp21,fpp0,fnp0,fn79,tn100
+	tp28,fpp0,fnp0,fn72,tn100
+	tp32,fpp0,fnp0,fn68,tn100
+	tp27,fpp0,fnp0,fn73,tn100
+	tp31,fpp0,fnp0,fn69,tn100
+	tp25,fpp0,fnp0,fn75,tn100
+	tp20,fpp0,fnp0,fn80,tn100
+	tp20,fpp0,fnp0,fn80,tn100
+	tp29,fpp0,fnp0,fn71,tn100
+	tp28,fpp0,fnp0,fn72,tn100
+45,0.312,1.000,0.474,0.000,0.656
+	tp31,fpp0,fnp0,fn69,tn100
+	tp39,fpp0,fnp0,fn61,tn100
+	tp27,fpp0,fnp0,fn73,tn100
+	tp37,fpp0,fnp0,fn63,tn100
+	tp27,fpp0,fnp0,fn73,tn100
+	tp35,fpp0,fnp0,fn65,tn100
+	tp30,fpp0,fnp0,fn70,tn100
+	tp34,fpp0,fnp0,fn66,tn100
+	tp27,fpp0,fnp0,fn73,tn100
+	tp25,fpp0,fnp0,fn75,tn100
+50,0.361,1.000,0.528,0.000,0.681
+	tp38,fpp0,fnp0,fn62,tn100
+	tp41,fpp0,fnp0,fn59,tn100
+	tp28,fpp0,fnp0,fn72,tn100
+	tp40,fpp0,fnp0,fn60,tn100
+	tp41,fpp0,fnp0,fn59,tn100
+	tp43,fpp0,fnp0,fn57,tn100
+	tp38,fpp0,fnp0,fn62,tn100
+	tp32,fpp0,fnp0,fn68,tn100
+	tp28,fpp0,fnp0,fn72,tn100
+	tp32,fpp0,fnp0,fn68,tn100
+55,0.402,1.000,0.572,0.000,0.701
+	tp40,fpp0,fnp0,fn60,tn100
+	tp36,fpp0,fnp0,fn64,tn100
+	tp50,fpp0,fnp0,fn50,tn100
+	tp38,fpp0,fnp0,fn62,tn100
+	tp42,fpp0,fnp0,fn58,tn100
+	tp42,fpp0,fnp0,fn58,tn100
+	tp36,fpp0,fnp0,fn64,tn100
+	tp38,fpp0,fnp0,fn62,tn100
+	tp40,fpp0,fnp0,fn60,tn100
+	tp40,fpp0,fnp0,fn60,tn100
+60,0.395,1.000,0.564,0.000,0.698
+	tp42,fpp0,fnp0,fn58,tn100
+	tp39,fpp0,fnp0,fn61,tn100
+	tp39,fpp0,fnp0,fn61,tn100
+	tp49,fpp0,fnp0,fn51,tn100
+	tp39,fpp0,fnp0,fn61,tn100
+	tp42,fpp0,fnp0,fn58,tn100
+	tp32,fpp0,fnp0,fn68,tn100
+	tp37,fpp0,fnp0,fn63,tn100
+	tp45,fpp0,fnp0,fn55,tn100
+	tp31,fpp0,fnp0,fn69,tn100
+65,0.442,1.000,0.612,0.000,0.721
+	tp42,fpp0,fnp0,fn58,tn100
+	tp41,fpp0,fnp0,fn59,tn100
+	tp54,fpp0,fnp0,fn46,tn100
+	tp47,fpp0,fnp0,fn53,tn100
+	tp48,fpp0,fnp0,fn52,tn100
+	tp46,fpp0,fnp0,fn54,tn100
+	tp37,fpp0,fnp0,fn63,tn100
+	tp45,fpp0,fnp0,fn55,tn100
+	tp41,fpp0,fnp0,fn59,tn100
+	tp41,fpp0,fnp0,fn59,tn100
+70,0.470,1.000,0.638,0.000,0.735
+	tp45,fpp0,fnp0,fn55,tn100
+	tp56,fpp0,fnp0,fn44,tn100
+	tp53,fpp0,fnp0,fn47,tn100
+	tp45,fpp0,fnp0,fn55,tn100
+	tp49,fpp0,fnp0,fn51,tn100
+	tp42,fpp0,fnp0,fn58,tn100
+	tp48,fpp0,fnp0,fn52,tn100
+	tp48,fpp0,fnp0,fn52,tn100
+	tp43,fpp0,fnp0,fn57,tn100
+	tp41,fpp0,fnp0,fn59,tn100
+75,0.524,0.998,0.686,0.001,0.762
+	tp53,fpp0,fnp0,fn47,tn100
+	tp56,fpp0,fnp1,fn44,tn99
+	tp58,fpp0,fnp0,fn42,tn100
+	tp57,fpp0,fnp0,fn43,tn100
+	tp52,fpp0,fnp0,fn48,tn100
+	tp52,fpp0,fnp0,fn48,tn100
+	tp49,fpp0,fnp0,fn51,tn100
+	tp52,fpp0,fnp0,fn48,tn100
+	tp48,fpp0,fnp0,fn52,tn100
+	tp47,fpp0,fnp0,fn53,tn100
+80,0.536,1.000,0.697,0.000,0.768
+	tp50,fpp0,fnp0,fn50,tn100
+	tp54,fpp0,fnp0,fn46,tn100
+	tp57,fpp0,fnp0,fn43,tn100
+	tp55,fpp0,fnp0,fn45,tn100
+	tp52,fpp0,fnp0,fn48,tn100
+	tp60,fpp0,fnp0,fn40,tn100
+	tp54,fpp0,fnp0,fn46,tn100
+	tp49,fpp0,fnp0,fn51,tn100
+	tp50,fpp0,fnp0,fn50,tn100
+	tp55,fpp0,fnp0,fn45,tn100
+85,0.561,1.000,0.717,0.000,0.780
+	tp53,fpp0,fnp0,fn47,tn100
+	tp62,fpp0,fnp0,fn38,tn100
+	tp58,fpp0,fnp0,fn42,tn100
+	tp63,fpp0,fnp0,fn37,tn100
+	tp54,fpp0,fnp0,fn46,tn100
+	tp65,fpp0,fnp0,fn35,tn100
+	tp44,fpp0,fnp0,fn56,tn100
+	tp53,fpp0,fnp0,fn47,tn100
+	tp56,fpp0,fnp0,fn44,tn100
+	tp53,fpp0,fnp0,fn47,tn100
+90,0.607,0.999,0.754,0.001,0.803
+	tp62,fpp0,fnp0,fn38,tn100
+	tp65,fpp0,fnp0,fn35,tn100
+	tp59,fpp0,fnp0,fn41,tn100
+	tp67,fpp0,fnp1,fn33,tn99
+	tp59,fpp0,fnp0,fn41,tn100
+	tp65,fpp0,fnp0,fn35,tn100
+	tp61,fpp0,fnp0,fn39,tn100
+	tp58,fpp0,fnp0,fn42,tn100
+	tp55,fpp0,fnp0,fn45,tn100
+	tp56,fpp0,fnp0,fn44,tn100
+95,0.644,0.998,0.782,0.001,0.822
+	tp59,fpp0,fnp0,fn41,tn100
+	tp68,fpp0,fnp0,fn32,tn100
+	tp66,fpp0,fnp0,fn34,tn100
+	tp67,fpp0,fnp0,fn33,tn100
+	tp66,fpp0,fnp0,fn34,tn100
+	tp70,fpp0,fnp0,fn30,tn100
+	tp64,fpp1,fnp0,fn35,tn100
+	tp65,fpp0,fnp0,fn35,tn100
+	tp59,fpp0,fnp0,fn41,tn100
+	tp60,fpp0,fnp0,fn40,tn100
+100,0.675,0.999,0.805,0.001,0.838
+	tp68,fpp0,fnp0,fn32,tn100
+	tp75,fpp0,fnp0,fn25,tn100
+	tp71,fpp0,fnp0,fn29,tn100
+	tp71,fpp0,fnp0,fn29,tn100
+	tp66,fpp0,fnp0,fn34,tn100
+	tp70,fpp0,fnp0,fn30,tn100
+	tp66,fpp1,fnp0,fn33,tn100
+	tp64,fpp0,fnp0,fn36,tn100
+	tp63,fpp0,fnp0,fn37,tn100
+	tp61,fpp0,fnp0,fn39,tn100
+
+k2-wf attack
+pct,recall,precision,f1score,fpr,accuracy
+0,0.703,0.832,0.761,0.143,0.792
+	tp70,fpp2,fnp14,fn28,tn86
+	tp75,fpp2,fnp11,fn23,tn89
+	tp74,fpp2,fnp7,fn24,tn93
+	tp74,fpp1,fnp10,fn25,tn90
+	tp71,fpp3,fnp16,fn26,tn84
+	tp74,fpp3,fnp13,fn23,tn87
+	tp67,fpp6,fnp11,fn27,tn89
+	tp68,fpp0,fnp10,fn32,tn90
+	tp65,fpp2,fnp17,fn33,tn83
+	tp65,fpp2,fnp11,fn33,tn89
+5,0.703,0.832,0.761,0.143,0.792
+	tp70,fpp2,fnp14,fn28,tn86
+	tp75,fpp2,fnp11,fn23,tn89
+	tp74,fpp2,fnp7,fn24,tn93
+	tp74,fpp1,fnp10,fn25,tn90
+	tp71,fpp3,fnp16,fn26,tn84
+	tp74,fpp3,fnp13,fn23,tn87
+	tp67,fpp6,fnp11,fn27,tn89
+	tp68,fpp0,fnp10,fn32,tn90
+	tp65,fpp2,fnp17,fn33,tn83
+	tp65,fpp2,fnp11,fn33,tn89
+10,0.703,0.832,0.761,0.143,0.792
+	tp70,fpp2,fnp14,fn28,tn86
+	tp75,fpp2,fnp11,fn23,tn89
+	tp74,fpp2,fnp7,fn24,tn93
+	tp74,fpp1,fnp10,fn25,tn90
+	tp71,fpp3,fnp16,fn26,tn84
+	tp74,fpp3,fnp13,fn23,tn87
+	tp67,fpp6,fnp11,fn27,tn89
+	tp68,fpp0,fnp10,fn32,tn90
+	tp65,fpp2,fnp17,fn33,tn83
+	tp65,fpp2,fnp11,fn33,tn89
+15,0.703,0.832,0.761,0.143,0.792
+	tp70,fpp2,fnp14,fn28,tn86
+	tp75,fpp2,fnp11,fn23,tn89
+	tp74,fpp2,fnp7,fn24,tn93
+	tp74,fpp1,fnp10,fn25,tn90
+	tp71,fpp3,fnp16,fn26,tn84
+	tp74,fpp3,fnp13,fn23,tn87
+	tp67,fpp6,fnp11,fn27,tn89
+	tp68,fpp0,fnp10,fn32,tn90
+	tp65,fpp2,fnp17,fn33,tn83
+	tp65,fpp2,fnp11,fn33,tn89
+20,0.703,0.832,0.761,0.143,0.792
+	tp70,fpp2,fnp14,fn28,tn86
+	tp75,fpp2,fnp11,fn23,tn89
+	tp74,fpp2,fnp7,fn24,tn93
+	tp74,fpp1,fnp10,fn25,tn90
+	tp71,fpp3,fnp16,fn26,tn84
+	tp74,fpp3,fnp13,fn23,tn87
+	tp67,fpp6,fnp11,fn27,tn89
+	tp68,fpp0,fnp10,fn32,tn90
+	tp65,fpp2,fnp17,fn33,tn83
+	tp65,fpp2,fnp11,fn33,tn89
+25,0.703,0.832,0.761,0.143,0.792
+	tp70,fpp2,fnp14,fn28,tn86
+	tp75,fpp2,fnp11,fn23,tn89
+	tp74,fpp2,fnp7,fn24,tn93
+	tp74,fpp1,fnp10,fn25,tn90
+	tp71,fpp3,fnp16,fn26,tn84
+	tp74,fpp3,fnp13,fn23,tn87
+	tp67,fpp6,fnp11,fn27,tn89
+	tp68,fpp0,fnp10,fn32,tn90
+	tp65,fpp2,fnp17,fn33,tn83
+	tp65,fpp2,fnp11,fn33,tn89
+30,0.703,0.832,0.761,0.143,0.792
+	tp70,fpp2,fnp14,fn28,tn86
+	tp75,fpp2,fnp11,fn23,tn89
+	tp74,fpp2,fnp7,fn24,tn93
+	tp74,fpp1,fnp10,fn25,tn90
+	tp71,fpp3,fnp16,fn26,tn84
+	tp74,fpp3,fnp13,fn23,tn87
+	tp67,fpp6,fnp11,fn27,tn89
+	tp68,fpp0,fnp10,fn32,tn90
+	tp65,fpp2,fnp17,fn33,tn83
+	tp65,fpp2,fnp11,fn33,tn89
+35,0.703,0.832,0.761,0.143,0.792
+	tp70,fpp2,fnp14,fn28,tn86
+	tp75,fpp2,fnp11,fn23,tn89
+	tp74,fpp2,fnp7,fn24,tn93
+	tp74,fpp1,fnp10,fn25,tn90
+	tp71,fpp3,fnp16,fn26,tn84
+	tp74,fpp3,fnp13,fn23,tn87
+	tp67,fpp6,fnp11,fn27,tn89
+	tp68,fpp0,fnp10,fn32,tn90
+	tp65,fpp2,fnp17,fn33,tn83
+	tp65,fpp2,fnp11,fn33,tn89
+40,0.703,0.832,0.761,0.143,0.792
+	tp70,fpp2,fnp14,fn28,tn86
+	tp75,fpp2,fnp11,fn23,tn89
+	tp74,fpp2,fnp7,fn24,tn93
+	tp74,fpp1,fnp10,fn25,tn90
+	tp71,fpp3,fnp16,fn26,tn84
+	tp74,fpp3,fnp13,fn23,tn87
+	tp67,fpp6,fnp11,fn27,tn89
+	tp68,fpp0,fnp10,fn32,tn90
+	tp65,fpp2,fnp17,fn33,tn83
+	tp65,fpp2,fnp11,fn33,tn89
+45,0.703,0.832,0.761,0.143,0.792
+	tp70,fpp2,fnp14,fn28,tn86
+	tp75,fpp2,fnp11,fn23,tn89
+	tp74,fpp2,fnp7,fn24,tn93
+	tp74,fpp1,fnp10,fn25,tn90
+	tp71,fpp3,fnp16,fn26,tn84
+	tp74,fpp3,fnp13,fn23,tn87
+	tp67,fpp6,fnp11,fn27,tn89
+	tp68,fpp0,fnp10,fn32,tn90
+	tp65,fpp2,fnp17,fn33,tn83
+	tp65,fpp2,fnp11,fn33,tn89
+50,0.703,0.832,0.761,0.143,0.792
+	tp70,fpp2,fnp14,fn28,tn86
+	tp75,fpp2,fnp11,fn23,tn89
+	tp74,fpp2,fnp7,fn24,tn93
+	tp74,fpp1,fnp10,fn25,tn90
+	tp71,fpp3,fnp16,fn26,tn84
+	tp74,fpp3,fnp13,fn23,tn87
+	tp67,fpp6,fnp11,fn27,tn89
+	tp68,fpp0,fnp10,fn32,tn90
+	tp65,fpp2,fnp17,fn33,tn83
+	tp65,fpp2,fnp11,fn33,tn89
+55,0.703,0.832,0.761,0.143,0.792
+	tp70,fpp2,fnp14,fn28,tn86
+	tp75,fpp2,fnp11,fn23,tn89
+	tp74,fpp2,fnp7,fn24,tn93
+	tp74,fpp1,fnp10,fn25,tn90
+	tp71,fpp3,fnp16,fn26,tn84
+	tp74,fpp3,fnp13,fn23,tn87
+	tp67,fpp6,fnp11,fn27,tn89
+	tp68,fpp0,fnp10,fn32,tn90
+	tp65,fpp2,fnp17,fn33,tn83
+	tp65,fpp2,fnp11,fn33,tn89
+60,0.703,0.832,0.761,0.143,0.792
+	tp70,fpp2,fnp14,fn28,tn86
+	tp75,fpp2,fnp11,fn23,tn89
+	tp74,fpp2,fnp7,fn24,tn93
+	tp74,fpp1,fnp10,fn25,tn90
+	tp71,fpp3,fnp16,fn26,tn84
+	tp74,fpp3,fnp13,fn23,tn87
+	tp67,fpp6,fnp11,fn27,tn89
+	tp68,fpp0,fnp10,fn32,tn90
+	tp65,fpp2,fnp17,fn33,tn83
+	tp65,fpp2,fnp11,fn33,tn89
+65,0.703,0.832,0.761,0.143,0.792
+	tp70,fpp2,fnp14,fn28,tn86
+	tp75,fpp2,fnp11,fn23,tn89
+	tp74,fpp2,fnp7,fn24,tn93
+	tp74,fpp1,fnp10,fn25,tn90
+	tp71,fpp3,fnp16,fn26,tn84
+	tp74,fpp3,fnp13,fn23,tn87
+	tp67,fpp6,fnp11,fn27,tn89
+	tp68,fpp0,fnp10,fn32,tn90
+	tp65,fpp2,fnp17,fn33,tn83
+	tp65,fpp2,fnp11,fn33,tn89
+70,0.703,0.832,0.761,0.143,0.792
+	tp70,fpp2,fnp14,fn28,tn86
+	tp75,fpp2,fnp11,fn23,tn89
+	tp74,fpp2,fnp7,fn24,tn93
+	tp74,fpp1,fnp10,fn25,tn90
+	tp71,fpp3,fnp16,fn26,tn84
+	tp74,fpp3,fnp13,fn23,tn87
+	tp67,fpp6,fnp11,fn27,tn89
+	tp68,fpp0,fnp10,fn32,tn90
+	tp65,fpp2,fnp17,fn33,tn83
+	tp65,fpp2,fnp11,fn33,tn89
+75,0.703,0.832,0.761,0.143,0.792
+	tp70,fpp2,fnp14,fn28,tn86
+	tp75,fpp2,fnp11,fn23,tn89
+	tp74,fpp2,fnp7,fn24,tn93
+	tp74,fpp1,fnp10,fn25,tn90
+	tp71,fpp3,fnp16,fn26,tn84
+	tp74,fpp3,fnp13,fn23,tn87
+	tp67,fpp6,fnp11,fn27,tn89
+	tp68,fpp0,fnp10,fn32,tn90
+	tp65,fpp2,fnp17,fn33,tn83
+	tp65,fpp2,fnp11,fn33,tn89
+80,0.703,0.832,0.761,0.143,0.792
+	tp70,fpp2,fnp14,fn28,tn86
+	tp75,fpp2,fnp11,fn23,tn89
+	tp74,fpp2,fnp7,fn24,tn93
+	tp74,fpp1,fnp10,fn25,tn90
+	tp71,fpp3,fnp16,fn26,tn84
+	tp74,fpp3,fnp13,fn23,tn87
+	tp67,fpp6,fnp11,fn27,tn89
+	tp68,fpp0,fnp10,fn32,tn90
+	tp65,fpp2,fnp17,fn33,tn83
+	tp65,fpp2,fnp11,fn33,tn89
+85,0.703,0.832,0.761,0.143,0.792
+	tp70,fpp2,fnp14,fn28,tn86
+	tp75,fpp2,fnp11,fn23,tn89
+	tp74,fpp2,fnp7,fn24,tn93
+	tp74,fpp1,fnp10,fn25,tn90
+	tp71,fpp3,fnp16,fn26,tn84
+	tp74,fpp3,fnp13,fn23,tn87
+	tp67,fpp6,fnp11,fn27,tn89
+	tp68,fpp0,fnp10,fn32,tn90
+	tp65,fpp2,fnp17,fn33,tn83
+	tp65,fpp2,fnp11,fn33,tn89
+90,0.703,0.832,0.761,0.143,0.792
+	tp70,fpp2,fnp14,fn28,tn86
+	tp75,fpp2,fnp11,fn23,tn89
+	tp74,fpp2,fnp7,fn24,tn93
+	tp74,fpp1,fnp10,fn25,tn90
+	tp71,fpp3,fnp16,fn26,tn84
+	tp74,fpp3,fnp13,fn23,tn87
+	tp67,fpp6,fnp11,fn27,tn89
+	tp68,fpp0,fnp10,fn32,tn90
+	tp65,fpp2,fnp17,fn33,tn83
+	tp65,fpp2,fnp11,fn33,tn89
+95,0.703,0.832,0.761,0.143,0.792
+	tp70,fpp2,fnp14,fn28,tn86
+	tp75,fpp2,fnp11,fn23,tn89
+	tp74,fpp2,fnp7,fn24,tn93
+	tp74,fpp1,fnp10,fn25,tn90
+	tp71,fpp3,fnp16,fn26,tn84
+	tp74,fpp3,fnp13,fn23,tn87
+	tp67,fpp6,fnp11,fn27,tn89
+	tp68,fpp0,fnp10,fn32,tn90
+	tp65,fpp2,fnp17,fn33,tn83
+	tp65,fpp2,fnp11,fn33,tn89
+100,0.703,0.832,0.761,0.143,0.792
+	tp70,fpp2,fnp14,fn28,tn86
+	tp75,fpp2,fnp11,fn23,tn89
+	tp74,fpp2,fnp7,fn24,tn93
+	tp74,fpp1,fnp10,fn25,tn90
+	tp71,fpp3,fnp16,fn26,tn84
+	tp74,fpp3,fnp13,fn23,tn87
+	tp67,fpp6,fnp11,fn27,tn89
+	tp68,fpp0,fnp10,fn32,tn90
+	tp65,fpp2,fnp17,fn33,tn83
+	tp65,fpp2,fnp11,fn33,tn89
+
+k4-ctw attack
+pct,recall,precision,f1score,fpr,accuracy
+0,0.000,0.000,0.000,0.000,0.500
+	tp0,fpp0,fnp0,fn100,tn100
+	tp0,fpp0,fnp0,fn100,tn100
+	tp0,fpp0,fnp0,fn100,tn100
+	tp0,fpp0,fnp0,fn100,tn100
+	tp0,fpp0,fnp0,fn100,tn100
+	tp0,fpp0,fnp0,fn100,tn100
+	tp0,fpp0,fnp0,fn100,tn100
+	tp0,fpp0,fnp0,fn100,tn100
+	tp0,fpp0,fnp0,fn100,tn100
+	tp0,fpp0,fnp0,fn100,tn100
+5,0.037,0.983,0.071,0.001,0.518
+	tp2,fpp0,fnp0,fn98,tn100
+	tp6,fpp0,fnp0,fn94,tn100
+	tp3,fpp0,fnp0,fn97,tn100
+	tp3,fpp0,fnp0,fn97,tn100
+	tp4,fpp0,fnp0,fn96,tn100
+	tp5,fpp0,fnp1,fn95,tn99
+	tp3,fpp0,fnp0,fn97,tn100
+	tp3,fpp0,fnp0,fn97,tn100
+	tp4,fpp0,fnp0,fn96,tn100
+	tp4,fpp0,fnp0,fn96,tn100
+10,0.053,1.000,0.100,0.000,0.527
+	tp3,fpp0,fnp0,fn97,tn100
+	tp8,fpp0,fnp0,fn92,tn100
+	tp3,fpp0,fnp0,fn97,tn100
+	tp8,fpp0,fnp0,fn92,tn100
+	tp2,fpp0,fnp0,fn98,tn100
+	tp4,fpp0,fnp0,fn96,tn100
+	tp8,fpp0,fnp0,fn92,tn100
+	tp5,fpp0,fnp0,fn95,tn100
+	tp8,fpp0,fnp0,fn92,tn100
+	tp4,fpp0,fnp0,fn96,tn100
+15,0.094,1.000,0.170,0.000,0.547
+	tp4,fpp0,fnp0,fn96,tn100
+	tp5,fpp0,fnp0,fn95,tn100
+	tp10,fpp0,fnp0,fn90,tn100
+	tp13,fpp0,fnp0,fn87,tn100
+	tp9,fpp0,fnp0,fn91,tn100
+	tp9,fpp0,fnp0,fn91,tn100
+	tp10,fpp0,fnp0,fn90,tn100
+	tp15,fpp0,fnp0,fn85,tn100
+	tp9,fpp0,fnp0,fn91,tn100
+	tp10,fpp0,fnp0,fn90,tn100
+20,0.124,1.000,0.220,0.000,0.562
+	tp12,fpp0,fnp0,fn88,tn100
+	tp12,fpp0,fnp0,fn88,tn100
+	tp12,fpp0,fnp0,fn88,tn100
+	tp10,fpp0,fnp0,fn90,tn100
+	tp9,fpp0,fnp0,fn91,tn100
+	tp13,fpp0,fnp0,fn87,tn100
+	tp12,fpp0,fnp0,fn88,tn100
+	tp11,fpp0,fnp0,fn89,tn100
+	tp17,fpp0,fnp0,fn83,tn100
+	tp16,fpp0,fnp0,fn84,tn100
+25,0.139,1.000,0.243,0.000,0.570
+	tp16,fpp0,fnp0,fn84,tn100
+	tp19,fpp0,fnp0,fn81,tn100
+	tp10,fpp0,fnp0,fn90,tn100
+	tp18,fpp0,fnp0,fn82,tn100
+	tp13,fpp0,fnp0,fn87,tn100
+	tp11,fpp0,fnp0,fn89,tn100
+	tp13,fpp0,fnp0,fn87,tn100
+	tp14,fpp0,fnp0,fn86,tn100
+	tp11,fpp0,fnp0,fn89,tn100
+	tp14,fpp0,fnp0,fn86,tn100
+30,0.199,1.000,0.330,0.000,0.599
+	tp18,fpp0,fnp0,fn82,tn100
+	tp16,fpp0,fnp0,fn84,tn100
+	tp23,fpp0,fnp0,fn77,tn100
+	tp18,fpp0,fnp0,fn82,tn100
+	tp25,fpp0,fnp0,fn75,tn100
+	tp27,fpp0,fnp0,fn73,tn100
+	tp18,fpp0,fnp0,fn82,tn100
+	tp19,fpp0,fnp0,fn81,tn100
+	tp19,fpp0,fnp0,fn81,tn100
+	tp16,fpp0,fnp0,fn84,tn100
+35,0.223,1.000,0.364,0.000,0.611
+	tp23,fpp0,fnp0,fn77,tn100
+	tp22,fpp0,fnp0,fn78,tn100
+	tp24,fpp0,fnp0,fn76,tn100
+	tp24,fpp0,fnp0,fn76,tn100
+	tp24,fpp0,fnp0,fn76,tn100
+	tp23,fpp0,fnp0,fn77,tn100
+	tp21,fpp0,fnp0,fn79,tn100
+	tp23,fpp0,fnp0,fn77,tn100
+	tp20,fpp0,fnp0,fn80,tn100
+	tp19,fpp0,fnp0,fn81,tn100
+40,0.243,1.000,0.389,0.000,0.621
+	tp20,fpp0,fnp0,fn80,tn100
+	tp23,fpp0,fnp0,fn77,tn100
+	tp34,fpp0,fnp0,fn66,tn100
+	tp25,fpp0,fnp0,fn75,tn100
+	tp28,fpp0,fnp0,fn72,tn100
+	tp23,fpp0,fnp0,fn77,tn100
+	tp19,fpp0,fnp0,fn81,tn100
+	tp20,fpp0,fnp0,fn80,tn100
+	tp26,fpp0,fnp0,fn74,tn100
+	tp25,fpp0,fnp0,fn75,tn100
+45,0.292,1.000,0.449,0.000,0.646
+	tp35,fpp0,fnp0,fn65,tn100
+	tp31,fpp0,fnp0,fn69,tn100
+	tp25,fpp0,fnp0,fn75,tn100
+	tp34,fpp0,fnp0,fn66,tn100
+	tp27,fpp0,fnp0,fn73,tn100
+	tp35,fpp0,fnp0,fn65,tn100
+	tp29,fpp0,fnp0,fn71,tn100
+	tp34,fpp0,fnp0,fn66,tn100
+	tp24,fpp0,fnp0,fn76,tn100
+	tp18,fpp0,fnp0,fn82,tn100
+50,0.338,1.000,0.502,0.000,0.669
+	tp37,fpp0,fnp0,fn63,tn100
+	tp37,fpp0,fnp0,fn63,tn100
+	tp25,fpp0,fnp0,fn75,tn100
+	tp39,fpp0,fnp0,fn61,tn100
+	tp38,fpp0,fnp0,fn62,tn100
+	tp41,fpp0,fnp0,fn59,tn100
+	tp38,fpp0,fnp0,fn62,tn100
+	tp32,fpp0,fnp0,fn68,tn100
+	tp27,fpp0,fnp0,fn73,tn100
+	tp24,fpp0,fnp0,fn76,tn100
+55,0.362,1.000,0.530,0.000,0.681
+	tp36,fpp0,fnp0,fn64,tn100
+	tp27,fpp0,fnp0,fn73,tn100
+	tp45,fpp0,fnp0,fn55,tn100
+	tp39,fpp0,fnp0,fn61,tn100
+	tp37,fpp0,fnp0,fn63,tn100
+	tp36,fpp0,fnp0,fn64,tn100
+	tp36,fpp0,fnp0,fn64,tn100
+	tp34,fpp0,fnp0,fn66,tn100
+	tp36,fpp0,fnp0,fn64,tn100
+	tp36,fpp0,fnp0,fn64,tn100
+60,0.361,0.997,0.528,0.001,0.680
+	tp36,fpp0,fnp0,fn64,tn100
+	tp33,fpp0,fnp0,fn67,tn100
+	tp36,fpp0,fnp0,fn64,tn100
+	tp47,fpp0,fnp0,fn53,tn100
+	tp36,fpp0,fnp0,fn64,tn100
+	tp36,fpp0,fnp0,fn64,tn100
+	tp30,fpp0,fnp1,fn70,tn99
+	tp36,fpp0,fnp0,fn64,tn100
+	tp43,fpp0,fnp0,fn57,tn100
+	tp28,fpp0,fnp0,fn72,tn100
+65,0.413,1.000,0.583,0.000,0.706
+	tp39,fpp0,fnp0,fn61,tn100
+	tp39,fpp0,fnp0,fn61,tn100
+	tp52,fpp0,fnp0,fn48,tn100
+	tp43,fpp0,fnp0,fn57,tn100
+	tp47,fpp0,fnp0,fn53,tn100
+	tp42,fpp0,fnp0,fn58,tn100
+	tp33,fpp0,fnp0,fn67,tn100
+	tp45,fpp0,fnp0,fn55,tn100
+	tp38,fpp0,fnp0,fn62,tn100
+	tp35,fpp0,fnp0,fn65,tn100
+70,0.445,0.998,0.615,0.001,0.722
+	tp45,fpp0,fnp0,fn55,tn100
+	tp51,fpp1,fnp0,fn48,tn100
+	tp48,fpp0,fnp0,fn52,tn100
+	tp43,fpp0,fnp0,fn57,tn100
+	tp47,fpp0,fnp0,fn53,tn100
+	tp38,fpp0,fnp0,fn62,tn100
+	tp47,fpp0,fnp0,fn53,tn100
+	tp44,fpp0,fnp0,fn56,tn100
+	tp41,fpp0,fnp0,fn59,tn100
+	tp41,fpp0,fnp0,fn59,tn100
+75,0.495,1.000,0.661,0.000,0.747
+	tp52,fpp0,fnp0,fn48,tn100
+	tp52,fpp0,fnp0,fn48,tn100
+	tp52,fpp0,fnp0,fn48,tn100
+	tp54,fpp0,fnp0,fn46,tn100
+	tp48,fpp0,fnp0,fn52,tn100
+	tp51,fpp0,fnp0,fn49,tn100
+	tp51,fpp0,fnp0,fn49,tn100
+	tp52,fpp0,fnp0,fn48,tn100
+	tp43,fpp0,fnp0,fn57,tn100
+	tp40,fpp0,fnp0,fn60,tn100
+80,0.506,1.000,0.671,0.000,0.753
+	tp47,fpp0,fnp0,fn53,tn100
+	tp48,fpp0,fnp0,fn52,tn100
+	tp53,fpp0,fnp0,fn47,tn100
+	tp55,fpp0,fnp0,fn45,tn100
+	tp49,fpp0,fnp0,fn51,tn100
+	tp56,fpp0,fnp0,fn44,tn100
+	tp53,fpp0,fnp0,fn47,tn100
+	tp47,fpp0,fnp0,fn53,tn100
+	tp49,fpp0,fnp0,fn51,tn100
+	tp49,fpp0,fnp0,fn51,tn100
+85,0.522,0.998,0.684,0.001,0.761
+	tp50,fpp0,fnp0,fn50,tn100
+	tp53,fpp0,fnp0,fn47,tn100
+	tp54,fpp0,fnp0,fn46,tn100
+	tp60,fpp0,fnp0,fn40,tn100
+	tp51,fpp0,fnp0,fn49,tn100
+	tp59,fpp0,fnp0,fn41,tn100
+	tp43,fpp1,fnp0,fn56,tn100
+	tp52,fpp0,fnp0,fn48,tn100
+	tp53,fpp0,fnp0,fn47,tn100
+	tp47,fpp0,fnp0,fn53,tn100
+90,0.570,0.998,0.725,0.001,0.784
+	tp60,fpp0,fnp0,fn40,tn100
+	tp58,fpp0,fnp0,fn42,tn100
+	tp55,fpp0,fnp0,fn45,tn100
+	tp62,fpp0,fnp1,fn38,tn99
+	tp55,fpp0,fnp0,fn45,tn100
+	tp61,fpp0,fnp0,fn39,tn100
+	tp60,fpp0,fnp0,fn40,tn100
+	tp57,fpp0,fnp0,fn43,tn100
+	tp50,fpp0,fnp0,fn50,tn100
+	tp52,fpp0,fnp0,fn48,tn100
+95,0.609,1.000,0.756,0.000,0.804
+	tp58,fpp0,fnp0,fn42,tn100
+	tp59,fpp0,fnp0,fn41,tn100
+	tp61,fpp0,fnp0,fn39,tn100
+	tp65,fpp0,fnp0,fn35,tn100
+	tp62,fpp0,fnp0,fn38,tn100
+	tp67,fpp0,fnp0,fn33,tn100
+	tp62,fpp0,fnp0,fn38,tn100
+	tp63,fpp0,fnp0,fn37,tn100
+	tp57,fpp0,fnp0,fn43,tn100
+	tp55,fpp0,fnp0,fn45,tn100
+100,0.631,1.000,0.773,0.000,0.815
+	tp63,fpp0,fnp0,fn37,tn100
+	tp66,fpp0,fnp0,fn34,tn100
+	tp66,fpp0,fnp0,fn34,tn100
+	tp68,fpp0,fnp0,fn32,tn100
+	tp62,fpp0,fnp0,fn38,tn100
+	tp66,fpp0,fnp0,fn34,tn100
+	tp65,fpp0,fnp0,fn35,tn100
+	tp62,fpp0,fnp0,fn38,tn100
+	tp59,fpp0,fnp0,fn41,tn100
+	tp54,fpp0,fnp0,fn46,tn100
+
+k4-hp attack
+pct,recall,precision,f1score,fpr,accuracy
+0,0.000,0.000,0.000,0.000,0.500
+	tp0,fpp0,fnp0,fn100,tn100
+	tp0,fpp0,fnp0,fn100,tn100
+	tp0,fpp0,fnp0,fn100,tn100
+	tp0,fpp0,fnp0,fn100,tn100
+	tp0,fpp0,fnp0,fn100,tn100
+	tp0,fpp0,fnp0,fn100,tn100
+	tp0,fpp0,fnp0,fn100,tn100
+	tp0,fpp0,fnp0,fn100,tn100
+	tp0,fpp0,fnp0,fn100,tn100
+	tp0,fpp0,fnp0,fn100,tn100
+5,0.028,1.000,0.054,0.000,0.514
+	tp2,fpp0,fnp0,fn98,tn100
+	tp4,fpp0,fnp0,fn96,tn100
+	tp3,fpp0,fnp0,fn97,tn100
+	tp1,fpp0,fnp0,fn99,tn100
+	tp3,fpp0,fnp0,fn97,tn100
+	tp4,fpp0,fnp0,fn96,tn100
+	tp1,fpp0,fnp0,fn99,tn100
+	tp3,fpp0,fnp0,fn97,tn100
+	tp4,fpp0,fnp0,fn96,tn100
+	tp3,fpp0,fnp0,fn97,tn100
+10,0.045,1.000,0.085,0.000,0.522
+	tp2,fpp0,fnp0,fn98,tn100
+	tp8,fpp0,fnp0,fn92,tn100
+	tp2,fpp0,fnp0,fn98,tn100
+	tp7,fpp0,fnp0,fn93,tn100
+	tp2,fpp0,fnp0,fn98,tn100
+	tp3,fpp0,fnp0,fn97,tn100
+	tp6,fpp0,fnp0,fn94,tn100
+	tp4,fpp0,fnp0,fn96,tn100
+	tp7,fpp0,fnp0,fn93,tn100
+	tp4,fpp0,fnp0,fn96,tn100
+15,0.080,1.000,0.147,0.000,0.540
+	tp4,fpp0,fnp0,fn96,tn100
+	tp5,fpp0,fnp0,fn95,tn100
+	tp8,fpp0,fnp0,fn92,tn100
+	tp11,fpp0,fnp0,fn89,tn100
+	tp6,fpp0,fnp0,fn94,tn100
+	tp6,fpp0,fnp0,fn94,tn100
+	tp7,fpp0,fnp0,fn93,tn100
+	tp15,fpp0,fnp0,fn85,tn100
+	tp9,fpp0,fnp0,fn91,tn100
+	tp9,fpp0,fnp0,fn91,tn100
+20,0.103,1.000,0.186,0.000,0.552
+	tp9,fpp0,fnp0,fn91,tn100
+	tp11,fpp0,fnp0,fn89,tn100
+	tp11,fpp0,fnp0,fn89,tn100
+	tp8,fpp0,fnp0,fn92,tn100
+	tp8,fpp0,fnp0,fn92,tn100
+	tp10,fpp0,fnp0,fn90,tn100
+	tp9,fpp0,fnp0,fn91,tn100
+	tp9,fpp0,fnp0,fn91,tn100
+	tp15,fpp0,fnp0,fn85,tn100
+	tp13,fpp0,fnp0,fn87,tn100
+25,0.112,1.000,0.201,0.000,0.556
+	tp14,fpp0,fnp0,fn86,tn100
+	tp14,fpp0,fnp0,fn86,tn100
+	tp10,fpp0,fnp0,fn90,tn100
+	tp15,fpp0,fnp0,fn85,tn100
+	tp10,fpp0,fnp0,fn90,tn100
+	tp9,fpp0,fnp0,fn91,tn100
+	tp10,fpp0,fnp0,fn90,tn100
+	tp11,fpp0,fnp0,fn89,tn100
+	tp8,fpp0,fnp0,fn92,tn100
+	tp11,fpp0,fnp0,fn89,tn100
+30,0.164,1.000,0.280,0.000,0.582
+	tp16,fpp0,fnp0,fn84,tn100
+	tp12,fpp0,fnp0,fn88,tn100
+	tp21,fpp0,fnp0,fn79,tn100
+	tp16,fpp0,fnp0,fn84,tn100
+	tp21,fpp0,fnp0,fn79,tn100
+	tp21,fpp0,fnp0,fn79,tn100
+	tp16,fpp0,fnp0,fn84,tn100
+	tp14,fpp0,fnp0,fn86,tn100
+	tp15,fpp0,fnp0,fn85,tn100
+	tp12,fpp0,fnp0,fn88,tn100
+35,0.192,1.000,0.322,0.000,0.596
+	tp19,fpp0,fnp0,fn81,tn100
+	tp20,fpp0,fnp0,fn80,tn100
+	tp22,fpp0,fnp0,fn78,tn100
+	tp21,fpp0,fnp0,fn79,tn100
+	tp22,fpp0,fnp0,fn78,tn100
+	tp19,fpp0,fnp0,fn81,tn100
+	tp19,fpp0,fnp0,fn81,tn100
+	tp19,fpp0,fnp0,fn81,tn100
+	tp16,fpp0,fnp0,fn84,tn100
+	tp15,fpp0,fnp0,fn85,tn100
+40,0.205,1.000,0.338,0.000,0.602
+	tp14,fpp0,fnp0,fn86,tn100
+	tp21,fpp0,fnp0,fn79,tn100
+	tp31,fpp0,fnp0,fn69,tn100
+	tp23,fpp0,fnp0,fn77,tn100
+	tp25,fpp0,fnp0,fn75,tn100
+	tp20,fpp0,fnp0,fn80,tn100
+	tp16,fpp0,fnp0,fn84,tn100
+	tp15,fpp0,fnp0,fn85,tn100
+	tp21,fpp0,fnp0,fn79,tn100
+	tp19,fpp0,fnp0,fn81,tn100
+45,0.243,1.000,0.389,0.000,0.621
+	tp26,fpp0,fnp0,fn74,tn100
+	tp26,fpp0,fnp0,fn74,tn100
+	tp22,fpp0,fnp0,fn78,tn100
+	tp31,fpp0,fnp0,fn69,tn100
+	tp23,fpp0,fnp0,fn77,tn100
+	tp27,fpp0,fnp0,fn73,tn100
+	tp24,fpp0,fnp0,fn76,tn100
+	tp28,fpp0,fnp0,fn72,tn100
+	tp19,fpp0,fnp0,fn81,tn100
+	tp17,fpp0,fnp0,fn83,tn100
+50,0.275,1.000,0.428,0.000,0.637
+	tp28,fpp0,fnp0,fn72,tn100
+	tp30,fpp0,fnp0,fn70,tn100
+	tp20,fpp0,fnp0,fn80,tn100
+	tp33,fpp0,fnp0,fn67,tn100
+	tp32,fpp0,fnp0,fn68,tn100
+	tp33,fpp0,fnp0,fn67,tn100
+	tp32,fpp0,fnp0,fn68,tn100
+	tp28,fpp0,fnp0,fn72,tn100
+	tp20,fpp0,fnp0,fn80,tn100
+	tp19,fpp0,fnp0,fn81,tn100
+55,0.311,1.000,0.473,0.000,0.656
+	tp27,fpp0,fnp0,fn73,tn100
+	tp23,fpp0,fnp0,fn77,tn100
+	tp42,fpp0,fnp0,fn58,tn100
+	tp33,fpp0,fnp0,fn67,tn100
+	tp34,fpp0,fnp0,fn66,tn100
+	tp32,fpp0,fnp0,fn68,tn100
+	tp30,fpp0,fnp0,fn70,tn100
+	tp31,fpp0,fnp0,fn69,tn100
+	tp29,fpp0,fnp0,fn71,tn100
+	tp30,fpp0,fnp0,fn70,tn100
+60,0.310,1.000,0.471,0.000,0.655
+	tp32,fpp0,fnp0,fn68,tn100
+	tp28,fpp0,fnp0,fn72,tn100
+	tp32,fpp0,fnp0,fn68,tn100
+	tp42,fpp0,fnp0,fn58,tn100
+	tp31,fpp0,fnp0,fn69,tn100
+	tp28,fpp0,fnp0,fn72,tn100
+	tp24,fpp0,fnp0,fn76,tn100
+	tp32,fpp0,fnp0,fn68,tn100
+	tp37,fpp0,fnp0,fn63,tn100
+	tp24,fpp0,fnp0,fn76,tn100
+65,0.353,1.000,0.520,0.000,0.676
+	tp31,fpp0,fnp0,fn69,tn100
+	tp34,fpp0,fnp0,fn66,tn100
+	tp46,fpp0,fnp0,fn54,tn100
+	tp38,fpp0,fnp0,fn62,tn100
+	tp40,fpp0,fnp0,fn60,tn100
+	tp35,fpp0,fnp0,fn65,tn100
+	tp28,fpp0,fnp0,fn72,tn100
+	tp38,fpp0,fnp0,fn62,tn100
+	tp33,fpp0,fnp0,fn67,tn100
+	tp30,fpp0,fnp0,fn70,tn100
+70,0.368,1.000,0.537,0.000,0.684
+	tp36,fpp0,fnp0,fn64,tn100
+	tp40,fpp0,fnp0,fn60,tn100
+	tp41,fpp0,fnp0,fn59,tn100
+	tp38,fpp0,fnp0,fn62,tn100
+	tp39,fpp0,fnp0,fn61,tn100
+	tp31,fpp0,fnp0,fn69,tn100
+	tp40,fpp0,fnp0,fn60,tn100
+	tp39,fpp0,fnp0,fn61,tn100
+	tp33,fpp0,fnp0,fn67,tn100
+	tp31,fpp0,fnp0,fn69,tn100
+75,0.420,1.000,0.590,0.000,0.710
+	tp41,fpp0,fnp0,fn59,tn100
+	tp43,fpp0,fnp0,fn57,tn100
+	tp47,fpp0,fnp0,fn53,tn100
+	tp49,fpp0,fnp0,fn51,tn100
+	tp43,fpp0,fnp0,fn57,tn100
+	tp40,fpp0,fnp0,fn60,tn100
+	tp42,fpp0,fnp0,fn58,tn100
+	tp45,fpp0,fnp0,fn55,tn100
+	tp36,fpp0,fnp0,fn64,tn100
+	tp34,fpp0,fnp0,fn66,tn100
+80,0.424,1.000,0.594,0.000,0.712
+	tp36,fpp0,fnp0,fn64,tn100
+	tp42,fpp0,fnp0,fn58,tn100
+	tp48,fpp0,fnp0,fn52,tn100
+	tp51,fpp0,fnp0,fn49,tn100
+	tp41,fpp0,fnp0,fn59,tn100
+	tp47,fpp0,fnp0,fn53,tn100
+	tp44,fpp0,fnp0,fn56,tn100
+	tp38,fpp0,fnp0,fn62,tn100
+	tp38,fpp0,fnp0,fn62,tn100
+	tp39,fpp0,fnp0,fn61,tn100
+85,0.430,1.000,0.600,0.000,0.715
+	tp36,fpp0,fnp0,fn64,tn100
+	tp45,fpp0,fnp0,fn55,tn100
+	tp46,fpp0,fnp0,fn54,tn100
+	tp52,fpp0,fnp0,fn48,tn100
+	tp44,fpp0,fnp0,fn56,tn100
+	tp48,fpp0,fnp0,fn52,tn100
+	tp36,fpp0,fnp0,fn64,tn100
+	tp42,fpp0,fnp0,fn58,tn100
+	tp43,fpp0,fnp0,fn57,tn100
+	tp38,fpp0,fnp0,fn62,tn100
+90,0.475,0.998,0.643,0.001,0.737
+	tp45,fpp0,fnp0,fn55,tn100
+	tp47,fpp0,fnp0,fn53,tn100
+	tp48,fpp0,fnp0,fn52,tn100
+	tp56,fpp0,fnp1,fn44,tn99
+	tp48,fpp0,fnp0,fn52,tn100
+	tp49,fpp0,fnp0,fn51,tn100
+	tp49,fpp0,fnp0,fn51,tn100
+	tp49,fpp0,fnp0,fn51,tn100
+	tp41,fpp0,fnp0,fn59,tn100
+	tp43,fpp0,fnp0,fn57,tn100
+95,0.510,1.000,0.675,0.000,0.755
+	tp45,fpp0,fnp0,fn55,tn100
+	tp48,fpp0,fnp0,fn52,tn100
+	tp55,fpp0,fnp0,fn45,tn100
+	tp56,fpp0,fnp0,fn44,tn100
+	tp54,fpp0,fnp0,fn46,tn100
+	tp53,fpp0,fnp0,fn47,tn100
+	tp52,fpp0,fnp0,fn48,tn100
+	tp53,fpp0,fnp0,fn47,tn100
+	tp47,fpp0,fnp0,fn53,tn100
+	tp47,fpp0,fnp0,fn53,tn100
+100,0.526,1.000,0.688,0.000,0.763
+	tp50,fpp0,fnp0,fn50,tn100
+	tp55,fpp0,fnp0,fn45,tn100
+	tp58,fpp0,fnp0,fn42,tn100
+	tp59,fpp0,fnp0,fn41,tn100
+	tp54,fpp0,fnp0,fn46,tn100
+	tp52,fpp0,fnp0,fn48,tn100
+	tp54,fpp0,fnp0,fn46,tn100
+	tp52,fpp0,fnp0,fn48,tn100
+	tp48,fpp0,fnp0,fn52,tn100
+	tp44,fpp0,fnp0,fn56,tn100
+
+k4-wf attack
+pct,recall,precision,f1score,fpr,accuracy
+0,0.552,0.914,0.687,0.052,0.753
+	tp52,fpp1,fnp7,fn47,tn93
+	tp55,fpp2,fnp3,fn43,tn97
+	tp61,fpp1,fnp4,fn38,tn96
+	tp62,fpp0,fnp5,fn38,tn95
+	tp58,fpp1,fnp6,fn41,tn94
+	tp56,fpp1,fnp2,fn43,tn98
+	tp55,fpp0,fnp4,fn45,tn96
+	tp56,fpp0,fnp4,fn44,tn96
+	tp49,fpp0,fnp6,fn51,tn94
+	tp48,fpp0,fnp5,fn52,tn95
+5,0.552,0.914,0.687,0.052,0.753
+	tp52,fpp1,fnp7,fn47,tn93
+	tp55,fpp2,fnp3,fn43,tn97
+	tp61,fpp1,fnp4,fn38,tn96
+	tp62,fpp0,fnp5,fn38,tn95
+	tp58,fpp1,fnp6,fn41,tn94
+	tp56,fpp1,fnp2,fn43,tn98
+	tp55,fpp0,fnp4,fn45,tn96
+	tp56,fpp0,fnp4,fn44,tn96
+	tp49,fpp0,fnp6,fn51,tn94
+	tp48,fpp0,fnp5,fn52,tn95
+10,0.552,0.914,0.687,0.052,0.753
+	tp52,fpp1,fnp7,fn47,tn93
+	tp55,fpp2,fnp3,fn43,tn97
+	tp61,fpp1,fnp4,fn38,tn96
+	tp62,fpp0,fnp5,fn38,tn95
+	tp58,fpp1,fnp6,fn41,tn94
+	tp56,fpp1,fnp2,fn43,tn98
+	tp55,fpp0,fnp4,fn45,tn96
+	tp56,fpp0,fnp4,fn44,tn96
+	tp49,fpp0,fnp6,fn51,tn94
+	tp48,fpp0,fnp5,fn52,tn95
+15,0.552,0.914,0.687,0.052,0.753
+	tp52,fpp1,fnp7,fn47,tn93
+	tp55,fpp2,fnp3,fn43,tn97
+	tp61,fpp1,fnp4,fn38,tn96
+	tp62,fpp0,fnp5,fn38,tn95
+	tp58,fpp1,fnp6,fn41,tn94
+	tp56,fpp1,fnp2,fn43,tn98
+	tp55,fpp0,fnp4,fn45,tn96
+	tp56,fpp0,fnp4,fn44,tn96
+	tp49,fpp0,fnp6,fn51,tn94
+	tp48,fpp0,fnp5,fn52,tn95
+20,0.552,0.914,0.687,0.052,0.753
+	tp52,fpp1,fnp7,fn47,tn93
+	tp55,fpp2,fnp3,fn43,tn97
+	tp61,fpp1,fnp4,fn38,tn96
+	tp62,fpp0,fnp5,fn38,tn95
+	tp58,fpp1,fnp6,fn41,tn94
+	tp56,fpp1,fnp2,fn43,tn98
+	tp55,fpp0,fnp4,fn45,tn96
+	tp56,fpp0,fnp4,fn44,tn96
+	tp49,fpp0,fnp6,fn51,tn94
+	tp48,fpp0,fnp5,fn52,tn95
+25,0.552,0.914,0.687,0.052,0.753
+	tp52,fpp1,fnp7,fn47,tn93
+	tp55,fpp2,fnp3,fn43,tn97
+	tp61,fpp1,fnp4,fn38,tn96
+	tp62,fpp0,fnp5,fn38,tn95
+	tp58,fpp1,fnp6,fn41,tn94
+	tp56,fpp1,fnp2,fn43,tn98
+	tp55,fpp0,fnp4,fn45,tn96
+	tp56,fpp0,fnp4,fn44,tn96
+	tp49,fpp0,fnp6,fn51,tn94
+	tp48,fpp0,fnp5,fn52,tn95
+30,0.552,0.914,0.687,0.052,0.753
+	tp52,fpp1,fnp7,fn47,tn93
+	tp55,fpp2,fnp3,fn43,tn97
+	tp61,fpp1,fnp4,fn38,tn96
+	tp62,fpp0,fnp5,fn38,tn95
+	tp58,fpp1,fnp6,fn41,tn94
+	tp56,fpp1,fnp2,fn43,tn98
+	tp55,fpp0,fnp4,fn45,tn96
+	tp56,fpp0,fnp4,fn44,tn96
+	tp49,fpp0,fnp6,fn51,tn94
+	tp48,fpp0,fnp5,fn52,tn95
+35,0.552,0.914,0.687,0.052,0.753
+	tp52,fpp1,fnp7,fn47,tn93
+	tp55,fpp2,fnp3,fn43,tn97
+	tp61,fpp1,fnp4,fn38,tn96
+	tp62,fpp0,fnp5,fn38,tn95
+	tp58,fpp1,fnp6,fn41,tn94
+	tp56,fpp1,fnp2,fn43,tn98
+	tp55,fpp0,fnp4,fn45,tn96
+	tp56,fpp0,fnp4,fn44,tn96
+	tp49,fpp0,fnp6,fn51,tn94
+	tp48,fpp0,fnp5,fn52,tn95
+40,0.552,0.914,0.687,0.052,0.753
+	tp52,fpp1,fnp7,fn47,tn93
+	tp55,fpp2,fnp3,fn43,tn97
+	tp61,fpp1,fnp4,fn38,tn96
+	tp62,fpp0,fnp5,fn38,tn95
+	tp58,fpp1,fnp6,fn41,tn94
+	tp56,fpp1,fnp2,fn43,tn98
+	tp55,fpp0,fnp4,fn45,tn96
+	tp56,fpp0,fnp4,fn44,tn96
+	tp49,fpp0,fnp6,fn51,tn94
+	tp48,fpp0,fnp5,fn52,tn95
+45,0.552,0.914,0.687,0.052,0.753
+	tp52,fpp1,fnp7,fn47,tn93
+	tp55,fpp2,fnp3,fn43,tn97
+	tp61,fpp1,fnp4,fn38,tn96
+	tp62,fpp0,fnp5,fn38,tn95
+	tp58,fpp1,fnp6,fn41,tn94
+	tp56,fpp1,fnp2,fn43,tn98
+	tp55,fpp0,fnp4,fn45,tn96
+	tp56,fpp0,fnp4,fn44,tn96
+	tp49,fpp0,fnp6,fn51,tn94
+	tp48,fpp0,fnp5,fn52,tn95
+50,0.552,0.914,0.687,0.052,0.753
+	tp52,fpp1,fnp7,fn47,tn93
+	tp55,fpp2,fnp3,fn43,tn97
+	tp61,fpp1,fnp4,fn38,tn96
+	tp62,fpp0,fnp5,fn38,tn95
+	tp58,fpp1,fnp6,fn41,tn94
+	tp56,fpp1,fnp2,fn43,tn98
+	tp55,fpp0,fnp4,fn45,tn96
+	tp56,fpp0,fnp4,fn44,tn96
+	tp49,fpp0,fnp6,fn51,tn94
+	tp48,fpp0,fnp5,fn52,tn95
+55,0.552,0.914,0.687,0.052,0.753
+	tp52,fpp1,fnp7,fn47,tn93
+	tp55,fpp2,fnp3,fn43,tn97
+	tp61,fpp1,fnp4,fn38,tn96
+	tp62,fpp0,fnp5,fn38,tn95
+	tp58,fpp1,fnp6,fn41,tn94
+	tp56,fpp1,fnp2,fn43,tn98
+	tp55,fpp0,fnp4,fn45,tn96
+	tp56,fpp0,fnp4,fn44,tn96
+	tp49,fpp0,fnp6,fn51,tn94
+	tp48,fpp0,fnp5,fn52,tn95
+60,0.552,0.914,0.687,0.052,0.753
+	tp52,fpp1,fnp7,fn47,tn93
+	tp55,fpp2,fnp3,fn43,tn97
+	tp61,fpp1,fnp4,fn38,tn96
+	tp62,fpp0,fnp5,fn38,tn95
+	tp58,fpp1,fnp6,fn41,tn94
+	tp56,fpp1,fnp2,fn43,tn98
+	tp55,fpp0,fnp4,fn45,tn96
+	tp56,fpp0,fnp4,fn44,tn96
+	tp49,fpp0,fnp6,fn51,tn94
+	tp48,fpp0,fnp5,fn52,tn95
+65,0.552,0.914,0.687,0.052,0.753
+	tp52,fpp1,fnp7,fn47,tn93
+	tp55,fpp2,fnp3,fn43,tn97
+	tp61,fpp1,fnp4,fn38,tn96
+	tp62,fpp0,fnp5,fn38,tn95
+	tp58,fpp1,fnp6,fn41,tn94
+	tp56,fpp1,fnp2,fn43,tn98
+	tp55,fpp0,fnp4,fn45,tn96
+	tp56,fpp0,fnp4,fn44,tn96
+	tp49,fpp0,fnp6,fn51,tn94
+	tp48,fpp0,fnp5,fn52,tn95
+70,0.552,0.914,0.687,0.052,0.753
+	tp52,fpp1,fnp7,fn47,tn93
+	tp55,fpp2,fnp3,fn43,tn97
+	tp61,fpp1,fnp4,fn38,tn96
+	tp62,fpp0,fnp5,fn38,tn95
+	tp58,fpp1,fnp6,fn41,tn94
+	tp56,fpp1,fnp2,fn43,tn98
+	tp55,fpp0,fnp4,fn45,tn96
+	tp56,fpp0,fnp4,fn44,tn96
+	tp49,fpp0,fnp6,fn51,tn94
+	tp48,fpp0,fnp5,fn52,tn95
+75,0.552,0.914,0.687,0.052,0.753
+	tp52,fpp1,fnp7,fn47,tn93
+	tp55,fpp2,fnp3,fn43,tn97
+	tp61,fpp1,fnp4,fn38,tn96
+	tp62,fpp0,fnp5,fn38,tn95
+	tp58,fpp1,fnp6,fn41,tn94
+	tp56,fpp1,fnp2,fn43,tn98
+	tp55,fpp0,fnp4,fn45,tn96
+	tp56,fpp0,fnp4,fn44,tn96
+	tp49,fpp0,fnp6,fn51,tn94
+	tp48,fpp0,fnp5,fn52,tn95
+80,0.552,0.914,0.687,0.052,0.753
+	tp52,fpp1,fnp7,fn47,tn93
+	tp55,fpp2,fnp3,fn43,tn97
+	tp61,fpp1,fnp4,fn38,tn96
+	tp62,fpp0,fnp5,fn38,tn95
+	tp58,fpp1,fnp6,fn41,tn94
+	tp56,fpp1,fnp2,fn43,tn98
+	tp55,fpp0,fnp4,fn45,tn96
+	tp56,fpp0,fnp4,fn44,tn96
+	tp49,fpp0,fnp6,fn51,tn94
+	tp48,fpp0,fnp5,fn52,tn95
+85,0.552,0.914,0.687,0.052,0.753
+	tp52,fpp1,fnp7,fn47,tn93
+	tp55,fpp2,fnp3,fn43,tn97
+	tp61,fpp1,fnp4,fn38,tn96
+	tp62,fpp0,fnp5,fn38,tn95
+	tp58,fpp1,fnp6,fn41,tn94
+	tp56,fpp1,fnp2,fn43,tn98
+	tp55,fpp0,fnp4,fn45,tn96
+	tp56,fpp0,fnp4,fn44,tn96
+	tp49,fpp0,fnp6,fn51,tn94
+	tp48,fpp0,fnp5,fn52,tn95
+90,0.552,0.914,0.687,0.052,0.753
+	tp52,fpp1,fnp7,fn47,tn93
+	tp55,fpp2,fnp3,fn43,tn97
+	tp61,fpp1,fnp4,fn38,tn96
+	tp62,fpp0,fnp5,fn38,tn95
+	tp58,fpp1,fnp6,fn41,tn94
+	tp56,fpp1,fnp2,fn43,tn98
+	tp55,fpp0,fnp4,fn45,tn96
+	tp56,fpp0,fnp4,fn44,tn96
+	tp49,fpp0,fnp6,fn51,tn94
+	tp48,fpp0,fnp5,fn52,tn95
+95,0.552,0.914,0.687,0.052,0.753
+	tp52,fpp1,fnp7,fn47,tn93
+	tp55,fpp2,fnp3,fn43,tn97
+	tp61,fpp1,fnp4,fn38,tn96
+	tp62,fpp0,fnp5,fn38,tn95
+	tp58,fpp1,fnp6,fn41,tn94
+	tp56,fpp1,fnp2,fn43,tn98
+	tp55,fpp0,fnp4,fn45,tn96
+	tp56,fpp0,fnp4,fn44,tn96
+	tp49,fpp0,fnp6,fn51,tn94
+	tp48,fpp0,fnp5,fn52,tn95
+100,0.552,0.914,0.687,0.052,0.753
+	tp52,fpp1,fnp7,fn47,tn93
+	tp55,fpp2,fnp3,fn43,tn97
+	tp61,fpp1,fnp4,fn38,tn96
+	tp62,fpp0,fnp5,fn38,tn95
+	tp58,fpp1,fnp6,fn41,tn94
+	tp56,fpp1,fnp2,fn43,tn98
+	tp55,fpp0,fnp4,fn45,tn96
+	tp56,fpp0,fnp4,fn44,tn96
+	tp49,fpp0,fnp6,fn51,tn94
+	tp48,fpp0,fnp5,fn52,tn95
+
