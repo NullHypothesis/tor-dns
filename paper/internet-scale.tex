@@ -42,6 +42,7 @@ name server. Beyond that, the queries will look like they're coming from the IP 
 of the name server and not the IP address of the exit relay, which is what we're interested 
 in.
 
+\subsection{Learning AS-level paths}
 In order to do our analysis, we need to have some way of figuring out the AS-level paths. 
 We considered two options: the use of AS path inference and the use of traceroute data. 
 We decided against AS path inference because Juen et al. showed that it can be quite
@@ -61,10 +62,9 @@ coverage is significant because as the Murdoch paper states, ``As Tor does not c
 implement a a mechanism for performing traceroutes, the operator of the node must do so
 manually. Furthermore, the Juen paper was only able to cover around 28\% of exit bandwidth
 by asking operators to run traceroutes for them.  Thus, we find that RIPE Atlas gives us a
-great way to study the paths that Tor circuits might traverse. (I'm wondering if a table
-might be better for those percentages .  . .) In order to get our traceroutes, we ran
-traceroutes from probes that that were in the same ASes as Tor guards and exits. TODO:
-Mention why we picked AS 6128 as our client AS.
+great way to study the paths that Tor circuits might traverse. In order to get
+our traceroutes, we ran traceroutes from probes that that were in the same ASes
+as Tor guards and exits. \fixme{Mention why we picked AS 6128 as our client AS.}
 
 % - 197 out of all 377 (52%) Tor exit ASs have Atlas probes.
 % - 220 out of all 434 (51%) Tor guard ASs have Atlas probes.
@@ -87,14 +87,16 @@ Mention why we picked AS 6128 as our client AS.
 	\end{tabular}
 \end{table}
 
-We also had to consider what method we'd use to translate the IP addresses in our 
-traceroutes to ASes. The options we considered were Team Cymru and pyasn. We decided to 
-go with pyasn because it uses actual control plane data in order to perform the 
-translations vs. using whois, which is what Team Cymru uses (find source for this). 
-(A word of caution: if there is an AS that is annoucing bogons on a particular day, and 
-you unluckily happen to pick that day, you might get bogus translations. For example, an 
-IP address like 10.10.10.1 might result in an AS number instead of 'None'.)
+We also had to consider what method we'd use to translate the IP addresses in
+our traceroutes to ASes. The options we considered were Team Cymru~\cite{ipasn}
+and pyasn~\cite{pyasn}. We decided to go with pyasn because it uses actual
+control plane data in order to perform the translations vs. using whois, which
+is what Team Cymru uses (find source for this).  (A word of caution: if there is
+an AS that is annoucing bogons on a particular day, and you unluckily happen to
+pick that day, you might get bogus translations. For example, an IP address like
+10.10.10.1 might result in an AS number instead of 'None'.)
 
+\subsection{Simulating Tor user activity}
 In order to measure the chances an AS will be in the ``correct'' position to carry out a
 deanonymization attack, we make use of TorPS, the Tor Path Simulator. This tool 
 ``faithfully mimics the behavior of Tor client software for creating exit circuits.''
@@ -102,18 +104,18 @@ That is, it gives us realistic combinations of guards and exits based on the sta
 Tor network for a given time. TorPS is based on Tor version X. For each sample, it uses 
 one guard which will expire after 270 days. We have TorPS simulate the behavior of a Tor 
 client for the month of March 2016. We use 50,000 samples for the same reasons given in
-``Users Get Routed.'' (Should we mention the fixes we made to TorPS? Should we mention 
-the problem we found with their user models?) For our simulation, we had each sample 
-visit domain.com---a website under our control---once per hour for the entire
-month of March 2016. Thus, each sample had a total of 744 opportunites to be
+``Users Get Routed.'' \fixme{Should we mention the fixes we made to TorPS? Should we mention 
+the problem we found with their user models?} For our simulation, we had each sample 
+visit domain.com\footnote{We redacted the real domain to anonymize our
+submission.}---a website under our control---once per hour for the entire month
+of March 2016.  Thus, each sample had a total of 744 opportunites to be
 compromised (this assumes that the circuit changes every time the sample/user
-visits domain.com). It is much better to use a tool like TorPS in order to
-measure these chances instead of just using all permutations of guard and
-exits.
+visits domain.com).  It is much better to use a tool like TorPS in order to
+measure these chances instead of just using all permutations of guard and exits.
 
 In this analysis, we completely ignore caching of any type, so our results are overly 
-pessimistic. TODO: Mention that these results apply only to what we had data for: about 
-half.
+pessimistic. \fixme{Mention that these results apply only to what we had data for: about 
+half.}
 
 Describe the four scenarios in the graph here: 1) Traditional, 2) Google, 3) Local, and 
 4) Status Quo.
@@ -129,7 +131,8 @@ ASes that RIPE Atlas had coverage for to 8.8.8.8.
 Local: ``Local'' represents what would happen if all exit relays ran their own name 
 servers locally (e.g., the use of unbound) on their own machines. In order to figure out 
 what ASes would be traversed on the way to resolve domain.com. In order to figure out the 
-DNS delegation path, we use part of the ddptr tool. Assuming no caching and assuming 
+DNS delegation path, we use the command line option \texttt{+trace} of the
+command line tool dig. Assuming no caching and assuming 
 iterative resolution, for domain.com the name server will have to visit three name servers:
 a root name server, a top level domain name server, and a second level domain name server. 
 
@@ -141,7 +144,7 @@ in order to figure out the IP addresses of the name servers that the exit relays
 using. We then performed traceroutes from the exit ASes to the appropriate IP addresses 
 in order to get the AS-level paths.
 
-TODO: Get the numbers from my data for the fan-out.
+\fixme{Get the numbers from my data for the fan-out.}
 
 As you can see in Figure~\subref{fig:compromised-streams} and
 Figure~\subref{fig:time-until-compromise}, 
