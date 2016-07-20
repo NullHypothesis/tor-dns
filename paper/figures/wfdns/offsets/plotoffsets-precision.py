@@ -27,8 +27,8 @@ if __name__ == '__main__':
 
     # see http://matplotlib.org/api/lines_api.html
     linestyles = cycle(["-.", "-", ":", "--", "-.", "-", ":", "--"])
-    markerstyles = cycle(['o', 'v', '^', '<', '>', '8',
-    's', 'p', '*', 'h', 'H', 'D', 'd'])
+    markerstyles = cycle(['o', 'v', '^', '<', '>', '*', '8',
+    's', 'p', 'h', 'H', 'D', 'd'])
     ax.set_prop_cycle(cycler('color', ['c', 'm', 'y', 'k',
     'tomato', 'lightskyblue', 'limegreen', 'chocolate']))
 
