@@ -1,4 +1,4 @@
-\section{Attack overview}
+\section{WF+DNS attacks}
 \label{sec:attack}
 We begin by summarizing our attack.  Our attack is based on traffic correlation,
 so it requires an attacker to observe traffic that is both entering and exiting
@@ -209,13 +209,6 @@ Table~\ref{tab:dns-requests} shows statistics for the number of DNS requests per
 site. For at least half of the dataset we have ten requests per website where
 two of them are unique.
 
-Table~\ref{tab:ttls} shows statistics on the TTL of DNS records in our dataset
-for the TTL as-is (raw) and when clipped by Tor, for unique domains, and when
-only considering the unique domain for each website with the lowest TTL.
-Note that for about half of the websites on Alexa top one million, there is at
-least one unique domain with a TTL of 60 seconds. Tor's TTL clipping has no
-impact on the median TTL, but significantly influences the mean TTL.
-
 \begin{figure}[t]
 	\centering
 	\includegraphics[width=0.7\linewidth]{figures/dns-unique-domains.pdf}
@@ -238,84 +231,46 @@ impact on the median TTL, but significantly influences the mean TTL.
 	\label{tab:dns-requests}
 \end{table}
 
-\begin{table}[t]
-	\caption{Raw TTLs are unprocessed while Tor TTLs adhere to Tor's TTL clipping.
-	The unique prefix is for the TTL of unique domains while min unique only
-	considers the unique domains with the minimum TTL for each website.}
-	\centering
-	\begin{tabular}{l r r}
-	\toprule
-	\textbf{TTLs (s)} & \textbf{Median} & \textbf{Mean} \\
-	\midrule
-	% 2016/04/28 15:52:39 DNS records TTL mean 9780.0, std 42930.5, median 255.0, min 0.0, max 604800.0
-	raw & 255 & $9780.0\pm42930.5$ \\ % & 0 & 604800 \\
-	% 2016/04/28 15:44:05 DNS records TTL mean 701.5, std 755.3, median 255.0, min 60.0, max 1800.0
-	Tor & 255 & $701.5\pm\phantom{00}755.3$ \\ %& 60 & 1800 \\
-	% 2016/04/28 15:52:39 	unique domain TTL mean 13022.2, std 35054.4, median 900.0, min 0.0, max 604800.0
-	unique raw & 900 & $13022.2\pm35054.4$ \\ %& 0 & 604800 \\
-	% 2016/04/28 15:44:05 	unique domain TTL mean 1005.3, std 789.6, median 900.0, min 60.0, max 1800.0
-	unique Tor & 900 & $1005.3\pm\phantom{00}789.6$ \\ %& 60 & 1800 \\
-	% 2016/04/28 15:52:39 	unique domain _min_ TTL mean 3833.9, std 11073.6, median 60.0, min 0.0, max 604800.0
-	min unique raw & 60 & $3833.9\pm11073.6$ \\ % & 0 & 604800 \\
-	% 2016/04/28 15:44:05 	unique domain _min_ TTL mean 644.2, std 763.8, median 60.0, min 60.0, max 1800.0
-	min unique Tor & 60 & $644.2\pm\phantom{00}763.8$ \\ %& 60 & 1800 \\
-	\bottomrule
-	\end{tabular}
-	\label{tab:ttls}
-\end{table}
+To analyse the feasability of mapping DNS requests to websites we construct a
+na\"{\i}ve website classifier: map each unique domain in a set of DNS requests
+to the corresponding website.
+With five-fold cross-validation on our Alexa top one million dataset with five
+samples we consider a closed world and an open world: in the closed world the
+attacker can use samples from all sites in training (as folded) while in the
+open world some sites are unmonitored and therefore unknown (as per the fold).
+In the closed world we get 0.970 recall and 0.994 precision.
+For the open world we monitor Alexa top 500k and consider 369k unmonitored
+sites. The number of unmonitored sites is extrapolated from our powerlaw
+distribution, giving a relastic base rate (for the entire Tor network) for
+evaluating our classifier.
+In the open world we get 0.965 recall and 0.975 precision, slightly
+worse than in the closed world.
 
-\fixme{Consider a second round of 5x1M and see if they are stable? Another
-option is to cross-validate.}
+Note that it is likely that website classification can be made
+virtually perfect if accounting for order of requests, per-exit partitioning of
+DNS requests, TTLS, and website popularity. The closed world setting
+is also realistic when evaluating a classifier that maps DNS requests to
+websites since gathering reuqets made by all 170 million active websites on the
+Internet is practical with modest resources.
+We use our conservative open world results when simulating the Tor network for
+evaluating WF+DNS attacks but
+highlight that our results indicate that observing DNS requests in Tor is
+largely equivallent to observing sites visited over Tor.
 
-% TL;DR: unique domains are useful.
-Motivated by the above results we construct a na\"{\i}ve website classifier:
-map each unique domain in a set of DNS requests to the corresponding website.
-Note that it is highly likely that website classification can be made
-significantly more accurate if we account for TTLs, order of requests, per-exit
-partitioning of DNS requests, and website popularity.
+\subsection{Our two WF+DNS attacks}
+We use Wa-kNN by Wang et al.~\cite{Wang2014a} and a list of sites derived from
+observing DNS requests for our two attacks:
 
-\subsection{Augmenting WF attacks with DNS data}
-\fixme{Our approaches are generic for any WF attack (with minor caveats)}
-As a baseline we use the Wa-kNN website fingerprinting attack by
-Wang et al.~\cite{Wang2014a}. Wa-kNN is a k-nearest neighbour classifier with
-a custom weightlearning algorithm (WLLCC~\cite{WangThesis}). From traffic traces
-between Tor clients and their guard, Wa-kNN extracts a number of features used
-for site classification.
-In the training phase, WLLCC adjusts weights of features extracted from sites
-of known classes such that the distance between instances of the same site (class) are minimized (collapsed).
-In the testing phase, Wa-kNN determines the distance of a testing trace to all
-known training traces. The distance calculation produced the $k$ nearest
-classes: if all classes are the same, then the testing trace is classified as
-that (monitored) class, otherwise it is classified as unmonitored.
-For all our attacks, unless otherwise noted, we set $k=2$. Next, we propose
-a number of attacks that augment Wa-kNN with DNS data, followed by
-an experimental evaluation.
+\begin{description}
+	\item[\texttt{ctw}] we ``close the world''
+	on a modified Wa-kNN classifier by only considering the distance to observed
+	sites when calculating the $k$-nearest neighbours. The classifier still
+	considers the distance to all open instances to capture unmonitored sites.
+	\item[\texttt{hp}] when Wa-kNN classifies a trace as a monitored site, confirm
+	that we observed the same site in the DNS data (ensuring high precision). If
+	not, make the final classification unmonitored.
+\end{description}
 
-\subsubsection{Confirmation-based attacks}
-We define three attacks that confirm the output of Wa-kNN with the observed
-sites in the DNS data with different goals: high precision (HP), high
- recall (HR), and a merge of HP and HR.
-
- \begin{description}
- 	\item[HP] When Wa-kNN classifies a trace as a monitored site, confirm
-	that we observed the same site in the DNS data. If not, overrule Wa-kNN and
-	make the final classification unmonitored.
-	\item[HR] When Wa-kNN classifies a trace as an unmonitored site, we re-run
-	Wa-kNN with $k+1$ and look if there is any class that occured $k$ times.
-	If that was the case, and we observed the site (class) in the DNS data,
-	then we overrule Wa-kNN and make the final classification the observed class.
-	\item[Merge] If the Wa-kNN classifies a trace as a monitored site, take the
-	output of HP, otherwise the output from HR.
- \end{description}
-
-The HP attack increases false negatives but reduces the number of false
-positives. The HR attack reduces confusion with one close neighbour in
-Wa-kNN, reducing false negatives but increasing false positives.
-
-\subsubsection{Close-the-world attack}
-Observing DNS requests results in a list of observed sites that are a subset of
-the monitored sites.
-For our close-the-world classifier we ``close the world''
-on a modified Wa-kNN classifier by only considering the distance to observed
-sites when calculating the $k$-nearest neighbours. The classifier still
-considers the distance to all open instances to capture unmonitored sites.
+Note that our approaches are generic and can be made to work with any website
+fingerprinting attack with little effort.
+\fixme{talk more about rational}

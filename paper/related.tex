@@ -55,7 +55,10 @@ proposing an attack that used Hidden Markov Models to determine if a sequence of
 page requests all come from the same site.  The authors used an open-world
 setting for their evaluation.  Wang and Goldberg~\cite{Wang2013a} proposed an
 improved attack that employed a new method for data gathering.  In 2014, Wang
-\ea~\cite{Wang2014a} further improved on their results.  Cai \ea~\cite{Cai2014b}
+\ea~\cite{Wang2014a} further improved on their results with a
+k-nearest neighbour classifier Wa-kNN and a custom weightlearning algorithm
+(WLLCC~\cite{WangThesis}) that in several rounds determine the optimal weights.
+Cai \ea~\cite{Cai2014b}
 analyzed what traffic features provide the most predictive power to detect
 websites, proved a lower bound of any defense that achieves a certain level of
 security, and provided a framework to investigate the performance of
@@ -67,5 +70,9 @@ operating system differences, page changes, and background traffic.  Most
 recently in 2016, Panchenko et al.~\cite{Panchenko2016a} showed that
 web\emph{page} fingerprinting (\ie, fingerprinting of any page on a site) lacks
 precision in the open world while web\emph{site} fingerprinting (\ie,
-fingerprinting of only the start page of a site) remains practical.  \fixme{What
-are we doing better than past work?}
+fingerprinting of only the start page of a site) remains practical.
+
+We show how to augment any website fingerprinting attack with information from
+observed DNS requests. Our two proposed attacks use Wa-kNN and greatly improves
+precision for web\emph{site} fingerprinting. 
+\fixme{work in WF defenses}

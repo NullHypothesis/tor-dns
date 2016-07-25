@@ -1,33 +1,6 @@
 \section{Analysis}
 \label{sec:analysis}
 
-\subsection{From DNS requests to websites}
-To analyse the feasability of mapping DNS requests to websites we construct a
-na\"{\i}ve website classifier: map each unique domain in a set of DNS requests
-to the corresponding website.
-With five-fold cross-validation on our Alexa top one million dataset with five
-samples we consider a closed world and an open world: in the closed world the
-attacker can use samples from all sites in training (as folded) while in the
-open world some sites are unmonitored and therefore unknown (as per the fold).
-In the closed world we get 0.970 recall and 0.994 precision.
-For the open world we monitor Alexa top 500k and consider 369k unmonitored
-sites. The number of unmonitored sites is extrapolated from our powerlaw
-distribution, giving a relastic base rate (for the entire Tor network) for our
-classifier. In the open world we get 0.965 recall and 0.975 precision, slightly
-worse than in the closed world.
-
-Note that it is likely that website classification can be made
-virtually perfect if accounting for order of requests, per-exit partitioning of
-DNS requests, TTLS, and website popularity. The closed world setting
-is also realistic when evaluating a classifier that maps DNS requests to
-websites since gathering reuqets made byall 170 million active websites on the
-Internet is practical with modest resources.
-We use our conservative open world results when simulating the Tor network for
-evaluating WF+DNS attacks but
-highlight that our results indicate that observing DNS requests in Tor is
-largely equivallent to observing sites visited over Tor.
-
-
 \subsection{WF+DNS attacks}
 % flow:
 % - we get signal (precision), confirming what kNN says
@@ -122,7 +95,7 @@ The above results paint a bleak picture: a small fraction of exit
 bandwidth provides a perfectly precise attack on relatively
 \emph{unpopular} sites such as \url{wikileaks.org} at Alexa rank 10808.
 To better understand the limitations of our attacks, we focus on precision
-and
+and 33\% of exit bandwith (as observed on average by Google).
 
 % window = 1800
 % size = 10
