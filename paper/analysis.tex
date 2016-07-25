@@ -1,16 +1,39 @@
 \section{Analysis}
 \label{sec:analysis}
 
-\subsection{Feasability of DNS request linking}
-\fixme{rerun all experiments with more sites}
+\subsection{From DNS requests to websites}
+To analyse the feasability of mapping DNS requests to websites we construct a
+na\"{\i}ve website classifier: map each unique domain in a set of DNS requests
+to the corresponding website.
+With five-fold cross-validation on our Alexa top one million dataset with five
+samples we consider a closed world and an open world: in the closed world the
+attacker can use samples from all sites in training (as folded) while in the
+open world some sites are unmonitored and therefore unknown (as per the fold).
+In the closed world we get 0.970 recall and 0.994 precision.
+For the open world we monitor Alexa top 500k and consider 369k unmonitored
+sites. The number of unmonitored sites is extrapolated from our powerlaw
+distribution, giving a relastic base rate (for the entire Tor network) for our
+classifier. In the open world we get 0.965 recall and 0.975 precision, slightly
+worse than in the closed world.
+
+Note that it is likely that website classification can be made
+virtually perfect if accounting for order of requests, per-exit partitioning of
+DNS requests, TTLS, and website popularity. The closed world setting
+is also realistic when evaluating a classifier that maps DNS requests to
+websites since gathering reuqets made byall 170 million active websites on the
+Internet is practical with modest resources.
+We use our conservative open world results when simulating the Tor network for
+evaluating WF+DNS attacks but
+highlight that our results indicate that observing DNS requests in Tor is
+largely equivallent to observing sites visited over Tor.
+
+
+\subsection{WF+DNS attacks}
 % flow:
 % - we get signal (precision), confirming what kNN says
 % - signal depends on pct of exit bandwidth, but improve precision
 % 	already at small pct (but big impact on recall)
 % - signal depends on monitored sites' popularity
-% - WF less good at annoying base rate -> precision goes down
-% 	with 1:1 ratio, the base rate is 0.5 when testing.
-%  We flip the base rate to 10*100/100*1000 = 0.01
 
 We perform 10-fold cross-validation for all of our experiments in the open
 world setting. We monitor 1000 sites with 100 instances each and
@@ -20,11 +43,11 @@ Note the 1:1 ratio between monitored traces and unmonitored traces,
 ensuring that for the classifier there is equal probability in the testing
 phase that a trace is a monitored or unmonitored site.
 In other words, the \emph{base rate} is 0.5 in our experiments.
-Furthermore, for all experiments we define an \emph{offset} that specifies
-which sites on Alexa are monitored. An offset of 0 means that Alexa sites
-[1,1000] are monitored and Alexa [1001,101000] unmonitored. An offset of 100
-means that Alexa sites [101,1100] are monitored, and Alexa [1,100] and
-[1101,10100] unmonitored.
+Furthermore, for all experiments we specify the starting Alexa rank of the
+monitored sites. Whem minitoring 1000 sites starting at rank 1, sites
+[1,1000] are monitored and Alexa [1001,101000] unmonitored. Starting to monitor
+Alexa from rank 100 means that Alexa sites [101,1100] are monitored, and Alexa
+ [1,100] and [1101,10100] unmonitored.
 We never monitor an unmonitored site or vice versa. How popular monitored sites
 are is a key factor in the effectiveness of our attacks.
 % note: base rate is per user, while popularity in Alexa for DNS observations
@@ -32,22 +55,24 @@ are is a key factor in the effectiveness of our attacks.
 
 Figure~\ref{fig:wfdns:torpct} shows the recall and precision for our WF+DNS
 attacks as a function of the percentage of observed Tor exit bandwidth by the
-attacker at offset $10^5$. We show Wa-kNN with $k=2$ and $k=4$.
-\fixme{Recall measures the probability that a visit to a monitored page will
+attacker monitoring Alexa sites from rank $10^5$.
+% TODO: consider moving recall and precision to background
+Recall measures the probability that a visit to a monitored page will
 be detected, while precision measures the probability that a classification by
 the classifier of a visit to a monitored site (positive test outcome) is the
-correct one. Note that precision captures the base rate in an experiment.}
-For recall, regardless of $k$, both \texttt{ctw} and \texttt{hp} are
-significantly impacted by the percentage of exit bandwidth observed by the
-attacker. An attacker cannot identify a monitored site in the DNS data that
-she does not see.
-%Already at 5\% of
-%\fixme{snapshotsim bug or something else?}
-For precision we see a significant gain at low percentages with a small steady
-gain as the observed exit bandwidth increases. As we increase $k$ from 2 to 4
-we trade decreased recall for increased precision in the \texttt{wf} attack
-and the relative gain in precision is much smaller. Since we are already at
-such high precision ($>0.9$) this is expected.
+correct one. %Note that precision captures the base rate in an experiment.
+For recall both \texttt{ctw} and \texttt{hp} are bound by the
+percentage of exit bandwidth observed by the attacker (the percentage is an
+upper bound).
+Simply put, an attacker cannot identify a monitored site in the DNS data that
+she does not see. Note that \texttt{ctw} sees improved recall over \texttt{wf}
+at 100\% of exit bandwidth.
+For precision our attacks have an imediate gain over \texttt{wf} as soon as
+the attacker can observe \emph{any exit bandwidth}.
+While the \texttt{hp} attack has constantly near-perfect precision, the
+\texttt{ctw} attack benefits from observing more and more of exit bandwidth,
+nearly reaching the same levels as \texttt{hp} at 100\%.
+
 
 \begin{figure}[t]
 \centering
@@ -59,39 +84,50 @@ such high precision ($>0.9$) this is expected.
 	\includegraphics[width=0.466\linewidth]{figures/wfdns/pct/100x100+10000-dns2site-alexa10000-precision}
     \label{fig:wfdns:torpct:precision}
 }
-\caption{10x100+1k-dns2site-alexa10k}
+\caption{The recall and precision for an open-world dataset, monitoring sites
+starting from Alexa rank 10k, comparing our attacks (\texttt{ctw and
+ \texttt{hp}}) to a website fingerprinting attack (\texttt{wf}) for different
+ percentages of observed exit bandwidth. }
 \label{fig:wfdns:torpct}
 \end{figure}
 
 
-Figure~\ref{fig:wfdns:offsets} shows recall and precision at 50 percentage of
-observed Tor exit bandwidth as a function of the offset. For monitored sites in
-Alexa top-1000 we see no notable difference between any of the attacks in either
-recall or precision: popular sites are virtually always visited by some Tor user
-so they always show up in the attackers DNS data. At $10^4$ and onwards we see
-the different attacks diverging: recall goes down and precision goes up,
-indicating that our attacks can use the DNS data to augment precision.
-DNS data is only useful for an attacker for less popular websites, such as
-\url{wikileaks.org} at Alexa rank 10808.
-% we should see a smaller match, hopefully there in bigger dataset
-
+Figure~\ref{fig:wfdns:alexa} shows recall and precision at 100 percent of
+observed Tor exit bandwidth as a function of the starting Alexa rank of
+monitored sites (we still monitor 1000 sites).
+For low Alexa ranks there is no difference between our attacks and the
+\texttt{wf} attack. This is because, even with a window of only 60 seconds,
+it is virtually guaranteed that someone browsed to any of the most popular
+sites over Tor. At Alexa rank $10^3$ and onward we se a clear divergence from
+the \texttt{wf} attack for both recall and precision:
+\texttt{ctw} can improve the recall and precision, while
+\texttt{hp} offers almost perfect precision already at Alexa $10^4$.
 
 \begin{figure}[t]
 \centering
 \subfigure[Recall]{
-	\includegraphics[width=0.466\linewidth]{figures/wfdns/offsets/100x100+10k-offsets-100pct-recall}
-    \label{fig:wfdns:offsets:recall}
+	\includegraphics[width=0.466\linewidth]{figures/wfdns/alexa/1kx100+100k-offsets-100pct-recall}
+    \label{fig:wfdns:alexa:recall}
 }
 \subfigure[Precision]{
-	\includegraphics[width=0.466\linewidth]{figures/wfdns/offsets/100x100+10k-offsets-100pct-precision}
-    \label{fig:wfdns:offsets:precision}
+	\includegraphics[width=0.466\linewidth]{figures/wfdns/alexa/1kx100+100k-offsets-100pct-precision}
+    \label{fig:wfdns:alexa:precision}
 }
-\caption{10x100+1k-offsets at 100 percentage of Tor exit bandwidth.}
-\label{fig:wfdns:offsets}
+\caption{The recall and precision when varying the starting Alexa rank of
+monitored sites.}
+\label{fig:wfdns:alexa}
 \end{figure}
 
-% impact of:
-% - fixing Tor TTL bug,
-% - different min/max TTLs
+The above results paint a bleak picture: a small fraction of exit
+bandwidth provides a perfectly precise attack on relatively
+\emph{unpopular} sites such as \url{wikileaks.org} at Alexa rank 10808.
+To better understand the limitations of our attacks, we focus on precision
+and
+
+% window = 1800
+% size = 10
+% wf
+% distributions
+
 
 % limitation: webSITES, not wePAGES in our analysis + what we get from DNS.

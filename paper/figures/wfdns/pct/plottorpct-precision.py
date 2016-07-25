@@ -40,7 +40,7 @@ if __name__ == '__main__':
     plt.ylabel('precision', labelpad=9.0, fontsize=22)
     plt.grid()
     plt.ylim(float(ymin), 1)
-    plt.legend(prop={'size':16}, loc=4, ncol=2)
+    plt.legend(prop={'size':16}, loc=4, ncol=3)
     fig.set_size_inches(6,5)
     plt.tight_layout()
 

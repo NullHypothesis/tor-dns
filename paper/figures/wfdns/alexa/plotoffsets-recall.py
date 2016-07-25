@@ -36,12 +36,14 @@ if __name__ == '__main__':
         plot(lengths, d[j], label=names[j], ls=next(linestyles),
          marker=next(markerstyles), markersize=10, lw=1)
 
-    plt.xlabel('pct of exit bandwidth', labelpad=7.0, fontsize=22)
-    plt.ylabel('recall', labelpad=9.0, fontsize=22)
+    plt.xlabel('monitored sites Alexa rank', labelpad=7.0, fontsize=16)
+    plt.ylabel('recall', labelpad=9.0, fontsize=16)
     plt.grid()
-    plt.ylim(float(ymin), 1)
-    plt.legend(prop={'size':16}, loc=2, ncol=3)
-    fig.set_size_inches(6,5)
+    plt.ylim(float(ymin), 0.7)
+    ax.set_xscale('log', basex=10)
+    plt.xticks([ pow(10,i) for i in range(0,9) ])
+    plt.legend(prop={'size':12}, loc=2, ncol=3)
+    fig.set_size_inches(5,4)
     plt.tight_layout()
 
     if output in ['--pdf','--png','--svg']:
