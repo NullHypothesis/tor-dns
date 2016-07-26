@@ -97,7 +97,33 @@ bandwidth provides a perfectly precise attack on relatively
 To better understand the implications and limitations of our attacks,
 from now on we focus on
 33\% of exit bandwith (as observed on average by Google) and
-precision (where we see clear gain from our attacks).
+precision (where we see clear gain from our attacks). Unless otherwise stated
+we monitor pages starting from Alexa $10^4$.
+
+\begin{figure*}[t]
+\centering
+\subfigure[Approximating the impact of website fingerprinting defenses.]{
+	\includegraphics[width=0.23\linewidth]{figures/wfdns/rounds/10x100+1k-a10k}
+    \label{fig:wfdns:var:rounds}
+}
+\subfigure[Increasing the window size due to TTL clipping at Alexa 10k and 100k.]{
+	\includegraphics[width=0.23\linewidth]{figures/wfdns/window/10x100+1k}
+    \label{fig:wfdns:var:window}
+}
+\subfigure[Scaling the Tor network wrt. site visits at Alexa 10k and 100k.]{
+	\includegraphics[width=0.23\linewidth]{figures/wfdns/scale/10x100+1k}
+    \label{fig:wfdns:var:scale}
+}
+\subfigure[Distributions \fixme{TODO}]{
+	\includegraphics[width=0.23\linewidth]{figures/wfdns/rounds/10x100+1k-a10k}
+    \label{fig:wfdns:var:dist}
+}
+\caption{The impact on the precision of our attacks when observing 33\% of Tor
+exit traffic (Google's average). The default weightlearning rounds are 2500,
+the window size is 60 seconds, the Tor network scale 1.0, and the distribution
+powerlaw with $\alpha=TODO$.}
+\label{fig:wfdns:var}
+\end{figure*}
 
 \subsubsection{Website fingerprinting defenses}
 Website fingerprinting defenses are being
@@ -107,22 +133,35 @@ increase in overhead the stronger the defense\footnote{e.g., Juarez et al.
 observe an exponentially growing bandwidth overhead for increasing protection
 with WTF-PAD~\cite{DBLP:journals/corr/JuarezIPDW15}.}.
 This leads to the goal of finding an optima with ``good enough''
-protection. As a first attempt to approximate the impact of fingerprinting
+protection and minimal overhead.
+As a first attempt to approximate the impact of fingerprinting
 defenses on WF+DNS attacks, we use Wa-kNN with
 random weights and no weightlearning: this significantly reduces the
 effectiveness of the attack since some features (like indices of outgoing
-packers) are several orders of magnitude more useful than others. 
+packers) are several orders of magnitude more useful than others.
+% rounds [0,3000]
+Figure~\ref{fig:wfdns:var:rounds}
+\fixme{'What if we got WF defenses deployed?'}
+% results, but WF+DNS much stronger than just WF, so implications for defense?
 
 \subsubsection{Tor's TTL clipping}
+% plot growing window size? [60, 1800]
+% alexa at 10k and 100k
+% table with TTLs needed again!
+Figure~\ref{fig:wfdns:var:window}
+\fixme{'What if we fixed TTL bug + set min TTL to what is now max TTL?'}
 
 \subsubsection{A larger Tor network}
+% plot growing tor network? [1, 10]
+% problem will not go away by itself
+Figure~\ref{fig:wfdns:var:scale}
+\fixme{'What if the Tor network got more traffic?'}
 
 \subsubsection{Website popularity distributions}
+% alexa offsets, all distributions and attacks
+Figure~\ref{fig:wfdns:var:dist}
+\fixme{'What if traffic in Tor is more evenly spread among websites?'}
 
-% window = 1800
-% size = 10
-% wf
-% distributions
 
 
 % limitation: webSITES, not wePAGES in our analysis + what we get from DNS.

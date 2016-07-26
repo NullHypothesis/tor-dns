@@ -1,0 +1,44 @@
+2016-07-26 15:45:40.238499421 +0200 CEST: wfdns for 10x100+1000 with alexa100000 window1260 r2500
+
+k2-ctw attack
+pct,recall,precision,f1score,fpr,accuracy
+33,0.297,0.924,0.444,0.030,0.641
+	tp31,fpp0,fnp1,fn69,tn99
+	tp25,fpp0,fnp0,fn75,tn100
+	tp44,fpp4,fnp1,fn52,tn99
+	tp36,fpp1,fnp1,fn63,tn99
+	tp31,fpp5,fnp2,fn64,tn98
+	tp22,fpp0,fnp0,fn78,tn100
+	tp25,fpp0,fnp0,fn75,tn100
+	tp22,fpp0,fnp0,fn78,tn100
+	tp30,fpp0,fnp5,fn70,tn95
+	tp31,fpp6,fnp4,fn63,tn96
+
+k2-hp attack
+pct,recall,precision,f1score,fpr,accuracy
+33,0.271,0.959,0.418,0.013,0.629
+	tp27,fpp0,fnp1,fn73,tn99
+	tp23,fpp0,fnp0,fn77,tn100
+	tp41,fpp0,fnp1,fn59,tn99
+	tp34,fpp0,fnp1,fn66,tn99
+	tp26,fpp1,fnp1,fn73,tn99
+	tp20,fpp0,fnp0,fn80,tn100
+	tp23,fpp0,fnp0,fn77,tn100
+	tp20,fpp0,fnp0,fn80,tn100
+	tp27,fpp0,fnp5,fn73,tn95
+	tp30,fpp0,fnp3,fn70,tn97
+
+k2-wf attack
+pct,recall,precision,f1score,fpr,accuracy
+33,0.710,0.830,0.765,0.146,0.795
+	tp73,fpp2,fnp14,fn25,tn86
+	tp75,fpp3,fnp12,fn22,tn88
+	tp75,fpp2,fnp7,fn23,tn93
+	tp74,fpp1,fnp9,fn25,tn91
+	tp71,fpp3,fnp15,fn26,tn85
+	tp73,fpp4,fnp16,fn23,tn84
+	tp69,fpp6,fnp9,fn25,tn91
+	tp69,fpp1,fnp10,fn30,tn90
+	tp67,fpp2,fnp16,fn31,tn84
+	tp64,fpp2,fnp12,fn34,tn88
+
