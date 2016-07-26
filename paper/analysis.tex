@@ -94,8 +94,30 @@ monitored sites.}
 The above results paint a bleak picture: a small fraction of exit
 bandwidth provides a perfectly precise attack on relatively
 \emph{unpopular} sites such as \url{wikileaks.org} at Alexa rank 10808.
-To better understand the limitations of our attacks, we focus on precision
-and 33\% of exit bandwith (as observed on average by Google).
+To better understand the implications and limitations of our attacks,
+from now on we focus on
+33\% of exit bandwith (as observed on average by Google) and
+precision (where we see clear gain from our attacks).
+
+\subsubsection{Website fingerprinting defenses}
+Website fingerprinting defenses are being
+designed and discussed for deployment in Tor.
+The defenses produce bandwidth and/or latency overhead with a significant
+increase in overhead the stronger the defense\footnote{e.g., Juarez et al.
+observe an exponentially growing bandwidth overhead for increasing protection
+with WTF-PAD~\cite{DBLP:journals/corr/JuarezIPDW15}.}.
+This leads to the goal of finding an optima with ``good enough''
+protection. As a first attempt to approximate the impact of fingerprinting
+defenses on WF+DNS attacks, we use Wa-kNN with
+random weights and no weightlearning: this significantly reduces the
+effectiveness of the attack since some features (like indices of outgoing
+packers) are several orders of magnitude more useful than others. 
+
+\subsubsection{Tor's TTL clipping}
+
+\subsubsection{A larger Tor network}
+
+\subsubsection{Website popularity distributions}
 
 % window = 1800
 % size = 10
