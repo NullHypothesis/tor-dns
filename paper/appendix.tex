@@ -1,0 +1,136 @@
+\appendix
+
+In the appendix, we provide details on how to replicate our results.  Each
+subsection discusses the replication of a specific experiment, providing both
+code and data necessary to replicate.
+
+\subsection{Replicating AS exposure of DNS}
+Here is how you can replicate the results of Subsection~\ref{sec:as-exposure}.
+First, obtain the Python 2 tool ddptr that we have developed for this
+measurement task:
+
+\begin{lstlisting}
+git clone https://github.com/NullHypothesis/ddptr.git
+\end{lstlisting}
+
+Next, you need two files to continue; \first a list of websites such as the
+AlexaTop 1,000~\cite{alexatop1k}, which you should save as top-1k.csv; \second a
+file ipasn.dat, which enables looking up AS numbers for given IP addresses.  The
+library pyasn documents how you can generate this file~\cite{pyasn}.  After
+having fetched top-1k.csv, ipasn.dat and ddptr.py, you are ready to run it as
+follows:
+
+\begin{lstlisting}
+sudo ./ddptr.py --fqdn-file top-1k.csv ipasn.dat 2>&1 | tee top-1k-ddptr.log
+\end{lstlisting}
+
+The resulting log files contains plenty of information, but only the lines
+``Exposure is \ldots'' are necessary to create Figure~\ref{fig:exposure}.  You
+can extract all exposure values from the log files by running:
+
+\begin{lstlisting}
+echo exposure > exposures.csv
+grep Exposure top-1k-ddptr.log | awk '{print $NF}' >> exposures.csv
+\end{lstlisting}
+
+The file exposures.csv then contains all exposure values, one per line,
+including a header line.  It is easy to take the file and plot it with a tool of
+your choice.
+
+\subsection{Replicating DNS resolver mapping}
+Here is how you can replicate the results of
+Subsection~\ref{sec:mapping-resolvers}.  First, you need to set up an
+authoritative DNS server for a domain that is under your control.  We set up
+a bind9 instance that was responsible for the zone *.tor.nymity.ch.  We
+configured bind9 to return the same IP address for any request under
+tor.nymity.ch.
+
+Next, you need the Python 2 exitmap scanner~\cite{exitmap}:
+
+\begin{lstlisting}
+git clone https://github.com/NullHypothesis/exitmap.git
+\end{lstlisting}
+
+We developed a special module for exitmap that is part of the following git
+repository.  You can clone it, and then copy the module to exitmap's modules
+directory as follows:
+
+\begin{lstlisting}
+git clone https://github.com/NullHypothesis/tor-dns-tools.git
+cp tor-dns-tools/exit-resolvers/dnsenum.py /path/to/exitmap/src/modules/
+\end{lstlisting}
+
+You are now ready to start the experiment.  On the machine running bind9, you
+have to run tcpdump to capture all DNS requests going to bind9:
+
+\begin{lstlisting}
+tcpdump -n "udp and port 53" -w dns-requests.pcap
+\end{lstlisting}
+
+Bind9 is now ready to serve DNS requests and tcpdump is capturing them to a
+file.  You can now run exitmap to generate the data:
+
+\begin{lstlisting}
+
+\end{lstlisting}
+
+We set up a cronjob to run exitmap automatically every six hours.  
+First, edit your crontab:
+\begin{lstlisting}
+crontab -u "$USER" -e
+\end{lstlisting}
+Then, add the following line to the crontab file:
+\begin{lstlisting}
+0 */6 * * * /path/to/exitmap -f /path/to/exitmaprc dnsenum
+\end{lstlisting}
+
+The file exitmaprc had the following content.  The key \texttt{first\_hop} is
+not necessary, but it makes scanning more reliable.  We set it to the
+fingerprint of a Tor relay under our control.
+\begin{lstlisting}
+[Defaults]
+first_hop = 9B94CD0B7B8057EAF21BA7F023B7A1C8CA9CE645
+build_delay = 0.5
+analysis_dir = /path/to/analysis_directory/
+tor_dir = /path/to/tor_directory/
+\end{lstlisting}
+
+Having set up cron, exitmap will now run periodically, and the data you need
+will be captured in the pcap file that is created on the machine running bind9.
+Once you are ready to analyze the data, the README file of the following GitHub
+repository discusses how you can turn the pcap file into visualizations:
+\url{https://github.com/NullHypothesis/tor-dns-tools/tree/master/exit-resolvers}.
+
+\subsection{Replicating number of DNS requests on exit relays}
+Because of the ethical issues of recording data on exit relays, we developed a
+patch for tshark that allows us to reduce the granularity of timestamps.  That
+way, we are able to record the number of DNS requests in a given time period
+without payload or further information.
+
+\begin{lstlisting}
+sudo ./tshark -n -f 'udp port 53' -T fields -e frame.time_epoch -Y 'dns.qry.type == 1 and dns.flags.response == 0'
+\end{lstlisting}
+
+\begin{lstlisting}
+diff -Naur wireshark-1.12.1.orig/epan/frame_data.c wireshark-1.12.1/epan/frame_data.c
+--- wireshark-1.12.1.orig/epan/frame_data.c     2014-09-16 18:09:03.000000000 +0200
++++ wireshark-1.12.1/epan/frame_data.c  2016-07-21 19:31:56.392000000 +0200
+@@ -310,8 +310,8 @@
+   fdata->flags.has_phdr_comment = (phdr->opt_comment != NULL);
+   fdata->flags.has_user_comment = 0;
+   fdata->color_filter = NULL;
+-  fdata->abs_ts.secs = phdr->ts.secs;
+-  fdata->abs_ts.nsecs = phdr->ts.nsecs;
++  fdata->abs_ts.secs = phdr->ts.secs - (phdr->ts.secs % 3600);
++  fdata->abs_ts.nsecs = 0;
+   fdata->shift_offset.secs = 0;
+   fdata->shift_offset.nsecs = 0;
+   fdata->frame_ref_num = 0;
+\end{lstlisting}
+
+\begin{lstlisting}
+patch -p0 < tshark-binned-timestamps.patch
+\end{lstlisting}
+
+The output of the command is coarse timestamps, one per line, of when tshark
+captured a DNS request.

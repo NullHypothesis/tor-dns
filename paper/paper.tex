@@ -12,9 +12,23 @@
 \usepackage{cite}            % For reasonably sorting citations.
 \usepackage{balance}         % Balance columns on last page.
 \usepackage{wasysym}         % For \Circle, ...
+\usepackage{listings}        % For source code listings.
 \usepackage[tight,footnotesize]{subfigure}
 
 \definecolor{darkblue}{rgb}{0,0,0.5}
+\definecolor{lightgray}{rgb}{0.93,0.93,0.93}
+
+\lstset{
+	backgroundcolor=\color{lightgray},
+	basicstyle=\footnotesize\ttfamily,
+	keepspaces=true,
+	breakatwhitespace=true,
+	breaklines=true,
+	numbers=left,
+	numbersep=3pt,
+	numberstyle=\scriptsize\color{gray},
+}
+
 \hypersetup{
 	pdftitle={Understanding the impact of DNS on Tor's anonymity},
 	pdfauthor={Anonymous},
@@ -82,6 +96,8 @@
 \input{conclusion}
 
 % \input{acknowledgements}
+
+\input{appendix}
 
 \balance
 \bibliographystyle{IEEEtranS}
