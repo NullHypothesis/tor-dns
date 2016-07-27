@@ -22,8 +22,8 @@ of section.}
 	\label{fig:attack-scenario}
 \end{figure}
 
-\begin{description}
-	\item[Ingress sniffing] An attacker must observe traffic that is entering
+\begin{itemize}
+    \item \emph{Ingress sniffing:} An attacker must observe traffic that is entering
 		the Tor network.  The attacker can operate on the network level, i.e.,
 		be a malicious ISP, or an intelligence agency.  In addition, the
 		attacker can operate on the relay level, i.e., run a malicious Tor guard
@@ -31,17 +31,17 @@ of section.}
 		data.  Therefore, packet meta information such as packet lengths and
 		directions serve as input to a website fingerprinting
 		attack~\cite{Panchenko2016a}.
-	\item[Egress sniffing] To observe both ends of the communication, an
+    \item \emph{Egress sniffing:} To observe both ends of the communication, an
 		attacker must also observe egress DNS traffic.  We expect the adversary
 		to operate on the network level, i.e., be on the path between exit relay
 		and a DNS server.  Alternatively, the attacker can run a malicious DNS
 		resolver or server.  Note that an attacker may also run an exit relay,
 		but in that case she might as well do classical end-to-end correlation.
-	\item[WF fingerprinting] We employ a website fingerprinting attack to
+    \item \emph{WF fingerprinting:} We employ a website fingerprinting attack to
 		determine if any of the recently observed DNS queries in egress traffic
 		could be part of the encrypted ingress traffic.  Note that the DNS query
 		itself does not tell us what \emph{page} a user is going to.
-\end{description}
+\end{itemize}
 
 \subsection{Simulating Tor-exits' DNS traffic}
 \label{sec:attack:sim}
