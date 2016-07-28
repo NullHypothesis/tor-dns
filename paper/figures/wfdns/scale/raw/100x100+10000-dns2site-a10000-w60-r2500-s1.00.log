@@ -1,0 +1,44 @@
+2016-07-26 20:52:11.31050912 +0200 CEST: wfdns for 100x100+10000 with a10000 w60 r2500 s1.00
+
+k2-ctw attack
+pct,recall,precision,f1score,fpr,accuracy
+33,0.255,0.909,0.397,0.028,0.624
+	tp231,fpp10,fnp8,fn759,tn992
+	tp252,fpp58,fnp4,fn690,tn996
+	tp245,fpp49,fnp17,fn706,tn983
+	tp278,fpp27,fnp6,fn695,tn994
+	tp269,fpp0,fnp0,fn731,tn1000
+	tp265,fpp3,fnp8,fn732,tn992
+	tp232,fpp2,fnp0,fn766,tn1000
+	tp265,fpp43,fnp8,fn692,tn992
+	tp244,fpp0,fnp0,fn756,tn1000
+	tp264,fpp14,fnp19,fn722,tn981
+
+k2-hp attack
+pct,recall,precision,f1score,fpr,accuracy
+33,0.218,0.983,0.357,0.004,0.608
+	tp199,fpp1,fnp5,fn800,tn995
+	tp223,fpp4,fnp0,fn773,tn1000
+	tp203,fpp4,fnp3,fn793,tn997
+	tp235,fpp3,fnp1,fn762,tn999
+	tp238,fpp0,fnp0,fn762,tn1000
+	tp231,fpp0,fnp8,fn769,tn992
+	tp197,fpp0,fnp0,fn803,tn1000
+	tp220,fpp0,fnp4,fn780,tn996
+	tp209,fpp0,fnp0,fn791,tn1000
+	tp225,fpp0,fnp6,fn775,tn994
+
+k2-wf attack
+pct,recall,precision,f1score,fpr,accuracy
+33,0.642,0.830,0.724,0.132,0.774
+	tp626,fpp35,fnp91,fn339,tn909
+	tp658,fpp38,fnp91,fn304,tn909
+	tp638,fpp37,fnp81,fn325,tn919
+	tp646,fpp48,fnp112,fn306,tn888
+	tp663,fpp35,fnp90,fn302,tn910
+	tp623,fpp34,fnp80,fn343,tn920
+	tp636,fpp53,fnp104,fn311,tn896
+	tp656,fpp21,fnp85,fn323,tn915
+	tp647,fpp42,fnp108,fn311,tn892
+	tp628,fpp41,fnp96,fn331,tn904
+
