@@ -131,7 +131,9 @@ relay maintains its own DNS cache\footnote{Around eventdns.c.  See the
 		code in src/or/dns.c.} and enforces a minimum TTL of 60 seconds
 and a maximum TTL of 30 minutes\footnote{See src/or/dns.c:278}.  We
 refer to this as Tor's \emph{TTL clipping}. Due to a
-bug\footnote{\url{https://trac.torproject.org/projects/tor/ticket/19025}}
+bug\footnote{We redacted the link to the bug report to anonymize our paper
+submission.}
+% \url{https://bugs.torproject.org/19025}}
 in Tor, the TTL of all DNS responses are set to 60 seconds.
 
 %\subsubsection{Sliding window approach to compensate for DNS caching}
