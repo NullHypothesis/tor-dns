@@ -50,7 +50,15 @@ percentage of exit bandwidth observed by the attacker (the percentage is an
 upper bound).
 Simply put, an attacker cannot identify a monitored site in the DNS data that
 she does not see. Note that \texttt{ctw} sees improved recall over \texttt{wf}
-at 100\% of exit bandwidth.
+at 100\% of exit bandwidth. For \texttt{hp} the results suggest that:
+
+\begin{equation}
+	\label{eq:hprecall}
+	\textnormal{recall}_{\texttt{hp}} = \textnormal{recall}_{\texttt{wf}} * \textnormal{pct}
+\end{equation}
+Note that the above relationship only holds when observing DNS requests gives
+a clear advantage to \texttt{hp} terms of precision over \texttt{wf} (see
+following paragraph).
 For precision our attacks have an imediate gain over \texttt{wf} as soon as
 the attacker can observe \emph{any exit bandwidth}.
 While the \texttt{hp} attack has constantly near-perfect precision, the
@@ -150,24 +158,53 @@ As a first attempt to approximate the impact of fingerprinting
 defenses on WF+DNS attacks, we use Wa-kNN with
 random weights and no weightlearning: this significantly reduces the
 effectiveness of the attack since some features (like indices of outgoing
-packers) are several orders of magnitude more useful than others.
-% rounds [0,3000]
-Figure~\ref{fig:wfdns:var:rounds}
-\fixme{'What if we got WF defenses deployed?'}
-% results, but WF+DNS much stronger than just WF, so implications for defense?
+packers) are several orders of magnitude more useful
+than others~\cite{DBLP:journals/corr/JuarezIPDW15}.
+Figure~\ref{fig:wfdns:var:rounds} shows the impact of doing between 0 and 3000
+rounds of weightlearning. At few to no rounds precision for the \texttt{wf}
+attack is below 50\%---the classification is more likely to be wrong than
+right---while there is no impact on the \texttt{hp} attack and a relatively
+small decrease for the \texttt{ctw} attack.
+For recall (not shown in the figure), note the bound and relationship in
+\ref{eq:hprecall}: for \texttt{wf} at 0 rounds the recall is 0.055 and for
+\texttt{hp} 0.019. This suggests that for WF defenses to
+be effective against WF+DNS attacks the defense must be tuned to provide a
+low recall even when the parameters of WF attacks are selected for high
+recall.
 
 \subsubsection{Tor's TTL clipping}
-% plot growing window size? [60, 1800]
-% alexa at 10k and 100k
-% table with TTLs needed again!
-Figure~\ref{fig:wfdns:var:window}
-\fixme{'What if we fixed TTL bug + set min TTL to what is now max TTL?'}
+As noted in Section~\ref{sec:attack:sim}, due to a bug in Tor the max TTL
+for DNS responses in an exit's cache is 60 seconds. As a consequence of this
+a sliding window of only the last 60 seconds of all observed DNS requests is
+enough to capture all visited monitored sites through Tor (subject to the
+fraction of observed Tor exit bandwidth, and mapping DNS requests to sites).
+Assume that the bug is fixed and the attacker keeps a window length equal
+to the max TTL of all unique domains she found for her monitored sites.
+Figure~\ref{fig:wfdns:var:window} shows the impact on precision for different
+window sizes from 60 seconds to 30 minutes (Tor's MAX\_DNS\_ENTRY\_AGE
+for keeping entries in an exit's cache) and for Alexa starting rank $10^4$ and
+$10^5$. For \texttt{ctw}, the window size has a significant impact at both
+Alexa starting ranks, while \texttt{hp} is only significantly impacted at
+Alexa starting rank $10^4$: at higher ranks the DNS data still has a high
+enough probability to give an advantage to the attacker despite the large
+window size.
+
+Recall that Table~\ref{tab:ttls} on page~\pageref{tab:ttls} shows statistics on
+the minimum TTL of each site's unique domains. Our data shows that at least
+half of the sites on Alexa top one million has a unique domain with a TTL of
+60 seconds or below.
+In fact, 48\% of the raw unique TTLs are below 60 seconds and only
+26\% above 30 minutes. Fixing the Tor clipping bug is therefore not enough on
+its own: to mitigate WF+DNS attacks the minimum TTL should be significantly
+increased.
 
 \subsubsection{A larger Tor network}
-% plot growing tor network? [1, 10]
-% problem will not go away by itself
-Figure~\ref{fig:wfdns:var:scale}
-\fixme{'What if the Tor network got more traffic?'}
+Figure~\ref{fig:wfdns:var:scale} scales the size of the Tor network wrt. site
+visits from as-is to ten-times its size for Alexa starting rank $10^4$ and
+$10^5$. At twice its current size, the impact on WF+DNS attacks is smaller than
+increasing the minumum TTL for DNS caching to 180 seconds as shown in
+Figure~\ref{fig:wfdns:var:window}. Clearly, WF+DNS attacks will not become
+impractical for impopular sites as the network grows. 
 
 \subsubsection{Website popularity distributions}
 % alexa offsets, all distributions and attacks
