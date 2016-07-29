@@ -3,8 +3,20 @@
 
 \subsection{Ethical considerations}
 \label{sec:ethics}
-\fixme{Mention that our IRB determined us to be exempt for the DNS experiment.}
-\cite{ethics-guidelines}
+Section~\ref{sec:load-freq} discusses how we set up an exit relay to determine
+the number of DNS requests per five minute interval.  Since our exit relay was
+forwarding traffic of Tor users, we contacted our university's institutional
+review board (IRB) before running the experiment.  Our IRB ruled that its
+approval is not applicable because the limited data we wanted to collect did not
+fall under human subjects research.  In addition to contacting our IRB, we
+adhered to The Tor Project's ethics guidelines~\cite{ethics-guidelines}.  In
+particular, \first we ensured that we only collected data that is safe to
+publish, \second we only collected data we needed, and \third we limited the
+granularity of the data to minimize the likelihood of reidentification.  We deem
+the risk to Tor users negligible.  As for the benefits, by conducting this
+experiment, we can improve our understanding of the risks that Tor users face
+and work towards mitigation methods.  In summary, we believe that the benefits
+of our experiment outweigh the risks.
 
 \subsection{Mitigation}
 We now discuss ways to mitigate the issues our work raised.  We distinguish
