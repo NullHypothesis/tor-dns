@@ -84,24 +84,41 @@ our results later on.
 
 \subsubsection{Page load frequency}
 % phw's numbers extrapolated
-Second, we determine \emph{how many websites} are visited by Tor users in a
-certain time span. We use (less intrusive) statistics on the number of
-outgoing DNS requests collected on a Tor exit relay under our control
-and interpolate these numbers to all Tor exit relays based on the
-published bandwidth statistics of all Tor exit relays\footnote{We found
-		our exit relay \texttt{746BE73579F274AFEFA5E12C4ADACD53784D0762}
-		to have on average 119.3 outgoing DNS requests per 5 minutes
-		during a two week period, which corresponds to about 1.583 page
-		visits per minute (taking caching into account and assuming a
-		powerlaw distribution of site popularity as described above).
-		The exit was configured to only allow port 80 and 443 during the
-		time of the measurements to avoid counting DNS requests from
-		other protocols than HTTP and HTTPS. We then used the
-		self-reported bandwidth information from Tor exit relays
-		collected in the ``extra-info'' descriptors available on
-		\url{https://collector.torproject.org/} to estimate the number
-		of page loads on each of the about 1200 exit relays active at
-		that time.}.
+Second, we determined how many websites Tor users visit in a certain time span.
+We approximated this number by seting up an exit relay whose exit policy
+included only ports 80 and 443, so our relay would only forward web traffic.  We
+then used tshark to capture the timestamps of DNS requests---but no DNS
+responses.  We made sure that our tshark filter did not capture packet payloads
+or headers, so we were unable to learn what websites Tor users were visiting.
+In addition, we patched tshark so it would log timestamps at a granularity of
+five minutes.  Given the limited granularity, we feel safe to publish this
+dataset.  For an ethical discussion of this experiment, refer to
+Section~\ref{sec:ethics}.  We ran the experiment for approximately two weeks
+from May 15, 2016 to May 31, 2016, which allowed us to determine the number of
+DNS requests for 4,832 five minute intervals.  The time series is illustrated in
+Figure~\ref{fig:dns-reqs}.
+
+\begin{figure}[t]
+	\centering
+	\includegraphics[width=\linewidth]{figures/dns-reqs.pdf}
+	\caption{The number of DNS requests per five minute intervals on our
+	exit relay.  Using a privacy-preserving measurement method, we only
+	determined approximate timestamps and no content.  The red line at $y = 105$
+	illustrates the median of the distribution.}
+	\label{fig:dns-reqs}
+\end{figure}
+
+We then interpolate these numbers to all Tor exit relays based on the published
+bandwidth statistics of all Tor exit relays. We found our exit relay to have on
+average 119.3 outgoing DNS requests per 5 minutes during a two week period,
+which corresponds to about 1.583 page visits per minute (taking caching into
+account and assuming a powerlaw distribution of site popularity as described
+above).  The exit was configured to only allow port 80 and 443 during the time
+of the measurements to avoid counting DNS requests from other protocols than
+HTTP and HTTPS. We then used the self-reported bandwidth information from Tor
+exit relays collected in the ``extra-info'' descriptors available on
+CollecTor~\cite{collector} to estimate the number of page loads on each of the
+about 1,200 exit relays active at that time.
 
 \subsubsection{DNS caching}
 % exit caching only (limitation: client-side caching negligible?)
