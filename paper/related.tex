@@ -47,7 +47,7 @@ automate our method and achieve previously unprecedented scale.
 
 \paragraph{Website fingerprinting}
 In 2009, Hermann \ea~\cite{Hermann2009a} demonstrated the first website
-fingerprinting attack against anonymity systems---including Tor---in a
+fingerprinting (WF) attack against anonymity systems---including Tor---in a
 closed-world setting.  In 2011, Panchenko et al.~\cite{Panchenko2011a} greatly
 improved on Hermann \ea's detection rate and provided insight into an open-world
 setting.  In 2012, Cai et al.~\cite{Cai2012a} improved on prior work by
@@ -62,17 +62,31 @@ Cai \ea~\cite{Cai2014b}
 analyzed what traffic features provide the most predictive power to detect
 websites, proved a lower bound of any defense that achieves a certain level of
 security, and provided a framework to investigate the performance of
-fingerprinting attacks.  Juarez~\cite{Juarez2014a} critically evaluated past
-fingerprinting attacks, showing that they all made numerous simplifying
-assumptions.  The authors suggest that fingerprinting attacks are still
+WF attacks.  Juarez~\cite{Juarez2014a} critically evaluated past
+attacks, showing that they all made numerous simplifying
+assumptions.  The authors suggest that attacks are still
 difficult to run outside a lab setting as an attacker will have to consider
-operating system differences, page changes, and background traffic.  Most
-recently in 2016, Panchenko et al.~\cite{Panchenko2016a} showed that
-web\emph{page} fingerprinting (\ie, fingerprinting of any page on a site) lacks
-precision in the open world while web\emph{site} fingerprinting (\ie,
-fingerprinting of only the start page of a site) remains practical.
+operating system differences, page changes, and background traffic.
 
-We show how to augment any website fingerprinting attack with information from
-observed DNS requests. Our two proposed attacks use Wa-kNN and greatly improves
-precision for web\emph{site} fingerprinting. 
-\fixme{work in WF defenses}
+Recently, in 2016, Wang and Goldberg addressed a number of practical
+roadblocks such as noisy data and maintaining a training set,
+further highlighting the need for WF defenses in Tor~\cite{taoianreally}.
+Panchenko et al.~\cite{Panchenko2016a} showed that
+web\emph{page} fingerprinting (\ie, fingerprinting of any page on a site) is
+significantly harder than web\emph{site} fingerprinting (\ie,
+fingerprinting of only the start page of a site).
+Hayes and Danezis proposed k-fingerprinting, an attack with
+notably better performance than Wa-kNN even in the face of
+WF defenses \cite{kfingerprinting}. Their attack retains 30\% accuracy in a
+closed-world setting against the WTF-PAD defense by
+Juarez et al.~\cite{DBLP:journals/corr/JuarezIPDW15}---a prime candidate for
+deployment in Tor\footnote{\url{https://gitweb.torproject.org/torspec.git/tree/proposals/254-padding-negotiation.txt}}---at
+the cost of 50\% bandwidth overhead.
+
+We show how to correlate and use observed DNS requests with WF attacks,
+resulting in WF+DNS attacks, greatly
+improving precision for web\emph{site} fingerprinting.
+Our two proposed WF+DNS attacks have implications for the design of WF defenses:
+to mitigate WF+DNS attacks open-world evaluations of the WF defense should
+minimise recall even when the WF attack is tuned to sacrifice precision for
+recall.

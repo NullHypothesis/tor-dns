@@ -9,10 +9,13 @@ their size. We collected 100 samples of Alexa top 1k and one sample each of
 Alexa top (1k,101k]. The order of site and sample collection was randomly
 distributed to a Docker fleet, where each sample used a fresh circuit without
 guards and a fresh copy of TBB\footnote{The consensus was cached to not
-cause an excessive load on the network.} for up to 60 seconds. We considered
-a sample collected if we managed to resolve the domain of the site
+cause an excessive load on the network.} for up to 60 seconds,
+in line with the recommendations by Wang and Goldberg~\cite{Wang2013a}.
+We considered a sample collected if we managed to resolve the domain of the site
 and did not prune our dataset further, neglecting issues like CloudFlare
-CAPTCHAs and outliers~\cite{Juarez2014a}.
+CAPTCHAs, outliers and localized domains~\cite{Juarez2014a}. This may result
+in worse results for all attacks~\cite{Wang2013a}, but we are primarily
+interested in showing a difference between the WF attack and WF+DNS attacks.
 
 We perform 10-fold cross-validation for all of our experiments in the open
 world setting, monitoring 1000 sites with 100 instances each and
