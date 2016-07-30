@@ -1,0 +1,44 @@
+2016-07-30 17:16:40.576558723 +0200 CEST: wfdns for 10x100+1000 with a10 w60 r2500 s1.00
+
+k2-ctw attack
+pct,recall,precision,f1score,fpr,accuracy
+33,0.265,1.000,0.415,0.000,0.633
+	tp30,fpp0,fnp0,fn70,tn100
+	tp25,fpp0,fnp0,fn75,tn100
+	tp17,fpp0,fnp0,fn83,tn100
+	tp25,fpp0,fnp0,fn75,tn100
+	tp26,fpp0,fnp0,fn74,tn100
+	tp28,fpp0,fnp0,fn72,tn100
+	tp17,fpp0,fnp0,fn83,tn100
+	tp39,fpp0,fnp0,fn61,tn100
+	tp30,fpp0,fnp0,fn70,tn100
+	tp28,fpp0,fnp0,fn72,tn100
+
+k2-hp attack
+pct,recall,precision,f1score,fpr,accuracy
+33,0.253,1.000,0.401,0.000,0.627
+	tp29,fpp0,fnp0,fn71,tn100
+	tp24,fpp0,fnp0,fn76,tn100
+	tp17,fpp0,fnp0,fn83,tn100
+	tp25,fpp0,fnp0,fn75,tn100
+	tp24,fpp0,fnp0,fn76,tn100
+	tp27,fpp0,fnp0,fn73,tn100
+	tp15,fpp0,fnp0,fn85,tn100
+	tp34,fpp0,fnp0,fn66,tn100
+	tp30,fpp0,fnp0,fn70,tn100
+	tp28,fpp0,fnp0,fn72,tn100
+
+k2-wf attack
+pct,recall,precision,f1score,fpr,accuracy
+33,0.771,0.877,0.820,0.109,0.839
+	tp80,fpp1,fnp9,fn19,tn91
+	tp78,fpp2,fnp7,fn20,tn93
+	tp75,fpp1,fnp7,fn24,tn93
+	tp75,fpp0,fnp9,fn25,tn91
+	tp78,fpp4,fnp13,fn18,tn87
+	tp80,fpp1,fnp11,fn19,tn89
+	tp71,fpp1,fnp9,fn28,tn91
+	tp77,fpp2,fnp4,fn21,tn96
+	tp81,fpp2,fnp12,fn17,tn88
+	tp76,fpp1,fnp13,fn23,tn87
+

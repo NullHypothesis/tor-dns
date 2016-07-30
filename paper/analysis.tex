@@ -1,9 +1,7 @@
-\section{Analysis}
+\section{The impact of WF+DNS attacks}
 \label{sec:analysis}
-
-\subsection{WF+DNS attacks}
-To evaluate out WF+DNS attacks we collected a dataset in May 2016 using TBB
-5.5.4.
+To evaluate out WF+DNS attacks we collected a dataset of traffic traces in May
+2016 using TBB 5.5.4.
 TBB was modified to not generate network traffic on launch (check for
 updates, extensions etc) and
 tor (bundled with TBB) to log incoming and outgoing cells together with
@@ -134,18 +132,18 @@ we monitor pages starting from Alexa $10^4$.
 	\includegraphics[width=0.23\linewidth]{figures/wfdns/scale/100x100+10k}
     \label{fig:wfdns:var:scale}
 }
-\subfigure[Distributions \fixme{TODO}]{
-	\includegraphics[width=0.23\linewidth]{figures/wfdns/rounds/100x100+10k}
+\subfigure[The impact of different website popularity distributions.]{
+	\includegraphics[width=0.23\linewidth]{figures/wfdns/dist/10x100+1k}
     \label{fig:wfdns:var:dist}
 }
 \caption{The impact on the precision of our attacks when observing 33\% of Tor
-exit traffic (Google's average). The default weightlearning rounds are 2500,
-the window size is 60 seconds, the Tor network scale 1.0, and the distribution
-powerlaw with $\alpha=TODO$.}
+exit traffic (Google's average). The defaults are: 2500 weightlearning rounds,
+60 seconds window size, Tor network scale 1.0, and the conservative
+powerlaw distribution (pc) with $\alpha=1.13487087527372$.}
 \label{fig:wfdns:var}
 \end{figure*}
 
-\subsubsection{Website fingerprinting defenses}
+\subsection{Website fingerprinting defenses}
 Website fingerprinting defenses are being
 designed and discussed for deployment in Tor.
 The defenses produce bandwidth and/or latency overhead with a significant
@@ -172,7 +170,7 @@ be effective against WF+DNS attacks the defense must be tuned to provide a
 low recall even when the parameters of WF attacks are selected for high
 recall.
 
-\subsubsection{Tor's TTL clipping}
+\subsection{Tor's TTL clipping}
 As noted in Section~\ref{sec:attack:sim}, due to a bug in Tor the max TTL
 for DNS responses in an exit's cache is 60 seconds. As a consequence of this
 a sliding window of only the last 60 seconds of all observed DNS requests is
@@ -198,19 +196,44 @@ In fact, 48\% of the raw unique TTLs are below 60 seconds and only
 its own: to mitigate WF+DNS attacks the minimum TTL should be significantly
 increased.
 
-\subsubsection{A larger Tor network}
+\subsection{A larger Tor network}
 Figure~\ref{fig:wfdns:var:scale} scales the size of the Tor network wrt. site
 visits from as-is to ten-times its size for Alexa starting rank $10^4$ and
 $10^5$. At twice its current size, the impact on WF+DNS attacks is smaller than
 increasing the minumum TTL for DNS caching to 180 seconds as shown in
 Figure~\ref{fig:wfdns:var:window}. Clearly, WF+DNS attacks will not become
-impractical for impopular sites as the network grows. 
+impractical for impopular sites as the network grows.
 
-\subsubsection{Website popularity distributions}
+\subsection{Website popularity distributions}
 % alexa offsets, all distributions and attacks
-Figure~\ref{fig:wfdns:var:dist}
-\fixme{'What if traffic in Tor is more evenly spread among websites?'}
-
-
+If we assume that our estimate for the number of sites visited through the Tor
+network, as described in Section~\ref{sec:load-freq}, is roughly correct
+(and we know from Figure~\ref{fig:wfdns:var:scale} that the impact of an error
+is relatively minor) then one imporant consideration is how
+these site visits are distributed. We define four distributions:
+\begin{description}
+	\item[pc] A conservative powerlaw distribution
+	(with $\alpha=1.13487087527372$)
+	that we manually fitted to the Alexa top 10k data,
+	slightly underrepresenting the popularity of top Alexa sites.
+	This distribution was described in Section~\ref{sec:attack:pop}.
+	\item[pr] A realistic powerlaw distribution
+	(with $\alpha=1.98331802607295$)
+	that is the best fit according to
+	the python powerlaw library by Alstott~et al.~\cite{powerlaw} for the Alexa
+	top 10k data.
+	\item[uc] A conservative uniformly random distribution that for some reason
+	only considers one million active websites on the Internet.
+	\item[ur] A realistic uniformly random distribution that considers 173 million active websites, as reported by Netcraft in July 2016.
+\end{description}
+Figure~\ref{fig:wfdns:var:dist} shows the impact on the precision of the
+\texttt{hp} attack for the different distributions as we vary the starting
+Alexa rank. The uniform distributions always have perfect precision.
+The difference between the two powerlaw distributions is about one order of
+magnitude in terms of starting Alexa rank: the realistic distribution gets
+near perfect at $10^3$ and the conservative at $10^4$.
+We conclude that WF+DNS attacks are perfectly precise for unpopular sites
+where the probability that someone else than the target browses to a monitored
+site within the timeframe given by the window length is negligible.
 
 % limitation: webSITES, not wePAGES in our analysis + what we get from DNS.
