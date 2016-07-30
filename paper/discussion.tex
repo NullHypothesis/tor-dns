@@ -83,13 +83,16 @@ leakage, e.g., by configuring QNAME minimization~\cite{qname-minimization}.
 Besides making recommendations to exit relay operators, we can remotely
 influence the cache of each exit relay's resolver.  For example, using exitmap,
 we can resolve the domain sensitive.org over each exit relay continuously, right
-before its TTL is about to expire.  That way, once a Tor user connects to
-sensitive.org, the exit relay can serve the DNS request from its cache instead
-of exposing it to third parties.  Clearly, this approach does not scale, but it
+before its TTL is about to expire.  That way an attacker gains no advantage from
+observing DNS since sensitive.org is always in every exits' cache.
+Clearly, this approach does not scale, but it
 allows us to eliminate DNS-based correlation attacks for a select number of
 sites.
 
-\fixme{WF+DNS: fix bug + increase min TTL for the DNS cache at exits.}
+Tor can fix the Tor clipping bug and consider significantly increasing the
+minimum TTL for the DNS cache at exits to make WF+DNS attacks less precise.
+This requires finding the longest acceptable TTL that does not have a
+notable negative impact on functionality.
 
 \subsubsection{Long-term solutions}
 \label{sec:long-term}
@@ -103,5 +106,8 @@ set up \url{facebookcorewwwi.onion} as an alternative front-end.  When
 connecting to the onion service, Tor users never leave the Tor network, and
 hence no not need DNS.
 
-\fixme{WF defense strong enough to kill recall of agressive WF attacks, since
-WF+DNS gives high precision.}
+While growing the Tor network will have a minor impact on protecting against
+WF+DNS attacks, the most important change is to deploy a WF defense. The
+WF defense should be tuned to significantly reduce the recall of WF attacks,
+even when the WF attack is configured to sacrifice precision for recall, since
+WF+DNS attacks significantly increase precision.
