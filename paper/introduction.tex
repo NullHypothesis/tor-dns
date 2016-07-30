@@ -51,11 +51,11 @@ resolution for the Alexa Top 1,000 domains, which reveals that the DNS
 resolution process for half of these domains traverses numerous autonomous
 systems that are not traversed for the subsequent HTTP connection to the web
 site.  Armed with a better understanding of DNS's role in Tor, we show how to
-augment existing website fingerprinting attacks with DNS, yielding improved
-results.  \fixme{We don't create a new WF attack, we show how to use one when
-the attacker can also observe DNS.}  We evaluate our website fingerprinting
-attack, and finally investigate its Internet-scale impact using the TorPS
-simulator~\cite{TorPS}.  By employing a novel method to run traceroutes from
+augment existing website fingerprinting (WF) attacks with observed DNS requests,
+yielding perfectly precise WF+DNS attacks for unpopular websites.
+Finally we investigate the impact of our WF+DNS attacks at Internet-scale
+with the help of the TorPS simulator~\cite{TorPS}.
+By employing a novel method to run traceroutes from
 exit relays, we believe our results to be significantly more accurate and
 comprehensive than previous work.
 
@@ -81,13 +81,12 @@ contributions:
 		network-level adversaries.  Our results show that for numerous popular
 		websites, 70\% of all traversed ASs are only visited for DNS requests.
 
-	\item We show how existing website fingerprinting attacks can be improved by
-		augmenting them with DNS requests observed by a network-level adversary,
-		turning the complex open world scenario into a smaller problem.
-		\fixme{Rephrase.}
+	\item We show how existing WF attacks can be combined with observed DNS
+	requests by a network-level adversary to yield perfectly precise
+	WF+DNS attacks for unpopular websites. 
 
 	\item We develop a new measurement method to evaluate the threat of
-		network-level adversaries.  We employ the RIPE Atlas~\cite{atlas}
+		network-level adversaries. We employ the RIPE Atlas~\cite{atlas}
 		platform to achieve previously unprecedented path coverage and accuracy.
 \end{itemize}
 
