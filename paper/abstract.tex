@@ -9,15 +9,18 @@ In this work, we explore the impact of DNS on Tor users' anonymity.
 Specifically, we investigate if DNS can improve existing attacks, and how much
 information it leaks to third parties.  To this end, we \first develop a novel
 method to identify the DNS resolvers of Tor exit relays, we \second show how
-existing website fingerprinting attacks can be improved by augmenting them with
-DNS requests, we \third analyze the Internet-scale impact of our attack on Tor
+existing website fingerprinting (WF) attacks can be improved by observing DNS
+requests, we \third analyze the Internet-scale impact of our attack on Tor
 users, and we \fourth present an improved method to evaluate correlation
 attacks.
 %
 Our results show that Google's DNS resolver observes almost 40\% of all DNS
-requests exiting the Tor network.  Furthermore, DNS requests often transit ASs
+requests exiting the Tor network. Furthermore, DNS requests often transit ASs
 that subsequent TCP streams do not transit, enabling additional organizations to
-snoop on Tor traffic.  \fixme{Add insights about WF attack and TorPS
-simulations.}  Finally, some of our findings generalize to other anonymity
-networks.
+snoop on Tor traffic.
+By correlating the output of WF
+attacks with observed DNS requests, WF+DNS attacks are perfectly precise for
+unpopular websites, further motivating the introduction of WF defenses in Tor.
+\fixme{Add insights about TorPS simulations.}
+Finally, some of our findings generalize to other anonymity networks.
 \end{abstract}
