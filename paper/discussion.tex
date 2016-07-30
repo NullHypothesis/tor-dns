@@ -89,6 +89,8 @@ of exposing it to third parties.  Clearly, this approach does not scale, but it
 allows us to eliminate DNS-based correlation attacks for a select number of
 sites.
 
+\fixme{WF+DNS: fix bug + increase min TTL for the DNS cache at exits.}
+
 \subsubsection{Long-term solutions}
 \label{sec:long-term}
 Practical defenses are on the horizon.  Zhu et al.~\cite{Zhu2015a} proposed
@@ -100,3 +102,6 @@ safety should offer an onion service as an alternative.  Facebook, for example,
 set up \url{facebookcorewwwi.onion} as an alternative front-end.  When
 connecting to the onion service, Tor users never leave the Tor network, and
 hence no not need DNS.
+
+\fixme{WF defense strong enough to kill recall of agressive WF attacks, since
+WF+DNS gives high precision.}
