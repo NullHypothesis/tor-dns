@@ -32,8 +32,9 @@ site (positive test outcome) is the correct one. Consider a classifier with
 0.25 recall and 0.5 precision: on average, every fourth visit by the user to
 a monitored site will be detected, and half of the classifications by the
 classifier will be wrong. Often, when a classifier is wrong,
-it is due to either classifying a monitored site as unmonitored or vice versa.
-Mistaking one monitored site for another is less likely.
+it is due to either classifying a monitored site as unmonitored (lowering
+recall) or vice versa (lowering precision).
+Mistaking one monitored site for another is less likely~\cite{WangThesis}.
 
 Tor---and any other anonymity network---could eliminate WF
 attacks by employing encrypted, constant-rate channels between a Tor client and
@@ -72,8 +73,12 @@ destination.  The \texttt{RELAY\_RESOLVE} cell supports pure name resolution,
 without establishing a subsequent TCP connection~\cite[\S~6.4]{tor-spec}.  The
 exit relay responds with a \texttt{RELAY\_RESOLVED} cell.
 
-As of December 2015, both exit relays and Tor clients maintain a caching layer
-around the DNS resolution code to speed up repeated lookups.  Exit relays send
+As of December 2015, exit relays maintain a caching layer
+around the DNS resolution code to speed up repeated lookups.
+The caching layer for Tor clients is off by default to prevent tracking attacks
+due to modified DNS
+responses\footnote{\url{https://gitweb.torproject.org/torspec.git/tree/proposals/205-local-dnscache.txt}}. 
+Exit relays send
 their DNS requests to the system resolver, which Linux systems read from
 \texttt{/etc/resolv.conf}.  The system resolver is not modified by Tor, and
 contains whatever the exit relay operator configured, e.g., the ISP's resolver,
