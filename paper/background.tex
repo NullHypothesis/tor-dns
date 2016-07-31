@@ -10,16 +10,32 @@ provider (ISP) are not able to read any packet content.  However, Tor does not
 protect meta information such as packet inter-arrival timing, frequency, and
 length.  Exploiting these properties, the ISP can use a classifier to guess what
 sites the user is visiting.  The literature calls this attack \emph{website
-fingerprinting}.  Past work evaluated website fingerprinting attacks in either a
-closed work or an open world setting.  A closed world setting consists of a set
-of $n$ known websites, and the attackers tries to learn which among all $n$
-sites the user is visiting.  If $n$ is small, an attacker can train a classifier
-on all websites, rendering website fingerprinting a simple classification
-problem.  The open world setting is more realistic, with $n$ being the number of
-all websites on the Internet, making it much harder to train a classifier on all
-possible sites. \fixme{todo: base rate and refactor}
+fingerprinting}.  Past work evaluated website fingerprinting (WF) attacks in
+either a closed work or an open world setting.
+A closed world setting consists of a set
+of $n$ \emph{monitored} websites, and the attackers tries to learn which among
+all $n$ sites the user is visiting with the notable restriction that the user
+can only browse to one of the $n$ websites.
 
-Tor---and any other anonymity network---could eliminate website fingerprinting
+The open world setting is more realistic: the user can browse to
+\emph{unmonitored} sites in addition to the monitored sites. Unmonitored sites
+are, per definition, not known the attacker and consequently the attacker's
+classifier cannot train on unmonitored sites the user visits. Note that the
+attacker classifier can train on whatever number of unmonitored sites it wants,
+as long as during testing of the classifier the classifier has not trained on
+an unmonitored site being tested. Two relevant metrics for WF attacks in the
+open-world setting are recall and precision.
+Recall measures the probability that a visit to a monitored
+page will be detected, while precision measures the probability
+that a classification by the classifier of a visit to a monitored
+site (positive test outcome) is the correct one. Consider a classifier with
+0.25 recall and 0.5 precision: on average, every fourth visit by the user to
+a monitored site will be detected, and half of the classifications by the
+classifier will be wrong. Often, when a classifier is wrong,
+it is due to either classifying a monitored site as unmonitored or vice versa.
+Mistaking one monitored site for another is less likely.
+
+Tor---and any other anonymity network---could eliminate WF
 attacks by employing encrypted, constant-rate channels between a Tor client and
 its guard.  Unfortunately, the Tor network's limited spare capacity does not
 allow for such an expensive defense, but some research has worked on making it
