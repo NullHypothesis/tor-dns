@@ -267,7 +267,10 @@ done
 # different distributions
 for i in conpl realpl conuni realuni
 do
-  wfdns -sites 1000 -instances 100 -open 100000 -pmin 33 -pmax 33 -alexa 10000 -simdist $i
+  for j in 0 10 100 1000 10000 100000 1000000 10000000 100000000
+  do
+    wfdns -sites 1000 -instances 100 -open 100000 -pmin 33 -pmax 33 -simdist $i -alexa $j
+  done
 done
 \end{lstlisting}
 
