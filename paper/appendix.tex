@@ -199,9 +199,78 @@ For the open world metrics, run:
 dns2site -sites 500000 -instances 5
 \end{lstlisting}
 
-Without the -open parameter, dns2site tool determines a reasonable
+Without the \texttt{-open} parameter, the dns2site tool determines a reasonable
 open world size based on our conservative powerlaw distribution,
-which should be around 369,000. 
+which should be around 369,000.
 
 \subsection{Replicating WF+DNS attacks}
-\fixme{TODO}
+This is how you replicate the WF+DNS results figures from
+Section~\ref{sec:analysis}.
+First download and extract the traffic traces from our
+1,000x100+100,000 WF dataset:
+
+\begin{lstlisting}
+wget FIXME/alexa1kx100+100k-extracted.tar.gz
+tar -zxf alexa1kx100+100k-extracted.tar.gz
+\end{lstlisting}
+
+Get and install our wfdns tool using Go:
+
+\begin{lstlisting}
+go get github.com/pylls/wfdns
+\end{lstlisting}
+
+To generate data for Figure~\ref{fig:wfdns:torpct}, run:
+
+\begin{lstlisting}
+wfdns -sites 1000 -instances 100 -open 100000 -pmin 0 -pmax 100 -pstep 5 -alexa 10000
+\end{lstlisting}
+
+The result is written to stdout and three files: one CSV file for precision,
+one CSV file for recall, and a log of all output. All filenames capture relevant
+parameters and are only created upon experiment completion.
+
+To generate data for Figure~\ref{fig:wfdns:alexa}, run as a shellscript:
+
+\begin{lstlisting}
+for i in 0 10 100 1000 10000 100000 1000000 10000000 100000000
+do
+  wfdns -sites 1000 -instances 100 -open 100000 -pmin 100 -alexa $i
+done
+\end{lstlisting}
+
+Manual assembly of the CSV files needed. For Figure~\ref{fig:wfdns:var} run
+as a shellscript:
+
+\begin{lstlisting}
+# rounds
+for i in 0 300 600 900 1200 1500 1800 2100 2400 2700 3000
+do
+  wfdns -sites 1000 -instances 100 -open 100000 -pmin 33 -pmax 33 -alexa 10000 -r $i
+done
+# window size
+for i in 90 180 360 540 720 900 1080 1260 1440 1620 1800
+do
+  for j in 10000 100000
+  do
+  wfdns -sites 1000 -instances 100 -open 100000 -pmin 33 -pmax 33 -window $i -alexa $j
+  done
+done
+# Tor network scale
+for i in 1.0 2.0 3.0 4.0 5.0 6.0 7.0 8.0 9.0 10.0
+do
+  for j in 10000 100000
+  do
+  wfdns -sites 1000 -instances 100 -open 100000 -pmin 33 -pmax 33 -scaletor $i -alexa $j
+  done
+done
+# different distributions
+for i in conpl realpl conuni realuni
+do
+  wfdns -sites 1000 -instances 100 -open 100000 -pmin 33 -pmax 33 -alexa 10000 -simdist $i
+done
+\end{lstlisting}
+
+Manual assembly of the CSV files needed.
+Note that generating the figures takes \emph{days} on modern
+hardware: we spent well over a CPU core year in total on the figures.
