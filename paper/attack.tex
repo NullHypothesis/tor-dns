@@ -171,6 +171,7 @@ simulate or consider the fact that the observed fraction of Tor exit bandwidth
 corresponds to many different exits with individual caches.
 
 \subsection{From DNS requests to websites}
+\label{sec:dns2site}
 Given a sliding window of DNS requests we investigate
 how useful this information is in determining if websites of interest have
 been visited or not. In April 2016 we visited Alexa top one million websites
@@ -281,7 +282,7 @@ samples we consider a closed world and an open world: in the closed world the
 attacker can use samples from all sites in training (as folded) while in the
 open world some sites are unmonitored and therefore unknown (as per the fold).
 In the closed world we get 0.970 recall and 0.994 precision.
-For the open world we monitor Alexa top 500k and consider 369k unmonitored
+For the open world we monitor Alexa top 500,000 and consider 369,000 unmonitored
 sites. The number of unmonitored sites is extrapolated from our powerlaw
 distribution, giving a relastic base rate (for the entire Tor network) for
 evaluating our classifier.

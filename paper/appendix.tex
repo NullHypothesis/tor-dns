@@ -74,7 +74,7 @@ file.  You can now run exitmap to generate the data:
 
 \end{lstlisting}
 
-We set up a cronjob to run exitmap automatically every six hours.  
+We set up a cronjob to run exitmap automatically every six hours.
 First, edit your crontab:
 \begin{lstlisting}
 crontab -u "$USER" -e
@@ -134,3 +134,74 @@ patch -p0 < tshark-binned-timestamps.patch
 
 The output of the command is coarse timestamps, one per line, of when tshark
 captured a DNS request.
+
+\subsection{Replicating DNS requests stats}
+This is how you replicate the DNS-related statistics from
+Section~\ref{sec:dns2site}.  First download and extract the Alexa top one
+million websites dataset with extracted DNS requests:
+
+\begin{lstlisting}
+wget FIXME/alexa1mx5-extracted.tar.gz
+tar -zxf alexa1mx5-extracted.tar.gz
+\end{lstlisting}
+
+Get the Alexa file we used when gathering the data~\cite{alexatop1k} and
+the CloudFlare IPv4
+addresses\footnote{\url{https://www.cloudflare.com/ips-v4}} at the time of
+gathering:
+
+\begin{lstlisting}
+wget FIXME/top-1m.csv
+wget FIXME/ips-v4
+\end{lstlisting}
+
+Get and install our dnsstats tool using Go\footnote{\url{https://golang.org/}}:
+
+\begin{lstlisting}
+go get github.com/pylls/dnsstats
+\end{lstlisting}
+
+Finally, run dnsstats on the downloaded data:
+
+\begin{lstlisting}
+dnsstats alexa1mx5-extracted/
+\end{lstlisting}
+
+This produces a large number of statistics, including those used in
+ Section~\ref{sec:dns2site}.
+
+\subsection{Replicating DNS to website classification}
+This is how you replicate the DNS to website classification from
+Section~\ref{sec:dns2site}.
+First download and extract the Alexa top one
+million websites dataset with extracted DNS requests:
+
+\begin{lstlisting}
+wget FIXME/alexa1mx5-extracted.tar.gz
+tar -zxf alexa1mx5-extracted.tar.gz
+\end{lstlisting}
+
+Get and install our dns2site tool using Go:
+
+\begin{lstlisting}
+go get github.com/pylls/dns2site
+\end{lstlisting}
+
+For the closed world metrics, run:
+
+\begin{lstlisting}
+dns2site -sites 1000000 -instances 5 -open 0
+\end{lstlisting}
+
+For the open world metrics, run:
+
+\begin{lstlisting}
+dns2site -sites 500000 -instances 5
+\end{lstlisting}
+
+Without the -open parameter, dns2site tool determines a reasonable
+open world size based on our conservative powerlaw distribution,
+which should be around 369,000. 
+
+\subsection{Replicating WF+DNS attacks}
+\fixme{TODO}
