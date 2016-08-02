@@ -277,3 +277,253 @@ done
 Manual assembly of the CSV files needed.
 Note that generating the figures takes \emph{days} on modern
 hardware: we spent well over a CPU core year in total on the figures.
+
+\subsection{Replicating the DNS Alexa top 1,000,000 dataset}
+This is how you replicate the steps we used to gather the Alexa top 1,000,000
+dataset used in Section~\ref{sec:dns2site}.
+First, get and install three tools using Go:
+
+\begin{lstlisting}
+go get github.com/pylls/tordns/cmd/{server,tbbdnsw,extractdns}
+\end{lstlisting}
+
+We use a worker-server model, where a server instructs workers to browse to a
+site and return the observed DNS requests. Download an Alexa file with top
+sites~\cite{alexatop1k} and run the server:
+
+\begin{lstlisting}
+server -f data -s 5 -t 30 top-1m.csv
+\end{lstlisting}
+The server will instruct workers to collect in total
+five samples of the sites in top-1m.csv, using 30 seconds per site visit,
+and store the results in the data folder. By default, the server listens on
+port 55555 on all interfaces.
+
+Download a fresh copy of TBB from \url{https://torproject.org} and extract it.
+Open Browser/TorBrowser/Data/Browser/profile.default/preferences/
+and put the
+following \emph{at the bottom} of \texttt{extension-overrides.js}:
+
+\begin{lstlisting}
+user_pref("app.update.enabled", false);
+user_pref("extensions.torlauncher.prompt_at_startup", false);
+user_pref("extensions.torlauncher.start_tor", false);
+user_pref("datareporting.healthreport.nextDataSubmissionTime", "1559373924100");
+user_pref("datareporting.policy.firstRunTime", "1559287524100");
+user_pref("extensions.torbutton.lastUpdateCheck", "1559287542.7");
+user_pref("extensions.torbutton.show_slider_notification", false);
+user_pref("extensions.torbutton.updateNeeded", false);
+user_pref("extensions.torbutton.versioncheck_url", "");
+user_pref("extensions.torbutton.versioncheck_enabled", false);
+user_pref("network.proxy.proxy_over_tls", false);
+user_pref("network.proxy.socks", "");
+user_pref("network.proxy.socks_port", 0);
+user_pref("network.proxy.socks_remote_dns", false);
+\end{lstlisting}
+
+Download the latest release of dumb-init from
+\url{https://github.com/Yelp/dumb-init/releases}. We need a minimal init system
+to clean up the many processes we will be creating in Docker.
+Copy the following into a
+new file named \texttt{Dockerfile}:
+
+\begin{lstlisting}
+FROM debian:jessie
+MAINTAINER Tobias Pulls <tobias.pulls@kau.se>
+
+RUN apt-get update && apt-get install -y \
+	xvfb \
+	libpcap-dev \
+	libasound2 \
+	libdbus-glib-1-2 \
+	libgtk2.0-0 \
+	libxrender1 \
+	libxt6 \
+	xz-utils \
+  xauth \
+  psmisc \
+	--no-install-recommends
+
+COPY dumb-init*_amd64.deb /
+RUN dpkg -i dumb-init*.deb
+RUN rm dumb-init*.deb && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+ENV HOME /home/user
+ENV LANG C.UTF-8
+
+# create user (start-tor-browser.sh prevents us from running as root)
+RUN useradd --create-home --home-dir $HOME user
+
+COPY tbbdnsw $HOME/
+COPY tor-browser_en-US $HOME/tor-browser_en-US
+
+RUN chown -R user:user $HOME \
+	&& chmod +x $HOME/tbbdnsw \
+  && setcap 'CAP_NET_RAW+eip CAP_NET_ADMIN+eip' $HOME/tbbdnsw
+
+WORKDIR $HOME
+USER user
+ENTRYPOINT ["dumb-init", "--"]
+\end{lstlisting}
+
+Build the docker container and start a worker:
+
+\begin{lstlisting}
+docker build -t pulls/worker  .
+docker run --privileged -d pulls/worker ./tbbdnsw <IP:port>
+\end{lstlisting}
+The worker will repeatedly try to connect to the server at <IP:port>. We
+successfully ran 120 workers each 1U blades
+with Intel(R) Xeon(R) CPU E5-2650 0 @ 2.00GHz with 62GB RAM. The server was
+hosted on a laptop with SSD storage.
+
+Finally, to extract the DNS data from the resulting pcaps use the
+extractdns tool:
+
+\begin{lstlisting}
+extractdns -o results/ data/
+\end{lstlisting}
+Where data is the folder the server stored the data in and results is the folder
+to store the extracted data in.
+
+\subsection{Replicating the WF dataset}
+To replicate our WF dataset used in Section~\ref{sec:analysis}, get and
+install the following four tools using Go:
+% server
+\begin{lstlisting}
+go get github.com/pylls/tordns/cmd/{server,tbbw,torlogext,fext}
+\end{lstlisting}
+
+Download an Alexa file with top sites~\cite{alexatop1k} and run:
+
+\begin{lstlisting}
+server -f data -s 5 -t 60 -o .torlog top-1m.csv
+\end{lstlisting}
+The server will instruct workers to collect in total
+five samples of the sites in top-1m.csv, using 60 seconds per site visit,
+and store the results in the data folder with the suffix \texttt{.torlog}.
+By default, the server listens on port 55555 on all interfaces.
+
+% configure Tor
+Download a fresh copy of TBB from \url{https://torproject.org} and extract it.
+Open Browser/TorBrowser/Data/Browser/profile.default/preferences/
+and put the
+following \emph{at the bottom} of \texttt{extension-overrides.js}:
+
+\begin{lstlisting}
+user_pref("app.update.enabled", false);
+user_pref("extensions.torlauncher.prompt_at_startup", false);
+user_pref("datareporting.healthreport.nextDataSubmissionTime", "1759373924100");
+user_pref("datareporting.policy.firstRunTime", "1759287524100");
+user_pref("extensions.torbutton.lastUpdateCheck", "1759287542.7");
+user_pref("extensions.torbutton.show_slider_notification", false);
+user_pref("extensions.torbutton.updateNeeded", false);
+user_pref("extensions.torbutton.versioncheck_url", "");
+user_pref("extensions.torbutton.versioncheck_enabled", false);
+\end{lstlisting}
+
+Open Browser/TorBrowser/Data/Tor/torrc and add:
+
+\begin{lstlisting}
+LogTimeGranularity 1
+UseEntryGuards 0
+\end{lstlisting}
+
+% build custom tor
+Next we need to build a custom tor for TBB that logs all incoming and outgoing
+cells using Tor's logging framework. First, get the tor source code:
+
+\begin{lstlisting}
+git clone https://git.torproject.org/tor.git
+\end{lstlisting}
+Follow the instructions in the INSTALL file. Once you can build tor,
+apply the below patch to src/or/relay.c and run make:
+% clients
+\begin{lstlisting}
+diff -Naur tor/src/or/relay.c relay.c
+--- tor/src/or/relay.c	2016-08-02 18:04:05.796809070 +0200
++++ relay.c	2016-08-02 18:03:50.036572253 +0200
+@@ -585,6 +585,10 @@
+     return -1;
+   }
+
++  log_notice(LD_GENERAL, "OUTGOING CIRC %u STREAM %d COMMAND %s(%d) length %zu",
++             circ->n_circ_id, stream_id, relay_command_to_string(relay_command),
++             relay_command, payload_len);
++
+   memset(&rh, 0, sizeof(rh));
+   rh.command = relay_command;
+   rh.stream_id = stream_id;
+@@ -1453,6 +1457,9 @@
+         ;
+     }
+   }
++  log_notice(LD_GENERAL, "INCOMING CIRC %u STREAM %d COMMAND %s(%d) length %d",
++             circ->n_circ_id, rh.stream_id,
++             relay_command_to_string(rh.command), rh.command, rh.length);
+
+   /* either conn is NULL, in which case we've got a control cell, or else
+    * conn points to the recognized stream. */
+\end{lstlisting}
+Copy src/or/tor to Browser/TorBrowser/tor.
+
+Download the latest release of dumb-init from
+\url{https://github.com/Yelp/dumb-init/releases}.
+Copy the following into a
+new file named \texttt{Dockerfile}:
+
+\begin{lstlisting}
+FROM debian:jessie
+MAINTAINER Tobias Pulls <tobias.pulls@kau.se>
+
+RUN apt-get update && apt-get install -y \
+	xvfb \
+	libpcap-dev \
+	libasound2 \
+	libdbus-glib-1-2 \
+	libgtk2.0-0 \
+	libxrender1 \
+	libxt6 \
+	xz-utils \
+  xauth \
+  psmisc \
+	--no-install-recommends
+
+COPY dumb-init*_amd64.deb /
+RUN dpkg -i dumb-init*.deb
+RUN rm dumb-init*.deb && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+ENV HOME /home/user
+ENV LANG C.UTF-8
+
+# create user (start-tor-browser.sh prevents us from running as root)
+RUN useradd --create-home --home-dir $HOME user
+
+COPY tbbw $HOME/
+COPY tor-browser_en-US $HOME/tor-browser_en-US
+
+RUN chown -R user:user $HOME \
+	&& chmod +x $HOME/tbbw \
+  && setcap 'CAP_NET_RAW+eip CAP_NET_ADMIN+eip' $HOME/tbbdnsw
+
+WORKDIR $HOME
+USER user
+ENTRYPOINT ["dumb-init", "--"]
+\end{lstlisting}
+
+Build the docker container and start a worker:
+
+\begin{lstlisting}
+docker build -t pulls/worker  .
+docker run --privileged -d pulls/worker ./tbbw <IP:port>
+\end{lstlisting}
+
+Finally, to extract the data from the resulting torlog-files use the
+torlogext and fext tools:
+
+\begin{lstlisting}
+torlogext -o results/ data/
+fext results
+\end{lstlisting}
+The torlogext file generates cell-files with the format used by
+Wang et al.~\cite{Wang2014a}, and the fext tool extracts features for Wa-kNN.
