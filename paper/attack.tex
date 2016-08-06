@@ -67,7 +67,7 @@ powerlaw distribution to be a good fit as neither a lognormal nor a
 powerlaw distribution with exponential cutoff (truncated powerlaw
 distribution) offered significantly better fits\footnote{We used the
 		python powerlaw package~\cite{powerlaw}
-		%\url{https://github.com/jeffalstott/powerlaw} 
+		%\url{https://github.com/jeffalstott/powerlaw}
 		for fitting. After manual adjustment to make a conservative
 		model (worst for the attacker), the resulting powerlaw
 		distribution had an $\alpha$ parameter of about $1.1349$. Note
@@ -284,6 +284,7 @@ samples we consider a closed world and an open world: in the closed world the
 attacker can use samples from all sites in training (as folded) while in the
 open world some sites are unmonitored and therefore unknown (as per the fold).
 In the closed world we get 0.970 recall and 0.994 precision.
+\fixme{closed world should use FPR, not precision}
 For the open world we monitor Alexa top 500,000 and consider 369,000 unmonitored
 sites. The number of unmonitored sites is extrapolated from our powerlaw
 distribution, giving a relastic base rate (for the entire Tor network) for

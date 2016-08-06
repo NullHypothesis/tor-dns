@@ -325,7 +325,8 @@ Download the latest release of dumb-init from
 \url{https://github.com/Yelp/dumb-init/releases}. We need a minimal init system
 to clean up the many processes we will be creating in Docker.
 Copy the following into a
-new file named \texttt{Dockerfile}:
+new file named \texttt{Dockerfile}\footnote{Based on
+\url{https://github.com/jfrazelle/dockerfiles/tree/master/tor-browser}.}:
 
 \begin{lstlisting}
 FROM debian:jessie
