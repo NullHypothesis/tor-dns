@@ -16,8 +16,8 @@ adversaries that can observe traffic entering the Tor network and \emph{some}
 DNS requests exiting the network, e.g., requests addressed to DNS root servers.
 But how common is this scenario?  How many adversaries are in a position to
 observe DNS requests but not subsequent TCP connections?  We answer this
-question by determining the number of ASs that DNS queries traverse versus the
-number of ASs subsequent web traffic traverses.
+question by determining the number of ASes that DNS queries traverse versus the
+number of ASes subsequent web traffic traverses.
 
 We quantify the exposure of DNS versus web traffic as follows.  We begin with
 Alexa's Top 1,000~\cite{alexatop1k}, a list of the 1,000 most popular web sites
@@ -32,10 +32,10 @@ www.example.com.  We ran UDP traceroutes to each server in the delegation path,
 targeting port 53 to mimic DNS resolution.
 
 For both experiments, we then mapped all IP addresses in the traceroutes to AS
-numbers~\cite{ipasn}, and generated a set of traversed ASs for DNS traceroutes
-($\mathcal{D}$), and a set of traversed ASs for web traceroutes
+numbers~\cite{ipasn}, and generated a set of traversed ASes for DNS traceroutes
+($\mathcal{D}$), and a set of traversed ASes for web traceroutes
 ($\mathcal{W}$).  Having determined these two sets for each of Alexa's Top
-1,000, we are now interested in the fraction of ASs that are \emph{only}
+1,000, we are now interested in the fraction of ASes that are \emph{only}
 traversed for DNS traffic, but \emph{not} for web traffic.  To this end, we
 define an exposure metric $\lambda$, defined as
 
@@ -46,7 +46,7 @@ define an exposure metric $\lambda$, defined as
      {|\mathcal{D} \cup \mathcal{W}|}.
 \end{equation}
 
-The metric approaches 1 as the number of ASs that are only traversed for DNS
+The metric approaches 1 as the number of ASes that are only traversed for DNS
 increases.  For example, if $\mathcal{D} = \{1,2,3\}$ and $\mathcal{W} =
 \{2,3,4\}$, then $\lambda = \frac{|\{1\}|}{|\{1,2,3,4\}|} = \frac{1}{4} =
 0.25$.  We determined $\lambda$ for each site in the Alexa Top 1,000.  We ran
@@ -61,11 +61,11 @@ significant difference between both distributions ($p < 0.01$), the medians
 
 Figure~\ref{fig:exposure} shows the empirical CDF of all 1,000 $\lambda$ values
 that we calculated for Alexa's Top 1,000 sites.  In total, this experiment
-traversed 350 unique ASs for DNS requests and 339 unique ASs for web requests.
-The figure shows that for half of Alexa's Top 1,000 domains, DNS-only ASs
-account for around 70\% of all traversed ASs.  However, note that this result
+traversed 350 unique ASes for DNS requests and 339 unique ASes for web requests.
+The figure shows that for half of Alexa's Top 1,000 domains, DNS-only ASes
+account for around 70\% of all traversed ASes.  However, note that this result
 only applies to exit relays that do their own DNS resolution; for relays that
-use a third-party resolver, what matters is the ASs that are traversed between
+use a third-party resolver, what matters is the ASes that are traversed between
 the exit relay and its DNS resolver.  We conclude that adversaries that are
 unable to observe a Tor user's TCP connection still have many opportunities to
 see preceding DNS requests.  Such adversaries include (\emph{i}) popular open
@@ -81,7 +81,7 @@ entities.
 	\centering
 	\includegraphics[width=0.65\linewidth]{figures/dns-exposure.pdf}
 	\caption{Our AS exposure metric $\lambda$ for Alexa's Top 1,000 web sites.
-	For half of all sites, 70\% of ASs are only traversed for DNS resolution,
+	For half of all sites, 70\% of ASes are only traversed for DNS resolution,
 	but not for subsequent web traffic.}
 	\label{fig:exposure}
 \end{figure}
@@ -152,14 +152,14 @@ not be the primary resolver.
 
 \subsubsection{Visualizing results}
 Figure~\ref{fig:exit-resolvers} illustrates the fraction of DNS requests that
-all ASs that were ever in the top three could observe.  Google averages at
+all ASes that were ever in the top three could observe.  Google averages at
 33\%, but at times saw more than 40\% of all DNS requests exiting the Tor
 network---an alarming number for a single organization.  Second to Google is
 ``Local,'' i.e., exit relays that run their own resolver, averaging at 12\%.
 Next is OVH which used to be as popular as local resolvers, but slowly lost its
 share over time.  Note that in contrast to Google, OVH does not run a public
 DNS server; the company's resolvers are only accessible to its customers.
-Between 0\% and 5\% are seven more ASs, labeled as ``Others,'' namely Level 3,
+Between 0\% and 5\% are seven more ASes, labeled as ``Others,'' namely Level 3,
 Visual Online, Init7, OpenDNS, Cyberdyne, NForce, and LeaseWeb.  Apart from the
 illustrated top resolvers, the distribution has a long tail, presumably
 consisting of many ISP resolvers.

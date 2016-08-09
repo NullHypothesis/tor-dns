@@ -322,9 +322,9 @@ Copyright 200X ACM X-XXXXX-XX-X/XX/XX ...\$5.00}
 %%%
 %%%  Abbreviations
 %%%
-\newcommand{\ie}{{\em i.e. \xspace}}
-\newcommand{\eg}{{\em e.g. \xspace}}
-\newcommand{\ea}{{\em et al. \xspace}}
+\newcommand{\ie}{{\em i.e.\xspace}}
+\newcommand{\eg}{{\em e.g.\xspace}}
+\newcommand{\ea}{{\em et al.\xspace}}
 \newcommand{\fp}{\vspace*{0.05in}\noindent}
 \newcommand{\name}{NAME\xspace}
 

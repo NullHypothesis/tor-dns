@@ -2,34 +2,51 @@
 \label{sec:introduction}
 
 % High-level motivation.
-We have yet to learn how to build anonymity networks that are resistant to
-global adversaries while also providing low latency.  Remailer systems like
-Mixmaster and Mixminion gave up low latency in favor of strong anonymity.
-Considering latency crucial for adoption, the Tor network treaded the opposite
-path, trading off strong anonymity for low latency.  This design decision
-enables latency-sensitive applications such as web browsing, but at the cost of
-not being able to protect against adversaries that can observe traffic both
-entering and exiting the anonymity network, which facilitates deanonymization.
-While such adversaries are not in the threat models of low-latency networks,
-that does not mean that they are not a concern.  Indeed, semi-global adversaries
-are a reality~\cite{Farrell2014a}, and even smaller adversaries are a
-concern~\cite{Johnson2013a}.  A sound understanding of semi-global adversaries
-is necessary to better protect Tor users and mitigate attacks.
+We have yet to learn how to build anonymity networks that both
+resist global adversaries and provide low latency.  Remailer systems
+such as Mixmaster~\cite{mixmaster} and
+Mixminion~\cite{danezis2003mixminion} eschew low latency in favor of
+strong anonymity. 
+In contrast, Tor~\cite{dingledine04tor} trades off strong anonymity to
+achieve low latency; Tor thus  
+enables latency-sensitive applications such as web browsing but is
+vulnerable to
+adversaries that can observe traffic both
+entering and exiting its network, thus enabling deanonymization.
+Although Tor does not consider global adversairies in its threat model,
+adversaries that can observe traffic for extended periods of time in
+multiple network locations (\ie, ``semi-global'' adversaries) are a real
+concern~\cite{Farrell2014a,Johnson2013a}; we need to better understand
+the nature to which these adversaries exist in operational networks and
+their ability to deanonymize users.  
 
 % More specific problem.
-Academia has spent considerable effort on quantifying the threat of correlation
-attacks~\cite{Johnson2013a,Murdoch2007a}.  Past work, however, only focused on
-the TCP flows between clients and servers such as HTTP requests, BitTorrent
-connections, or IRC sessions.  The DNS requests that typically precede TCP
-connections received no attention.  This is a critical oversight because the
-nature of DNS differs in fundamental ways from subsequent TCP flows.  Depending
-on the setup of a Tor exit relay, DNS requests can traverse parts of the
-Internet unknown to the subsequent TCP connection.  This aids an attacker that
-can observe occasional DNS requests but no exit traffic to link both ends of the
-communication.  Figure~\ref{fig:overview} illustrates an example in which an
-adversary monitors the connection between a user and her guard relay, and the
-exit relay and its DNS resolvers or servers.  This to date uncharted territory
-is the topic of this work.
+Past work on has quantified the extent to which an adversary that
+observes TCP flows between clients and servers (\eg, HTTP requests,
+BitTorrent connections, and IRC sessions) can correlate traffic flows
+between the client and the entry to the anonymity network and between
+the exit of the anonymity network and its ultimate
+destination~\cite{Johnson2013a,Murdoch2007a}. The ability to correlate
+these two flows---a so-called {\em correlation attack}---can link the
+sender and receiver of a traffic flow, thus compromising the anonymity
+of both endpoints. Although TCP connections are an important part
+of communications, but the Domain Name System (DNS) traffic is also
+quite revealing: for example, even loading a single webpage can generate
+hundreds of DNS requests to many different domains. No previous analysis
+of correlation attacks has studied how DNS traffic can exacerbate
+correlation attacks. 
+
+When analyzing correlation attacks, however, one must also consider DNS
+traffic, since DNS traffic often traverses completely different paths
+and autonomous systems (ASes) than the subsequent corresponding TCP
+connections.  An attacker that can observe occasional DNS
+requests may still be able to link both ends of the communication, even
+if the attacker cannot observe TCP traffic between the exit of the
+anonymity network and the server.
+Figure~\ref{fig:overview} illustrates how an adversary may
+monitor the connection between a user and the guard relay, and between the exit
+relay and its DNS resolvers or servers.  This 
+territory---to-date, completely unexplored---is the focus of this work.
 
 \begin{figure}[t]
 	\centering
@@ -37,67 +54,72 @@ is the topic of this work.
 	\caption{Past traffic correlation studies have focused on linking the TCP
 		stream entering the Tor network to the one(s) exiting the network.  We
 		show that an adversary can also link the associated DNS traffic, which
-		can be exposed to many more ASs than the TCP stream.}
+		can be exposed to many more ASes than the TCP stream.}
 	\label{fig:overview}
 \end{figure}
 
 % Summary of our paper.
-We first set out to explore DNS resolution on Tor exit relays.  By developing a
-new method to identify all exit relays' DNS resolver, we learn that Google
-currently gets to see almost 40\% of all DNS requests exiting the Tor network.
-Next, we are interested in the exposure of DNS requests.  Who can observe the
-DNS requests of Tor exit relays?  To answer this question, we simulate DNS
-resolution for the Alexa Top 1,000 domains, which reveals that the DNS
-resolution process for half of these domains traverses numerous autonomous
+We first explore how Tor exit relays resolve DNS names.  By developing a
+new method to identify all exit relays' DNS resolvers, we learn that Google
+currently sees almost 40\% of all DNS requests exiting the Tor network.
+Second, we investigate which organizations can observe
+DNS requests that originate from Tor exit relays.  To answer this question, we emulate DNS
+resolution for the Alexa Top 1,000 domains from the Tor exit nodes using
+measurement vantage points that are co-loated with Tor exit nodes; we find that DNS
+resolution for half of these domains traverses numerous autonomous
 systems that are not traversed for the subsequent HTTP connection to the web
-site.  Armed with a better understanding of DNS's role in Tor, we show how to
-augment existing website fingerprinting (WF) attacks with observed DNS requests,
-yielding perfectly precise WF+DNS attacks for unpopular websites.
-Finally we investigate the impact of our WF+DNS attacks at Internet-scale
-with the help of the TorPS simulator~\cite{TorPS}.
-By employing a novel method to run traceroutes from
-exit relays, we believe our results to be significantly more accurate and
+site.  
+We introduce a new
+method to perform traceroutes from the networks where
+exit relays are located, making our results significantly more accurate and
 comprehensive than previous work.
+Next, we show how the ability to observe DNS traffic from Tor
+exit relates can 
+augment existing website fingerprinting (WF),
+yielding perfectly precise WF+DNS attacks for unpopular websites.
+Finally, we use the TorPS simulator~\cite{TorPS} to investigate the
+effects of Internet-scale WF+DNS attacks. 
 
 % Comparison to past work.
-We improve on the state of the art by showing that DNS requests pose a threat
-that future work on correlation attacks should consider.  Our measurements
-provide us with a better understanding of the Tor network that can aide in
-future design decisions.  Finally, we propose a new measurement method to
-evaluate the impact of traffic correlation attack, significantly improving on
-past work.  Our work \first serves as guidance to Tor exit relay operators
-and Tor network developers,
-\second improves state-of-the-art measurement techniques, \third further
-justifies the introduction of WF defenses in Tor, \fourth
-and sheds light on previously uncharted territory of the Tor network.  To
-foster future work and facilitate the replication of our results, we publish
-both our code and datasets.\footnote{We redacted the link to our project page to
-anonymize our paper submission.} In summary, we make the following
-contributions:
+We demonstrate that DNS requests significantly increase the opportunity
+for adversaries to perform correlation attacks. This finding should
+encourage future work on correlation attacks to consider both TCP
+traffic and the corresponding DNS traffic; future design decisions
+should also be cognizant of this threat.  The measurement methods we use
+to evaluate the effects of traffic correlation attacks are also more
+accurate than past work. Our work \first serves as guidance to Tor exit
+relay operators and Tor network developers, \second improves
+state-of-the-art measurement techniques for analysis of correlation attacks, and \third
+provides even stronger justification for introducing website fingerprinting defenses in
+Tor.  To foster future work and facilitate the replication of
+our results, we publish both our code and datasets.\footnote{We redacted
+  the link to our project page to preserve anonymity.} In
+summary, we make the following contributions:
 \begin{itemize}
-	\item We develop a novel method to identify the DNS resolver of exit relays,
-		revealing that 40\% of DNS request exiting the Tor network go to
-		Google's public DNS resolvers.
+\item We develop a method to identify the DNS resolver of exit
+  relays. We find that 40\% of DNS request exiting the Tor network go to
+  Google's public DNS resolvers.
 
-	\item We quantify the exposure of the DNS resolution process to
-		network-level adversaries.  Our results show that for numerous popular
-		websites, 70\% of all traversed ASs are only visited for DNS requests.
+	\item We quantify the exposure of DNS resolution to
+		network-level adversaries.  We find that for many popular
+		websites, 70\% of all traversed ASes are only visited for DNS requests.
 
-	\item We show how existing WF attacks can be combined with observed DNS
+	\item We show how existing WF attacks can be augmented with observed DNS
 	requests by a network-level adversary to yield perfectly precise
 	WF+DNS attacks for unpopular websites.
 
-	\item We develop a new measurement method to evaluate the threat of
+	\item We develop a measurement method to evaluate the threat of
 		network-level adversaries. We employ the RIPE Atlas~\cite{atlas}
 		platform to achieve previously unprecedented path coverage and accuracy.
 \end{itemize}
 
-The rest of this paper is organized as follows.  We begin by providing
-background in Section~\ref{sec:background} and discussing related
-work in Section~\ref{sec:related_work}.  We then shed light on the landscape of DNS in Tor
-in Section~\ref{sec:landscape}.  Section~\ref{sec:attack} discusses our WF+DNS
-attacks, which we evaluate in Section~\ref{sec:analysis}.  We
-then model the Internet-scale impact of our attacks in
+The rest of this paper is organized as follows.
+Section~\ref{sec:background} presents background, and
+Section~\ref{sec:related_work} relates our study to previous work.  In
+Section~\ref{sec:landscape}, we shed light on the landscape of DNS in
+Tor.  Section~\ref{sec:attack} discusses our WF+DNS attacks, which we
+evaluate in Section~\ref{sec:analysis}.  We then model the
+Internet-scale impact of our attacks in
 Section~\ref{sec:internet-scale}.  Finally, we discuss our work in
 Section~\ref{sec:discussion} and conclude the paper in
 Section~\ref{sec:conclusion}.

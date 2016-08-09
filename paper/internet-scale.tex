@@ -14,8 +14,8 @@ setup in detail.
 	\centering
 	\includegraphics[width=\linewidth]{figures/simulations.pdf}
 	\caption{The relation among our simulation components.  Our goal is to
-	determine the ASs a Tor user's traffic traverses into and out of the Tor
-	network.  Duplicate ASs on both sides can deanonymize streams.}
+	determine the ASes a Tor user's traffic traverses into and out of the Tor
+	network.  Duplicate ASes on both sides can deanonymize streams.}
 	\label{fig:simulations}
 \end{figure}
 
@@ -66,11 +66,11 @@ great way to study the paths that Tor circuits might traverse. In order to get
 our traceroutes, we ran traceroutes from probes that that were in the same ASes
 as Tor guards and exits. \fixme{Mention why we picked AS 6128 as our client AS.}
 
-% - 197 out of all 377 (52%) Tor exit ASs have Atlas probes.
-% - 220 out of all 434 (51%) Tor guard ASs have Atlas probes.
+% - 197 out of all 377 (52%) Tor exit ASes have Atlas probes.
+% - 220 out of all 434 (51%) Tor guard ASes have Atlas probes.
 
-% - Atlas ASs cover 57.53% of Tor exit bandwidth.
-% - Atlas ASs cover 73.59% of Tor guard bandwidth.
+% - Atlas ASes cover 57.53% of Tor exit bandwidth.
+% - Atlas ASes cover 73.59% of Tor guard bandwidth.
 
 \begin{table}[t]
 	\caption{The coverage of RIPE Atlas nodes that are colocated with Tor guard and exit
@@ -79,7 +79,7 @@ as Tor guards and exits. \fixme{Mention why we picked AS 6128 as our client AS.}
 	\centering
 	\begin{tabular}{l|r r}
 	\toprule
-	\textbf{Atlas probe coverage} & \textbf{Tor guard ASs} & \textbf{Tor exit ASs} \\
+	\textbf{Atlas probe coverage} & \textbf{Tor guard ASes} & \textbf{Tor exit ASes} \\
 	\midrule
 	By bandwidth & 73.59\% & 57.53\% \\
 	By number & 50.69\% & 52.25\% \\

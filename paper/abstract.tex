@@ -1,23 +1,28 @@
 \begin{abstract}
-Many research projects investigated the practicality of end-to-end correlation
-attacks on the Tor network.  All work, however, only focused on the TCP stream
-between clients and servers.  The client's accompanying DNS requests were
-ignored, and DNS's impact on the Tor network's anonymity is still poorly
-understood.
+Previous correlation attacks on the Tor network have focused solely on
+the attacks that are possible from analyzing a single TCP connection between
+a client and a server. In reality, of course, a client application opens
+several TCP connections to handle a single application request; many of
+those TCP connections are also accompanied by DNS requests and
+responses. This additional traffic presents many more opportunities for
+an adversary to launch a correlation attack.
 %
-In this work, we explore the impact of DNS on Tor users' anonymity.
-Specifically, we investigate if DNS can improve existing attacks, and how much
-information it leaks to third parties.  To this end, we \first develop a novel
-method to identify the DNS resolvers of Tor exit relays, we \second show how
-existing website fingerprinting (WF) attacks can be improved by observing DNS
-requests, we \third analyze the Internet-scale impact of our attack on Tor
-users, and we \fourth present an improved method to evaluate correlation
+This paper quantifies the effects of DNS traffic on Tor users' anonymity.
+We investigate how DNS can make existing attacks more powerful, as well
+as how DNS lookups can leak information to third parties about anonymous
+communication. We \first develop a
+method to identify the DNS resolvers of Tor exit relays; \second show how
+existing website fingerprinting (WF) attacks are stronger when they incorporate DNS
+traffic; \third analyze the Internet-scale effects of these new attacks on Tor
+users; and \fourth present an improved method to evaluate correlation
 attacks.
 %
-Our results show that Google's DNS resolver observes almost 40\% of all DNS
-requests exiting the Tor network. Furthermore, DNS requests often transit ASs
-that subsequent TCP streams do not transit, enabling additional organizations to
-snoop on Tor traffic.
+We find that Google's DNS resolver observes almost 40\% of all DNS
+requests exiting the Tor network. DNS requests also often traverse ASes
+that the corresponding TCP connections do not transit, enabling
+additional ASes to gain information about Tor users' traffic.
+%%% 
+\xxx{Abstract is very unclear from here down.}
 By correlating the output of WF
 attacks with observed DNS requests, WF+DNS attacks are perfectly precise for
 unpopular websites, further motivating the introduction of WF defenses in Tor.
