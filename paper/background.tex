@@ -1,50 +1,54 @@
 \section{Background}
 \label{sec:background}
-We now give a brief introduction to website fingerprinting and DNS resolution
-over the Tor network.
+We provide an introduction introduction to website fingerprinting
+attacks, as well as how
+the Tor network implements DNS resolution.
 
 \paragraph{Website fingerprinting attacks}
-The Tor network encrypts relayed traffic as it travels from the client to the
-exit relay.  Therefore, intermediate parties such as the user's Internet service
-provider (ISP) are not able to read any packet content.  However, Tor does not
-protect meta information such as packet inter-arrival timing, frequency, and
-length.  Exploiting these properties, the ISP can use a classifier to guess what
-sites the user is visiting.  The literature calls this attack \emph{website
-fingerprinting}.  Past work evaluated website fingerprinting (WF) attacks in
-either a closed work or an open world setting.
-A closed world setting consists of a set
-of $n$ \emph{monitored} websites, and the attackers tries to learn which among
-all $n$ sites the user is visiting with the notable restriction that the user
-can only browse to one of the $n$ websites.
+The Tor network encrypts relayed traffic as it travels from the client
+to the exit relay.  Therefore, intermediate parties such as the user's
+Internet service provider (ISP) cannot read the contents of any packet.
+Tor does not, however, protect other statistics about the network
+traffic, such as packet inter-arrival timing, frequency, and length.
+The ISP can analyze these properties to infer the destinations that a
+user is visiting.  The literature calls this attack \emph{website
+  fingerprinting}.  
 
-The open world setting is more realistic: the user can browse to
-\emph{unmonitored} sites in addition to the monitored sites. Unmonitored sites
-are, per definition, not known the attacker and consequently the attacker's
-classifier cannot train on unmonitored sites the user visits. Note that the
-attacker classifier can train on whatever number of unmonitored sites it wants,
-as long as during testing of the classifier the classifier has not trained on
-an unmonitored site being tested. Two relevant metrics for WF attacks in the
-open-world setting are recall and precision.
-Recall measures the probability that a visit to a monitored
-page will be detected, while precision measures the probability
-that a classification by the classifier of a visit to a monitored
-site (positive test outcome) is the correct one. Consider a classifier with
-0.25 recall and 0.5 precision: on average, every fourth visit by the user to
-a monitored site will be detected, and half of the classifications by the
-classifier will be wrong. Often, when a classifier is wrong,
-it is due to either classifying a monitored site as unmonitored (lowering
-recall) or vice versa (lowering precision).
-Mistaking one monitored site for another is less likely~\cite{WangThesis}.
+Past work evaluated website fingerprinting (WF) attacks in two settings:
+A {\em closed-world} setting consists of a set of $n$ {monitored}
+websites, and the attackers tries to learn which among all $n$ sites the
+user is visiting with the notable restriction that the user can only
+browse to one of the $n$ websites.  The {\em open-world} setting is more
+realistic: the user can browse to {unmonitored} sites in addition to the
+monitored sites. Unmonitored sites are, per definition, not known to the
+attacker; thus, the attacker's classifier cannot train on unmonitored
+sites the user visits. Note that the attacker's classifier can train on
+whatever unmonitored sites it chooses, as long as during testing, the
+classifier has not trained on an unmonitored site. Two relevant metrics
+for WF attacks in the open-world 
+setting are recall and precision.  Recall measures the probability that
+a visit to a monitored page will be detected, while precision measures
+the probability that a classification by the classifier of a visit to a
+monitored site (positive test outcome) is the correct one. Consider a
+classifier with 0.25 recall and 0.5 precision: on average, every fourth
+visit by the user to a monitored site will be detected, and half of the
+classifications by the classifier will be wrong. Errors can
+either classify a monitored site as
+unmonitored (lowering recall) or vice versa (lowering precision).
+Mistaking one monitored site for another is less
+likely~\cite{WangThesis}.
 
-Tor---and any other anonymity network---could eliminate WF
-attacks by employing encrypted, constant-rate channels between a Tor client and
-its guard.  Unfortunately, the Tor network's limited spare capacity does not
-allow for such an expensive defense, but some research has worked on making it
+Tor could eliminate WF
+attacks with encrypted, constant-bitrate channels between a Tor client and
+its guard; other anonymity networks could use a similar technique.
+Unfortunately, the Tor network's limited spare capacity does not 
+allow for such a throughput-intensive defense, but some research has
+worked on making this type of defense
 more efficient~\cite{Cai2014a,DBLP:journals/corr/JuarezIPDW15,WangThesis}.
 
 \paragraph{The Tor network}
 The Tor network is an overlay network that anonymizes TCP streams such as web
-traffic.  As of April 2016, it counts approximately 7,000 relays and about two
+traffic.  As of April 2016, it comprises approximately 7,000 relays and about two
 million users.  Clients send data over the Tor network by randomly selecting
 three relays---typically called the guard, middle, and exit relay---that then
 form a virtual tunnel called a \emph{circuit}.  The guard relay learns the
@@ -54,21 +58,23 @@ talk to each other using the Tor protocol, which uses 512-byte \emph{cells}.
 Finally, each relay is uniquely identified by its \emph{fingerprint}, a hash
 function over its public key.
 
-\paragraph{How Tor handles DNS}
-Tor clients must send DNS requests over Tor to prevent DNS leakage, \ie, have a
-DNS request escape its encrypted connection.  Tor does not transport UDP
+\paragraph{How Tor resolves DNS requests}
+Tor clients must send DNS requests over Tor to prevent DNS {\em leakage}
+(\ie, having a
+DNS request travel over an unencrypted channel as opposed to over Tor
+itself).  Tor does not transport UDP 
 traffic, but it implements a workaround to wrap DNS requests into Tor cells.
-After the user types in a domain, say foo.com, Tor Browser establishes a
+After the user types in a domain, say {\tt foo.com}, the Tor Browser establishes a
 connection to the SOCKS proxy exposed by the local Tor client.  Using the SOCKS
 protocol, applications instruct the Tor client to establish a circuit to a given
-domain and port.\footnote{SOCKS in version 4a and 5 supports connection
-initiations using domain names in addition to IP addresses.} The Tor client then
+domain and port.\footnote{SOCKS versions 4a and 5 support connection
+initiation using domain names in addition to IP addresses.} The Tor client then
 selects an exit relay whose exit policy supports foo.com and port 443.  Next,
 the client sends a \texttt{RELAY\_BEGIN} Tor cell to the exit relay, instructing
 it to first resolve foo.com, and then establish a TCP connection to the resolved
 address at port 443~\cite[\S~6.2]{tor-spec}.  After successfully establishing a
-connection, the exit relay responds with a \texttt{RELAY\_CONNECTED} cell to the
-local Tor client.  Subsequently, data can be exchanged with the intended
+connection, the exit relay responds with a \texttt{RELAY\_CONNECTED}
+cell.  The client can then exchange data with its intended 
 destination.  The \texttt{RELAY\_RESOLVE} cell supports pure name resolution,
 without establishing a subsequent TCP connection~\cite[\S~6.4]{tor-spec}.  The
 exit relay responds with a \texttt{RELAY\_RESOLVED} cell.
@@ -80,6 +86,6 @@ due to modified DNS
 responses\footnote{\url{https://gitweb.torproject.org/torspec.git/tree/proposals/205-local-dnscache.txt}}. 
 Exit relays send
 their DNS requests to the system resolver, which Linux systems read from
-\texttt{/etc/resolv.conf}.  The system resolver is not modified by Tor, and
-contains whatever the exit relay operator configured, e.g., the ISP's resolver,
-or public resolvers such as Google's 8.8.8.8.
+\texttt{/etc/resolv.conf}.  Tor does not modify the system resolver and
+contains whatever the exit relay operator configured, such as the ISP's resolver,
+or public resolvers such as Google's {\tt 8.8.8.8} open public DNS resolver.
