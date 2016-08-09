@@ -1,43 +1,46 @@
-\section{Understanding the landscape}
+\section{Understanding the Landscape}
 \label{sec:landscape}
-Before diving into our attack, we need to first improve our understanding of
-DNS's role in Tor.  We begin by investigating how common it is for adversaries
-to be able to observe DNS request but \emph{not} subsequent TCP connections of
-Tor users (see Section~\ref{sec:as-exposure}).  We then seek to understand how
-these results connect to the Tor network by determining the DNS resolvers used
-by exit relays (see Section~\ref{sec:mapping-resolvers}).
 
-\subsection{Measuring AS exposure of DNS queries}
+Before explaining our attack, we need to better understand how Tor performs DNS
+resolution.  We begin by investigating how common it is for adversaries
+to be able to observe DNS request but \emph{not} subsequent TCP connections of
+Tor users (Section~\ref{sec:as-exposure}).  We then seek to understand how
+these results connect to the Tor network by determining the DNS resolvers used
+by exit relays (Section~\ref{sec:mapping-resolvers}).
+
+\subsection{Quantifying the additional AS exposure of DNS queries}
 \label{sec:as-exposure}
-Adversaries that can observe both DNS and subsequent TCP traffic (e.g., the ISP
-of an exit relay) can readily ignore DNS as traditional, TCP-based correlation
-attacks work just fine~\cite{Murdoch2007a}.  But in this work, we consider
+
+Adversaries that can observe both DNS and subsequent TCP traffic (\eg, the ISP
+of an exit relay) gain no benefit from seeing the client's DNS traffic,
+since TCP traffic is sufficient to mount correlation
+attacks~\cite{Murdoch2007a}.  In this work, we consider 
 adversaries that can observe traffic entering the Tor network and \emph{some}
-DNS requests exiting the network, e.g., requests addressed to DNS root servers.
-But how common is this scenario?  How many adversaries are in a position to
-observe DNS requests but not subsequent TCP connections?  We answer this
-question by determining the number of ASes that DNS queries traverse versus the
+DNS requests exiting the network---such as requests addressed to DNS
+root servers---but {\em not} subsequent TCP traffic from exit relays.
+We first determine the prevalence of these adversaries by measuring the
+number of ASes that DNS queries traverse versus the 
 number of ASes subsequent web traffic traverses.
 
-We quantify the exposure of DNS versus web traffic as follows.  We begin with
+We quantify the {\em exposure} of DNS traffic versus TCP traffic as follows.  We begin with
 Alexa's Top 1,000~\cite{alexatop1k}, a list of the 1,000 most popular web sites
 as seen by the Alexa search engine.  For each site, we conducted two
 experiments.  First, we ran a TCP traceroute to the site, targeting port 80 to
-mimic web traffic.  Second, we determined the site's DNS delegation path using
-the dig command's \texttt{+trace} feature.  The delegation path of a domain
-name, say www.example.com, is a list of authoritative DNS servers, e.g., the
-authoritative server for .com pointing to the authoritative server of
-example.com, pointing to the authoritative server responsible for
-www.example.com.  We ran UDP traceroutes to each server in the delegation path,
+mimic web traffic.  Second, we determined the DNS delegation path for
+the website's DNS name using
+the {\tt dig} command's \texttt{+trace} feature.  The delegation path of a domain
+name, say {\tt www.example.com}, is a list of authoritative DNS servers, such as the
+authoritative server for {\tt .com} pointing to the authoritative server of
+{\tt example.com}, which in turn points to the authoritative server responsible for
+{\tt www.example.com}.  We also ran UDP traceroutes to each server in the delegation path,
 targeting port 53 to mimic DNS resolution.
 
 For both experiments, we then mapped all IP addresses in the traceroutes to AS
-numbers~\cite{ipasn}, and generated a set of traversed ASes for DNS traceroutes
-($\mathcal{D}$), and a set of traversed ASes for web traceroutes
-($\mathcal{W}$).  Having determined these two sets for each of Alexa's Top
-1,000, we are now interested in the fraction of ASes that are \emph{only}
-traversed for DNS traffic, but \emph{not} for web traffic.  To this end, we
-define an exposure metric $\lambda$, defined as
+numbers~\cite{ipasn}, generating both a set of traversed ASes for DNS traceroutes
+($\mathcal{D}$) and a set of traversed ASes for web traceroutes
+($\mathcal{W}$).  Given these two sets for each of Alexa's Top
+1,000, we compute the fraction of ASes that are \emph{only}
+traversed for DNS traffic, but \emph{not} for web traffic ($\lambda$):
 
 \begin{equation}
 \label{equ:exposure}
@@ -45,7 +48,7 @@ define an exposure metric $\lambda$, defined as
 \frac{|\mathcal{D} \setminus \mathcal{W}|}
      {|\mathcal{D} \cup \mathcal{W}|}.
 \end{equation}
-
+\noindent
 The metric approaches 1 as the number of ASes that are only traversed for DNS
 increases.  For example, if $\mathcal{D} = \{1,2,3\}$ and $\mathcal{W} =
 \{2,3,4\}$, then $\lambda = \frac{|\{1\}|}{|\{1,2,3,4\}|} = \frac{1}{4} =
@@ -63,12 +66,12 @@ Figure~\ref{fig:exposure} shows the empirical CDF of all 1,000 $\lambda$ values
 that we calculated for Alexa's Top 1,000 sites.  In total, this experiment
 traversed 350 unique ASes for DNS requests and 339 unique ASes for web requests.
 The figure shows that for half of Alexa's Top 1,000 domains, DNS-only ASes
-account for around 70\% of all traversed ASes.  However, note that this result
+account for around 70\% of all traversed ASes.  This result
 only applies to exit relays that do their own DNS resolution; for relays that
-use a third-party resolver, what matters is the ASes that are traversed between
-the exit relay and its DNS resolver.  We conclude that adversaries that are
+use a third-party resolver, the ASes that are traversed between
+the exit relay and its DNS resolver is the metric of interest.  We conclude that adversaries that are
 unable to observe a Tor user's TCP connection still have many opportunities to
-see preceding DNS requests.  Such adversaries include (\emph{i}) popular open
+see a TCP connection's correspodning DNS request.  Such adversaries include (\emph{i}) popular open
 DNS resolvers such as Google and OpenDNS, (\emph{ii}) DNS root servers, and
 (\emph{iii}) network adversaries located on the path to the previous two
 entities.
@@ -79,36 +82,38 @@ entities.
 
 \begin{figure}[t]
 	\centering
-	\includegraphics[width=0.65\linewidth]{figures/dns-exposure.pdf}
+	\includegraphics[width=0.85\linewidth]{figures/dns-exposure.pdf}
 	\caption{Our AS exposure metric $\lambda$ for Alexa's Top 1,000 web sites.
 	For half of all sites, 70\% of ASes are only traversed for DNS resolution,
 	but not for subsequent web traffic.}
 	\label{fig:exposure}
 \end{figure}
 
-\subsection{Mapping DNS resolvers}
+\subsection{Determining how Tor exit relays resolve DNS queries}
 \label{sec:mapping-resolvers}
-Having shown that the Internet provides fertile ground for DNS-snooping
-adversaries, let us now investigate how this affects the Tor network.  Key to
-this question is an understanding of what DNS resolvers exit relays use.  Until
-now, we only had anecdotal evidence, e.g., from OpenDNS-powered error messages
+
+Having shown that the Internet provides ample opportunity for
+network-level adversaries to snoop on DNS traffic from exit relays, we
+now investigate how the exit relays in the Tor network resolve DNS
+queries in practice. Before this study,
+we only had anecdotal evidence (\eg, from OpenDNS-powered error messages)
 that some exit relays would occasionally show.
 
 We identify the DNS resolver of all exit relays by using
 exitmap~\cite{exitmap}, a scanner for Tor exit relays.  Exitmap automates
-running a task---e.g., fetch a web page---over all one thousand exit relays,
+running a task such as fetching a webpage over all one thousand exit relays,
 making it possible to see the Internet through the ``eyes'' of every single
-exit relay.  Leveraging exitmap, we resolve unique, relay-specific domains over
-each exit relay, to a DNS server under our control.  This experiment is
-visualized in Figure~\ref{fig:dnsenum}.  To improve reliability, we configured
+exit relay.  Using exitmap, we resolve unique, relay-specific domains over
+each exit relay, to a DNS server under our control.
+Figure~\ref{fig:dnsenum} illustrates this experiment.  To improve reliability, we configured
 exitmap to use two-hop circuits instead of the standard three-hop circuits.
 The first hop was a guard relay under our control.  Over each exit relay, we
-resolved a unique domain PREFIX.tor.domain.com.  The prefix consisted of the
+resolved a unique domain {\tt PREFIX.tor.domain.com}.  The prefix consisted of the
 relay's unique 160-bit fingerprint, concatenated to a random 40-bit string
 whose purpose is to prevent caching, so exit relays indeed resolve each query
 instead of responding with a cached element.  We controlled the authoritative
-DNS server of tor.domain.com, so we could capture both the IP address and packet
-content of every single query for tor.domain.com.
+DNS server of {\tt tor.domain.com}, so we could capture both the IP address and packet
+content of every single query for {\tt tor.domain.com}.
 
 \begin{figure}[t]
 	\centering
@@ -120,46 +125,48 @@ content of every single query for tor.domain.com.
 	\label{fig:dnsenum}
 \end{figure}
 
-An exit relay can either run its own resolver (see the left exit relay in
-Figure~\ref{fig:dnsenum}), or use a third-party resolver such as the one
-provided by its ISP (see the right exit relay in Figure~\ref{fig:dnsenum}).  If
+An exit relay can either run its own resolver, as shown in the left exit relay in
+Figure~\ref{fig:dnsenum}; or rely on a third-party resolver, such as the one
+provided by its ISP, as shown in the right exit relay in Figure~\ref{fig:dnsenum}.  If
 an exit relay runs its own resolver, we expect to receive a DNS request from
 the exit relay's IP address, but if an exit relay uses a third-party resolver,
 we expect to receive a request from an unrelated IP address.  Having encoded
 relay-specific fingerprints in the query names, we are able to map queries to
 exit relays in such cases.  We ran this experiment from September 2015 to May
 2016, at least once a day.  Once we started to analyze our data, we identified
-the following two difficulties.
+the following two challenges:
 
-\paragraph{DNS proxies}
-Manual inspection of our data revealed that several exit relays used DNS
-proxies, i.e., machines that passed on DNS requests to an actual resolver
-instead of resolving it themselves.  Google's resolver 8.8.8.8 is a popular
-example of a DNS proxy; the actual resolution is documented to be done by
-several dozen machines in the background~\cite{google-proxies}.  DNS proxies do
-not interfere with our measurements, which is why we ignored them.
+\begin{itemize}
+\item {\em DNS proxies:}
+We found that several exit relays used DNS
+proxies---machines that passed on DNS requests to an actual resolver
+instead of resolving it themselves.  Google's resolver {\tt 8.8.8.8} is a popular
+example of a DNS proxy; 
+several dozen machines perfom resolution in the
+background~\cite{google-proxies}.  DNS proxies do 
+not interfere with our measurements, so we ignored them.
 
-\paragraph{Multiple DNS resolvers}
+\item {\em Multiple DNS resolvers:}
 On Linux systems, DNS resolution is controlled by the file
 \texttt{/etc/resolv.conf}.  It contains a list of up to three DNS resolvers
 that are queried in order.  If the primary resolver does not respond within a
 time limit, the system falls back to the second, and finally the third
-resolver, if available.  Our data suggests that several exit relays used
+resolver.  Our data suggests that several exit relays used
 different resolvers in subsequent exitmap scans---one relay, for example, used
 both Google's DNS resolver and one provided by its ISP.  For our visualization,
 we only consider the first resolver we observed for an exit relay, which might
 not be the primary resolver.
-
-\subsubsection{Visualizing results}
+\end{itemize}
+\noindent
 Figure~\ref{fig:exit-resolvers} illustrates the fraction of DNS requests that
 all ASes that were ever in the top three could observe.  Google averages at
 33\%, but at times saw more than 40\% of all DNS requests exiting the Tor
 network---an alarming number for a single organization.  Second to Google is
-``Local,'' i.e., exit relays that run their own resolver, averaging at 12\%.
-Next is OVH which used to be as popular as local resolvers, but slowly lost its
+``Local''---exit relays that run their own resolver, averaging at 12\%.
+Next is OVH, which used to be as popular as local resolvers, but slowly lost its
 share over time.  Note that in contrast to Google, OVH does not run a public
 DNS server; the company's resolvers are only accessible to its customers.
-Between 0\% and 5\% are seven more ASes, labeled as ``Others,'' namely Level 3,
+Between 0\% and 5\% are seven more ASes, labeled as ``Others'', namely Level 3,
 Visual Online, Init7, OpenDNS, Cyberdyne, NForce, and LeaseWeb.  Apart from the
 illustrated top resolvers, the distribution has a long tail, presumably
 consisting of many ISP resolvers.
@@ -196,7 +203,7 @@ instead of always using UDP port 53.  Our data allows for verifying if a given
 resolver randomizes its source ports.  We classify a resolver as ``uses
 randomization'' if the source port does not equal 53.  Note that this method
 causes a small number of false positives because a randomizing resolver could
-use port 53 simply by chance.  However, the probability of that happening is
+use port 53 simply by chance.  The probability of that happening is
 only $\frac{1}{65535}$.
 
 We found 135 DNS resolvers that did not use random source ports.  These

@@ -1,10 +1,12 @@
-\section{WF+DNS attacks}
+\section{WF+DNS Attacks}
 \label{sec:attack}
-We begin by summarizing our attack.  Our attack is based on traffic correlation,
-so it requires an attacker to observe traffic that is both entering and exiting
-the Tor network.  In contrast to earlier work, we consider DNS instead of just
-end-to-end TCP packets.
-Our attack is illustrated in Figure~\ref{fig:attack-scenario} and requires the
+
+As with conventional correlation attacks, an attacker must observe
+traffic that is both entering and exiting 
+the Tor network; in contrast to threat models from previous work, we
+incorporate DNS instead of only 
+TCP traffic.
+Figure~\ref{fig:attack-scenario} illustrates our correlation attack; it requires the
 following building blocks:
 \begin{figure}[t]
 	\centering
@@ -22,25 +24,25 @@ following building blocks:
 \begin{itemize}
     \item \emph{Ingress sniffing:} An attacker must observe traffic that is
 		entering the Tor network.  The attacker can operate on the network level,
-		i.e., be a malicious ISP, or an intelligence agency.  In addition, the
-		attacker can operate on the relay level, i.e., run a malicious Tor guard
-		relay.  Note that in both cases, the attacker can only observe encrypted
-		data.  Therefore, packet meta information such as packet lengths and
-		directions serve as input to a website fingerprinting
-		attack~\cite{Panchenko2016a}.
+		as a malicious ISP or an intelligence agency.  In addition, the
+		attacker can operate on the relay level by running a malicious Tor guard
+		relay.  In both cases, the attacker can only observe encrypted
+		data, so packet lengths and
+		directions are the main inputs for website fingerprinting~\cite{Panchenko2016a}.
     \item \emph{Egress sniffing:} To observe both ends of the communication, an
 		attacker must also observe egress DNS traffic.  We expect the adversary
-		to operate on the network level, i.e., be on the path between exit relay
-		and a DNS server.  Alternatively, the attacker can run a malicious DNS
-		resolver or server.  Note that an attacker may also run an exit relay,
-		but in that case she might as well do classical end-to-end correlation.
+		either to be on the path between exit relay
+		and a DNS server or to run a malicious DNS
+		resolver or server.  An attacker may also run an exit relay,
+		but in this case, conventional end-to-end correlation
+                attacks are equally effective as those we describe here.
 \end{itemize}
-We combine a classical WF attack operating on traffic from ingress sniffing with
+We combine a conventional WF attack operating on traffic from ingress sniffing with
 DNS traffic observed by egress sniffing, creating WF+DNS attacks. Our attacks
 correlate the web\emph{sites} observed by the WF attack in ingress traffic with
 the web\emph{sites} identified from DNS traffic. Next, we describe how we
 simulate the DNS traffic from Tor exits, how we map DNS requests to websites,
-and finally present our two WF+DNS attacks.
+and finally present our two WF+DNS attacks. \xxx{NF: stopped here.}
 
 \subsection{Simulating Tor-exits' DNS traffic}
 \label{sec:attack:sim}
@@ -53,9 +55,9 @@ from trying to collect them (\eg by operating exit relays and recording
 the outgoing traffic). We therefore opt to \emph{simulate} the DNS traffic
 emerging from Tor exit relays.
 
-\subsubsection{Website Popularity Distribution}
+\subsubsection{Website popularity distribution}
 \label{sec:attack:pop}
-First, we model \emph{what websites} are visited by Tor users.
+First, we model \emph{which websites} Tor users visit.
 Currently, there are about 173 million active websites in the
 world~\cite{numberofwebsites} and the Alexa ranking~\cite{alexatop1k}
 gives insights into their popularity based on the browsing behaviour of
@@ -248,7 +250,7 @@ and when
 only considering the unique domain for each website with the lowest TTL.
 Note that for about half of the websites on Alexa top one million, there is at
 least one unique domain with a TTL of 60 seconds. Tor's TTL clipping has no
-impact on the median TTL, but significantly influences the mean TTL.
+effect on the median TTL, but significantly influences the mean TTL.
 
 \begin{table}[t]
 \caption{Raw TTLs are unprocessed while Tor TTLs adhere to Tor's TTL clipping.
