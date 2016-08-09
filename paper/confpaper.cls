@@ -58,6 +58,16 @@
 
 \RequirePackage[compact]{titlesec}
 
+%\renewcommand{\abstractname}{\vspace{-\baselineskip}}
+
+\usepackage[runin]{abstract}
+
+\renewcommand{\abstractname}{~~~Abstract---\relax}
+\renewcommand{\abstractnamefont}{\normalfont\footnotesize \fontshape{\itdefault}\fontseries{\bfdefault}\selectfont}
+\renewcommand{\abstracttextfont}{\normalfont\footnotesize\bfseries}
+\renewcommand{\absleftindent}{0pt}
+\renewcommand{\absrightindent}{0pt}
+
 \renewcommand{\thesection}{\Roman{section}} 
 \renewcommand{\thesubsection}{\thesection.\Alph{subsection}}
 
