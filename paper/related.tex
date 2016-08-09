@@ -1,15 +1,18 @@
-\section{Related work}
+\section{Related Work}
 \label{sec:related_work}
-Our work combines traffic correlation with website fingerprinting attacks,
-which is why we split related work into these two topics.
 
-\paragraph{Traffic analysis methods}
+This paper combines traffic analysis methods for correlation attacks
+with website fingerprinting attacks; we discuss related work in each of
+these two areas.
+
+\paragraph{Traffic analysis and correlation attacks}
 Tor's threat model excludes global adversaries~\cite{Dingledine2004a}, but the
-practical threat of such adversaries is an important question that academia has
-spent considerable effort on answering.  In 2004, when the Tor network counted
+practical threat of such adversaries is an important question that the
+research community has
+spent considerable effort on answering.  In 2004, when the Tor network comprised
 only 33 relays, Feamster and Dingledine investigated the practical threat that
-network-level adversaries pose to anonymity networks~\cite{Feamster2004a}.  In
-particular, the authors considered an attacker that controls an autonomous
+network-level adversaries pose to anonymity networks~\cite{Feamster2004a}.  
+The authors considered an attacker that controls an autonomous
 system that is traversed both for ingress and egress traffic, allowing the
 attacker to correlate both streams.  Using AS path prediction~\cite{Gao2001a},
 Feamster and Dingledine found that powerful tier-1 ISPs reduce location
@@ -17,41 +20,44 @@ diversity of anonymity networks.  In 2007, Murdoch and Zieli\'{n}ski drew
 attention to IXP-level adversaries, a class of adversaries that was missing in
 Feamster and Dingledine's work~\cite{Murdoch2007a}.  Murdoch and Zieli\'{n}ski
 showed that IXP adversaries are able to correlate traffic streams, even in the
-presence of packet sampling rates as low as one in 2,000.  In 2013, Johnson
+presence of packet sampling rates as low as one in 2,000.  
+
+In 2013, Johnson
 \ea~\cite{Johnson2013a} presented the first large-scale study on the risk of Tor
 users facing relay-level and network-level adversaries.  The authors developed a
-Tor path simulator (TorPS~\cite{TorPS}) that simulates Tor circuits for a number
+{\em Tor path simulator (TorPS)}~\cite{TorPS} that simulates Tor circuits for a number
 of user models the authors developed.  By combining TorPS with AS path
 prediction, Johnson \ea could answer questions such as the average time until a
 Tor user's circuit is deanonymized by an AS or IXP.  Most recently in 2016,
 Nithyanand \ea~\cite{Nithyanand2016a} used AS path prediction to evaluate the
 practical threat faced by users in the top 10 countries using Tor.  In 2015,
-Juen \ea~\cite{Juen2015a} questioned the accuracy of path prediction algorithms
+Juen \ea~\cite{Juen2015a} examined the accuracy of path prediction algorithms
 that prior work~\cite{Johnson2013a,Feamster2004a} used to estimate the threat of
 correlation attacks.  The authors compared AS path predictions to millions of
-traceroutes they initiated from 25\% of Tor relays by bandwidth at the AS level.
-Only 20\% of predicted paths matched the paths observed in traceroute, calling
-into question the results of prior work.  A limitation of Juen \ea's work is
-that they could not consider the reverse path in traceroutes.  This shortcoming
-was addressed in 2015 by Sun \ea~\cite{Sun2015a}.  While past work treated
-routing as static, Sun \ea leveraged the dynamic nature of routing to show that
-network adversaries are a bigger threat than thought.
+traceroutes they initiated from 25\% of Tor relays by bandwidth at the
+AS level and found that
+only 20\% of predicted paths matched the paths observed in traceroute.
+Juen \ea could not consider the reverse path in traceroutes.  In 2015,
+Sun \ea~\cite{Sun2015a} addressed this shortcoming; although past work treated
+routing as static, Sun \ea showed that the dynamic nature of Internet
+routing makes network-level adversaries stronger than previous work had considered.
 
-We improve on previous work in two significant ways; (\emph{i}) we are the first
-to consider the DNS protocol for traffic analysis and evaluate its practical
-threat, and (\emph{ii}) we develop and deploy a method to scale the measurement
-method proposed by Juen \ea~\cite{Juen2015a}.  Our method leverages the
-volunteer-run RIPE Atlas measurement platform~\cite{atlas} instead of convincing
-relay operators to run third-party scripts.  This approach allows us to fully
-automate our method and achieve previously unprecedented scale.
+We improve on previous work in two significant ways: (\emph{i}) we are
+the first to evaluate how DNS traffic exacerbates traffic correlation
+attacks, both in concept and in practice; and (\emph{ii}) we develop and
+deploy a scalable, sustainable version of the measurement method proposed by Juen
+\ea~\cite{Juen2015a}.  Our method uses the volunteer-run RIPE Atlas
+measurement platform~\cite{atlas}, as opposed to relying on relay operators
+to run third-party scripts.  This approach allows us to fully automate
+our method and achieve previously unprecedented scale.
 
 \paragraph{Website fingerprinting}
 In 2009, Hermann \ea~\cite{Hermann2009a} demonstrated the first website
 fingerprinting (WF) attack against anonymity systems---including Tor---in a
-closed-world setting.  In 2011, Panchenko et al.~\cite{Panchenko2011a} greatly
+closed-world setting.  In 2011, Panchenko \ea~\cite{Panchenko2011a} greatly
 improved on Hermann \ea's detection rate and provided insight into an open-world
-setting.  In 2012, Cai et al.~\cite{Cai2012a} improved on prior work by
-proposing an attack that used Hidden Markov Models to determine if a sequence of
+setting.  In 2012, Cai \ea~\cite{Cai2012a} improved on previous work by
+proposing an attack that used Hidden Markov Models to determine whether a sequence of
 page requests all come from the same site.  The authors used an open-world
 setting for their evaluation.  Wang and Goldberg~\cite{Wang2013a} proposed an
 improved attack that employed a new method for data gathering.  In 2014, Wang
@@ -60,33 +66,37 @@ k-nearest neighbour classifier Wa-kNN and a custom weightlearning algorithm
 (WLLCC~\cite{WangThesis}) that in several rounds determine the optimal weights
 for features extracted from traffic traces.
 Cai \ea~\cite{Cai2014b}
-analyzed what traffic features provide the most predictive power to detect
+determined which traffic features provide the most predictive power to detect
 websites, proved a lower bound of any defense that achieves a certain level of
 security, and provided a framework to investigate the performance of
-WF attacks.  Juarez~\cite{Juarez2014a} critically evaluated past
-attacks, showing that they all made numerous simplifying
-assumptions.  The authors suggest that attacks are still
+WF attacks.  Juarez~\cite{Juarez2014a} showed that all previous attacks
+made several simplifying 
+assumptions; the work suggested that attacks are still
 difficult to run outside a lab setting as an attacker will have to consider
 operating system differences, page changes, and background traffic.
-Recently, in 2016, Wang and Goldberg addressed a number of practical
-roadblocks such as noisy data and maintaining a training set,
+Recently, in 2016, Wang and Goldberg addressed many practical
+roadblocks to website fingerprinting, such as noisy data and maintaining a training set,
 further highlighting the need for WF defenses in Tor~\cite{taoianreally}.
-Panchenko et al.~\cite{Panchenko2016a} showed that
-web\emph{page} fingerprinting (\ie, fingerprinting of any page on a site) is
+
+Panchenko \ea~\cite{Panchenko2016a} showed that web\emph{page}
+fingerprinting (\ie, fingerprinting of any page on a site) is
 significantly harder than web\emph{site} fingerprinting (\ie,
-fingerprinting of only the start page of a site).
-Hayes and Danezis proposed k-fingerprinting, an attack with
-notably better performance than Wa-kNN even in the face of
-WF defenses \cite{kfingerprinting}. Their attack retains 30\% accuracy in a
-closed-world setting against the WTF-PAD defense by
-Juarez et al.~\cite{DBLP:journals/corr/JuarezIPDW15}---a prime candidate for
-deployment in Tor\footnote{\url{https://gitweb.torproject.org/torspec.git/tree/proposals/254-padding-negotiation.txt}}---at
+fingerprinting of only the start page of a site).  Hayes and Danezis
+proposed k-fingerprinting, an attack with notably better performance
+than Wa-kNN even in the face of WF defenses
+\cite{kfingerprinting}. Their attack retains 30\% accuracy in a
+closed-world setting against the WTF-PAD defense by Juarez et
+al.~\cite{DBLP:journals/corr/JuarezIPDW15}---a prime candidate for
+deployment in
+Tor\footnote{\url{https://gitweb.torproject.org/torspec.git/tree/proposals/254-padding-negotiation.txt}}---at
 the cost of 50\% bandwidth overhead.
 
-We show how to correlate and use observed DNS requests with WF attacks,
-resulting in WF+DNS attacks, greatly
-improving precision for web\emph{site} fingerprinting.
-Our two proposed WF+DNS attacks have implications for the design of WF defenses:
-to mitigate WF+DNS attacks open-world evaluations of the WF defense should
+In this paper, we show how to correlate and use observed DNS requests in
+concert with WF attacks,
+which significantly
+improves precision for web\emph{site} fingerprinting.
+The two WF+DNS attacks  that we present in this paper have implications
+for the design of WF defenses: 
+to mitigate WF+DNS attacks, open-world evaluations of the WF defense should
 minimise recall even when the WF attack is tuned to sacrifice precision for
 recall.
