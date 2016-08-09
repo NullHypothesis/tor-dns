@@ -58,7 +58,7 @@
 
 \RequirePackage[compact]{titlesec}
 
-%\renewcommand{\abstractname}{\vspace{-\baselineskip}}
+\renewcommand{\baselinestretch}{0.95}
 
 \usepackage[runin]{abstract}
 
@@ -114,9 +114,9 @@
 %    columnsep=0.25in
   ]{geometry}
 }{%
-\RequirePackage[noheadfoot,left=0.75in,right=0.75in,top=0.75in,
-    footskip=0.5in,bottom=1in,
-    columnsep=0.33in
+  \RequirePackage[noheadfoot,
+  left=0.75in,right=0.75in,top=0.75in,bottom=1in,
+  columnsep=0.15in
   ]{geometry}
 }
 
@@ -137,13 +137,13 @@
 %%%  Captions
 %%%
 %\RequirePackage[font=bf]{caption}
-\RequirePackage[font=small,format=plain,labelfont=bf,textfont=it]{caption}
+\RequirePackage[font=footnotesize,format=plain,labelfont=bf,textfont=it]{caption}
 %\RequirePackage{subcaption}
 %% Space between figure and caption (assuming caption
 %% is below figure)
 %\RequirePackage[font=bf,aboveskip=0pt]{caption} % SPACE
 %% Space between caption and body text of document
-\addtolength{\textfloatsep}{-7pt} % SPACE
+\addtolength{\textfloatsep}{-12pt} % SPACE
 
 %%%
 %%%  Section headings
@@ -223,21 +223,22 @@
 %%%
 %%%  PDF setup
 %%%
-\RequirePackage[breaklinks=true,pagebackref,filecolor=black,citecolor=blue,urlcolor=black,linkcolor=blue,colorlinks,pdfpagelabels,pdfpagelayout=SinglePage]{hyperref}
+\RequirePackage[breaklinks=true,filecolor=black,citecolor=blue,urlcolor=black,linkcolor=blue,colorlinks,pdfpagelabels,pdfpagelayout=SinglePage]{hyperref}
 
-\renewcommand*{\backref}[1]{}
-\renewcommand*{\backrefalt}[4]{
-  \ifcase #1 %
-    (Not cited.) %
-  \or
-    {\small (Cited on page~#2.)}%
-  \else
-    {\small (Cited on pages~#2.)}%
-  \fi
-}
-\renewcommand*{\backrefsep}{, }
-\renewcommand*{\backreftwosep}{ and~}
-\renewcommand*{\backreflastsep}{ and~}
+
+% \renewcommand*{\backref}[1]{}
+% \renewcommand*{\backrefalt}[4]{
+%   \ifcase #1 %
+%     (Not cited.) %
+%   \or
+%     {\small (Cited on page~#2.)}%
+%   \else
+%     {\small (Cited on pages~#2.)}%
+%   \fi
+% }
+% \renewcommand*{\backrefsep}{, }
+% \renewcommand*{\backreftwosep}{ and~}
+% \renewcommand*{\backreflastsep}{ and~}
 
 \hypersetup{%
 pdfauthor = {\AUTHORS},
@@ -258,12 +259,12 @@ bookmarksopen = {true}
 %%%
 \RequirePackage[pdftex]{graphicx}
 \RequirePackage{soul}
-%\RequirePackage{subcaption}
 \RequirePackage{amsthm}
 \RequirePackage{amssymb}
 \RequirePackage{listings}
 \RequirePackage{tikz}
 \usetikzlibrary{arrows}
+%\RequirePackage{subcaption}
 
 %\setlength{\parindent}{0pt}
 %\setlength{\parskip}{\baselineskip}

@@ -1,3 +1,4 @@
+\pdfoutput=1
 \documentclass[10pt,twocolumn]{confpaper}
 
 %%%%%%%%%%%%%%%%%%%%  INCLUDES  %%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -5,14 +6,13 @@
 %\graphicspath{ {./figures/} }
 
 \usepackage[T1]{fontenc}
-\usepackage[scaled=0.8]{beramono} % For a pretty monospaced font.
 \usepackage[pdftex]{graphicx}
 \usepackage{booktabs}        % For pretty tables.
 \usepackage{xcolor}          % For colorful links.
-\usepackage{cite}            % For reasonably sorting citations.
 \usepackage{wasysym}         % For \Circle, ...
 \usepackage{listings}        % For source code listings.
 \usepackage[tight,footnotesize]{subfigure}
+\usepackage[scaled=0.8]{beramono} % For a pretty monospaced font.
 
 
 \definecolor{darkblue}{rgb}{0,0,0.5}
@@ -43,9 +43,6 @@
 %%%%%%%%%%%%%%%%%%%%  LOCALS  %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \newcommand{\fixme}[1]{\textcolor{red}{{\bf FIXME:} #1}\xspace}
-%\newcommand{\ie}{i.e.\xspace}
-%\newcommand{\eg}{e.g.\xspace}
-%\newcommand{\ea}{et al.\xspace}
 \newcommand{\first}{(\emph{i})\xspace}
 \newcommand{\second}{(\emph{ii})\xspace}
 \newcommand{\third}{(\emph{iii})\xspace}
@@ -93,16 +90,18 @@
 \input{internet-scale}
 \input{discussion}
 \balance\input{conclusion}\label{lastpage}
+
+\section*{Appendix}
+\input{appendix}
+
 \end{sloppypar}
 
-\small
-%\setlength{\bibsep}{0pt}
+%\bibliographystyle{abbrv}
+\bibliographystyle{IEEEtranS}
 \setlength{\parskip}{-1pt}
-\setlength{\itemsep}{-1pt}
-% \footnotesize % SPACE
-%\bibliographystyle{IEEEtranS}
+\setlength{\itemsep}{-10pt}
+ \footnotesize % SPACE
 \balance\bibliography{references}
-\bibliographystyle{abbrv}
 %\bibliographystyle{abbrvnat_noaddr} % SPACE
 %\theendnotes % ENDNOTES
 }{% onlyAbstract
