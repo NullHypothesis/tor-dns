@@ -73,9 +73,6 @@ as Tor guards and exits. \fixme{Mention why we picked AS 6128 as our client AS.}
 % - Atlas ASes cover 73.59% of Tor guard bandwidth.
 
 \begin{table}[t]
-	\caption{The coverage of RIPE Atlas nodes that are colocated with Tor guard and exit
-	relays.}
-	\label{tab:atlas-coverage}
 	\centering
 	\begin{tabular}{l|r r}
 	\toprule
@@ -85,9 +82,12 @@ as Tor guards and exits. \fixme{Mention why we picked AS 6128 as our client AS.}
 	By number & 50.69\% & 52.25\% \\
 	\bottomrule
 	\end{tabular}
+	\caption{The coverage of RIPE Atlas nodes that are colocated with Tor guard and exit
+	relays.}
+	\label{tab:atlas-coverage}
 \end{table}
 
-We also had to consider what method we'd use to translate the IP addresses in
+We also had to consider what method we would use to translate the IP addresses in
 our traceroutes to ASes. The options we considered were Team Cymru~\cite{ipasn}
 and pyasn~\cite{pyasn}. We decided to go with pyasn because it uses actual
 control plane data in order to perform the translations vs. using whois, which

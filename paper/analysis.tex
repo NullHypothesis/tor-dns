@@ -1,24 +1,30 @@
-\section{The Effect of WF+DNS Attacks}
+\section{Evaluating WF+DNS Attacks}
 \label{sec:analysis}
-To evaluate out WF+DNS attacks we collected a dataset of traffic traces in May
-2016 using TBB 5.5.4.
-TBB was modified to not generate network traffic on launch (check for
-updates, extensions etc) and
-tor (bundled with TBB) to log incoming and outgoing cells.
-We collected 100 samples of Alexa top 1k and one sample each of
-Alexa top (1k,101k]. The order of site and sample collection was randomly
-distributed to a Docker fleet, where each sample used a fresh circuit without
+
+\subsection{Attack precision and recall}
+
+To evaluate our WF+DNS attacks, we collected traffic traces in May
+2016 using TBB~5.5.4.
+We modified TBB so that it does not generate network traffic on launch
+(\ie, check for
+updates, extensions, etc.), and we modified 
+Tor (bundled with TBB) to log incoming and outgoing cells.
+We then collected performed 100 downloads for each site in the Alexa top
+1k and one download for each site in the 
+Alexa top (1k,101k]. We randomly distributed these measurement tasks
+to a Docker fleet; each download used a fresh circuit without
 guards and a fresh copy of TBB\footnote{The consensus was cached to not
 cause an excessive load on the network.} for up to 60 seconds,
 in line with the recommendations by Wang and Goldberg~\cite{Wang2013a}.
-We considered a sample collected if we managed to resolve the domain of the site
-and did not prune our dataset further, neglecting issues like CloudFlare
+We considered the measurement to be successful if we managed to resolve
+the domain of the site; 
+we did not prune our dataset further, neglecting issues like CloudFlare
 CAPTCHAs, outliers, control cells, and localized domains~\cite{Juarez2014a}.
 This likely leads to overall worse results for all attacks than what is
 possible, but we are primarily interested in the difference between WF and
 WF+DNS attacks~\cite{Wang2013a}.
 
-We perform 10-fold cross-validation for all of our experiments in the open
+We perform ten-fold cross-validation for all of our experiments in the open
 world setting, monitoring 1,000 sites with 100 instances each and
 100,000 unmonitored sites unless otherwise stated.
 Note the 1:1 ratio between monitored traces and unmonitored traces,
@@ -138,11 +144,48 @@ we monitor pages starting from Alexa 10,000.
 exit traffic (Google's average). The defaults are: Alexa from top 10,000,
 2500 weightlearning rounds,
 60 seconds window size, Tor network scale 1.0, and the conservative
-powerlaw distribution (pc) with $\alpha=1.13487087527372$.}
+power-law distribution (pc) with $\alpha=1.13487087527372$.}
 \label{fig:wfdns:var}
 \end{figure*}
 
-\subsection{Website fingerprinting defenses}
+
+
+\subsection{Sensitivity to website popularity distribution}
+
+% alexa offsets, all distributions and attacks
+If we assume that our estimate for the number of sites visited through the Tor
+network, as described in Section~\ref{sec:load-freq}, is roughly correct
+(and we know from Figure~\ref{fig:wfdns:var:scale} that the effects of an error
+is relatively minor) then one imporant consideration is how
+these site visits are distributed. We define four distributions:
+\begin{description}
+	\item[pc] A conservative power-law distribution
+	(with $\alpha=1.13487087527372$)
+	that we manually fitted to the Alexa top 10,000 data,
+	slightly underrepresenting the popularity of top Alexa sites.
+	This distribution was described in Section~\ref{sec:attack:pop}.
+	\item[pr] A realistic power-law distribution
+	(with $\alpha=1.98331802607295$)
+	that is the best fit according to
+	the python power-law library by Alstott~\ea~\cite{power-law} for the Alexa
+	top 10,000 data.
+	\item[uc] A conservative uniformly random distribution that for some reason
+	only considers one million active websites on the Internet.
+	\item[ur] A realistic uniformly random distribution that considers 173 million active websites, as reported by Netcraft in July 2016.
+\end{description}
+Figure~\ref{fig:wfdns:var:dist} shows the effect on the precision of the
+\texttt{hp} attack for the different distributions as we vary the starting
+Alexa rank. The uniform distributions always have perfect precision.
+The difference between the two power-law distributions is about one order of
+magnitude in terms of starting Alexa rank: the realistic distribution gets
+near perfect at 1,000 and the conservative at 10,000.
+We conclude that WF+DNS attacks are perfectly precise for unpopular sites
+where the probability that someone else than the target browses to a monitored
+site within the timeframe given by the window length is negligible.
+
+
+\subsection{Effect of website fingerprinting defenses}
+
 Website fingerprinting defenses are being
 designed and discussed for deployment in Tor.
 The defenses produce bandwidth and/or latency overhead with a significant
@@ -169,8 +212,9 @@ be effective against WF+DNS attacks the defense must be tuned to provide a
 low recall even when the parameters of WF attacks are selected for high
 recall.
 
-\subsection{Tor's TTL clipping}
-As noted in Section~\ref{sec:attack:sim}, due to a bug in Tor the max TTL
+\subsection{Effect of Tor's TTL clipping}
+
+As we noted in Section~\ref{sec:attack:sim}, due to a bug in Tor the max TTL
 for DNS responses in an exit's cache is 60 seconds. As a consequence of this
 a sliding window of only the last 60 seconds of all observed DNS requests is
 enough to capture all visited monitored sites through Tor (subject to the
@@ -195,44 +239,12 @@ In fact, 48\% of the raw unique TTLs are below 60 seconds and only
 its own: to mitigate WF+DNS attacks the minimum TTL should be significantly
 increased.
 
-\subsection{A larger Tor network}
+\subsection{Effect of Tor network growth}
 Figure~\ref{fig:wfdns:var:scale} scales the size of the Tor network wrt. site
 visits from as-is to ten-times its size for Alexa starting rank 10,000 and
 100,000. At twice its current size, the impact on WF+DNS attacks is smaller than
 increasing the minumum TTL for DNS caching to 180 seconds as shown in
 Figure~\ref{fig:wfdns:var:window}. Clearly, WF+DNS attacks will not become
 impractical for impopular sites as the network grows.
-
-\subsection{Website popularity distributions}
-% alexa offsets, all distributions and attacks
-If we assume that our estimate for the number of sites visited through the Tor
-network, as described in Section~\ref{sec:load-freq}, is roughly correct
-(and we know from Figure~\ref{fig:wfdns:var:scale} that the impact of an error
-is relatively minor) then one imporant consideration is how
-these site visits are distributed. We define four distributions:
-\begin{description}
-	\item[pc] A conservative powerlaw distribution
-	(with $\alpha=1.13487087527372$)
-	that we manually fitted to the Alexa top 10,000 data,
-	slightly underrepresenting the popularity of top Alexa sites.
-	This distribution was described in Section~\ref{sec:attack:pop}.
-	\item[pr] A realistic powerlaw distribution
-	(with $\alpha=1.98331802607295$)
-	that is the best fit according to
-	the python powerlaw library by Alstott~et al.~\cite{powerlaw} for the Alexa
-	top 10,000 data.
-	\item[uc] A conservative uniformly random distribution that for some reason
-	only considers one million active websites on the Internet.
-	\item[ur] A realistic uniformly random distribution that considers 173 million active websites, as reported by Netcraft in July 2016.
-\end{description}
-Figure~\ref{fig:wfdns:var:dist} shows the impact on the precision of the
-\texttt{hp} attack for the different distributions as we vary the starting
-Alexa rank. The uniform distributions always have perfect precision.
-The difference between the two powerlaw distributions is about one order of
-magnitude in terms of starting Alexa rank: the realistic distribution gets
-near perfect at 1,000 and the conservative at 10,000.
-We conclude that WF+DNS attacks are perfectly precise for unpopular sites
-where the probability that someone else than the target browses to a monitored
-site within the timeframe given by the window length is negligible.
 
 % limitation: webSITES, not wePAGES in our analysis + what we get from DNS.
