@@ -2,9 +2,9 @@
 \label{sec:attack}
 
 As with conventional correlation attacks, an attacker must observe
-traffic that is both entering and exiting 
+traffic that is both entering and exiting
 the Tor network; in contrast to threat models from previous work, we
-incorporate DNS instead of only 
+incorporate DNS instead of only
 TCP traffic.
 Figure~\ref{fig:attack-scenario} illustrates our correlation attack; it requires the
 following building blocks:
@@ -291,13 +291,13 @@ With five-fold cross-validation on our Alexa top one million dataset with five
 samples we consider a closed world and an open world: in the closed world the
 attacker can use samples from all sites in training (as folded) while in the
 open world some sites are unmonitored and therefore unknown (as per the fold).
-In the closed world we get 0.970 recall and 0.994 precision.
-\fixme{closed world should use FPR, not precision}
-For the open world we monitor Alexa top 500,000 and consider 369,000 unmonitored
-sites. The number of unmonitored sites is extrapolated from our powerlaw
+In the closed world we get 0.955 recall (TPR).
+For the open world we monitor Alexa top 500,000 with five samples each and
+consider 433,000 unmonitored sites.
+The number of unmonitored sites is extrapolated from our powerlaw
 distribution, giving a relastic base rate (for the entire Tor network) for
 evaluating our classifier.
-In the open world we get 0.965 recall and 0.975 precision, slightly
+In the open world we get 0.947 recall and 0.984 precision, slightly
 worse than in the closed world.
 
 Note that it is likely that website classification can be made
