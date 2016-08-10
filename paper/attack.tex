@@ -341,14 +341,13 @@ observing DNS requests to implement two attacks:
 	not, make the final classification unmonitored.
 \end{description}
 \noindent
-These approaches are generic and apply to any WF attack. The
+These approaches apply to any website fingerprinting attack. The
 \texttt{ctw} attack increases the effectiveness of conventional WF
-attacks by making them more akin to 
-a closed-world setting, where websites have known
+attacks by building a classifier that takes advantage of websites with known
 fingerprints. 
-Conceptually, the attack could also include 
-a custom weight-learning run---training only on observed sites---but our initial
-results noted little to no gain, despite significant increases in
+Conceptually, training the classifier could also involve
+a custom weight-learning run that trains only on observed sites, but we found
+that this approach yielded little to no improvement in classifier accuracy, despite significant increases in
 testing time.
 We expect that this results because some features are more useful than others,
 regardless of the training data~\cite{kfingerprinting}. The \texttt{hp} attack
