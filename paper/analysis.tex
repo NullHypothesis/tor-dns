@@ -21,8 +21,8 @@ the domain of the site;
 we did not prune our dataset further, neglecting issues like CloudFlare
 CAPTCHAs, outliers, control cells, and localized domains~\cite{Juarez2014a}.
 This likely leads to overall worse results for all attacks than what is
-possible, but we are primarily interested in the difference between WF and
-\name attacks~\cite{Wang2013a}.
+possible, but we are primarily interested in the difference between website
+fingerprinting and \name attacks~\cite{Wang2013a}.
 
 We perform ten-fold cross-validation for all of our experiments in the open
 world setting, monitoring 1,000 sites with 100 instances each and
@@ -213,10 +213,10 @@ right---while there is no impact on the \texttt{hp} attack and a relatively
 small decrease for the \texttt{ctw} attack.
 For recall (not shown in the figure), the bound and relationship is
 as in Equation~\ref{eq:hprecall}: for \texttt{wf}, at zero rounds, recall is 0.055; for
-\texttt{hp} at zero rounds, recall is 0.019. These results suggest that for WF defenses to
-be effective against \name attacks, the defense must be tuned to provide a
-low recall even when the parameters of WF attacks are selected for high
-recall.
+\texttt{hp} at zero rounds, recall is 0.019. These results suggest that for
+website fingerprinting defenses to be effective against \name attacks, the
+defense must be tuned to provide a low recall even when the parameters of
+website fingerprinting attacks are selected for high recall.
 
 \subsubsection{Effect of Tor's TTL clipping}
 

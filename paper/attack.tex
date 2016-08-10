@@ -37,9 +37,11 @@ following building blocks:
 		but in this case, conventional end-to-end correlation
                 attacks are equally effective as those we describe here.
 \end{itemize}
-We combine a conventional WF attack operating on traffic from ingress sniffing with
+We combine a conventional website fingerprinting attack operating on traffic
+from ingress sniffing with
 DNS traffic observed by egress sniffing, creating \name attacks. Our attacks
-correlate the web\emph{sites} observed by the WF attack in ingress traffic with
+correlate the web\emph{sites} observed by the website fingerprinting attack in
+ingress traffic with
 the web\emph{sites} identified from DNS traffic. Next, we describe how we
 simulate the DNS traffic from Tor exits, how we map DNS requests to websites,
 and finally present our two \name attacks.
@@ -312,10 +314,9 @@ observing DNS requests to implement two attacks:
 \end{description}
 \noindent
 These approaches apply to any website fingerprinting attack. The
-\texttt{ctw} attack increases the effectiveness of conventional WF
-attacks by making them more akin to
-a closed-world setting, where websites have known
-fingerprints.
+\texttt{ctw} attack increases the effectiveness of conventional website
+fingerprinting attacks by making them more akin to a closed-world setting,
+where websites have known fingerprints.
 Conceptually, the attack could also include
 a custom weight-learning run---training only on observed sites---but our initial
 results noted little to no gain, despite significant increases in
