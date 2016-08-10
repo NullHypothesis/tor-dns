@@ -1,4 +1,4 @@
-\section{WF+DNS Attacks}
+\section{\name Attacks}
 \label{sec:attack}
 
 As with conventional correlation attacks, an attacker must observe
@@ -38,11 +38,11 @@ following building blocks:
                 attacks are equally effective as those we describe here.
 \end{itemize}
 We combine a conventional WF attack operating on traffic from ingress sniffing with
-DNS traffic observed by egress sniffing, creating WF+DNS attacks. Our attacks
+DNS traffic observed by egress sniffing, creating \name attacks. Our attacks
 correlate the web\emph{sites} observed by the WF attack in ingress traffic with
 the web\emph{sites} identified from DNS traffic. Next, we describe how we
 simulate the DNS traffic from Tor exits, how we map DNS requests to websites,
-and finally present our two WF+DNS attacks.
+and finally present our two \name attacks.
 
 \subsection{Approximating DNS traffic from Tor exits}
 \label{sec:attack:sim}
@@ -294,11 +294,11 @@ is also realistic when evaluating a classifier that maps DNS requests to
 websites since gathering requests made by all 173 million active websites on the
 Internet is practical with modest resources.
 We use our conservative open-world results when simulating the Tor network for
-evaluating WF+DNS attacks but
+evaluating \name attacks but
 note that our results indicate that observing DNS requests in Tor is
 largely equivallent to observing sites visited over Tor.
 
-\subsection{Classifiers for WF+DNS attacks}
+\subsection{Classifiers for \name attacks}
 
 \xxx{NF: This section is also confusing.  See comments in Slack.}
 We use Wa-kNN from Wang \ea~\cite{Wang2014a} and a list of sites derived from

@@ -91,7 +91,7 @@ allows us to eliminate DNS-based correlation attacks for a select number of
 sites.
 
 Tor can fix the Tor clipping bug and consider significantly increasing the
-minimum TTL for the DNS cache at exits to make WF+DNS attacks less precise.
+minimum TTL for the DNS cache at exits to make \name attacks less precise.
 This requires finding the longest acceptable TTL that does not have a
 notable negative impact on functionality.
 
@@ -108,7 +108,7 @@ connecting to the onion service, Tor users never leave the Tor network, and
 hence no not need DNS.
 
 While growing the Tor network will have a minor impact on protecting against
-WF+DNS attacks, the most important change is to deploy a WF defense. The
+\name attacks, the most important change is to deploy a WF defense. The
 WF defense should be tuned to significantly reduce the recall of WF attacks,
 even when the WF attack is configured to sacrifice precision for recall, since
-WF+DNS attacks significantly increase precision.
+\name attacks significantly increase precision.

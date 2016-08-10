@@ -1,9 +1,9 @@
-\section{Evaluating WF+DNS Attacks}
+\section{Evaluating \name Attacks}
 \label{sec:analysis}
 
 \subsection{Attack precision and recall}
 
-To evaluate our WF+DNS attacks, we collected traffic traces in May
+To evaluate our \name attacks, we collected traffic traces in May
 2016 using TBB~5.5.4.
 We modified TBB so that it does not generate network traffic on launch
 (\ie, check for
@@ -22,7 +22,7 @@ we did not prune our dataset further, neglecting issues like CloudFlare
 CAPTCHAs, outliers, control cells, and localized domains~\cite{Juarez2014a}.
 This likely leads to overall worse results for all attacks than what is
 possible, but we are primarily interested in the difference between WF and
-WF+DNS attacks~\cite{Wang2013a}.
+\name attacks~\cite{Wang2013a}.
 
 We perform ten-fold cross-validation for all of our experiments in the open
 world setting, monitoring 1,000 sites with 100 instances each and
@@ -45,7 +45,7 @@ are is a key factor in the effectiveness of our attacks.
 % note: base rate is per user, while popularity in Alexa for DNS observations
 % is world-wide
 
-Figure~\ref{fig:wfdns:torpct} shows the recall and precision for our WF+DNS
+Figure~\ref{fig:wfdns:torpct} shows the recall and precision for our \name
 attacks as a function of the percentage of observed Tor exit bandwidth by the
 attacker monitoring Alexa sites for sites whose rank is 10,000 or less.
 For recall, both \texttt{ctw} and \texttt{hp} are bound by the
@@ -93,7 +93,7 @@ For low Alexa ranks there is no difference between our attacks and the
 \texttt{wf} attack. This is because, even with a window of only 60 seconds,
 it is virtually guaranteed that someone browsed to any of the most popular
 sites over Tor. For sites that rank 1,000 or lower (\ie, less popular),
-the WF+DNS attacks show a clear improvement in both recall and precision.
+the \name attacks show a clear improvement in both recall and precision.
 These results paint a bleak picture: a small fraction of exit
 bandwidth provides a perfectly precise attack on relatively
 \emph{unpopular} sites such as \url{wikileaks.org}, which has Alexa rank
@@ -200,7 +200,7 @@ with WTF-PAD~\cite{DBLP:journals/corr/JuarezIPDW15}.
 This leads to the goal of finding an optimal with ``good enough''
 protection and minimal overhead.
 As a first attempt to approximate the effect of fingerprinting
-defenses on WF+DNS attacks, we use Wa-kNN with
+defenses on \name attacks, we use Wa-kNN with
 random weights and no weight-learning: this significantly reduces the
 effectiveness of the attack since some features (like indices of outgoing
 packers) are several orders of magnitude more useful
@@ -214,7 +214,7 @@ small decrease for the \texttt{ctw} attack.
 For recall (not shown in the figure), the bound and relationship is
 as in Equation~\ref{eq:hprecall}: for \texttt{wf}, at zero rounds, recall is 0.055; for
 \texttt{hp} at zero rounds, recall is 0.019. These results suggest that for WF defenses to
-be effective against WF+DNS attacks, the defense must be tuned to provide a
+be effective against \name attacks, the defense must be tuned to provide a
 low recall even when the parameters of WF attacks are selected for high
 recall.
 
@@ -262,7 +262,7 @@ domain for each website with the lowest TTL.  About half of the sites on
 Alexa top one million has a unique domain with a TTL of 60 seconds or
 shorter; 48\% of the raw unique TTLs are below 60 seconds and only 26\%
 above 30 minutes. Fixing the Tor clipping bug is therefore not
-sufficient; to mitigate WF+DNS attacks, the minimum TTL should be 
+sufficient; to mitigate \name attacks, the minimum TTL should be 
 significantly increased.  We also emulate what the correct TTL values
 would be due to TTL clipping supposing that Tor eventually fixes the
 aforementioned bug.  In this case, we find that Tor's TTL clipping has
@@ -284,9 +284,9 @@ fingerprinting precision, even with the larger window size.
 Figure~\ref{fig:wfdns:var:scale} scales the size of the Tor network with
 respect to site
 visits from the status quo to ten times its size, for Alexa starting rank 10,000 and
-100,000. At twice its current size, the impact on WF+DNS attacks is smaller than
+100,000. At twice its current size, the impact on \name attacks is smaller than
 increasing the minumum TTL for DNS caching to 180 seconds as shown in
-Figure~\ref{fig:wfdns:var:window}. These results indicate that WF+DNS
+Figure~\ref{fig:wfdns:var:window}. These results indicate that \name
 attacks will remain
 practical for many sites in the Alexa top one million, even as the Tor network grows.
 
@@ -296,7 +296,7 @@ practical for many sites in the Alexa top one million, even as the Tor network g
 
 % alexa offsets, all distributions and attacks
 To explore the sensitivity of our results to different distributions in
-how users visit websites, we now evaluate the effectiveness of WF+DNS
+how users visit websites, we now evaluate the effectiveness of \name
 attacks with four different website distributions:
 \begin{description}
 	\item[pc] A conservative power-law distribution
@@ -321,7 +321,7 @@ Alexa rank. The uniform distributions always have perfect precision.
 The difference between the two power-law distributions is about one order of
 magnitude in terms of starting Alexa rank: the realistic distribution gets
 near perfect at 1,000 and the conservative at 10,000.
-We conclude that WF+DNS attacks are perfectly precise for unpopular sites
+We conclude that \name attacks are perfectly precise for unpopular sites
 where the probability that someone else than the target browses to a monitored
 site within the timeframe given by the window length is negligible.
 
