@@ -222,11 +222,14 @@ a particular website; we call these domains {\em unique
 lookup to a unique domain during an HTTP session can identify that a
 user has visited a specific website. Figure~\ref{fig:unique-domains} shows the
 fraction of
-sites with unique domains for groups of websites in the Alexa top one million.
-For 96.8\% of all sites there exists at least one unique domain.
+sites with unique domains for websites up to Alexa top one million.
+For 96.8\% of all sites on the Alexa top one million
+there exists at least one unique domain.
 Interestingly, more
 popular websites are less likely have a unique domain associated with
-them.
+them: 40\% of Alexa top 100 has a unique domain compared to 96.8\% for
+top one million. \fixme{Run Figure~\ref{fig:unique-domains} with more points
+and explain early results.}
 Table~\ref{tab:dns-domains} shows statistics for the number of DNS domains per
 website. At least half of the sites we have ten domains per website where
 two of them are unique, suggesting that many website visits can be
@@ -237,7 +240,7 @@ identified from a single DNS request.
 	\includegraphics[width=0.9\linewidth]{figures/dns-unique-domains.pdf}
 	\caption{The fraction of websites on Alexa top one million that have at least
 	one unique domain. The vast majority of sites (96.8\%) have
-        unique domains. 
+        unique domains.
 }
 	\label{fig:unique-domains}
 \end{figure}
@@ -252,7 +255,7 @@ identified from a single DNS request.
 	unique per site & 2 & $2.3\pm\phantom{0}1.8$ & 0 & 363 \\
 	\bottomrule
 	\end{tabular}
-	\caption{The mean, median, standard deviation, minimum and
+	\caption{The median, mean, standard deviation, minimum and
           maximum number of DNS domains per website in the Alexa top 1
           million. More than half of the sites have two DNS domains that
         are unique to that site.}
