@@ -9,7 +9,7 @@ We modified TBB so that it does not generate network traffic on launch
 (\ie, check for
 updates, extensions, etc.), and we modified
 Tor (bundled with TBB) to log incoming and outgoing cells.
-We then collected performed 100 downloads for each site in the Alexa top
+We then performed 100 downloads for each site in the Alexa top
 1k and one download for each site in the
 Alexa top (1k,101k]. We randomly distributed these measurement tasks
 to a Docker fleet; each download used a fresh circuit without
@@ -26,7 +26,7 @@ fingerprinting and \name attacks~\cite{Wang2013a}.
 
 We perform ten-fold cross-validation for all of our experiments in the open
 world setting, monitoring 1,000 sites with 100 instances each and
-100,000 unmonitored sites unless otherwise stated.
+100,000 unmonitored sites.
 Note the 1:1 ratio between monitored traces and unmonitored traces,
 ensuring that for the classifier there is equal probability in the testing
 phase that a trace is a monitored or unmonitored site.
@@ -89,7 +89,7 @@ at Alexa rank 10k (and less popular). We compare our attacks (\texttt{ctw and
 Figure~\ref{fig:wfdns:alexa} shows recall and precision at 100\% of
 observed Tor exit bandwidth as a function of the starting Alexa rank of
 monitored sites (we still monitor 1,000 sites).
-For low Alexa ranks there is no difference between our attacks and the
+For high Alexa ranks there is no difference between our attacks and the
 \texttt{wf} attack. This is because, even with a window of only 60 seconds,
 it is virtually guaranteed that someone browsed to any of the most popular
 sites over Tor. For sites that rank 1,000 or lower (\ie, less popular),
