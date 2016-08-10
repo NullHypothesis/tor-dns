@@ -203,8 +203,8 @@ Without the \texttt{-open} parameter, the dns2site tool determines a reasonable
 open world size based on our conservative power-law distribution,
 which should be around 433,000.
 
-\subsection{Replicating WF+DNS attacks}
-This is how you replicate the WF+DNS results figures from
+\subsection{Replicating \name attacks}
+This is how you replicate the \name results figures from
 Section~\ref{sec:analysis}.
 First download and extract the traffic traces from our
 1,000x100+100,000 WF dataset:
@@ -239,7 +239,9 @@ do
 done
 \end{lstlisting}
 
-Manual assembly of the CSV files needed. For Figure~\ref{fig:wfdns:var} run
+Manual assembly of the CSV files needed. For
+Figures~\ref{fig:wfdns:var:rounds},~\ref{fig:wfdns:var:window},~\ref{fig:wfdns:var:scale},
+and~\ref{fig:wfdns:var:dist}, run
 as a shellscript:
 
 \begin{lstlisting}

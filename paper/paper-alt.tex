@@ -30,7 +30,7 @@
 }
 
 \hypersetup{
-	pdftitle={Understanding the impact of DNS on Tor's anonymity},
+	pdftitle={\TITLE},
 	pdfauthor={Anonymous},
 	pdfkeywords={Tor, DNS, traffic correlation, anonymity},
 	colorlinks=true,
@@ -49,6 +49,7 @@
 \newcommand{\fourth}{(\emph{iv})\xspace}
 \newcommand{\fifth}{(\emph{v})\xspace}
 
+\renewcommand{\name}{FingerprinTor\xspace}
 
 %%%%%%%%%%%%%%%%%%%%  TITLE/AUTHORS  %%%%%%%%%%%%%%%%%%%%%
 
@@ -91,11 +92,6 @@
 \input{discussion}
 \balance\input{conclusion}\label{lastpage}
 
-\section*{Appendix}
-\input{appendix}
-
-\end{sloppypar}
-
 %\bibliographystyle{abbrv}
 \bibliographystyle{IEEEtranS}
 \setlength{\parskip}{-1pt}
@@ -106,6 +102,12 @@
 %\theendnotes % ENDNOTES
 }{% onlyAbstract
 }
+
+\newpage
+\section*{Appendix}
+\input{appendix}
+
+\end{sloppypar}
 
 \end{document}
 
