@@ -69,14 +69,14 @@ these websites has previously been fit to a power-law distribution based
 on the rank of the
 website~\cite{DBLP:journals/network/MahantiCMAW13,ClausetSN09,AliS07}.
 For the page-view numbers of the Alexa top 10,000 websites, we found a
-power-law distribution to be a good fit as neither a lognormal nor a
+power-law distribution to be a good fit as neither a log-normal nor a
 power-law distribution with exponential cutoff (truncated power-law
 distribution) offered significantly better fits\footnote{We used the
 		python power-law package~\cite{power-law}
 		%\url{https://github.com/jeffalstott/power-law}
 		for fitting. After manual adjustment to make a conservative
 		model (worst for the attacker), the resulting power-law
-		distribution had an $\alpha$ parameter of about $1.1349$. Note
+		distribution had an $\alpha$ parameter of about $1.13$. Note
 		that page view numbers as collected by Alexa ignore multiple
 		visits by the same user on the same day (see
 		\url{https://support.alexa.com/hc/en-us/articles/200449744}), so
@@ -87,13 +87,13 @@ visited by Tor users. This might overestimate the popularity of
 higher-ranked websites, because Tor users might be visiting less popular
 websites, such as websites that are censored in different parts of the
 world more often than a typical Internet user. We will discuss the
-implications of our model for browing behavior in later sections.
+implications of our model for browsing behavior in later sections.
 
 \subsubsection{Modeling how often Tor users visit each page}
 \label{sec:load-freq}
 % phw's numbers extrapolated
 Next, we determined how many websites Tor users visit in a certain time span.
-We approximated this number by seting up an exit relay whose exit policy
+We approximated this number by setting up an exit relay whose exit policy
 included only ports 80 and 443, so our relay would only forward web traffic.  We
 then used tshark to capture the timestamps of DNS requests---but no DNS
 responses.  We made sure that our tshark filter did not capture packet payloads
@@ -281,7 +281,7 @@ closed-world evaluation yields 0.955 recall.  In the open-world
 evaluation, we monitor the Alexa top 500,000 with five samples each and
 consider 433,000 unmonitored sites.  The number of unmonitored sites is
 determined by our power-law
-distribution to represent a relastic base rate (for the entire Tor network)
+distribution to represent a realistic base rate (for the entire Tor network)
 for evaluating our classifier: on average, for sites on Alexa top 500,000
 to be visited 2.5 million times there will be about 433,000 visits to sites
 outside of Alexa top 500,0000.  Our classifier does not take into account the
