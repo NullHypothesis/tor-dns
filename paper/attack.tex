@@ -74,10 +74,15 @@ power-law distribution with exponential cutoff (truncated power-law
 distribution) offered significantly better fits\footnote{We used the
 		python power-law package~\cite{power-law}
 		%\url{https://github.com/jeffalstott/power-law}
-		for fitting. After manual adjustment to make a conservative
-		model (worst for the attacker), the resulting power-law
-		distribution had an $\alpha$ parameter of about $1.13$. Note
-		that pageview numbers as collected by Alexa ignore multiple
+		for fitting and picked a power-law
+		distribution with an $\alpha$ parameter of about $1.13$. 
+		When varying the fitting parameter $x_{min}$ that determines
+		beyond which minimum value the power-law behaviour should hold
+		in the provided data, we can get different $\alpha$ values. We
+		made a conservative choice of picking this smaller $\alpha$
+		value as it underestimates the popularity of popular websites
+		and therefore is worse for the attacker.
+		Note that pageview numbers as collected by Alexa ignore multiple
 		visits by the same user on the same day (see
 		\url{https://support.alexa.com/hc/en-us/articles/200449744}), so
 		the ranking might be slightly off when modelling website visit
