@@ -57,7 +57,7 @@ the outgoing traffic). We therefore opt to approximate the DNS traffic
 emerging from Tor exit relays by building a model of a typical Tor
 user's website browsing patterns, as well as the effects of DNS caching.
 
-\subsubsection{Modeling which pages Tor users visit}
+\subsubsection{Modeling which sites Tor users visit}
 \label{sec:attack:pop}
 
 We first build a model to approximate {which websites} Tor users visit.
@@ -68,7 +68,7 @@ a sample of all Internet users. The distribution of the popularity of
 these websites has previously been fit to a power-law distribution based
 on the rank of the
 website~\cite{DBLP:journals/network/MahantiCMAW13,ClausetSN09,AliS07}.
-For the page-view numbers of the Alexa top 10,000 websites, we found a
+For the pageview numbers of the Alexa top 10,000 websites, we found a
 power-law distribution to be a good fit as neither a log-normal nor a
 power-law distribution with exponential cutoff (truncated power-law
 distribution) offered significantly better fits\footnote{We used the
@@ -77,7 +77,7 @@ distribution) offered significantly better fits\footnote{We used the
 		for fitting. After manual adjustment to make a conservative
 		model (worst for the attacker), the resulting power-law
 		distribution had an $\alpha$ parameter of about $1.13$. Note
-		that page view numbers as collected by Alexa ignore multiple
+		that pageview numbers as collected by Alexa ignore multiple
 		visits by the same user on the same day (see
 		\url{https://support.alexa.com/hc/en-us/articles/200449744}), so
 		the ranking might be slightly off when modelling website visit
@@ -89,7 +89,7 @@ websites, such as websites that are censored in different parts of the
 world more often than a typical Internet user. We will discuss the
 implications of our model for browsing behavior in later sections.
 
-\subsubsection{Modeling how often Tor users visit each page}
+\subsubsection{Modeling how often Tor users visit each site}
 \label{sec:load-freq}
 % phw's numbers extrapolated
 Next, we determined how many websites Tor users visit in a certain time span.
@@ -119,16 +119,26 @@ Figure~\ref{fig:dns-reqs} shows this timeseries.
 
 We then interpolate these numbers to all Tor exit relays based on the published
 bandwidth statistics of all Tor exit relays. We found our exit relay to have an
-average of 119.3 outgoing DNS requests per five minutes during a two-week period,
-which corresponds to about 1.583 page visits per minute (taking caching into
-\fixme{did this use the old power-law distribution?}
-account and assuming a power-law distribution of site popularity as described
-above).  We configured exit relay to only allow port 80 and 443 during the time
+average of 119.3 outgoing DNS requests per five minutes during a two-week period.
+We configured the exit relay to only allow port 80 and 443 during the time
 of the measurements to avoid counting DNS requests from protocols other than
-HTTP and HTTPS. We then used the self-reported bandwidth information from Tor
-exit relays collected in the ``extra-info'' descriptors available on
-CollecTor~\cite{collector} to estimate the number of page loads on each of the
-about 1,200 exit relays active at that time.
+HTTP and HTTPS. 
+From DNS statistics of the Alexa top one million websites (see
+Section~\ref{sec:dns2site}) we know that one website visit causes about
+29.1 outgoing DNS requests (assuming a power-law distribution of site
+popularity as described above and taking into account that the client
+may send requests for the same domain several times until it gets served
+a response -- until the first response for a domain is cached at the
+exit relay, this can also causes multiple outgoing DNS request from the
+exit relay for the same domain). 
+This means that we had an average of about 4.1 website visits per five
+minutes on our exit relay. We can scale this number up to the whole Tor
+network using the self-reported bandwidth information from Tor exit
+relays collected in the ``extra-info'' descriptors available on
+CollecTor~\cite{collector} and estimate the number of website visits on
+each of the about 1,200 exit relays active at that time. According to
+these calculations the total number of websites visited through the Tor
+network is 316.3 websites per second.
 
 \subsubsection{Modeling the effects of DNS caching}
 To analyze which DNS requests the adversary can see, we need to
@@ -171,9 +181,9 @@ We assume that an adversary applies this sliding window technique and
 model the observable DNS data accordingly.
 The attacker observes a fraction of Tor exit bandwidth,
 for a specific window length,
-and together with our page load frequency estimation
-this triggers a number of page loads in our simulation.
-For each page load event we randomly draw a website using the
+and together with our website visit frequency estimation
+this triggers a number of website visits in our simulation.
+For each visit event we randomly draw a website using the
 power-law website popularity distribution described above and put its
 DNS requests into the window. As we will see next, we do not need to
 simulate or consider the fact that the observed fraction of Tor exit bandwidth
@@ -228,8 +238,8 @@ sites with unique domains for websites up to Alexa top one million.
 For 96.8\% of all sites on the Alexa top one million
 there exists at least one unique domain.
 Interestingly, more
-popular websites are less likely have a unique domain associated with
-them: 43\% of Alexa top 100 has a unique domain compared to 96.8\% for
+popular websites are less likely to have a unique domain associated with
+them: 43\% of Alexa top 100 have a unique domain compared to 96.8\% for
 top one million. Above Alexa top 100 the fraction is erratic between
 27\% to 41\%---why is not apparent---
 but for less popular sites from Alexa 100 and downwards the trend is clear.
