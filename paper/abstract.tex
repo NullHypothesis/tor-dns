@@ -26,6 +26,9 @@ additional ASes to gain information about Tor users' traffic.
 By correlating the output of WF
 attacks with observed DNS requests, WF+DNS attacks are perfectly precise for
 unpopular websites, further motivating the introduction of WF defenses in Tor.
-\fixme{Add insights about TorPS simulations.}
+Building off of lessons learned from earlier Tor measurement studies, we use the 
+Tor Path Simulator (TorPS) in combination with actual data plane data (vs. using 
+AS path inference) in order to get better approximations of the risks ASes can 
+pose should they decide to deploy DNS-enhanced attacks. 
 Finally, some of our findings generalize to other anonymity networks.
 \end{abstract}
