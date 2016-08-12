@@ -37,9 +37,11 @@ following building blocks:
 		but in this case, conventional end-to-end correlation
                 attacks are equally effective as those we describe here.
 \end{itemize}
-We combine a conventional WF attack operating on traffic from ingress sniffing with
+We combine a conventional website fingerprinting attack operating on traffic
+from ingress sniffing with
 DNS traffic observed by egress sniffing, creating \name attacks. Our attacks
-correlate the web\emph{sites} observed by the WF attack in ingress traffic with
+correlate the web\emph{sites} observed by the website fingerprinting attack in
+ingress traffic with
 the web\emph{sites} identified from DNS traffic. Next, we describe how we
 simulate the DNS traffic from Tor exits, how we map DNS requests to websites,
 and finally present our two \name attacks.
@@ -55,7 +57,7 @@ the outgoing traffic). We therefore opt to approximate the DNS traffic
 emerging from Tor exit relays by building a model of a typical Tor
 user's website browsing patterns, as well as the effects of DNS caching.
 
-\subsubsection{Modeling which pages Tor users visit}
+\subsubsection{Modeling which sites Tor users visit}
 \label{sec:attack:pop}
 
 We first build a model to approximate {which websites} Tor users visit.
@@ -66,16 +68,16 @@ a sample of all Internet users. The distribution of the popularity of
 these websites has previously been fit to a power-law distribution based
 on the rank of the
 website~\cite{DBLP:journals/network/MahantiCMAW13,ClausetSN09,AliS07}.
-For the page-view numbers of the Alexa top 10,000 websites, we found a
-power-law distribution to be a good fit as neither a lognormal nor a
+For the pageview numbers of the Alexa top 10,000 websites, we found a
+power-law distribution to be a good fit as neither a log-normal nor a
 power-law distribution with exponential cutoff (truncated power-law
 distribution) offered significantly better fits\footnote{We used the
 		python power-law package~\cite{power-law}
 		%\url{https://github.com/jeffalstott/power-law}
 		for fitting. After manual adjustment to make a conservative
 		model (worst for the attacker), the resulting power-law
-		distribution had an $\alpha$ parameter of about $1.1349$. Note
-		that page view numbers as collected by Alexa ignore multiple
+		distribution had an $\alpha$ parameter of about $1.13$. Note
+		that pageview numbers as collected by Alexa ignore multiple
 		visits by the same user on the same day (see
 		\url{https://support.alexa.com/hc/en-us/articles/200449744}), so
 		the ranking might be slightly off when modelling website visit
@@ -85,13 +87,13 @@ visited by Tor users. This might overestimate the popularity of
 higher-ranked websites, because Tor users might be visiting less popular
 websites, such as websites that are censored in different parts of the
 world more often than a typical Internet user. We will discuss the
-implications of our model for browing behavior in later sections.
+implications of our model for browsing behavior in later sections.
 
-\subsubsection{Modeling how often Tor users visit each page}
+\subsubsection{Modeling how often Tor users visit each site}
 \label{sec:load-freq}
 % phw's numbers extrapolated
 Next, we determined how many websites Tor users visit in a certain time span.
-We approximated this number by seting up an exit relay whose exit policy
+We approximated this number by setting up an exit relay whose exit policy
 included only ports 80 and 443, so our relay would only forward web traffic.  We
 then used tshark to capture the timestamps of DNS requests---but no DNS
 responses.  We made sure that our tshark filter did not capture packet payloads
@@ -117,16 +119,26 @@ Figure~\ref{fig:dns-reqs} shows this timeseries.
 
 We then interpolate these numbers to all Tor exit relays based on the published
 bandwidth statistics of all Tor exit relays. We found our exit relay to have an
-average of 119.3 outgoing DNS requests per five minutes during a two-week period,
-which corresponds to about 1.583 page visits per minute (taking caching into
-\fixme{did this use the old power-law distribution?}
-account and assuming a power-law distribution of site popularity as described
-above).  We configured exit relay to only allow port 80 and 443 during the time
+average of 119.3 outgoing DNS requests per five minutes during a two-week period.
+We configured the exit relay to only allow port 80 and 443 during the time
 of the measurements to avoid counting DNS requests from protocols other than
-HTTP and HTTPS. We then used the self-reported bandwidth information from Tor
-exit relays collected in the ``extra-info'' descriptors available on
-CollecTor~\cite{collector} to estimate the number of page loads on each of the
-about 1,200 exit relays active at that time.
+HTTP and HTTPS. 
+From DNS statistics of the Alexa top one million websites (see
+Section~\ref{sec:dns2site}) we know that one website visit causes about
+29.1 outgoing DNS requests (assuming a power-law distribution of site
+popularity as described above and taking into account that the client
+may send requests for the same domain several times until it gets served
+a response -- until the first response for a domain is cached at the
+exit relay, this can also causes multiple outgoing DNS request from the
+exit relay for the same domain). 
+This means that we had an average of about 4.1 website visits per five
+minutes on our exit relay. We can scale this number up to the whole Tor
+network using the self-reported bandwidth information from Tor exit
+relays collected in the ``extra-info'' descriptors available on
+CollecTor~\cite{collector} and estimate the number of website visits on
+each of the about 1,200 exit relays active at that time. According to
+these calculations the total number of websites visited through the Tor
+network is 316.3 websites per second.
 
 \subsubsection{Modeling the effects of DNS caching}
 To analyze which DNS requests the adversary can see, we need to
@@ -169,9 +181,9 @@ We assume that an adversary applies this sliding window technique and
 model the observable DNS data accordingly.
 The attacker observes a fraction of Tor exit bandwidth,
 for a specific window length,
-and together with our page load frequency estimation
-this triggers a number of page loads in our simulation.
-For each page load event we randomly draw a website using the
+and together with our website visit frequency estimation
+this triggers a number of website visits in our simulation.
+For each visit event we randomly draw a website using the
 power-law website popularity distribution described above and put its
 DNS requests into the window. As we will see next, we do not need to
 simulate or consider the fact that the observed fraction of Tor exit bandwidth
@@ -226,10 +238,12 @@ sites with unique domains for websites up to Alexa top one million.
 For 96.8\% of all sites on the Alexa top one million
 there exists at least one unique domain.
 Interestingly, more
-popular websites are less likely have a unique domain associated with
-them: 40\% of Alexa top 100 has a unique domain compared to 96.8\% for
-top one million. \fixme{Run Figure~\ref{fig:unique-domains} with more points
-and explain early results.}
+popular websites are less likely to have a unique domain associated with
+them: 43\% of Alexa top 100 have a unique domain compared to 96.8\% for
+top one million. Above Alexa top 100 the fraction is erratic between
+27\% to 41\%---why is not apparent---
+but for less popular sites from Alexa 100 and downwards the trend is clear.
+
 Table~\ref{tab:dns-domains} shows statistics for the number of DNS domains per
 website. At least half of the sites we have ten domains per website where
 two of them are unique, suggesting that many website visits can be
@@ -277,7 +291,7 @@ closed-world evaluation yields 0.955 recall.  In the open-world
 evaluation, we monitor the Alexa top 500,000 with five samples each and
 consider 433,000 unmonitored sites.  The number of unmonitored sites is
 determined by our power-law
-distribution to represent a relastic base rate (for the entire Tor network)
+distribution to represent a realistic base rate (for the entire Tor network)
 for evaluating our classifier: on average, for sites on Alexa top 500,000
 to be visited 2.5 million times there will be about 433,000 visits to sites
 outside of Alexa top 500,0000.  Our classifier does not take into account the
@@ -287,15 +301,12 @@ recall of 0.947 for a precision of 0.984.  By accounting for the order
 of requests, per-exit partitioning of DNS requests, TTLs, and website
 popularity, we expect that classifying website visits from DNS requests
 might be made even more accurate.
-
-\xxx{NF: don't understand this paragraph.}
-The closed-world setting
-is also realistic when evaluating a classifier that maps DNS requests to
-websites since gathering requests made by all 173 million active websites on the
+Further, note that a closed world is a realistic setting:
+gathering requests made by all 173 million active websites on the
 Internet is practical with modest resources.
-We use our conservative open-world results when simulating the Tor network for
-evaluating \name attacks but
-note that our results indicate that observing DNS requests in Tor is
+We use the conservative open world results when simulating the Tor network and
+the attacker's success in mapping DNS requests to websites.
+Note that our results indicate that observing DNS requests in Tor is
 largely equivallent to observing sites visited over Tor.
 
 \subsection{Classifiers for \name attacks}
@@ -315,10 +326,9 @@ observing DNS requests to implement two attacks:
 \end{description}
 \noindent
 These approaches apply to any website fingerprinting attack. The
-\texttt{ctw} attack increases the effectiveness of conventional WF
-attacks by making them more akin to
-a closed-world setting, where websites have known
-fingerprints.
+\texttt{ctw} attack increases the effectiveness of conventional website
+fingerprinting attacks by making them more akin to a closed-world setting,
+where websites have known fingerprints.
 Conceptually, the attack could also include
 a custom weight-learning run---training only on observed sites---but our initial
 results noted little to no gain, despite significant increases in

@@ -11,7 +11,7 @@ practical threat of such adversaries is an important question that the
 research community has
 spent considerable effort on answering.  In 2004, when the Tor network comprised
 only 33 relays, Feamster and Dingledine investigated the practical threat that
-network-level adversaries pose to anonymity networks~\cite{Feamster2004a}.  
+network-level adversaries pose to anonymity networks~\cite{Feamster2004a}.
 The authors considered an attacker that controls an autonomous
 system that is traversed both for ingress and egress traffic, allowing the
 attacker to correlate both streams.  Using AS path prediction~\cite{Gao2001a},
@@ -20,7 +20,7 @@ diversity of anonymity networks.  In 2007, Murdoch and Zieli\'{n}ski drew
 attention to IXP-level adversaries, a class of adversaries that was missing in
 Feamster and Dingledine's work~\cite{Murdoch2007a}.  Murdoch and Zieli\'{n}ski
 showed that IXP adversaries are able to correlate traffic streams, even in the
-presence of packet sampling rates as low as one in 2,000.  
+presence of packet sampling rates as low as one in 2,000.
 
 In 2013, Johnson
 \ea~\cite{Johnson2013a} presented the first large-scale study on the risk of Tor
@@ -53,7 +53,7 @@ our method and achieve previously unprecedented scale.
 
 \paragraph{Website fingerprinting}
 In 2009, Hermann \ea~\cite{Hermann2009a} demonstrated the first website
-fingerprinting (WF) attack against anonymity systems---including Tor---in a
+fingerprinting attack against anonymity systems---including Tor---in a
 closed-world setting.  In 2011, Panchenko \ea~\cite{Panchenko2011a} greatly
 improved on Hermann \ea's detection rate and provided insight into an open-world
 setting.  In 2012, Cai \ea~\cite{Cai2012a} improved on previous work by
@@ -69,34 +69,35 @@ Cai \ea~\cite{Cai2014b}
 determined which traffic features provide the most predictive power to detect
 websites, proved a lower bound of any defense that achieves a certain level of
 security, and provided a framework to investigate the performance of
-WF attacks.  Juarez~\cite{Juarez2014a} showed that all previous attacks
-made several simplifying 
+website fingerprinting attacks.
+Juarez~\cite{Juarez2014a} showed that all previous attacks
+made several simplifying
 assumptions; the work suggested that attacks are still
 difficult to run outside a lab setting as an attacker will have to consider
 operating system differences, page changes, and background traffic.
 Recently, in 2016, Wang and Goldberg addressed many practical
 roadblocks to website fingerprinting, such as noisy data and maintaining a training set,
-further highlighting the need for WF defenses in Tor~\cite{taoianreally}.
+further highlighting the need for website fingerprinting defenses in
+Tor~\cite{taoianreally}.
 
 Panchenko \ea~\cite{Panchenko2016a} showed that web\emph{page}
 fingerprinting (\ie, fingerprinting of any page on a site) is
 significantly harder than web\emph{site} fingerprinting (\ie,
 fingerprinting of only the start page of a site).  Hayes and Danezis
 proposed k-fingerprinting, an attack with notably better performance
-than Wa-kNN even in the face of WF defenses
+than Wa-kNN even in the face of defenses
 \cite{kfingerprinting}. Their attack retains 30\% accuracy in a
 closed-world setting against the WTF-PAD defense by Juarez et
 al.~\cite{DBLP:journals/corr/JuarezIPDW15}---a prime candidate for
-deployment in
-Tor\footnote{\url{https://gitweb.torproject.org/torspec.git/tree/proposals/254-padding-negotiation.txt}}---at
-the cost of 50\% bandwidth overhead.
+deployment in Tor~\cite{adapativepadding}---at the cost of 50\% bandwidth
+overhead.
 
 In this paper, we show how to correlate and use observed DNS requests in
-concert with WF attacks,
+concert with website fingerprinting attacks,
 which significantly
 improves precision for web\emph{site} fingerprinting.
 The two \name attacks  that we present in this paper have implications
-for the design of WF defenses: 
-to mitigate \name attacks, open-world evaluations of the WF defense should
-minimise recall even when the WF attack is tuned to sacrifice precision for
-recall.
+for the design of website fingerprinting defenses:
+to mitigate \name attacks, open-world evaluations of the website fingerprinting
+defense should minimise recall even when the website fingerprinting attack is
+tuned to sacrifice precision for recall.
