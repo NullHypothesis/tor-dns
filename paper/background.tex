@@ -37,14 +37,14 @@ either classify a monitored site as
 unmonitored (lowering recall) or vice versa (lowering precision).
 Mistaking one monitored site for another is less likely~\cite{WangThesis}.
 
-Wa-kNN is a website fingerprinting attack by Wang et al.~\cite{Wang2014a}
-in the form of a k-nearest neighbour classifier with a custom weight-learning
-algorithm WLLCC~\cite{WangThesis}.  From \emph{packet traces}
-between a Tor client and its guard, Wa-kNN extracts a number of \emph{features}
-for \emph{site classification}.  Useful features are, e.g.,
+Wa-kNN is a website fingerprinting attack by Wang \ea~\cite{Wang2014a}
+that uses a k-nearest neighbour classifier with a custom weight-learning
+algorithm, WLLCC~\cite{WangThesis}.  From {packet traces}
+between a Tor client and its guard, Wa-kNN extracts a number of {features}
+to classify each website.  Useful features include
 the number of outgoing packets and bursts of packets in the same direction.
-In the training phase, WLLCC adjusts \emph{weights} of features extracted from
-sites of known classes such that the \emph{distance} between instances of the
+In the training phase, WLLCC adjusts {weights} of features extracted from
+sites of known classes such that the {distance} between instances of the
 same site (class) are minimized (collapsed).
 In the testing phase, Wa-kNN determines the distance of a testing traffic trace
 to all known training traces.  The distance calculation results in the $k$
@@ -72,11 +72,11 @@ form a virtual tunnel called a \emph{circuit}.  The guard relay learns the
 client's IP address, but not its web activity, while the exit relay gets to
 learn the client's web activity, but not its IP address.  Relays and clients
 talk to each other using the Tor protocol, which uses 512-byte \emph{cells}.
-Finally, each relay is uniquely identified by its \emph{fingerprint}, a hash
-function over its public key.
+Finally, each relay is uniquely identified by a hash
+function over its public key (a relay fingerprint).
 
 \paragraph{How Tor resolves DNS requests}
-Tor clients must send DNS requests over Tor to prevent DNS {\em leakage}
+Tor clients must send DNS requests over Tor to prevent DNS {leakage}
 (\ie, having a
 DNS request travel over an unencrypted channel as opposed to over Tor
 itself).  Tor does not transport UDP
