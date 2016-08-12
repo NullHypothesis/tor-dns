@@ -1,34 +1,37 @@
 \begin{abstract}
-Previous correlation attacks on the Tor network have focused solely on
-the attacks that are possible from analyzing a single TCP connection between
-a client and a server. In reality, of course, a client application opens
-several TCP connections to handle a single application request; many of
-those TCP connections are also accompanied by DNS requests and
-responses. This additional traffic presents many more opportunities for
-an adversary to launch a correlation attack.
+Previous attacks that link the sender and receiver of traffic in the Tor
+network (``correlation attacks'') have generally relied on analyzing
+traffic from a single
+TCP connection. A typical client application, however, opens
+several TCP connections,  many of
+which are accompanied by DNS requests and
+responses. This additional traffic presents more opportunities for
+correlation attacks.
 %
-This paper quantifies the effects of DNS traffic on Tor users' anonymity.
-We investigate how DNS can make existing attacks more powerful, as well
-as how DNS lookups can leak information to third parties about anonymous
+This paper quantifies how DNS traffic can make Tor users more vulnerable
+to correlation attacks.
+We investigate how incorporating DNS traffic can make existing correlation attacks more powerful
+and how DNS lookups can leak information to third parties about anonymous
 communication. We \first develop a
-method to identify the DNS resolvers of Tor exit relays; \second show how
-existing website fingerprinting (WF) attacks are stronger when they incorporate DNS
-traffic; \third analyze the Internet-scale effects of these new attacks on Tor
-users; and \fourth present an improved method to evaluate correlation
+method to identify the DNS resolvers of Tor exit relays; \second develop
+a new set of correlation attacks (\name attacks) that incorporate DNS traffic to improve
+precision; \third analyze the Internet-scale effects of these new attacks on Tor
+users; and \fourth develop improved methods to evaluate correlation
 attacks.
 %
-We find that Google's DNS resolver observes almost 40\% of all DNS
-requests exiting the Tor network. DNS requests also often traverse ASes
+First, we find that there exist adversaries who can mount \name
+attacks: for example, 
+Google's DNS resolver observes almost 40\% of all DNS 
+requests exiting the Tor network. We also find that DNS requests also often traverse ASes
 that the corresponding TCP connections do not transit, enabling
 additional ASes to gain information about Tor users' traffic.
 %%% 
-\xxx{Abstract is very unclear from here down.}
-By correlating the output of WF
-attacks with observed DNS requests, WF+DNS attacks are perfectly precise for
-unpopular websites, further motivating the introduction of WF defenses in Tor.
-Building off of lessons learned from earlier Tor measurement studies, we use the 
-Tor Path Simulator (TorPS) in combination with actual data plane data (vs. using 
-AS path inference) in order to get better approximations of the risks ASes can 
-pose should they decide to deploy DNS-enhanced attacks. 
-Finally, some of our findings generalize to other anonymity networks.
+We then show that an adversary who can mount a \name attack can often
+determine the website that a Tor user is visiting with perfect
+precision, particularly for less popular websites where the set of DNS
+names associated with that website may be unique to the site.
+We also use the
+Tor Path Simulator (TorPS) in combination with traceroute data from
+vantage points co-located with Tor exit relays to estimate the power of
+AS-level adversaries who might mount \name attacks in practice. 
 \end{abstract}
