@@ -130,20 +130,19 @@ of the measurements to avoid counting DNS requests from protocols other than
 HTTP and HTTPS.
 From DNS statistics of the Alexa top one million websites (see
 Section~\ref{sec:dns2site}) we know that one website visit causes about
-29.1 outgoing DNS requests (assuming a power-law distribution of site
-popularity as described above and taking into account that the client
-may send requests for the same domain several times until it gets served
-a response -- until the first response for a domain is cached at the
-exit relay, this can also causes multiple outgoing DNS request from the
-exit relay for the same domain).
-This means that we had an average of about 4.1 website visits per five
+10.3 outgoing DNS requests for unqiue domains on average
+(assuming a power-law distribution of site popularity as described above and
+taking into account tor caching pending DNS requests, ensuring that multiple
+requests sent by TBB for the same domain name only results in one request
+by the exit).
+This means that we had an average of about 11.6 website visits per five
 minutes on our exit relay. We can scale this number up to the whole Tor
 network using the self-reported bandwidth information from Tor exit
 relays collected in the ``extra-info'' descriptors available on
 CollecTor~\cite{collector} and estimate the number of website visits on
-each of the about 1,200 exit relays active at that time. According to
-these calculations the total number of websites visited through the Tor
-network is about 190,000 websites per 10 minutes.
+each of the about 1,200 exit relays active at that time. The resulting average
+total number of websites visited through the Tor network is about 536,000
+websites per 10 minutes.
 
 Recently, Jansen and Johnson~\cite{jansen-ccs2016} measured the average
 number of active web (port 80 and 443) circuits in Tor to about 700,000 per 10
