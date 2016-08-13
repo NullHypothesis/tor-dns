@@ -158,7 +158,7 @@ wget FIXME/ips-v4
 Get and install our dnsstats tool using Go\footnote{\url{https://golang.org/}}:
 
 \begin{lstlisting}
-go get github.com/pylls/dnsstats
+go get github.com/pylls/fingerprintor/cmd/dnsstats
 \end{lstlisting}
 
 Finally, run dnsstats on the downloaded data:
@@ -184,7 +184,7 @@ tar -zxf alexa1mx5-extracted.tar.gz
 Get and install our dns2site tool using Go:
 
 \begin{lstlisting}
-go get github.com/pylls/dns2site
+go get github.com/pylls/fingerprintor/cmd/dns2site
 \end{lstlisting}
 
 For the closed world metrics, run:
@@ -214,48 +214,48 @@ wget FIXME/alexa1kx100+100k-extracted.tar.gz
 tar -zxf alexa1kx100+100k-extracted.tar.gz
 \end{lstlisting}
 
-Get and install our wfdns tool using Go:
+Get and install our fpt tool using Go:
 
 \begin{lstlisting}
-go get github.com/pylls/wfdns
+go get github.com/pylls/fingerprintor/cmd/fpt
 \end{lstlisting}
 
-To generate data for Figure~\ref{fig:wfdns:torpct}, run:
+To generate data for Figure~\ref{fig:fpt:torpct}, run:
 
 \begin{lstlisting}
-wfdns -sites 1000 -instances 100 -open 100000 -pmin 0 -pmax 100 -pstep 5 -alexa 10000
+fpt -sites 1000 -instances 100 -open 100000 -pmin 0 -pmax 100 -pstep 5 -alexa 10000
 \end{lstlisting}
 
 The result is written to stdout and three files: one CSV file for precision,
 one CSV file for recall, and a log of all output. All filenames capture relevant
 parameters and are only created upon experiment completion.
 
-To generate data for Figure~\ref{fig:wfdns:alexa}, run as a shellscript:
+To generate data for Figure~\ref{fig:fpt:alexa}, run as a shellscript:
 
 \begin{lstlisting}
 for i in 1 10 100 1000 10000 100000 1000000 10000000 100000000
 do
-  wfdns -sites 1000 -instances 100 -open 100000 -pmin 100 -alexa $i
+  fpt -sites 1000 -instances 100 -open 100000 -pmin 100 -alexa $i
 done
 \end{lstlisting}
 
 Manual assembly of the CSV files needed. For
-Figures~\ref{fig:wfdns:var:rounds},~\ref{fig:wfdns:var:window},~\ref{fig:wfdns:var:scale},
-and~\ref{fig:wfdns:var:dist}, run
+Figures~\ref{fig:fpt:var:rounds},~\ref{fig:fpt:var:window},~\ref{fig:fpt:var:scale},
+and~\ref{fig:fpt:var:dist}, run
 as a shellscript:
 
 \begin{lstlisting}
 # rounds
 for i in 0 300 600 900 1200 1500 1800 2100 2400 2700 3000
 do
-  wfdns -sites 1000 -instances 100 -open 100000 -pmin 33 -pmax 33 -alexa 10000 -r $i
+  fpt -sites 1000 -instances 100 -open 100000 -pmin 33 -pmax 33 -alexa 10000 -r $i
 done
 # window size
 for i in 90 180 360 540 720 900 1080 1260 1440 1620 1800
 do
   for j in 10000 100000
   do
-  wfdns -sites 1000 -instances 100 -open 100000 -pmin 33 -pmax 33 -window $i -alexa $j
+  fpt -sites 1000 -instances 100 -open 100000 -pmin 33 -pmax 33 -window $i -alexa $j
   done
 done
 # Tor network scale
@@ -263,7 +263,7 @@ for i in 1.0 2.0 3.0 4.0 5.0 6.0 7.0 8.0 9.0 10.0
 do
   for j in 10000 100000
   do
-  wfdns -sites 1000 -instances 100 -open 100000 -pmin 33 -pmax 33 -scaletor $i -alexa $j
+  fpt -sites 1000 -instances 100 -open 100000 -pmin 33 -pmax 33 -scaletor $i -alexa $j
   done
 done
 # different distributions
@@ -271,7 +271,7 @@ for i in conpl realpl conuni realuni
 do
   for j in 0 10 100 1000 10000 100000 1000000 10000000 100000000
   do
-    wfdns -sites 1000 -instances 100 -open 100000 -pmin 33 -pmax 33 -simdist $i -alexa $j
+    fpt -sites 1000 -instances 100 -open 100000 -pmin 33 -pmax 33 -simdist $i -alexa $j
   done
 done
 \end{lstlisting}
@@ -286,7 +286,8 @@ dataset used in Section~\ref{sec:dns2site}.
 First, get and install three tools using Go:
 
 \begin{lstlisting}
-go get github.com/pylls/tordns/cmd/{server,tbbdnsw,extractdns}
+go get github.com/pylls/fingerprintor/cmd/{server,tbbdnsw}
+go get github.com/pylls/fingerprintor/cmd/extractdns
 \end{lstlisting}
 
 We use a worker-server model, where a server instructs workers to browse to a
@@ -394,7 +395,8 @@ To replicate our WF dataset used in Section~\ref{sec:analysis}, get and
 install the following four tools using Go:
 % server
 \begin{lstlisting}
-go get github.com/pylls/tordns/cmd/{server,tbbw,torlogext,fext}
+go get github.com/pylls/fingerprintor/cmd/{server,tbbw}
+go get github.com/pylls/fingerprintor/cmd/{torlogext,fext}
 \end{lstlisting}
 
 Download an Alexa file with top sites~\cite{alexatop1k} and run:
