@@ -71,11 +71,11 @@ nearly reaching the same levels as \texttt{hp} at 100\% of the exit bandwidth.
 \begin{figure}[t]
 \centering
 \subfigure[Recall]{
-	\includegraphics[width=0.8\linewidth]{figures/fpt/pct/1kx100+100k-recall}
+	\includegraphics[width=0.8\linewidth]{figures/fpt/pct/1kx100+100k-recall-ggplot2}
     \label{fig:fpt:torpct:recall}
 }
 \subfigure[Precision]{
-	\includegraphics[width=0.8\linewidth]{figures/fpt/pct/1kx100+100k-precision}
+	\includegraphics[width=0.8\linewidth]{figures/fpt/pct/1kx100+100k-precision-ggplot2}
     \label{fig:fpt:torpct:precision}
 }
 \caption{Recall and precision for an open-world dataset, for sites
@@ -103,11 +103,11 @@ bandwidth provides a perfectly precise attack on relatively
 \begin{figure}[t]
 \centering
 \subfigure[Recall]{
-	\includegraphics[width=0.8\linewidth]{figures/fpt/alexa/1kx100+100k-offsets-100pct-recall}
+	\includegraphics[width=0.8\linewidth]{figures/fpt/alexa/1kx100+100k-offsets-100pct-recall-ggplot2}
     \label{fig:fpt:alexa:recall}
 }
 \subfigure[Precision]{
-	\includegraphics[width=0.8\linewidth]{figures/fpt/alexa/1kx100+100k-offsets-100pct-precision}
+	\includegraphics[width=0.8\linewidth]{figures/fpt/alexa/1kx100+100k-offsets-100pct-precision-ggplot2}
     \label{fig:fpt:alexa:precision}
 }
 \caption{The recall and precision when varying the starting Alexa rank of
@@ -120,14 +120,14 @@ monitored sites.}
 
 \begin{figure}[t]
 \centering
-\includegraphics[width=0.75\linewidth]{figures/fpt/rounds/1kx100+100k}
+\includegraphics[width=0.75\linewidth]{figures/fpt/rounds/1kx100+100k-ggplot2}
 \caption{Effect of website fingerprinting defenses.}
 \label{fig:fpt:var:rounds}
 \end{figure}
 
 \begin{figure}[t]
 \centering
-\includegraphics[width=0.75\linewidth]{figures/fpt/window/1kx100+100k}
+\includegraphics[width=0.75\linewidth]{figures/fpt/window/1kx100+100k-ggplot2}
 \caption{Effect of increasing the analysis time window.}
     \label{fig:fpt:var:window}
 \end{figure}
@@ -136,7 +136,7 @@ monitored sites.}
 
 \begin{figure}[t]
 \centering
-	\includegraphics[width=0.75\linewidth]{figures/fpt/scale/1kx100+100k}
+	\includegraphics[width=0.75\linewidth]{figures/fpt/scale/1kx100+100k-ggplot2}
 \caption{Effect of Tor network size.}
 \label{fig:fpt:var:scale}
 \end{figure}
@@ -144,7 +144,7 @@ monitored sites.}
 
 \begin{figure}[t]
 \centering
-\includegraphics[width=0.75\linewidth]{figures/fpt/dist/1kx100+100k}
+\includegraphics[width=0.75\linewidth]{figures/fpt/dist/1kx100+100k-ggplot2}
 \caption{Effect of different website popularity distributions.}
     \label{fig:fpt:var:dist}
 \end{figure}
@@ -154,19 +154,19 @@ monitored sites.}
 \begin{figure}[t]
 \centering
 \subfigure[Effect of website fingerprinting defenses.]{
-	\includegraphics[width=0.75\linewidth]{figures/fpt/rounds/1kx100+100k}
+	\includegraphics[width=0.75\linewidth]{figures/fpt/rounds/1kx100+100k-ggplot2}
     \label{fig:fpt:var:rounds}
 }
 \subfigure[Effect of increasing the analysis time window.]{
-	\includegraphics[width=0.75\linewidth]{figures/fpt/window/1kx100+100k}
+	\includegraphics[width=0.75\linewidth]{figures/fpt/window/1kx100+100k-ggplot2}
     \label{fig:fpt:var:window}
 }
 \subfigure[Effect of Tor network size.]{
-	\includegraphics[width=0.75\linewidth]{figures/fpt/scale/1kx100+100k}
+	\includegraphics[width=0.75\linewidth]{figures/fpt/scale/1kx100+100k-ggplot2}
     \label{fig:fpt:var:scale}
 }
 \subfigure[Effect of different website popularity distributions.]{
-	\includegraphics[width=0.75\linewidth]{figures/fpt/dist/1kx100+100k}
+	\includegraphics[width=0.75\linewidth]{figures/fpt/dist/1kx100+100k-ggplot2}
     \label{fig:fpt:var:dist}
 }
 \caption{The effect on attack precision. The defaults are: Alexa from top 10,000,
