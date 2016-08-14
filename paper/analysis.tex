@@ -99,15 +99,14 @@ bandwidth provides a perfectly precise attack on relatively
 \emph{unpopular} sites such as \url{wikileaks.org}, which has Alexa rank
 10,808.
 
-
 \begin{figure}[t]
 \centering
 \subfigure[Recall]{
-	\includegraphics[width=0.8\linewidth]{figures/fpt/alexa/1kx100+100k-offsets-100pct-recall-ggplot2}
+	\includegraphics[width=0.465\linewidth]{figures/fpt/alexa/1kx100+100k-offsets-100pct-recall-ggplot2}
     \label{fig:fpt:alexa:recall}
 }
 \subfigure[Precision]{
-	\includegraphics[width=0.8\linewidth]{figures/fpt/alexa/1kx100+100k-offsets-100pct-precision-ggplot2}
+	\includegraphics[width=0.465\linewidth]{figures/fpt/alexa/1kx100+100k-offsets-100pct-precision-ggplot2}
     \label{fig:fpt:alexa:precision}
 }
 \caption{The recall and precision when varying the starting Alexa rank of
@@ -125,29 +124,24 @@ monitored sites.}
 \label{fig:fpt:var:rounds}
 \end{figure}
 
-\begin{figure}[t]
+\begin{figure*}[t]
 \centering
-\includegraphics[width=0.75\linewidth]{figures/fpt/window/1kx100+100k-ggplot2}
-\caption{Effect of increasing the analysis time window.}
+\subfigure[Effect of increasing the analysis time window.]{
+    \includegraphics[width=0.31\linewidth]{figures/fpt/window/1kx100+100k-ggplot2}
     \label{fig:fpt:var:window}
-\end{figure}
-
-
-
-\begin{figure}[t]
-\centering
-	\includegraphics[width=0.75\linewidth]{figures/fpt/scale/1kx100+100k-ggplot2}
-\caption{Effect of Tor network size.}
-\label{fig:fpt:var:scale}
-\end{figure}
-
-
-\begin{figure}[t]
-\centering
-\includegraphics[width=0.75\linewidth]{figures/fpt/dist/1kx100+100k-ggplot2}
-\caption{Effect of different website popularity distributions.}
+}
+\subfigure[Effect of Tor network size.]{
+    \includegraphics[width=0.31\linewidth]{figures/fpt/scale/1kx100+100k-ggplot2}
+    \label{fig:fpt:var:scale}
+}
+\subfigure[Effect of different website popularity distributions.]{
+    \includegraphics[width=0.31\linewidth]{figures/fpt/dist/1kx100+100k-ggplot2}
     \label{fig:fpt:var:dist}
-\end{figure}
+}
+\caption{The recall and precision when varying the starting Alexa rank of
+monitored sites.}
+\label{foo}
+\end{figure*}
 
 
 \if 0
