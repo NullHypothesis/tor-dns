@@ -117,6 +117,7 @@ monitored sites.}
 \subsection{Sensitivity analysis}
 
 
+\if 0
 \begin{figure}[t]
 \centering
 \includegraphics[width=0.7\linewidth]{figures/fpt/rounds/1kx100+100k-ggplot2}
@@ -142,25 +143,25 @@ monitored sites.}
 \centering    \includegraphics[width=0.95\linewidth]{figures/fpt/dist/1kx100+100k-ggplot2}
 \caption{Effect of different website popularity distributions.}   \label{fig:fpt:var:dist}
 \end{figure}
+\fi
 
 
-\if 0
 \begin{figure}[t]
 \centering
 \subfigure[Effect of website fingerprinting defenses.]{
-	\includegraphics[width=0.75\linewidth]{figures/fpt/rounds/1kx100+100k-ggplot2}
+	\includegraphics[width=0.465\linewidth]{figures/fpt/rounds/1kx100+100k-ggplot2}
     \label{fig:fpt:var:rounds}
 }
 \subfigure[Effect of increasing the analysis time window.]{
-	\includegraphics[width=0.75\linewidth]{figures/fpt/window/1kx100+100k-ggplot2}
+	\includegraphics[width=0.465\linewidth]{figures/fpt/window/1kx100+100k-ggplot2}
     \label{fig:fpt:var:window}
 }
 \subfigure[Effect of Tor network size.]{
-	\includegraphics[width=0.75\linewidth]{figures/fpt/scale/1kx100+100k-ggplot2}
+	\includegraphics[width=0.465\linewidth]{figures/fpt/scale/1kx100+100k-ggplot2}
     \label{fig:fpt:var:scale}
 }
 \subfigure[Effect of different website popularity distributions.]{
-	\includegraphics[width=0.75\linewidth]{figures/fpt/dist/1kx100+100k-ggplot2}
+	\includegraphics[width=0.465\linewidth]{figures/fpt/dist/1kx100+100k-ggplot2}
     \label{fig:fpt:var:dist}
 }
 \caption{The effect on attack precision. The defaults are: Alexa from top 10,000,
@@ -169,7 +170,6 @@ monitored sites.}
 power-law distribution (pc) with $\alpha=1.13$.}
 \label{fig:fpt:var}
 \end{figure}
-\fi
 
 To better understand the extent and limitations of our attacks, we
 study the sensitivity of our results to website popularity distribution,
