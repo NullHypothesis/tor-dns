@@ -35,7 +35,7 @@ Furthermore, for all experiments we specify the starting Alexa rank of the
 monitored sites
 \emph{when simulating sites visited over the Tor network}\footnote{We always
 use the same sample data for website fingerprinting.}.
-Whem minitoring 1000 sites starting at rank 1, sites
+Whem monitoring 1,000 sites starting at rank 1, sites
 [1,1000] are monitored and Alexa [1001,101000] unmonitored. Starting to
 monitor Alexa from rank 100 means that Alexa sites [101,1100] are monitored,
 and Alexa [1,100] and [1101,10100] unmonitored.
@@ -71,11 +71,11 @@ nearly reaching the same levels as \texttt{hp} at 100\% of the exit bandwidth.
 \begin{figure}[t]
 \centering
 \subfigure[Recall]{
-	\includegraphics[width=0.8\linewidth]{figures/fpt/pct/1kx100+100k-recall}
+	\includegraphics[width=0.8\linewidth]{figures/fpt/pct/1kx100+100k-recall-ggplot2}
     \label{fig:fpt:torpct:recall}
 }
 \subfigure[Precision]{
-	\includegraphics[width=0.8\linewidth]{figures/fpt/pct/1kx100+100k-precision}
+	\includegraphics[width=0.8\linewidth]{figures/fpt/pct/1kx100+100k-precision-ggplot2}
     \label{fig:fpt:torpct:precision}
 }
 \caption{Recall and precision for an open-world dataset, for sites
@@ -99,15 +99,14 @@ bandwidth provides a perfectly precise attack on relatively
 \emph{unpopular} sites such as \url{wikileaks.org}, which has Alexa rank
 10,808.
 
-
 \begin{figure}[t]
 \centering
 \subfigure[Recall]{
-	\includegraphics[width=0.8\linewidth]{figures/fpt/alexa/1kx100+100k-offsets-100pct-recall}
+	\includegraphics[width=0.465\linewidth]{figures/fpt/alexa/1kx100+100k-offsets-100pct-recall-ggplot2}
     \label{fig:fpt:alexa:recall}
 }
 \subfigure[Precision]{
-	\includegraphics[width=0.8\linewidth]{figures/fpt/alexa/1kx100+100k-offsets-100pct-precision}
+	\includegraphics[width=0.465\linewidth]{figures/fpt/alexa/1kx100+100k-offsets-100pct-precision-ggplot2}
     \label{fig:fpt:alexa:precision}
 }
 \caption{The recall and precision when varying the starting Alexa rank of
@@ -120,57 +119,52 @@ monitored sites.}
 
 \begin{figure}[t]
 \centering
-\includegraphics[width=0.75\linewidth]{figures/fpt/rounds/1kx100+100k}
+\includegraphics[width=0.75\linewidth]{figures/fpt/rounds/1kx100+100k-ggplot2}
 \caption{Effect of website fingerprinting defenses.}
 \label{fig:fpt:var:rounds}
 \end{figure}
 
-\begin{figure}[t]
+\begin{figure*}[t]
 \centering
-\includegraphics[width=0.75\linewidth]{figures/fpt/window/1kx100+100k}
-\caption{Effect of increasing the analysis time window.}
+\subfigure[Effect of increasing the analysis time window.]{
+    \includegraphics[width=0.31\linewidth]{figures/fpt/window/1kx100+100k-ggplot2}
     \label{fig:fpt:var:window}
-\end{figure}
-
-
-
-\begin{figure}[t]
-\centering
-	\includegraphics[width=0.75\linewidth]{figures/fpt/scale/1kx100+100k}
-\caption{Effect of Tor network size.}
-\label{fig:fpt:var:scale}
-\end{figure}
-
-
-\begin{figure}[t]
-\centering
-\includegraphics[width=0.75\linewidth]{figures/fpt/dist/1kx100+100k}
-\caption{Effect of different website popularity distributions.}
+}
+\subfigure[Effect of Tor network size.]{
+    \includegraphics[width=0.31\linewidth]{figures/fpt/scale/1kx100+100k-ggplot2}
+    \label{fig:fpt:var:scale}
+}
+\subfigure[Effect of different website popularity distributions.]{
+    \includegraphics[width=0.31\linewidth]{figures/fpt/dist/1kx100+100k-ggplot2}
     \label{fig:fpt:var:dist}
-\end{figure}
+}
+\caption{The recall and precision when varying the starting Alexa rank of
+monitored sites.}
+\label{foo}
+\end{figure*}
 
 
 \if 0
 \begin{figure}[t]
 \centering
 \subfigure[Effect of website fingerprinting defenses.]{
-	\includegraphics[width=0.75\linewidth]{figures/fpt/rounds/1kx100+100k}
+	\includegraphics[width=0.75\linewidth]{figures/fpt/rounds/1kx100+100k-ggplot2}
     \label{fig:fpt:var:rounds}
 }
 \subfigure[Effect of increasing the analysis time window.]{
-	\includegraphics[width=0.75\linewidth]{figures/fpt/window/1kx100+100k}
+	\includegraphics[width=0.75\linewidth]{figures/fpt/window/1kx100+100k-ggplot2}
     \label{fig:fpt:var:window}
 }
 \subfigure[Effect of Tor network size.]{
-	\includegraphics[width=0.75\linewidth]{figures/fpt/scale/1kx100+100k}
+	\includegraphics[width=0.75\linewidth]{figures/fpt/scale/1kx100+100k-ggplot2}
     \label{fig:fpt:var:scale}
 }
 \subfigure[Effect of different website popularity distributions.]{
-	\includegraphics[width=0.75\linewidth]{figures/fpt/dist/1kx100+100k}
+	\includegraphics[width=0.75\linewidth]{figures/fpt/dist/1kx100+100k-ggplot2}
     \label{fig:fpt:var:dist}
 }
 \caption{The effect on attack precision. The defaults are: Alexa from top 10,000,
-2500 weight-learning rounds,
+2,500 weight-learning rounds,
 60 seconds window size, Tor network scale 1.0, and the conservative
 power-law distribution (pc) with $\alpha=1.13$.}
 \label{fig:fpt:var}
@@ -221,6 +215,11 @@ website fingerprinting attacks are selected for high recall.
 \subsubsection{Effect of Tor's TTL clipping}
 
 \begin{table}[t]
+\caption{Mean and median DNS TTL values across Alexa top one million sites. Raw
+TTLs are unprocessed, as they appear in DNS lookup traces. Tor TTLs adhere to
+Tor's TTL clipping.  Unique refers to the TTLs for unique domains; min unique
+only considers the unique domains with the minimum TTL for each website.}
+\label{tab:ttls}
 \centering
 \begin{tabular}{l r r}
 \toprule
@@ -240,12 +239,6 @@ min unique raw & \multirow{ 2}{*}{60} & $3833.9\pm11073.6$ \\ % & 0 & 604800 \\
 min unique Tor & & $644.2\pm\phantom{00}763.8$ \\ %& 60 & 1800 \\
 \bottomrule
 \end{tabular}
-\caption{Mean and median DNS TTL values across Alexa top one million
-  sites. Raw TTLs are unprocessed, as they appear in DNS lookup
-  traces. Tor TTLs adhere to Tor's TTL clipping.
-Unique refers to the TTLs for unique domains; min unique only
-considers the unique domains with the minimum TTL for each website.}
-\label{tab:ttls}
 \end{table}
 
 As discussed in Section~\ref{sec:attack:sim}, due to a bug in Tor, the
