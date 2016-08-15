@@ -78,10 +78,11 @@ centralized data sinks that Tor aims to avoid.
 
 Considering the above, we believe that exit relay operators should avoid
 public resolvers such as Google and OpenDNS.  Instead, they should
-either use the resolvers provided by their ISP, or run their own---in
-particular, if their ISP already hosts many other exit relays.  Local
+either use the resolvers provided by their ISP, or run their own,
+particularly of the operator's 
+ISP already hosts many other exit relays.  Local
 resolvers can further be optimized to minimize information leakage,
-by (for example) configuring QNAME minimization~\cite{qname-minimization}. 
+by (for example) enabling QNAME minimization~\cite{qname-minimization}. 
 
 \begin{table}[t]
   \renewcommand{\tabcaptext}{A comparison between three design points for DNS
@@ -102,7 +103,7 @@ by (for example) configuring QNAME minimization~\cite{qname-minimization}.
 	\bottomrule
 	\end{tabular}
 	\bottomcap{\tabcaptext}
-        \label{tab:setup-comparison}
+       \label{tab:setup-comparison}
 \end{table}
 
 In addition to making recommendations to exit relay operators, we can
