@@ -50,9 +50,12 @@ relay is querying.
 For Tor exits that rely on a third-party for DNS resolution, an
 adversary might be on the path between a Tor client and a
 Tor guard and on the path between a Tor exit and the third-party name
-server.  In additionx, the DNS queries will look like they are coming
+server.  \fixme{In addition, the DNS queries will look like they are coming
 from the IP address of the name server and not the IP address of the
-exit relay.
+exit relay.--This new wording seems unclear to me now--wanted to say 
+that ASes on the path from the 3rd-party to the DNS servers will see that 
+the queries are coming from the 3rd-party and not the exit IP, which is 
+why we ignore them . . .}
 
 \subsubsection{Simulating Tor user activity: TorPS}
 
@@ -60,28 +63,51 @@ To measure the likelihood that an AS can be in a position to perform a
 \name attack, we use TorPS, the Tor Path Simulator, which mimics how the
 Tor client software constructs circuits.  TorPS thus provides realistic
 combinations of guards and exits based on the state of the Tor network
-at a given time. TorPS is based on Tor version \xxx{X}. For each sample,
+at a given time. TorPS is based on Tor stable release version 0.2.4.23. 
+For each sample, 
 it uses one guard which expires after 270 days. We use TorPS to emulate
 the behavior of a Tor client for the month of March 2016.  As in
 previous work, we perform 100,000 samples in the TorPS Monte Carlo
-simulation.  For our simulation, we had each sample visit {\tt
-  domain.com}\footnote{We redacted the real domain to anonymize our
-  submission.}---a website under our control---once per hour for all of
-March 2016.  Thus, each guard-exit pair had 744 opportunites to be
-compromised (this assumes that the circuit changes for every visit to
-{\tt domain.com}).
+simulation.  
+
+For our simulation, we had each client visit several websites every day for
+March 2016.  We modeled our client behavior off of the ``Typical'' model 
+used in~\cite{Johnson2013a}.  At 9am we have the client visit Gmail and Twitter.  
+At 12pm the client visits Google Calendar and Google Docs. At 3pm the client 
+visits Facebook and Instagram. Finally, at 6pm and 6:20pm the client visits Google, 
+Startpage, and Ixquick.  (Note: For our chosen websites and port (443), 
+Torps provided a new circuit every 10 minutes.  It did not provide a new circuit 
+for different websites if the client visited them within the same 10-minute windows. 
+This is in contrast to how the latest Tor Browser works where it will provide a new 
+circuit every time you visit a different website even if 10 minutes have not passed.  
+Thus, our results will be conservative in this respect.)  Also, in our study each 
+client sample had 372 opportunities to be compromised in March because there are 31 
+days in March, and our client visits 12 sites per day.
+
+Finally, we had to choose where to place our clients. That is, we had to choose 
+which ASes we wanted our sample clients to be using Tor from.  We first found 
+out what the most popular countries for Tor users were from~\cite{metrics-countries} 
+and chose the top five.  
+We then researched which ISPs seemed to be the biggest players in those markets, and 
+used those AS numbers for our client ASes.  For the United States, we chose Comcast 
+(AS 7922).  For Russia we chose Rostelecom (AS 42610).  For Germany we chose 
+Deutsche Telekom (AS 3320).  For France we chose Orange (AS 3215).  And for Great 
+Britain, we chose British Telecom (AS 2856).  
+
+%Thus, each guard-exit pair had 744 opportunites to be
+%compromised (this assumes that the circuit changes for every visit to
+%{\tt domain.com}).
 % It is much better to use a tool like TorPS in order to
 %measure these chances instead of just using all permutations of guard and exits.
 
-The paragraph changes a lot: Made our own model based off of UGR ``typical'' model.  
-The sample user visits nine websites during the course of his day: mail.google.com, 
-twitter.com, calendar.google.com, instagram.com, startpage.com, ixquick.com, docs.google.com, 
-facebook.com, and google.com.  \fixme{Should we mention the fixes we made to TorPS? Should we mention 
-the problem we found with their user models? YES.}
+%The paragraph changes a lot: Made our own model based off of UGR ``typical'' model.  
+%The sample user visits nine websites during the course of his day: mail.google.com, 
+%twitter.com, calendar.google.com, instagram.com, startpage.com, ixquick.com, docs.google.com, 
+%facebook.com, and google.com.  \fixme{Should we mention the fixes we made to TorPS? Should we mention 
+%the problem we found with their user models? YES. -- I don't think it's relevant here anymore 
+%because we're not doing the traditional (exit ip - website destiation) traceroutes, like they did.}
 
-In this analysis, we ignore caching of any type, so our results are overly 
-pessimistic in this respect. \fixme{Mention that these results apply
-  only to what we had data for: about half.}
+
 
 
 \subsubsection{Inferring AS-level paths: traceroute + {\tt pyasn}}
@@ -117,12 +143,11 @@ commonly applied) AS path inference because Juen \ea showed that it can
 be quite inaccurate~\cite{Juen2015a}.  Using traceroute can yield more
 accurate paths.  Measuring traceroutes from client to guard notes is
 straightforward: we simply select a probe in a client AS and perform
-traceroutes to each respective guard. \fixme{Mention why we picked AS
-  6128 as our client AS.}  
+traceroutes to each respective guard. %Wow, nice story here! Thank you!
 
 Measuring traceroutes from exit relay to destination is far more
-difficult because Tor does not impleement a mechanism to facilitate
-traceroute~\cite{Murdoch2007a}. One approach, used in previous
+difficult because Tor does not implement a mechanism to facilitate
+traceroute~\cite{Murdoch2007a}.  One approach, used in previous
 work~\cite{Juen2015a}, is to ask relay operators to perform traceroutes.
 Unfortunately, this approach only yielded traceroutes from relays
 representing 26\% of exit bandwidth.  Instead, we observe that RIPE
@@ -150,20 +175,33 @@ inaccuracies in the event of BGP route hijacks or leaks, but we expect
 those events to be relatively unlikely for the time period and IP
 prefixes that we are concerned with.)
 
+
 The traceroutes are from July 2016, and we applied these in our analysis of Tor 
 in March 2016.  \xxx{don't understand what ``analysis of Tor in March
-  2016'' means.  What's the Tor trace corresponding to this?}
+  2016'' means.  What's the Tor trace corresponding to this?} \xxx{The following sentence should 
+explain it better, please, although now I'm thinking it doesn't matter as much as I thought it did 
+because we're working at the AS level.
+--The point is that although we're simulating the March 2016 Tor situation, the traceroutes themselves 
+are from July 2016 because I had to rerun all the traceroutes and add a bunch because we were no longer 
+using nymity nor 
+the original client AS. We upgraded the model and made the client visit 9 different websites from 5 
+different client ASes. We had to stick with March because we didn't have ``Status Quo'' information 
+from July. Summary: The results would perhaps be even more accurate if 
+all these brand new traceroutes had been 
+run closer to March 2016. Do we need to mention this??}
 
 
-
-\subsection{Results}
-
+Moved the following out of the Results section--will come up with either a header and/or an 
+opening sentence:
+%In contrast to how TorPS is used in~\cite{Johnson2013a}, we do not ultimately run 
+%traceroutes from .
 Describe the four scenarios in the graph here: 1) ISPs, 2) Google, 3) Local, and 
 4) Status Quo.
 
 %Traditional: ``Traditional'' represents the paths between all exit ASes that RIPE Atlas 
 %has coverage for and domain.com. That is, this measurement doesn't take DNS into account 
 %at all, as has been traditionally done.
+\fixme{change to Definition latex syntax}
 ISPs: ``ISPs'' represents what would happen if all exit relays used their ISPs' DNS name 
 servers.  We choose to represent this by saying that the name server is in the same AS as the 
 exit relay.
@@ -189,6 +227,7 @@ using. We then performed traceroutes from the exit ASes to the appropriate IP ad
 in order to get the AS-level paths.
 
 % \fixme{Get the numbers from my data for the fan-out.}
+\subsection{Results}
 
 \begin{figure}[t]
 \centering
@@ -208,15 +247,25 @@ in order to get the AS-level paths.
 
 Figures~\ref{fig:compromised-streams}
 and~\ref{fig:time-until-compromise} show that
-Google fared much better than the other situations. This might lead you to believe that 
-Tor exit relays should use 8.8.8.8 for all of their name resolution needs, but then you've 
-given Google A LOT of power. It might actually be better to tell Tor exit relay operators 
-to use their ISPs' default name servers because the ISPs get to see the Tor destinations 
-anyway! (Actually, the ISPs fared the best now that we actually measure this
---need to update this paragraph)
-
-The Status Quo results are significantly better than the Local results because only X\% 
+\fixme{will insert the 5 figures soon, the discrepancy with the ISPs' time-to-compromise
+looking better than Google's will be fixed, too (figured out why that was happening)}
+ISPs fared much better than the other situations. Google was next. There is a potential 
+tradeoff between the safety of using a well-managed DNS resolver such as Google's vs. 
+a potentially not as well-managed DNS resolver from the ISP.
+%Google fared much better than the other situations. This might lead you to believe that 
+%Tor exit relays should use 8.8.8.8 for all of their name resolution needs, but then you've 
+%given Google A LOT of power. It might actually be better to tell Tor exit relay operators 
+%to use their ISPs' default name servers because the ISPs get to see the Tor destinations 
+%anyway! (Actually, the ISPs fared the best now that we actually measure this
+%--need to update this paragraph)
+We believe that the Status Quo results are significantly better than the 
+Local results because only around 12\% 
 of Tor exit relays actually do their own resolution.
+The differing results for the different client ASes shows that client AS needs to be 
+taken into account 
 
-Figures for all five of our chosen client ASes will be inserted soon.
-
+Limitations \fixme{Are we not including limitations?  Looks like that section was removed?}:
+In this analysis, we ignore caching of any type, so our results are overly 
+pessimistic in this respect. \fixme{Mention that these results apply
+  only to what we had data for: about half--However, this is already stated in the RIPE Atlas 
+coverage table . . .}
