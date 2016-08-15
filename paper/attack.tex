@@ -338,11 +338,11 @@ Section~\ref{sec:background}) and a list of sites derived from
 observing DNS requests to implement two \name attacks:
 
 \begin{description}
-	\item[\texttt{ctw}] we ``close the world''
+	\item[\texttt{ctw}] We ``close the world''
 	on a Wa-kNN classifier that we modified to consider only the distance to
 	observed sites when calculating the $k$-nearest neighbors.
 	The classifier still considers the distance to all unmonitored sites.
-	\item[\texttt{hp}] when Wa-kNN classifies a trace as a monitored site, confirm
+	\item[\texttt{hp}] When Wa-kNN classifies a trace as a monitored site, confirm
 	that we observed the same site in the DNS data (ensuring {\em high
 	precision}). If not, make the final classification unmonitored.
 \end{description}
