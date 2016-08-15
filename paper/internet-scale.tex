@@ -202,15 +202,17 @@ Describe the four scenarios in the graph here: 1) ISPs, 2) Google, 3) Local, and
 %has coverage for and domain.com. That is, this measurement doesn't take DNS into account 
 %at all, as has been traditionally done.
 \fixme{change to Definition latex syntax}
-ISPs: ``ISPs'' represents what would happen if all exit relays used their ISPs' DNS name 
+
+\begin{itemize}
+    \item \emph{ISPs:} ``ISPs'' represents what would happen if all exit relays used their ISPs' DNS name 
 servers.  We choose to represent this by saying that the name server is in the same AS as the 
 exit relay.
 
-Google (8.8.8.8): ``Google'' represents what would happen if all exit relays used 
+    \item \emph{Google:} ``Google'' represents what would happen if all exit relays used 
 Google's public DNS server for resolution. We ran traceroutes from probes in all the exit 
 ASes that RIPE Atlas had coverage for to 8.8.8.8.
 
-Local: ``Local'' represents what would happen if all exit relays ran their own name 
+    \item \emph{Local:} ``Local'' represents what would happen if all exit relays ran their own name 
 servers locally (e.g., the use of unbound) on their own machines. In order to figure out 
 what ASes would be traversed on the way to resolve domain.com. In order to figure out the 
 DNS delegation path, we use the command line option \texttt{+trace} of the
@@ -218,13 +220,14 @@ command line tool dig. Assuming no caching and assuming
 iterative resolution, for domain.com the name server will have to visit three name servers:
 a root name server, a top level domain name server, and a second-level domain name server. 
 
-Status Quo: ``Status Quo'' represents to the best of our ability the type of name resolution 
+    \item \emph{Status Quo:} ``Status Quo'' represents to the best of our ability the type of name resolution 
 that exit relays perform, whether that be their own or the use of 3rd-party name servers, 
 which again includes public DNS name servers and their ISPs' name servers. To figure this 
 out, we used the exitmap tool, our own website, and our own authoritative name server 
 in order to figure out the IP addresses of the name servers that the exit relays were 
 using. We then performed traceroutes from the exit ASes to the appropriate IP addresses 
 in order to get the AS-level paths.
+\end{itemize}
 
 % \fixme{Get the numbers from my data for the fan-out.}
 \subsection{Results}
