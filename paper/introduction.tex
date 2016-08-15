@@ -13,7 +13,7 @@ enables latency-sensitive applications such as web browsing but is
 vulnerable to
 adversaries that can observe traffic both
 entering and exiting its network, thus enabling deanonymization.
-Although Tor does not consider global adversairies in its threat model,
+Although Tor does not consider global adversaries in its threat model,
 adversaries that can observe traffic for extended periods of time in
 multiple network locations (\ie, ``semi-global'' adversaries) are a real
 concern~\cite{Farrell2014a,Johnson2013a}; we need to better understand
@@ -65,7 +65,7 @@ currently sees almost 40\% of all DNS requests exiting the Tor network.
 Second, we investigate which organizations can observe
 DNS requests that originate from Tor exit relays.  To answer this question, we emulate DNS
 resolution for the Alexa Top 1,000 domains from the Tor exit nodes using
-measurement vantage points that are co-loated with Tor exit nodes; we find that DNS
+measurement vantage points that are co-located with Tor exit nodes; we find that DNS
 resolution for half of these domains traverses numerous ASes
 that are not traversed for the subsequent HTTP connection to the web
 site.
@@ -74,7 +74,7 @@ method to perform traceroutes from the networks where
 exit relays are located, making our results significantly more accurate and
 comprehensive than previous work.
 Next, we show how the ability to observe DNS traffic from Tor
-exit relates can
+exit relays can
 augment existing website fingerprinting attacks,
 yielding perfectly precise \name attacks for unpopular websites.
 Finally, we use the Tor Path Simulator (TorPS)~\cite{TorPS} to investigate the
