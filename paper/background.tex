@@ -81,11 +81,13 @@ Tor clients must send DNS requests over Tor to prevent DNS {leakage}
 DNS request travel over an unencrypted channel as opposed to over Tor
 itself).  Tor does not transport UDP
 traffic, but it implements a workaround to wrap DNS requests into Tor cells.
-After the user types in a domain, say {\tt foo.com}, the Tor Browser establishes
-a connection to the SOCKS proxy exposed by the local Tor client.  Using the
-SOCKS protocol, applications instruct the Tor client to establish a circuit to a
+Using the
+SOCKS protocol, applications can instruct the Tor client to establish a circuit to a
 given domain and port.\footnote{SOCKS versions 4a and 5 support connection
-initiation using domain names in addition to IP addresses.} The Tor client then
+initiation using domain names in addition to IP addresses.} 
+After the user types in a domain, say {\tt foo.com}, the Tor Browser establishes
+a connection to the SOCKS proxy exposed by the local Tor client.  
+The Tor client then
 selects an exit relay whose exit policy supports {\tt foo.com} and port 443.
 Next, the client sends a \texttt{RELAY\_BEGIN} Tor cell to the exit relay,
 instructing it to first resolve {\tt foo.com}, and then establish a TCP
@@ -97,12 +99,12 @@ destination.  The \texttt{RELAY\_RESOLVE} cell supports pure name resolution,
 without establishing a subsequent TCP connection~\cite[\S~6.4]{tor-spec}.  The
 exit relay responds with a \texttt{RELAY\_RESOLVED} cell.
 
-As of December 2015, exit relays maintain a caching layer
-around the DNS resolution code to speed up repeated lookups.
-The caching layer for Tor clients is off by default to prevent tracking attacks
-due to modified DNS responses~\cite{nolocalcache}.
 Exit relays send
 their DNS requests to the system resolver, which Linux systems read from
 \texttt{/etc/resolv.conf}.  Tor does not modify the system resolver and
 contains whatever the exit relay operator configured, such as the ISP's resolver,
 or public resolvers such as Google's {\tt 8.8.8.8} open public DNS resolver.
+As of December 2015, exit relays maintain a caching layer
+around the DNS resolution code to speed up repeated lookups.
+The caching layer for Tor clients, however, is off by default to prevent tracking attacks
+due to modified DNS responses~\cite{nolocalcache}.
