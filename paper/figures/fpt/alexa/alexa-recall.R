@@ -5,25 +5,25 @@ library(grid)
 args <- commandArgs(trailingOnly = TRUE)
 input_file <- args[1]
 
-cairo_pdf("1kx100+100k-offsets-100pct-recall-ggplot2.pdf", height=2.4, width=2.8)
+cairo_pdf("1kx100+100k-recall-ggplot2.pdf", height=2.4, width=2.8)
 data <- read.csv(input_file, header=TRUE)
 
-df <- data.frame(x = data$offset,
+df <- data.frame(x = data$alexa,
                  y = data$ctw,
                  Attack = "ctw")
 
-df <- rbind(df, data.frame(x = data$offset,
+df <- rbind(df, data.frame(x = data$alexa,
                            y = data$hp,
                            Attack = "hp"))
 
-df <- rbind(df, data.frame(x = data$offset,
+df <- rbind(df, data.frame(x = data$alexa,
                            y = data$wf,
                            Attack = "wf"))
 
 ggplot(df, aes(x, y, colour = Attack,
                      linetype = Attack,
                      shape = Attack)) +
-    geom_point() +
+    geom_point(size=2.5) +
     geom_line() +
     theme_bw() +
     labs(x = "Alexa site rank") +

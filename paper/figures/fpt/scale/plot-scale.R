@@ -35,7 +35,7 @@ df <- rbind(df, data.frame(x = data$scale,
 ggplot(df, aes(x, y, colour = Attack,
                      linetype = Attack,
                      shape = Attack)) +
-    geom_point() +
+    geom_point(size=2.5) +
     geom_line() +
     theme_bw() +
     ylim(0.63, 1) +
