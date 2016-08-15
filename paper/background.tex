@@ -26,7 +26,7 @@ user is visiting.  The literature calls this attack \emph{website
   fingerprinting}.
 
 Past work evaluated website fingerprinting attacks in two settings:
-A {\em closed-world} setting consists of a set of $n$ {monitored}
+a {\em closed-world} setting consists of a set of $n$ {monitored}
 websites, and the attackers tries to learn which among all $n$ sites the
 user is visiting with the notable restriction that the user can only
 browse to one of the $n$ websites.  The {\em open-world} setting is more
@@ -37,7 +37,8 @@ sites the user visits. Note that the attacker's classifier can train on
 whatever unmonitored sites it chooses, as long as during testing, the
 classifier has not trained on an unmonitored site. Two relevant metrics
 in the open-world
-setting are recall and precision.  Recall measures the probability that
+setting are \emph{recall} and \emph{precision}.
+Recall measures the probability that
 a visit to a monitored site will be detected, while precision measures
 the probability that a classification by the classifier of a visit to a
 monitored site (positive test outcome) is the correct one. Consider a
@@ -80,14 +81,15 @@ Tor clients must send DNS requests over Tor to prevent DNS {leakage}
 DNS request travel over an unencrypted channel as opposed to over Tor
 itself).  Tor does not transport UDP
 traffic, but it implements a workaround to wrap DNS requests into Tor cells.
-After the user types in a domain, say {\tt foo.com}, the Tor Browser establishes a
-connection to the SOCKS proxy exposed by the local Tor client.  Using the SOCKS
-protocol, applications instruct the Tor client to establish a circuit to a given
-domain and port.\footnote{SOCKS versions 4a and 5 support connection
+After the user types in a domain, say {\tt foo.com}, the Tor Browser establishes
+a connection to the SOCKS proxy exposed by the local Tor client.  Using the
+SOCKS protocol, applications instruct the Tor client to establish a circuit to a
+given domain and port.\footnote{SOCKS versions 4a and 5 support connection
 initiation using domain names in addition to IP addresses.} The Tor client then
-selects an exit relay whose exit policy supports foo.com and port 443.  Next,
-the client sends a \texttt{RELAY\_BEGIN} Tor cell to the exit relay, instructing
-it to first resolve foo.com, and then establish a TCP connection to the resolved
+selects an exit relay whose exit policy supports {\tt foo.com} and port 443.
+Next, the client sends a \texttt{RELAY\_BEGIN} Tor cell to the exit relay,
+instructing it to first resolve {\tt foo.com}, and then establish a TCP
+connection to the resolved
 address at port 443~\cite[\S~6.2]{tor-spec}.  After successfully establishing a
 connection, the exit relay responds with a \texttt{RELAY\_CONNECTED}
 cell.  The client can then exchange data with its intended
