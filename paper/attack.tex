@@ -12,7 +12,7 @@ following building blocks:
 	\centering
 	\includegraphics[width=0.8\linewidth]{figures/attack-scenario.pdf}
 	\caption{An overview of the \name attack.  An adversary must monitor
-		both ingress (encrypted Tor traffic) and egress (DNS requests) traffic.
+		both ingress (encrypted Tor traffic) and egress (DNS request) traffic.
 		A network-level adversary between the
 		client and its guard monitors ingress traffic.  The same adversary
 		monitors egress traffic between the exit and a DNS server, or the DNS
@@ -340,7 +340,7 @@ observing DNS requests to implement two \name attacks:
 \begin{description}
 	\item[\texttt{ctw}] we ``close the world''
 	on a Wa-kNN classifier that we modified to consider only the distance to
-	observed montiored sites when calculating the $k$-nearest neighbors.
+	observed sites when calculating the $k$-nearest neighbors.
 	The classifier still considers the distance to all unmonitored sites.
 	\item[\texttt{hp}] when Wa-kNN classifies a trace as a monitored site, confirm
 	that we observed the same site in the DNS data (ensuring {\em high
@@ -350,7 +350,7 @@ observing DNS requests to implement two \name attacks:
 These approaches apply to any website fingerprinting attack. The
 \texttt{ctw} attack increases the effectiveness of conventional website
 fingerprinting attacks by making them more akin to a closed-world setting,
-where websites have known fingerprints.
+where websites have known fingerprints and often the world is of limited size.
 Conceptually, the attack could also include
 a custom weight-learning run---training only on observed sites---but our initial
 results noted little to no gain, despite significant increases in
