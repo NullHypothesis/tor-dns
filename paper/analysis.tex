@@ -201,15 +201,15 @@ packers) are several orders of magnitude more useful
 than others~\cite{DBLP:journals/corr/JuarezIPDW15}.
 
 Figure~\ref{fig:fpt:var:rounds} shows the effects of between 0 and 3000
-rounds of weight-learning. At few to no rounds, the precision for the \texttt{wf}
-attack is below 50\%---the classification is more likely to be wrong than
-right---while there is no impact on the \texttt{hp} attack and a relatively
+rounds of weight-learning. At few to no rounds, the precision for the
+\texttt{wf} attack is below 50\%---the classification is more likely to be wrong
+than right---while there is no impact on the \texttt{hp} attack and a relatively
 small decrease for the \texttt{ctw} attack.
 For recall (not shown in the figure), the bound and relationship is
-as in Equation~\ref{eq:hprecall}: for \texttt{wf}, at zero rounds, recall is 0.055; for
-\texttt{hp} at zero rounds, recall is 0.019. These results suggest that for
-website fingerprinting defenses to be effective against \name attacks, the
-defense must be tuned to provide a low recall even when the parameters of
+as in Equation~\ref{eq:hprecall}: for \texttt{wf}, at zero rounds, recall is
+0.055; for \texttt{hp} at zero rounds, recall is 0.019. These results suggest
+that for website fingerprinting defenses to be effective against \name attacks,
+the defense must be tuned to provide a low recall even when the parameters of
 website fingerprinting attacks are selected for high recall.
 
 \subsubsection{Effect of Tor's TTL clipping}
