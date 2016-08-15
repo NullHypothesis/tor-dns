@@ -8,7 +8,7 @@ such as Mixmaster~\cite{mixmaster} and
 Mixminion~\cite{danezis2003mixminion} eschew low latency in favor of
 strong anonymity.
 In contrast, Tor~\cite{dingledine2004a} trades off strong anonymity to
-achieve low latency; Tor thus
+achieve low latency; Tor therefore
 enables latency-sensitive applications such as web browsing but is
 vulnerable to
 adversaries that can observe traffic both
@@ -38,7 +38,7 @@ these attacks.
 
 DNS traffic is highly relevant for correlation attacks because it
 often traverses completely different paths
-and autonomous systems (ASes) than the subsequent corresponding TCP
+and autonomous systems (ASs) than the subsequent corresponding TCP
 connections.  An attacker that can observe occasional DNS
 requests may still be able to link both ends of the communication, even
 if the attacker cannot observe TCP traffic between the exit of the
@@ -54,29 +54,24 @@ territory---to-date, completely unexplored---is the focus of this work.
 	\caption{Past traffic correlation studies have focused on linking the TCP
 		stream entering the Tor network to the one(s) exiting the network.  We
 		show that an adversary can also link the associated DNS traffic, which
-		can be exposed to many more ASes than the TCP stream.}
+		can be exposed to many more ASs than the TCP stream.}
 	\label{fig:overview}
 \end{figure}
 
 % Summary of our paper.
-We first explore how Tor exit relays resolve DNS names.  By developing a
-new method to identify all exit relays' DNS resolvers, we learn that Google
-currently sees almost 40\% of all DNS requests exiting the Tor network.
-Second, we investigate which organizations can observe
-DNS requests that originate from Tor exit relays.  To answer this question, we emulate DNS
-resolution for the Alexa Top 1,000 domains from the Tor exit nodes using
-measurement vantage points that are co-located with Tor exit nodes; we find that DNS
-resolution for half of these domains traverses numerous ASes
-that are not traversed for the subsequent HTTP connection to the web
-site.
-We introduce a new
-method to perform traceroutes from the networks where
+We first explore how Tor exit relays resolve DNS names.  By developing a new
+method to identify all exit relays' DNS resolvers, we learn that Google
+currently sees almost 40\% of all DNS requests exiting the Tor network.  Second,
+we investigate which organizations can observe DNS requests that originate from
+Tor exit relays.  To answer this question, we emulate DNS resolution for the
+Alexa Top 1,000 domains from an autonomous system that is popular among exit
+nodes.  We find that DNS resolution for half of these domains traverses numerous
+ASs that are not traversed for the subsequent HTTP connection to the web site.
+We further introduce a new method to perform traceroutes from the networks where
 exit relays are located, making our results significantly more accurate and
-comprehensive than previous work.
-Next, we show how the ability to observe DNS traffic from Tor
-exit relays can
-augment existing website fingerprinting attacks,
-yielding perfectly precise \name attacks for unpopular websites.
+comprehensive than previous work.  Next, we show how the ability to observe DNS
+traffic from Tor exit relays can augment existing website fingerprinting
+attacks, yielding perfectly precise \name attacks for unpopular websites.
 Finally, we use the Tor Path Simulator (TorPS)~\cite{TorPS} to investigate the
 effects of Internet-scale \name attacks.
 
@@ -93,7 +88,7 @@ state-of-the-art measurement techniques for analysis of correlation attacks, and
 provides even stronger justification for introducing website fingerprinting defenses in
 Tor.  To foster future work and facilitate the replication of
 our results, we publish both our code and datasets.\footnote{We redacted
-  the link to our project page to preserve anonymity.} In
+the link to our project page to preserve anonymity.} In
 summary, we make the following contributions:
 \begin{itemize}
 \item We develop a method to identify the DNS resolver of exit
@@ -102,7 +97,7 @@ summary, we make the following contributions:
 
 	\item We quantify the exposure of DNS resolution to
 		network-level adversaries.  We find that for many popular
-		websites, 70\% of all traversed ASes are only visited for DNS requests.
+		websites, 70\% of all traversed ASs are only visited for DNS requests.
 
 	\item We show how existing website fingerprinting attacks can be augmented with
 	observed DNS requests by a network-level adversary to yield perfectly precise
