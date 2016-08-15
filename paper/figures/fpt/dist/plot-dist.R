@@ -34,7 +34,7 @@ ggplot(df, aes(x, y, colour = Attack,
     geom_point(size=2.5) +
     geom_line() +
     theme_bw() +
-    labs(x = "Tor network scale") +
+    labs(x = "Alexa site rank") +
     labs(y = "Precision") +
     theme(legend.key.width = unit(2, "line"),
           legend.justification = c(1, 0),
