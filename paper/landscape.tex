@@ -14,12 +14,12 @@ by exit relays (Section~\ref{sec:mapping-resolvers}).
 Adversaries that can observe both DNS and subsequent TCP traffic (\eg, the ISP
 of an exit relay) gain no benefit from seeing the client's DNS traffic,
 since TCP traffic is sufficient to mount correlation
-attacks~\cite{Murdoch2007a}.  In this work, we consider 
+attacks~\cite{Murdoch2007a}.  In this work, we consider
 adversaries that can observe traffic entering the Tor network and \emph{some}
 DNS requests exiting the network---such as requests addressed to DNS
 root servers---but {\em not} subsequent TCP traffic from exit relays.
 We first determine the prevalence of these adversaries by measuring the
-number of ASes that DNS queries traverse versus the 
+number of ASes that DNS queries traverse versus the
 number of ASes subsequent web traffic traverses.
 
 We quantify the {\em exposure} of DNS traffic versus TCP traffic as follows.  We begin with
@@ -57,13 +57,13 @@ the experiment on a French VPS in AS 16276, owned by OVH SAS.  We chose this AS
 because, as of April 2016, it is the most popular AS by exit bandwidth, seeing
 $8.88\%$ of exit traffic, closely followed by AS 3223 (owned by the Romanian
 Voxility S.R.L.) that sees $8.79\%$ of exit traffic.  The experiment resulted in
-1,000 $\lambda$ values.  We repeated the experiment on a vantage point at our
-institution, achieving similar results: While a two-sample Kolmogorov-Smirnov
+1,000~$\lambda$ values.  We repeated the experiment on a vantage point at our
+institution, achieving similar results: while a two-sample Kolmogorov-Smirnov
 test determined a statistically significant difference between both
 distributions ($p < 0.01$), the medians (0.590 and 0.584) and standard
 deviations (0.149 and 0.118) are similar.
 
-Figure~\ref{fig:exposure} shows the empirical CDF of all 1,000 $\lambda$ values
+Figure~\ref{fig:exposure} shows the empirical CDF of all 1,000~$\lambda$ values
 that we calculated for Alexa's Top 1,000 sites.  In total, this experiment
 traversed 350 unique ASes for DNS requests and 339 unique ASes for web requests.
 The figure shows that for half of Alexa's Top 1,000 domains, DNS-only ASes
@@ -142,9 +142,9 @@ the following two challenges:
 We found that several exit relays used DNS
 proxies---machines that passed on DNS requests to an actual resolver
 instead of resolving it themselves.  Google's resolver {\tt 8.8.8.8} is a popular
-example of a DNS proxy; 
+example of a DNS proxy;
 several dozen machines perfom resolution in the
-background~\cite{google-proxies}.  DNS proxies do 
+background~\cite{google-proxies}.  DNS proxies do
 not interfere with our measurements, so we ignored them.
 
 \item {\em Multiple DNS resolvers:}
