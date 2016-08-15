@@ -11,6 +11,7 @@
 %%%  Load base
 %%%
 \LoadClass[pdftex,letterpaper]{extarticle}
+\RequirePackage{ifthen}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -22,6 +23,7 @@
 \newcommand{\KEYWORDS}{Keywords}
 \newcommand{\CONFERENCE}{Conference}
 \newcommand{\PAGENUMBERS}{yes} % "yes" or "no"
+\newcommand{\TABLECAPTIONS}{bottom} % "top" or "bottom". Silly IEEE formatting
 \newcommand{\COLOR}{yes}
 \newcommand{\showComments}{yes}
 \newcommand{\comment}[1]{}
@@ -81,6 +83,15 @@
 {\flushleft\it}{\Alph{subsection}.\arabic{subsubsection}.\quad}{0pt}{}
 
 
+\newcommand{\tabcaptext}{}
+\ifthenelse{\equal{\TABLECAPTIONS}{top}}{%
+\newcommand{\topcap}[1]{\caption{#1}}
+\newcommand{\bottomcap}[1]{}
+}
+{
+\newcommand{\topcap}[1]{}
+\newcommand{\bottomcap}[1]{\caption{#1}}
+}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -90,7 +101,6 @@
 \RequirePackage{balance}
 \RequirePackage{tabulary}
 \RequirePackage{url}
-\RequirePackage{ifthen}
 
 \special{papersize=8.5in,11in}
 \setlength{\pdfpagewidth}{8.5in}

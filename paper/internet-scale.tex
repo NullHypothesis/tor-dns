@@ -57,19 +57,19 @@ exit relay.
 \subsubsection{Simulating Tor user activity: TorPS}
 
 To measure the likelihood that an AS can be in a position to perform a
-\name attack, we use TorPS, the Tor Path Simulator, which
-mimics how the Tor client software constructs circuits.
-TorPS thus provides realistic combinations of guards and exits based on the state of the 
-Tor network at a given time. TorPS is based on Tor version \xxx{X}. For each sample, it uses 
-one guard which expires after 270 days. We use TorPS to emulate the behavior of a Tor 
-client for the month of March 2016.  As in previous work, we perform
-100,000 iterations (\ie, guard-exit pairs).
- For our simulation, we had each sample 
-visit {\tt domain.com}\footnote{We redacted the real domain to anonymize our
-submission.}---a website under our control---once per hour for all
-of March 2016.  Thus, each guard-exit pair had 744 opportunites to be
+\name attack, we use TorPS, the Tor Path Simulator, which mimics how the
+Tor client software constructs circuits.  TorPS thus provides realistic
+combinations of guards and exits based on the state of the Tor network
+at a given time. TorPS is based on Tor version \xxx{X}. For each sample,
+it uses one guard which expires after 270 days. We use TorPS to emulate
+the behavior of a Tor client for the month of March 2016.  As in
+previous work, we perform 100,000 samples in the TorPS Monte Carlo
+simulation.  For our simulation, we had each sample visit {\tt
+  domain.com}\footnote{We redacted the real domain to anonymize our
+  submission.}---a website under our control---once per hour for all of
+March 2016.  Thus, each guard-exit pair had 744 opportunites to be
 compromised (this assumes that the circuit changes for every visit to
-{\tt domain.com}). 
+{\tt domain.com}).
 % It is much better to use a tool like TorPS in order to
 %measure these chances instead of just using all permutations of guard and exits.
 
@@ -94,9 +94,9 @@ pessimistic in this respect. \fixme{Mention that these results apply
 % - Atlas ASes cover 73.59% of Tor guard bandwidth.
 
 \begin{table}[t]
-	\caption{The coverage of RIPE Atlas nodes that are colocated with Tor guard and exit
+	\renewcommand{\tabcaptext}{The coverage of RIPE Atlas nodes that are colocated with Tor guard and exit
 	relays.}
-	\label{tab:atlas-coverage}
+      \topcap{\tabcaptext}
 	\centering
 	\begin{tabular}{l|r r}
 	\toprule
@@ -106,6 +106,8 @@ pessimistic in this respect. \fixme{Mention that these results apply
 	By number & 50.69\% & 52.25\% \\
 	\bottomrule
 	\end{tabular}
+        \bottomcap{\tabcaptext}
+	\label{tab:atlas-coverage}
 \end{table}
 
 

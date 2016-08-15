@@ -13,6 +13,7 @@
 \usepackage{balance}         % Balance columns on last page.
 \usepackage{wasysym}         % For \Circle, ...
 \usepackage{listings}        % For source code listings.
+\usepackage{ifthen}
 \usepackage[tight,footnotesize]{subfigure}
 
 \definecolor{darkblue}{rgb}{0,0,0.5}
@@ -51,6 +52,20 @@
 \newcommand{\fifth}{(\emph{v})\xspace}
 
 \newcommand{\name}{FingerprinTor\xspace}
+
+
+\newcommand{\TABLECAPTIONS}{top} % "top" or "bottom". Silly IEEE formatting
+\newcommand{\tabcaptext}{}
+\ifthenelse{\equal{\TABLECAPTIONS}{top}}{%
+\newcommand{\topcap}[1]{\caption{#1}}
+\newcommand{\bottomcap}[1]{}
+}
+{
+\newcommand{\topcap}[1]{}
+\newcommand{\bottomcap}[1]{\caption{#1}}
+}
+
+
 
 \begin{document}
 

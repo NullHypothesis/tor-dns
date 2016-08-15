@@ -215,11 +215,12 @@ website fingerprinting attacks are selected for high recall.
 \subsubsection{Effect of Tor's TTL clipping}
 
 \begin{table}[t]
-\caption{Mean and median DNS TTL values across Alexa top one million sites. Raw
+\renewcommand{\tabcaptext}{Mean and median DNS TTL values across Alexa top one million sites. Raw
 TTLs are unprocessed, as they appear in DNS lookup traces. Tor TTLs adhere to
 Tor's TTL clipping.  Unique refers to the TTLs for unique domains; min unique
-only considers the unique domains with the minimum TTL for each website.}
-\label{tab:ttls}
+only considers the unique domains with the minimum TTL for each
+website.}
+\topcap{\tabcaptext}
 \centering
 \begin{tabular}{l r r}
 \toprule
@@ -239,6 +240,8 @@ min unique raw & \multirow{ 2}{*}{60} & $3833.9\pm11073.6$ \\ % & 0 & 604800 \\
 min unique Tor & & $644.2\pm\phantom{00}763.8$ \\ %& 60 & 1800 \\
 \bottomrule
 \end{tabular}
+\bottomcap{\tabcaptext}
+\label{tab:ttls}
 \end{table}
 
 As discussed in Section~\ref{sec:attack:sim}, due to a bug in Tor, the

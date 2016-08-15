@@ -11,7 +11,7 @@ following building blocks:
 \begin{figure}[t]
 	\centering
 	\includegraphics[width=0.8\linewidth]{figures/attack-scenario.pdf}
-	\caption{An overview of our correlation attack.  An adversary must monitor
+	\caption{An overview of the \name attack.  An adversary must monitor
 		both ingress and egress traffic.  A network-level adversary between the
 		client and its guard monitors ingress traffic.  The same adversary
 		monitors egress traffic between the exit and a DNS server, or the DNS
@@ -232,9 +232,10 @@ which is prevalent in our dataset and
 reportedly restricts access to Tor users (when searching).
 
 \begin{table}[t]
-	\caption{The percentage of websites on Alexa top-1 million websites using providers
-	involved in censoring or restricting access from Tor~\cite{Khattak2016a}.}
-	\label{tab:dns-censor}
+	\renewcommand{\tabcaptext}{The percentage of websites on Alexa top-1 million websites using providers
+	involved in censoring or restricting access from
+        Tor~\protect\cite{Khattak2016a}.}
+      \topcap{\tabcaptext}
 	\centering
 	\begin{tabular}{l r}
 	\toprule
@@ -246,6 +247,8 @@ reportedly restricts access to Tor users (when searching).
 	Domain on website uses Google & 77.43 \\
 	\bottomrule
 	\end{tabular}
+        \bottomcap{\tabcaptext}
+	\label{tab:dns-censor}
 \end{table}
 
 We collected 2,540,941 domain names over 60,828,453 DNS
@@ -272,7 +275,7 @@ identified from a single DNS request.
 
 \begin{figure}[t]
 	\centering
-	\includegraphics[width=0.7\linewidth]{figures/dns-unique-domains.pdf}
+	\includegraphics[width=0.9\linewidth]{figures/dns-unique-domains.pdf}
 	\caption{The fraction of websites on Alexa top one million that have at least
 	one unique domain. The vast majority of sites (96.8\%) have
         unique domains.
@@ -281,10 +284,10 @@ identified from a single DNS request.
 \end{figure}
 
 \begin{table}[t]
-	\caption{The median, mean, standard deviation, minimum and maximum number of
+	\renewcommand{\tabcaptext}{The median, mean, standard deviation, minimum and maximum number of
 	DNS domains per website in the Alexa top 1 million. More than half of the
 	sites have two DNS domains that are unique to that site.}
-	\label{tab:dns-domains}
+      \topcap{\tabcaptext}
 	\centering
 	\begin{tabular}{l r r r r}
 	\toprule
@@ -294,6 +297,8 @@ identified from a single DNS request.
 	unique per site & 2 & $2.3\pm\phantom{0}1.8$ & 0 & 363 \\
 	\bottomrule
 	\end{tabular}
+        \bottomcap{\tabcaptext}
+	\label{tab:dns-domains}
 \end{table}
 
 
