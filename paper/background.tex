@@ -5,15 +5,15 @@ attacks, as well as how the Tor network implements DNS resolution.
 
 \paragraph{The Tor network}
 The Tor network is an overlay network that anonymizes TCP streams such as web
-traffic.  As of April 2016, it comprises approximately 7,000 relays and about two
+traffic.  As of August 2016, it comprises approximately 7,000 relays and about two
 million users.  Clients send data over the Tor network by randomly selecting
 three relays---typically called the guard, middle, and exit relay---that then
 form a virtual tunnel called a \emph{circuit}.  The guard relay learns the
 client's IP address, but not its web activity, while the exit relay gets to
 learn the client's web activity, but not its IP address.  Relays and clients
 talk to each other using the Tor protocol, which uses 512-byte \emph{cells}.
-Finally, each relay is uniquely identified by a hash
-function over its public key (a relay fingerprint).
+Finally, each relay is uniquely identified by its fingerprint---a hash over its
+public key.
 
 \paragraph{Website fingerprinting attacks}
 The Tor network encrypts relayed traffic as it travels from the client
@@ -23,7 +23,7 @@ Tor does not, however, protect other statistics about the network
 traffic, such as packet inter-arrival timing, directions, and frequency.
 The ISP can analyze these properties to infer the destinations that a
 user is visiting.  The literature calls this attack \emph{website
-  fingerprinting}.
+fingerprinting}.
 
 Past work evaluated website fingerprinting attacks in two settings:
 a {\em closed-world} setting consists of a set of $n$ {monitored}
@@ -95,16 +95,17 @@ connection to the resolved
 address at port 443~\cite[\S~6.2]{tor-spec}.  After successfully establishing a
 connection, the exit relay responds with a \texttt{RELAY\_CONNECTED}
 cell.  The client can then exchange data with its intended
-destination.  The \texttt{RELAY\_RESOLVE} cell supports pure name resolution,
-without establishing a subsequent TCP connection~\cite[\S~6.4]{tor-spec}.  The
-exit relay responds with a \texttt{RELAY\_RESOLVED} cell.
+destination.  Another type of cell, \texttt{RELAY\_RESOLVE}, supports pure name
+resolution, without establishing a subsequent TCP
+connection~\cite[\S~6.4]{tor-spec}.  The exit relay responds with a
+\texttt{RELAY\_RESOLVED} cell.
 
 Exit relays send
 their DNS requests to the system resolver, which Linux systems read from
 \texttt{/etc/resolv.conf}.  Tor does not modify the system resolver and
-contains whatever the exit relay operator configured, such as the ISP's resolver,
+uses whatever the exit relay operator configured, such as the ISP's resolver,
 or public resolvers such as Google's {\tt 8.8.8.8} open public DNS resolver.
-As of December 2015, exit relays maintain a caching layer
+As of August 2016, exit relays maintain a caching layer
 around the DNS resolution code to speed up repeated lookups.
 The caching layer for Tor clients, however, is off by default to prevent tracking attacks
 due to modified DNS responses~\cite{nolocalcache}.
