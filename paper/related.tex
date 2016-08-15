@@ -12,8 +12,8 @@ research community has
 spent considerable effort on answering.  In 2004, when the Tor network comprised
 only 33 relays, Feamster and Dingledine investigated the practical threat that
 network-level adversaries pose to anonymity networks~\cite{Feamster2004a}.
-The authors considered an attacker that controls an autonomous
-system that is traversed both for ingress and egress traffic, allowing the
+The authors considered an attacker that controls an AS
+that is traversed both for ingress and egress traffic, allowing the
 attacker to correlate both streams.  Using AS path prediction~\cite{Gao2001a},
 Feamster and Dingledine found that powerful tier-1 ISPs reduce location
 diversity of anonymity networks.  In 2007, Murdoch and Zieli\'{n}ski drew
@@ -24,9 +24,9 @@ presence of packet sampling rates as low as one in 2,000.
 
 In 2013, Johnson
 \ea~\cite{Johnson2013a} presented the first large-scale study on the risk of Tor
-users facing relay-level and network-level adversaries.  The authors developed a
-{\em Tor path simulator (TorPS)}~\cite{TorPS} that simulates Tor circuits for a number
-of user models the authors developed.  By combining TorPS with AS path
+users facing relay-level and network-level adversaries.  The authors developed
+TorPS~\cite{TorPS} that simulates Tor circuits for a number
+of user models.  By combining TorPS with AS path
 prediction, Johnson \ea could answer questions such as the average time until a
 Tor user's circuit is deanonymized by an AS or IXP.  Most recently in 2016,
 Nithyanand \ea~\cite{Nithyanand2016a} used AS path prediction to evaluate the
@@ -34,8 +34,8 @@ practical threat faced by users in the top 10 countries using Tor.  In 2015,
 Juen \ea~\cite{Juen2015a} examined the accuracy of path prediction algorithms
 that prior work~\cite{Johnson2013a,Feamster2004a} used to estimate the threat of
 correlation attacks.  The authors compared AS path predictions to millions of
-traceroutes they initiated from 25\% of Tor relays by bandwidth at the
-AS level and found that
+traceroutes, initiated from 25\% of Tor relays by bandwidth at the
+AS level, and found that
 only 20\% of predicted paths matched the paths observed in traceroute.
 Juen \ea could not consider the reverse path in traceroutes.  In 2015,
 Sun \ea~\cite{Sun2015a} addressed this shortcoming; although past work treated
