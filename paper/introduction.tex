@@ -21,7 +21,7 @@ the nature to which these adversaries exist in operational networks and
 their ability to deanonymize users.
 
 % More specific problem.
-Past work on has quantified the extent to which an adversary that
+Past work has quantified the extent to which an adversary that
 observes TCP flows between clients and servers (\eg, HTTP requests,
 BitTorrent connections, and IRC sessions) can correlate traffic flows
 between the client and the entry to the anonymity network and between
@@ -30,7 +30,7 @@ destination~\cite{Johnson2013a,Murdoch2007a}. The ability to correlate
 these two flows---a so-called {\em correlation attack}---can link the
 sender and receiver of a traffic flow, thus compromising the anonymity
 of both endpoints. Although TCP connections are an important part
-of communications, but the Domain Name System (DNS) traffic is also
+of communications, the Domain Name System (DNS) traffic is also
 quite revealing: for example, even loading a single webpage can generate
 hundreds of DNS requests to many different domains. No previous analysis
 of correlation attacks has studied how DNS traffic can exacerbate
@@ -66,8 +66,8 @@ Second, we investigate which organizations can observe
 DNS requests that originate from Tor exit relays.  To answer this question, we emulate DNS
 resolution for the Alexa Top 1,000 domains from the Tor exit nodes using
 measurement vantage points that are co-loated with Tor exit nodes; we find that DNS
-resolution for half of these domains traverses numerous autonomous
-systems that are not traversed for the subsequent HTTP connection to the web
+resolution for half of these domains traverses numerous ASes
+that are not traversed for the subsequent HTTP connection to the web
 site.
 We introduce a new
 method to perform traceroutes from the networks where
@@ -77,7 +77,7 @@ Next, we show how the ability to observe DNS traffic from Tor
 exit relates can
 augment existing website fingerprinting attacks,
 yielding perfectly precise \name attacks for unpopular websites.
-Finally, we use the TorPS simulator~\cite{TorPS} to investigate the
+Finally, we use the Tor Path Simulator (TorPS)~\cite{TorPS} to investigate the
 effects of Internet-scale \name attacks.
 
 % Comparison to past work.
