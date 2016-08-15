@@ -90,14 +90,17 @@ than Wa-kNN even in the face of defenses
 closed-world setting against the WTF-PAD defense by Juarez et
 al.~\cite{DBLP:journals/corr/JuarezIPDW15}---a prime candidate for
 deployment in Tor~\cite{adapativepadding}---at the cost of 50\% bandwidth
-overhead.
+overhead. Juarez \ea use Wa-kNN to evaluate WTF-PAD and set $k=5$, as
+recommended by Wang \ea for an optimal trade-off between recall and the
+false positive rate.
 
 In this paper, we show how to correlate and use observed DNS requests in
 concert with website fingerprinting attacks,
 which significantly
 improves precision for web\emph{site} fingerprinting.
-The two \name attacks  that we present in this paper have implications
+The two \name attacks that we present have implications
 for the design of website fingerprinting defenses:
 to mitigate \name attacks, open-world evaluations of the website fingerprinting
 defense should minimise recall even when the website fingerprinting attack is
-tuned to sacrifice precision for recall.
+tuned to sacrifice precision for recall.  In the case of Wa-kNN, this means
+a low $k$: our results are based on $k=2$.
