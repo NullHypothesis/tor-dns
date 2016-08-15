@@ -19,9 +19,10 @@ experiment, we can improve our understanding of the risks that Tor users face
 and work towards mitigation methods.  In summary, we believe that the benefits
 of our experiment outweigh the risks.
 
-\subsection{Mitigation}
-We now discuss ways to mitigate the issues our work raised.  We distinguish
-between short-term solutions that could be implemented quickly
+\subsection{Defending against \name attacks}
+
+We now discuss ways to defend against \name attacks.  We distinguish
+between short-term solutions that can be implemented quickly
 (\S~\ref{sec:short-term}), and long-term solution that need significantly more
 work (\S~\ref{sec:long-term}).
 
@@ -38,14 +39,16 @@ use either \first Google's DNS resolver; \second their own, local resolver; or
 \third the resolver provided by their ISP.  If all exit relays would use Google,
 the company would obtain metadata about the activity of all Tor users---a clear
 violation of Tor's design goal of distributing trust.  This scenario is clearly
-to avoid.\footnote{To make matters worse, Fifield et al.'s~\cite{Fifield2015a}
-censorship circumvention system meek leveraged Google's cloud infrastructure
+to avoid. (To make matters worse, Fifield \ea's~\cite{Fifield2015a}
+censorship circumvention system meek used Google's cloud infrastructure
 to reach the Tor network up until May 2016.
 % died May 13, 2006. See https://lists.torproject.org/pipermail/tor-talk/2016-June/041699.html
 Inevitably, many of the thousands of meek clients
 will select exit relays that use Google's DNS resolver, which means that Google
 gets to see both traffic entering \emph{and}, partially, exiting the Tor
-network.} Next, let us imagine a Tor network that only uses local resolvers.  In
+network. 
+
+Next, let us imagine a Tor network that only uses local resolvers.  In
 that case, Tor is fully independent of third-party resolvers, but at the cost of
 the DNS resolution process being exposed to the network, allowing several
 parties to learn what domains Tor users are looking up.  Finally, all exit
