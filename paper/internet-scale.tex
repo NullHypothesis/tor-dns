@@ -276,22 +276,28 @@ close to 16 days.}
 \end{figure}
 
 Figures~\ref{fig:compromised-streams}
-and~\ref{fig:time-until-compromise} show that
-\fixme{new figures coming}
-
-In Figures \fixme{X} and \fixme{X}, we show the results of our experiment for client 
-AS \fixme{X}.  For the other client ASes, please see our Appendix. 
+and~\ref{fig:time-until-compromise} the results of our experiments for 100,000 
+simulated Tor users located in AS 7922 (United States, Comcast). (For the results 
+of our experiments for users located in the other four countries, please see our Appendix. 
 \emph{ISP DNS only} represents a world in which all exit relays use 
 their ISPs' name servers. \emph{Google DNS only} represents a world in which all 
 Tor exit relays use {\tt 8.8.8.8} for DNS resolution.  \emph{Local DNS only} represents 
 a world in which all Tor exit relays perform their own DNS resolution.  And again, 
 \emph{Status quo} represents our estimate of the current world of exit relay resolution.  
 
-As you can see, ISPs fared much better than the other situations. Google was next. There is a potential 
-tradeoff between the safety of using a well-managed DNS resolver such as Google's vs. 
-a potentially not as well-managed DNS resolver from the ISP.  
+The figures show that \emph{ISP DNS only} fared much better than the other configurations. 
+This was expected, of course, because there is only one AS (the exit relay's AS) to contend 
+with on the egress side. \emph{Google DNS only} was next, and we believe this is because
+ of Google's heavily \fixme{anycast/replicated} servers. 
 
-We believe that the Status Quo results are significantly better than the 
-Local results because only around 12\% of Tor exit relays actually do their own resolution.
-The differing results for the different client ASes shows that client AS needs to be 
-taken into account. 
+There is a potential tradeoff between the safety of using a well-managed 
+DNS resolver such as Google's vs. a potentially not-as-well-managed 
+DNS resolver from the ISP.  
+
+Please note that the wide variance observed in Figure~\ref{fig:time-until-compromise} is 
+due to using 31 days as a placeholder for sample users who were never compromised.
+
+We believe that the \emph{Status Quo} results are significantly better than the 
+\emph{Local dns only} results because only around 12\% of Tor exit relays 
+actually do their own resolution. Additionally, the differing results for the 
+different client ASes shows that client AS needs to be taken into account. 
