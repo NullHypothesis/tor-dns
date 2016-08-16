@@ -11,7 +11,7 @@ library(grid)
 args <- commandArgs(trailingOnly = TRUE)
 input_file <- args[1]
 
-cairo_pdf("1kx100+100k-ggplot2.pdf", height=2.4, width=2.8)
+cairo_pdf("1kx100+100k-ggplot2.pdf", height=2.6, width=3)
 data <- read.csv(input_file, header=TRUE)
 
 df <- data.frame(x = data$r,
