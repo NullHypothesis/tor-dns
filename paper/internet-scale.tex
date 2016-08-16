@@ -192,26 +192,25 @@ different DNS configurations:
       in the AS of the exit relay to Google's public DNS resolver, \ie,
       {\tt 8.8.8.8}.
 
-    \item \emph{Local DNS:} To measure the paths that would result if an
-      exit relay were running its own local resolver (\eg, {\tt
-        unbound}, {\tt bind}), we used {\tt dig +trace} to emulate the
+    \item \emph{Local DNS:} To measure the paths that would be traversed if an
+      exit relay were running its own, local resolver (\eg, the popular service {\tt
+      unbound}), we used {\tt dig +trace} to emulate the
       iterative DNS lookup that would take place. We tracked all IP
-      addresses from referrals at each level of the hierarchy and
+      addresses from referrals at each level of the delegation path and
       performed traceroutes to those IP addresses.
 
     \item \emph{Status quo:} This experiment represents a combination of
       the above configurations, which represents our estimate of how the
-      Tor network's exit relays are currently configured. We used {\tt
-        exitmap}, a website that we control, and our own authoritative
-      name server to determine the IP addresses of the name servers that
-      the Tor exit relays were using and ran the necessary traceroutes. 
-      For those exit relays that used several name servers during March, 
-      we randomly assigned one to the relay. We ended up having data 
-      for 73\% of the exit relays that TorPS ended up picking.
+      Tor network's exit relays are currently configured.  Recall that in
+      Section~\ref{sec:mapping-resolvers}, we already learned the IP addresses
+      of the resolvers that exit relays use.  We ran traceroutes to these very
+      IP addresses.  For the exit relays that used several resolvers during
+      March, we randomly assigned one to the relay.  We ended up having data for
+      73\% of the exit relays that TorPS ended up picking.
 \end{itemize}
 \noindent
-We then mapped each IP address in every traceroute to a corresponding
-AS.  The Python {\tt pyasn} module relies on BGP routing tables to
+We then mapped each IP address in every traceroute to its corresponding
+AS.  The Python module {\tt pyasn}~\cite{pyasn} relies on BGP routing tables to
 perform these mappings; by using a routing table that coincides with the
 time when we performed our traceroutes, we can obtain accurate AS-level
 mappings.  This method is subject to inaccuracies due to BGP route
