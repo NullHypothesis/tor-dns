@@ -17,8 +17,8 @@ df <- rbind(df, data.frame(x = data$pct,
                            Attack = "hp"))
 
 df <- rbind(df, data.frame(x = data$pct,
-                           y = data$kwf,
-                           Attack = "kwf"))
+                           y = data$wf,
+                           Attack = "wf"))
 
 ggplot(df, aes(x, y, colour = Attack,
                      linetype = Attack,
