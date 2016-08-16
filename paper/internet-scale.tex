@@ -181,22 +181,18 @@ performing these types of measurements.
 %run closer to March 2016. Do we need to mention this??}
 
 
-Moved the following out of the Results section--will come up with either a header and/or an 
-opening sentence:
+
 %In contrast to how TorPS is used in~\cite{Johnson2013a}, we do not ultimately run 
 %traceroutes from .
-Describe the four scenarios in the graph here: 1) ISPs, 2) Google, 3) Local, and 
-4) Status Quo.
-
-we only concern ourselves with root domain, that is, if facebook.com, we don't 
-take the embedded URLs into account.
 
 %Traditional: ``Traditional'' represents the paths between all exit ASes that RIPE Atlas 
 %has coverage for and domain.com. That is, this measurement doesn't take DNS into account 
 %at all, as has been traditionally done.
 
+We conducted five different types of traceroutes which we discuss next.
+
 \begin{itemize}
-    \item \emph{ISPs:} ``ISPs'' represents what would happen if all exit relays used their ISPs' DNS name 
+    \item \emph{ISP DNS:} ``ISP DNS'' represents what would happen if all exit relays used their ISPs' DNS name 
 servers.  We choose to represent this by saying that the name server is in the same AS as the 
 exit relay.
 
@@ -204,19 +200,24 @@ exit relay.
 Google's public DNS resolver ({\tt 8.8.8.8}) for resolution. We ran traceroutes from probes in all the exit 
 ASes that RIPE Atlas had coverage for to  {\tt 8.8.8.8}.
 
-    \item \emph{Local:} ``Local'' represents what would happen if all exit relays ran their own name 
+    \item \emph{Local DNS:} ``Local DNS'' represents what would happen if all exit relays ran their own name 
 servers locally (e.g., the use of unbound) on their own machines. In order to figure out 
 what ASes would be traversed on the way to resolve domain.com. In order to figure out the 
 DNS delegation path, we use the command line option \texttt{+trace} of the
 command line tool dig. Assuming no caching and assuming 
 iterative resolution, for domain.com the name server will have to visit three name servers:
 a root name server, a top level domain name server, and a second-level domain name server. 
+Note that we only concern ourselves with the root domains of the websites we chose for our 
+sample client to visit.  That is, if the client chose to visit facebook.com, we don't 
+take any embedded domains into account.  Those embedded domains could definitely be unique 
+to a site, though, and offer even more ways to deanonymize a site.  
+Thus, our analysis is conservative in this respect.
 
     \item \emph{Status Quo:} ``Status Quo'' represents to the best of our ability the 
 type of name resolution 
 that exit relays perform, whether that be their own or the use of 3rd-party name servers, 
 which again includes public DNS name servers and their ISPs' name servers.  To figure this 
-out, we used the exitmap tool, our own website, and our own authoritative name server 
+out, we used the {\tt exitmap} tool, our own website, and our own authoritative name server 
 in order to figure out the IP addresses of the name servers that the exit relays were 
 using. We then performed traceroutes from the exit ASes to the appropriate IP addresses 
 in order to get the AS-level paths.
