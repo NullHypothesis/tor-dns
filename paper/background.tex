@@ -84,9 +84,9 @@ traffic, but it implements a workaround to wrap DNS requests into Tor cells.
 Using the
 SOCKS protocol, applications can instruct the Tor client to establish a circuit to a
 given domain and port.\footnote{SOCKS versions 4a and 5 support connection
-initiation using domain names in addition to IP addresses.} 
-After the user types in a domain, say {\tt foo.com}, the Tor Browser establishes
-a connection to the SOCKS proxy exposed by the local Tor client.  
+initiation using domain names in addition to IP addresses.}
+After the user types in a domain, say {\tt foo.com}, the Tor browser establishes
+a connection to the SOCKS proxy exposed by the local Tor client.
 The Tor client then
 selects an exit relay whose exit policy supports {\tt foo.com} and port 443.
 Next, the client sends a \texttt{RELAY\_BEGIN} Tor cell to the exit relay,

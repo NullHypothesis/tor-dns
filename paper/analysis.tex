@@ -87,11 +87,13 @@ For high Alexa ranks there is no difference between our attacks and the
 \texttt{wf} attack. This is because, even with a window of only 60 seconds,
 it is almost certain that at least one user visited any of the most popular
 sites over Tor. For sites that rank 1,000 or lower (\ie, less popular),
-the \name attacks show a clear improvement in both recall and precision.
+both the \name attacks show a clear improvement in precision, while
+\texttt{ctw} also shows improved recall (only at 100\% observed exit bandwidth,
+as shown in Figure~\ref{fig:fpt:torpct}).
 These results paint a bleak picture: a small fraction of exit
 bandwidth provides a perfectly precise attack on relatively
-{unpopular} sites such as \url{wikileaks.org}, which has Alexa rank
-10,808.
+{unpopular} sites such as \url{wikileaks.org}, which had Alexa rank
+10,808 at the time of our experiments.
 
 \begin{figure}[t]
 \centering
@@ -160,14 +162,16 @@ power-law distribution (pc) with $\alpha=1.13$.}
 \end{figure}
 
 To better understand the extent and limitations of our attacks, we
-study the sensitivity of our results to website popularity distribution,
-website fingerprinting defenses, TTL clipping, and the growth of the Tor
-network.  In this section, we assume that an adversary can observe Tor
+study the sensitivity of our results to website fingerprinting defenses,
+TTL clipping, the growth of the Tor network, and website popularity
+distribution.  In this section, we assume that an adversary can observe Tor
 exit relays representing 33\% of exit bandwith (as observed on average
-by Google) and precision (where we see clear gain from both our
+by Google) and consider only precision (where we see clear gain from both our
 attacks).  Unless otherwise stated, we perform our evaluation on
 websites starting at Alexa rank 10,000 and proceeding through less
-popular websites.
+popular websites, use 2,500 weight-learning rounds, have a 60 seconds window
+size, a Tor network scale of 1.0, and use the conservative power-law
+distribution from Section~\ref{sec:attack:pop}.
 
 
 
@@ -203,7 +207,7 @@ website fingerprinting attacks are selected for high recall.
 \subsubsection{Effect of Tor's TTL clipping}
 
 \begin{table}[t]
-\renewcommand{\tabcaptext}{Mean and median DNS TTL values across Alexa top one million sites. Raw
+\renewcommand{\tabcaptext}{Median and mean DNS TTL values across Alexa top one million sites. Raw
 TTLs are unprocessed, as they appear in DNS lookup traces. Tor TTLs adhere to
 Tor's TTL clipping.  Unique refers to the TTLs for unique domains; min unique
 only considers the unique domains with the minimum TTL for each
@@ -239,7 +243,8 @@ seconds of all observed DNS requests is enough to capture all visited
 monitored sites through Tor (subject to the fraction of observed Tor
 exit bandwidth, and mapping DNS requests to sites).
 
-Table~\ref{tab:ttls} shows the TTL of DNS records in our dataset for the
+Table~\ref{tab:ttls} shows the TTL of DNS records in our Alexa top one million
+sites dataset from Section~\ref{sec:dns2site} for the
 TTL as-is (raw) and when clipped by Tor.  For each of these cases, we
 also consider TTLs for all unique domains, and for only the unique
 domain for each website with the lowest TTL.  About half of the sites on
@@ -258,7 +263,7 @@ TTL of all unique domains for any monitored site.
 Figure~\ref{fig:fpt:var:window} shows the effect on precision for
 different time intervals from 60 seconds to 30 minutes (Tor's {\tt
   MAX\_DNS\_ENTRY\_AGE} for keeping entries in an exit's DNS resolver
-cache) and for Alexa starting rank 10,000 and 100,000. For \texttt{ctw},
+cache), and for Alexa starting rank 10,000 and 100,000. For \texttt{ctw},
 the time interval has a significant effect at both Alexa starting ranks,
 while \texttt{hp} is only affected for sites ranked 10,000 or higher;
 for less popular sites, the DNS lookup data still significantly improves

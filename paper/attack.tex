@@ -130,7 +130,7 @@ Section~\ref{sec:dns2site}) we know that one website visit causes outgoing DNS r
 taking into account tor caching pending DNS requests, ensuring that multiple
 requests sent by clients for the same domain name only result in one outgoing request
 by the exit).
-This means that we had an average of about 23.2 website visits per ten 
+This means that we had an average of about 23.2 website visits per ten
 minutes on our exit relay. We can scale this number up to the whole Tor
 network using the self-reported bandwidth information from Tor exit
 relays collected in the ``extra-info'' descriptors available on
@@ -176,7 +176,8 @@ refer to this as Tor's \emph{TTL clipping}. Due to a
 bug in Tor that we identified\footnote{We redacted the link to the bug report to anonymize our paper
 submission.},
 % \url{https://bugs.torproject.org/19025}}
-the TTL of all DNS responses are set to 60 seconds.
+the TTL of all DNS responses are set to 60 seconds, which determines
+the duration the responses are cached.
 
 %\subsubsection{Sliding window approach to compensate for DNS caching}
 % we ignore caching by having a window of X minutes
@@ -265,7 +266,7 @@ top one million. Above Alexa top 100 the fraction is erratic between
 and downwards the trend is clear.
 
 Table~\ref{tab:dns-domains} shows statistics for the number of DNS domains per
-website. At least half of the sites we have ten domains per website where
+website. At least half of the sites have ten domains per website where
 two of them are unique, suggesting that many website visits can be
 identified from a single DNS request.
 
@@ -357,4 +358,4 @@ testing time.
 We expect that this is due to the fact that some features of traffic traces are
 more useful than others, regardless of the training data~\cite{kfingerprinting}.
 The \texttt{hp} attack only produces a positive classification if both ingress
-and egress traffic are consistent, simple but effective. 
+and egress traffic are consistent, simple but effective.
