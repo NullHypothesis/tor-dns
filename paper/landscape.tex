@@ -19,8 +19,8 @@ adversaries that can observe traffic entering the Tor network and \emph{some}
 DNS requests exiting the network---such as requests addressed to DNS
 root servers---but {\em not} subsequent TCP traffic from exit relays.
 We first determine the prevalence of these adversaries by measuring the
-number of ASs that DNS queries traverse versus the
-number of ASs subsequent web traffic traverses.
+number of ASes that DNS queries traverse versus the
+number of ASes subsequent web traffic traverses.
 
 We quantify the {\em exposure} of DNS traffic versus TCP traffic as follows.  We
 begin with Alexa's Top 1,000~\cite{alexatop1k}, a list of the 1,000 most popular
@@ -37,10 +37,10 @@ mimic DNS resolution.\footnote{We published the tool that we developed for this
 experiment, but we redacted the URL to preserve our anonymity.}
 
 For both experiments, we then mapped all IP addresses in the traceroutes to AS
-numbers~\cite{ipasn}, generating both a set of traversed ASs for DNS traceroutes
-($\mathcal{D}$) and a set of traversed ASs for web traceroutes
+numbers~\cite{ipasn}, generating both a set of traversed ASes for DNS traceroutes
+($\mathcal{D}$) and a set of traversed ASes for web traceroutes
 ($\mathcal{W}$).  Given these two sets for each of Alexa's Top
-1,000, we compute the fraction of ASs that are \emph{only}
+1,000, we compute the fraction of ASes that are \emph{only}
 traversed for DNS traffic, but \emph{not} for web traffic ($\lambda$):
 
 \begin{equation}
@@ -50,7 +50,7 @@ traversed for DNS traffic, but \emph{not} for web traffic ($\lambda$):
      {|\mathcal{D} \cup \mathcal{W}|}.
 \end{equation}
 \noindent
-The metric approaches 1 as the number of ASs that are only traversed for DNS
+The metric approaches 1 as the number of ASes that are only traversed for DNS
 increases.  For example, if $\mathcal{D} = \{1,2,3\}$ and $\mathcal{W} =
 \{2,3,4\}$, then $\lambda = \frac{|\{1\}|}{|\{1,2,3,4\}|} = \frac{1}{4} =
 0.25$.  We determined $\lambda$ for each site in the Alexa Top 1,000.  We ran
@@ -73,11 +73,11 @@ deviations (0.149 and 0.118) are similar.
 
 Figure~\ref{fig:exposure} shows the empirical CDF of all 1,000~$\lambda$ values
 that we calculated for Alexa's Top 1,000 sites.  In total, this experiment
-traversed 350 unique ASs for DNS requests and 339 unique ASs for web requests.
-The figure shows that for half of Alexa's Top 1,000 domains, DNS-only ASs
-account for around 70\% of all traversed ASs.  This result
+traversed 350 unique ASes for DNS requests and 339 unique ASes for web requests.
+The figure shows that for half of Alexa's Top 1,000 domains, DNS-only ASes
+account for around 70\% of all traversed ASes.  This result
 only applies to exit relays that do their own DNS resolution; for relays that
-use a third-party resolver, the ASs that are traversed between
+use a third-party resolver, the ASes that are traversed between
 the exit relay and its DNS resolver is the metric of interest.  We conclude that adversaries that are
 unable to observe a Tor user's TCP connection still have many opportunities to
 see a TCP connection's corresponding DNS request.  Such adversaries include (\emph{i}) popular open
@@ -93,7 +93,7 @@ entities.
 	\centering
 	\includegraphics[width=0.75\linewidth]{figures/dns-exposure.pdf}
 	\caption{Our AS exposure metric $\lambda$ for Alexa's Top 1,000 web sites.
-	For half of all sites, 70\% of ASs are only traversed for DNS resolution,
+	For half of all sites, 70\% of ASes are only traversed for DNS resolution,
 	but not for subsequent web traffic.}
 	\label{fig:exposure}
 \end{figure}
@@ -169,7 +169,7 @@ not be the primary resolver.
 \end{itemize}
 \noindent
 Figure~\ref{fig:exit-resolvers} illustrates the fraction of DNS requests that
-four of the most popular ASs could observe.  Google averages at 33\%, but at
+four of the most popular ASes could observe.  Google averages at 33\%, but at
 times saw more than 40\% of all DNS requests exiting the Tor network---an
 alarming number for a single organization.  Second to Google is ``Local''---exit
 relays that run their own resolver, averaging at 12\%.  Next is OVH, which used
