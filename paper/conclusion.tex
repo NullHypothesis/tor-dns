@@ -5,11 +5,10 @@ In this paper, we have demonstrated how AS-level adversaries can use DNS
 traffic from Tor exit relays to launch more effective correlation
 attacks, which link the sender and receiver of traffic in the Tor
 network.  We show how an attacker can use DNS query traffic to mount
-perfectly precise website fingerprinting attacks: Due to the fact that
-many websites have at least one DNS domain that is unique to that
-website, an attacker can often identify the website that a client is
-visiting with perfect accuracy, given the ability to observe the
-client's set of DNS requests.
+perfectly precise \name attacks: Mapping DNS traffic to websites is highly
+accurate even with simple techniques, and correlating the observed websites
+with a website fingerprinting attack greatly improves the precision when
+monitoring relatively unpopular websites. 
 
 Given this more powerful fingerprinting method, we showed that the
 threat of \name attacks against the Tor network is clear and present. We
@@ -39,4 +38,4 @@ network. The attacks that we present in this paper show that, when
 incorporating DNS query traffic, these attacks become even more accurate
 and powerful. We hope these findings underscore the urgency of
 eventually deploying strong defenses against fingerprinting attacks on
-the Tor network. 
+the Tor network.
