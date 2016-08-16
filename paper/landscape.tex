@@ -198,39 +198,44 @@ many ISP resolvers.
 
 % The following section takes up too much space, so it's commented out for now.
 % We should include it in an extended version of our work, though.
+
 \iffalse
-\subsection{Mapping resolver configuration}
+\subsection{Inferring resolver configuration}
 \label{sec:mapping-configuration}
-In addition to identifying an exit relay's DNS resolver, our technique can
-ascertain parts of its configuration.  Resolvers with poor or broken
-configuration pose a security risk to Tor users as attackers could poison or
-enumerate their cache, allowing them to redirect users or profile them.
-Therefore, it is important to identify broken resolvers because they jeopardize
-the anonymity of Tor users.
+
+In addition to identifying an exit relay's DNS resolver, our measurement
+techniques can ascertain aspects of the of how an exit relay's local
+resolver are configured.  It is important to identify broken resolvers
+because they jeopardize the anonymity of Tor users.  Resolvers with poor
+or broken configuration pose a security risk to Tor users as attackers
+could poison or enumerate their cache, allowing them to redirect users
+or profile them. Below, we discuss certain aspects of Tor's DNS resolver
+configurations that we can infer with our measurements.
 
 \paragraph{Random source ports}
-To impede cache poisoning attacks, DNS resolvers should use random source ports
-instead of always using UDP port 53.  Our data allows for verifying if a given
-resolver randomizes its source ports.  We classify a resolver as ``uses
-randomization'' if the source port does not equal 53.  This method
-causes a small number of false positives because a randomizing resolver could
-use port 53 simply by chance.  The probability of that happening is
-only $\frac{1}{65535}$.
+To impede cache poisoning attacks, DNS resolvers should use random
+source ports instead of always using UDP port 53.  Our measurements can
+determine whether a given resolver randomizes its source ports.  We
+classify a resolver as ``uses randomization'' if the source port does
+not equal 53.  This method causes a small number of false positives
+because a randomizing resolver could use port 53 simply by chance.  The
+probability of that happening is only $\frac{1}{65535}$.
 
 We found 135 DNS resolvers that did not use random source ports.  These
 resolvers were located in the networks of Vodafone, Germany (95\%), MTNL, India
 (4\%), and Cogent, U.S. (1\%).
 
 \paragraph{0x20 encoding}
-Resolvers can further reduce the chance of cache poisoning by employing 0x20
-encoding, i.e., randomizing the capitalization of domain names.  For example,
-to resolve foo.com, a resolver would send a request for fOo.CoM.  If the DNS
-response does not reflect the randomly chosen capitalization, the resolver
-considers unauthentic.  We classify a resolver as ``uses 0x20'' if it has at
-least one lowercase and one uppercase character.  Again, there is a chance of
-false positives, which depends on the domain name length.  A 0x20-encoded
-domain name of $n$ characters (excluding periods) can be all-uppercase or
-all-lowercase with probability $2 \cdot 0.5^n$.
+Resolvers can further reduce the chance of cache poisoning by employing
+{\tt 0x20} encoding (\ie, randomizing the capitalization of domain
+names).  For example, to resolve {\tt foo.com}, a resolver would send a
+request for {\tt fOo.CoM}.  If the DNS response does not reflect the
+randomly chosen capitalization, the resolver considers unauthentic.  We
+classify a resolver as ``uses {\tt 0x20}'' if it has at least one
+lowercase and one uppercase character.  Again, there is a chance of
+false positives, which depends on the domain name length.  A {\tt
+  0x20}-encoded domain name of $n$ characters (excluding periods) can be
+all-uppercase or all-lowercase with probability $2 \cdot 0.5^n$.
 
 We found 427 DNS resolvers that did not use 0x20 encoding for at least one
 query.  The top five resolvers were located in the networks of Google, U.S.
@@ -238,9 +243,10 @@ query.  The top five resolvers were located in the networks of Google, U.S.
 (7\%), OpenDNS, U.S. (4\%).
 
 \paragraph{DNSSEC validation}
-We can verify if a resolver is validating DNSSEC-signed records by resolving a
-domain whose signature is deliberately malformed.  Such a service is provided
-by dnssec-failed.org.  A validating resolver would not return an A record while
-a non-validating resolver would.  Therefore, we resolve dnssec-failed.org over
-all exit relays and check if we get an A record in response.
+We can verify whether a resolver is validating DNSSEC-signed records by resolving a
+domain whose signature is deliberately malformed; 
+{\tt dnssec-failed.org} provides such a service.  A validating resolver
+would not return an {\tt A} record while
+a non-validating resolver would.  Therefore, we send an {\tt A} query {\tt dnssec-failed.org} via
+all exit relays and check whether we receive an response
 \fi
