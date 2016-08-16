@@ -173,22 +173,28 @@ coincides with the time when we performed our traceroutes, we can obtain
 accurate AS-level mappings.  (This method of course is subject to
 inaccuracies in the event of BGP route hijacks or leaks, but we expect
 those events to be relatively unlikely for the time period and IP
-prefixes that we are concerned with.)
+prefixes that we are concerned with.)  (Please note that although we're 
+analyzing Tor during the month of March 2016, we ended up using traceroutes from 
+July 2016 due to information we didn't have time to collect again.  We recognize 
+that it would have been better for our traceroutes to be closer in time to the 
+month we wanted to analyze, but we don't 
+believe that this should greatly affect our results, and spot checks confirm 
+this.)  
 
 
-The traceroutes are from July 2016, and we applied these in our analysis of Tor 
-in March 2016.  \xxx{don't understand what ``analysis of Tor in March
-  2016'' means.  What's the Tor trace corresponding to this?} \xxx{The following sentence should 
-explain it better, please, although now I'm thinking it doesn't matter as much as I thought it did 
-because we're working at the AS level.
---The point is that although we're simulating the March 2016 Tor situation, the traceroutes themselves 
-are from July 2016 because I had to rerun all the traceroutes and add a bunch because we were no longer 
-using nymity nor 
-the original client AS. We upgraded the model and made the client visit 9 different websites from 5 
-different client ASes. We had to stick with March because we didn't have ``Status Quo'' information 
-from July. Summary: The results would perhaps be even more accurate if 
-all these brand new traceroutes had been 
-run closer to March 2016. Do we need to mention this??}
+%The traceroutes are from July 2016, and we applied these in our analysis of Tor 
+%in March 2016.  \xxx{don't understand what ``analysis of Tor in March
+%  2016'' means.  What's the Tor trace corresponding to this?} \xxx{The following sentence should 
+%explain it better, please, although now I'm thinking it doesn't matter as much as I thought it did 
+%because we're working at the AS level.
+%--The point is that although we're simulating the March 2016 Tor situation, the traceroutes themselves 
+%are from July 2016 because I had to rerun all the traceroutes and add a bunch because we were no longer 
+%using nymity nor 
+%the original client AS. We upgraded the model and made the client visit 9 different websites from 5 
+%different client ASes. We had to stick with March because we didn't have ``Status Quo'' information 
+%from July. Summary: The results would perhaps be even more accurate if 
+%all these brand new traceroutes had been 
+%run closer to March 2016. Do we need to mention this??}
 
 
 Moved the following out of the Results section--will come up with either a header and/or an 
@@ -208,8 +214,8 @@ Describe the four scenarios in the graph here: 1) ISPs, 2) Google, 3) Local, and
 servers.  We choose to represent this by saying that the name server is in the same AS as the 
 exit relay.
 
-    \item \emph{Google:} ``Google'' represents what would happen if all exit relays used 
-Google's public DNS server for resolution. We ran traceroutes from probes in all the exit 
+    \item \emph{Google DNS:} ``Google DNS'' represents what would happen if all exit relays used 
+Google's public DNS resolver for resolution. We ran traceroutes from probes in all the exit 
 ASes that RIPE Atlas had coverage for to 8.8.8.8.
 
     \item \emph{Local:} ``Local'' represents what would happen if all exit relays ran their own name 
