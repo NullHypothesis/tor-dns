@@ -140,7 +140,7 @@ total number of websites visited through the Tor network is about 536,000
 websites per ten minutes.
 
 Recently, Jansen and Johnson~\cite{jansen-ccs2016} measured the average
-number of active web (port 80 and 443) circuits in Tor to about 700,000 per ten 
+number of active web (port 80 and 443) circuits in Tor to about 700,000 per ten
 minutes.\footnote{This number comes from a preprint kindly
 shared by the authors and might change in the final version.}
 In the Tor Browser Bundle (TBB), the browser builds one circuit per
@@ -169,9 +169,11 @@ Section~\ref{sec:background}.
 On the exit relays, which perform DNS resolution on behalf of Tor clients, caching
 is relevant, because the requests of all users connected to an exit
 share the same cache. An exit
-relay maintains its own DNS cache\footnote{Around eventdns.c.  See the
-		code in src/or/dns.c.} and enforces a minimum TTL of 60 seconds
-and a maximum TTL of 30 minutes.\footnote{See src/or/dns.c:278}  We
+relay maintains its own DNS cache\footnote{See
+\url{https://gitweb.torproject.org/tor.git/tree/src/or/dns.c}.} and enforces a
+minimum TTL of 60 seconds and a maximum TTL of 30 minutes.\footnote{See
+\texttt{dns\_clip\_ttl} in
+\url{https://gitweb.torproject.org/tor.git/tree/src/or/dns.c}.}  We
 refer to this as Tor's \emph{TTL clipping}. Due to a
 bug in Tor that we identified\footnote{We redacted the link to the bug report to anonymize our paper
 submission.},
