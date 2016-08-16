@@ -175,13 +175,16 @@ We performed traceroutes from the five client ASes above to all guard IP
       performed the following traceroutes, emulating a number of
       different DNS configurations:
 \begin{itemize}
-    \item \emph{ISP DNS:} To measure the path from an exit relay to its
-      ISP's DNS resolver, we perform traceroutes from a RIPE Atlas node
-      in the ISP of the exit relay to the ISP's corresponding DNS resolver.
+    \item \emph{ISP DNS:} To investigate the scenario in which an exit 
+      relay uses the DNS 
+
+      %To measure the path from an exit relay to its
+      %ISP's DNS resolver, we perform traceroutes from a RIPE Atlas node
+      %in the ISP of the exit relay to the ISP's corresponding DNS resolver.
 
     \item \emph{Google DNS:} To measure the path from an exit relay to
       Google public DNS, we perform traceroutes from a RIPE Atlas node
-      in the ISP of the exit relay to Google's public DNS resolver (\ie,
+      in the AS of the exit relay to Google's public DNS resolver (\ie,
       {\tt 8.8.8.8}).
 
     \item \emph{Local DNS:} To measure the paths that would result if an
@@ -193,10 +196,13 @@ We performed traceroutes from the five client ASes above to all guard IP
 
     \item \emph{Status quo:} This experiment represents a combination of
       the above configurations, which represents our estimate of how the
-      Tor networks' exit relays are currently configured. We used {\tt
+      Tor network's exit relays are currently configured. We used {\tt
         exitmap}, a website that we control, and our own authoritative
       name server to determine the IP addresses of the name servers that
-      the Tor exit relays are using.
+      the Tor exit relays were using and ran the necessary traceroutes. 
+      For those exit relays that used several name servers during March, 
+      we randomly assigned one to the relay. We ended up having data 
+      for 73\% of the exit relays that TorPS ended up picking.
 \end{itemize}
 \noindent
 We then mapped each IP address in every traceroute to a corresponding
@@ -206,6 +212,17 @@ time when we performed our traceroutes, we can obtain accurate AS-level
 mappings.  This method is subject to inaccuracies due to BGP route
 hijacks or leaks, but we expect those events to be relatively unlikely
 for the time period and IP prefixes that we are concerned with.
+
+\subsubsection{Putting it all together}
+Ultimately, what we did was .  
+We sought to get estimates for the number of compromises per different DNS configurations 
+and the amount of time it would take to compromise in order to understand which 
+DNS configuration might be more favorable for Tor exit ASes. 
+To get our numbers for the compromised streams, 
+we counted the intersections.  To get our numbers for the time to first compromise: for 
+sample users that were not compromised during the month of March, we assigned a maximum value 
+of 31 days . (Samples that were compromised immediately would have a value of 0--it was 
+compromised at the very beginning of March 1st.)
 
 \subsection{Results}
 
@@ -228,7 +245,16 @@ for the time period and IP prefixes that we are concerned with.
 Figures~\ref{fig:compromised-streams}
 and~\ref{fig:time-until-compromise} show that
 \fixme{new figures coming}
-ISPs fared much better than the other situations. Google was next. There is a potential 
+
+In Figures \fixme{X} and \fixme{X}, we show the results of our experiment for client 
+AS \fixme{X}.  For the other client ASes, please see our Appendix. 
+\emph{ISP DNS only} represents a world in which all exit relays use 
+their ISPs' name servers. \emph{Google DNS only} represents a world in which all 
+Tor exit relays use {\tt 8.8.8.8} for DNS resolution.  \emph{Local DNS only} represents 
+a world in which all Tor exit relays perform their own DNS resolution.  And again, 
+\emph{Status quo} represents our estimate of the current world of exit relay resolution.  
+
+As you can see, ISPs fared much better than the other situations. Google was next. There is a potential 
 tradeoff between the safety of using a well-managed DNS resolver such as Google's vs. 
 a potentially not as well-managed DNS resolver from the ISP.  
 
