@@ -1,0 +1,114 @@
+2016-08-14 22:35:53.331935534 +0000 UTC: wfdns for 1000x100+100000 with a10000 w60 r1800 s1.00
+
+k1-ctw attack
+pct,recall,precision,f1score,fpr,accuracy
+33,0.244,0.696,0.361,0.108,0.603
+	tp2446,fpp825,fnp361,fn6729,tn9639
+	tp2547,fpp758,fnp444,fn6695,tn9556
+	tp2397,fpp680,fnp285,fn6923,tn9715
+	tp2474,fpp615,fnp331,fn6911,tn9669
+	tp2298,fpp714,fnp310,fn6988,tn9690
+	tp2528,fpp756,fnp380,fn6716,tn9620
+	tp2412,fpp911,fnp600,fn6677,tn9400
+	tp2516,fpp641,fnp353,fn6843,tn9647
+	tp2372,fpp633,fnp393,fn6995,tn9607
+	tp2420,fpp461,fnp325,fn7119,tn9675
+
+k1-hp attack
+pct,recall,precision,f1score,fpr,accuracy
+33,0.220,0.876,0.352,0.031,0.600
+	tp2211,fpp116,fnp192,fn7673,tn9808
+	tp2274,fpp141,fnp202,fn7585,tn9798
+	tp2175,fpp132,fnp129,fn7693,tn9871
+	tp2263,fpp89,fnp167,fn7648,tn9833
+	tp2095,fpp96,fnp157,fn7809,tn9843
+	tp2268,fpp133,fnp173,fn7599,tn9827
+	tp2208,fpp148,fnp355,fn7644,tn9645
+	tp2249,fpp126,fnp183,fn7625,tn9817
+	tp2120,fpp121,fnp209,fn7759,tn9791
+	tp2174,fpp82,fnp178,fn7744,tn9822
+
+k1-hp+ctw attack
+pct,recall,precision,f1score,fpr,accuracy
+33,0.244,0.696,0.361,0.108,0.603
+	tp2446,fpp825,fnp361,fn6729,tn9639
+	tp2547,fpp758,fnp444,fn6695,tn9556
+	tp2397,fpp680,fnp285,fn6923,tn9715
+	tp2474,fpp615,fnp331,fn6911,tn9669
+	tp2298,fpp714,fnp310,fn6988,tn9690
+	tp2528,fpp756,fnp380,fn6716,tn9620
+	tp2412,fpp911,fnp600,fn6677,tn9400
+	tp2516,fpp641,fnp353,fn6843,tn9647
+	tp2372,fpp633,fnp393,fn6995,tn9607
+	tp2420,fpp461,fnp325,fn7119,tn9675
+
+k1-wf attack
+pct,recall,precision,f1score,fpr,accuracy
+33,0.608,0.522,0.562,0.558,0.635
+	tp6169,fpp2150,fnp3329,fn1681,tn6671
+	tp6137,fpp2232,fnp3297,fn1631,tn6703
+	tp6037,fpp2216,fnp3321,fn1747,tn6679
+	tp6127,fpp2174,fnp3452,fn1699,tn6548
+	tp5918,fpp2281,fnp3375,fn1801,tn6625
+	tp6129,fpp2258,fnp3800,fn1613,tn6200
+	tp6121,fpp2141,fnp3367,fn1738,tn6633
+	tp6127,fpp2115,fnp3418,fn1758,tn6582
+	tp5999,fpp2177,fnp3310,fn1824,tn6690
+	tp6054,fpp2194,fnp3176,fn1752,tn6824
+
+k2-ctw attack
+pct,recall,precision,f1score,fpr,accuracy
+33,0.210,0.860,0.337,0.034,0.600
+	tp2128,fpp260,fnp48,fn7612,tn9952
+	tp2189,fpp223,fnp66,fn7588,tn9934
+	tp2057,fpp305,fnp122,fn7638,tn9878
+	tp2133,fpp184,fnp61,fn7683,tn9939
+	tp1965,fpp287,fnp120,fn7748,tn9880
+	tp2149,fpp223,fnp65,fn7628,tn9935
+	tp2091,fpp253,fnp50,fn7656,tn9950
+	tp2168,fpp267,fnp123,fn7565,tn9877
+	tp2012,fpp302,fnp160,fn7686,tn9840
+	tp2088,fpp178,fnp115,fn7734,tn9885
+
+k2-hp attack
+pct,recall,precision,f1score,fpr,accuracy
+33,0.187,0.974,0.313,0.005,0.592
+	tp1885,fpp17,fnp31,fn8098,tn9969
+	tp1936,fpp17,fnp30,fn8047,tn9970
+	tp1879,fpp12,fnp31,fn8109,tn9969
+	tp1885,fpp11,fnp39,fn8104,tn9961
+	tp1759,fpp19,fnp42,fn8222,tn9958
+	tp1888,fpp19,fnp35,fn8093,tn9965
+	tp1863,fpp17,fnp22,fn8120,tn9978
+	tp1918,fpp8,fnp38,fn8074,tn9962
+	tp1787,fpp14,fnp49,fn8199,tn9951
+	tp1852,fpp11,fnp35,fn8137,tn9965
+
+k2-hp+ctw attack
+pct,recall,precision,f1score,fpr,accuracy
+33,0.210,0.860,0.337,0.034,0.600
+	tp2128,fpp260,fnp48,fn7612,tn9952
+	tp2189,fpp223,fnp66,fn7588,tn9934
+	tp2057,fpp305,fnp122,fn7638,tn9878
+	tp2133,fpp184,fnp61,fn7683,tn9939
+	tp1965,fpp287,fnp120,fn7748,tn9880
+	tp2149,fpp223,fnp65,fn7628,tn9935
+	tp2091,fpp253,fnp50,fn7656,tn9950
+	tp2168,fpp267,fnp123,fn7565,tn9877
+	tp2012,fpp302,fnp160,fn7686,tn9840
+	tp2088,fpp178,fnp115,fn7734,tn9885
+
+k2-wf attack
+pct,recall,precision,f1score,fpr,accuracy
+33,0.517,0.859,0.645,0.085,0.729
+	tp5259,fpp257,fnp555,fn4484,tn9445
+	tp5247,fpp241,fnp557,fn4512,tn9443
+	tp5149,fpp265,fnp571,fn4586,tn9429
+	tp5171,fpp326,fnp678,fn4503,tn9322
+	tp4970,fpp258,fnp592,fn4772,tn9408
+	tp5187,fpp288,fnp687,fn4525,tn9313
+	tp5236,fpp252,fnp535,fn4512,tn9465
+	tp5212,fpp223,fnp547,fn4565,tn9453
+	tp5081,fpp281,fnp555,fn4638,tn9445
+	tp5162,fpp248,fnp545,fn4590,tn9455
+
