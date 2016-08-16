@@ -91,21 +91,27 @@ our results, we publish both our code and datasets.\footnote{We redacted
 the link to our project page to preserve anonymity.} In
 summary, we make the following contributions:
 \begin{itemize}
+
+\item We show how existing website fingerprinting attacks can be
+  augmented with observed DNS requests by a AS-level adversary to
+  yield perfectly precise \name attacks for unpopular websites.
+
 \item We develop a method to identify the DNS resolver of exit
-  relays. We find that 40\% of DNS request exiting the Tor network go to
-  Google's public DNS resolvers.
+  relays. We find that Tor exit relays comprising 40\% of Tor's exit
+  bandwidth rely on Google's public DNS servers to resolve DNS queries.
 
-	\item We quantify the exposure of DNS resolution to
-		network-level adversaries.  We find that for many popular
-		websites, 70\% of all traversed ASes are only visited for DNS requests.
+\item We quantify the extent to which DNS resolution exposes Tor users
+  to additional AS-level adversaries who are not on the path between the
+  sender and receiver.  We find that for the Alexa top 1,000 most
+  popular websites, 60\% of the ASes that are on the paths between the
+  exit relay and the DNS servers required to resolve the sites' domain
+  names are not on the path between the exit relay and the website.
 
-	\item We show how existing website fingerprinting attacks can be augmented with
-	observed DNS requests by a network-level adversary to yield perfectly precise
-	\name attacks for unpopular websites.
-
-	\item We develop a measurement method to evaluate the threat of
-		network-level adversaries. We employ the RIPE Atlas~\cite{atlas}
-		platform to achieve previously unprecedented path coverage and accuracy.
+\item We develop a new measurement method to evaluate the extent to
+  which ASes are on-path between exit relays and DNS resolvers. We use
+  the RIPE Atlas~\cite{atlas} platform to achieve previously
+  unprecedented path coverage and accuracy for evaluating the
+  capabilities of AS-level adversaries.
 \end{itemize}
 \noindent
 The rest of this paper is organized as follows.
