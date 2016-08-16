@@ -1,21 +1,22 @@
 \section{Internet-scale analysis}
 \label{sec:internet-scale}
 
-We explore how effective \name attacks might be in
-practice by modeling the activity of Tor users, emulating the
-corresponding Tor path selection of these users, and inferring  the
-prevalence of AS-level adversaries who have the ability to
-mount the attacks that we described in the preceding sections.
+We explore how effective \name attacks might be in practice by modeling
+the activity of Tor users, emulating the corresponding Tor path
+selection of these users, and inferring the prevalence of AS-level
+adversaries who have the ability to mount the attacks that we described
+in the preceding sections.
 
 \subsection{Approach}
 
-Figure~\ref{fig:simulations} summarizes our approach, which we detail in
-the next section. We model the activity of Tor users and simulate
-corresponding Tor path selection using TorPS~\cite{TorPS}.  TorPS
-returns guard and exit relays, which we then feed as input---together
-with source ASes and destination addresses---into our framework that
-runs traceroutes from RIPE Atlas nodes.  The rest of this section
-describes our approach in detail.
+We aim to quantify the likelihood that an AS will be able to mount a
+\name attack.  Figure~\ref{fig:simulations} summarizes our approach,
+which we detail in the next section. We model the activity of Tor users
+and simulate corresponding Tor path selection using TorPS~\cite{TorPS}.
+TorPS returns guard and exit relays, which we then feed as
+input---together with source ASes and destination addresses---into our
+framework that runs traceroutes from RIPE Atlas nodes.  The rest of this
+section describes our approach in detail.
 
 \subsubsection{Attack model}
 
@@ -28,14 +29,12 @@ describes our approach in detail.
 	\label{fig:simulations}
 \end{figure}
 
-We assume that an AS that can see traffic entering the Tor network and
-and can see DNS traffic exiting the Tor network at the other end can use
-this information in order to deanonymize the entering traffic.  Here we
-seek to measure the chances an AS will be in this favorable position to
-carry out such an attack.
 
-A Tor exit can perform DNS resolution in two ways: running a name server
-locally; relying on a third-party name server, such as its ISP's name
+We assume that an AS that can see both traffic entering the Tor network and
+and DNS traffic exiting the Tor network for the purposes of mounting
+a \name attack. 
+A Tor exit can perform DNS resolution in two ways: (1)~running a name server
+locally; or relying on a third-party name server, such as its ISP's name
 server or a public DNS name server such as Google's open public DNS
 resolver ({\tt 8.8.8.8}).  In the case of Tor
 exits that perform local DNS resolution a good position for an attacker
@@ -46,7 +45,6 @@ These name servers include the root name server, the TLD servers, and
 the second-level servers.  The ASes along the path from the exit relay
 to the name servers will be able to see the domain names that the exit
 relay is querying.
-
 For Tor exits that rely on a third-party for DNS resolution, an
 adversary might be on the path between a Tor client and a
 Tor guard and on the path between a Tor exit and the third-party name
@@ -61,54 +59,43 @@ why we ignore them . . .}
 
 To measure the likelihood that an AS can be in a position to perform a
 \name attack, we use TorPS, the Tor Path Simulator, which mimics how the
-Tor client software constructs circuits.  TorPS thus provides realistic
+Tor client software constructs circuits~\cite{TorPS}.  TorPS provides realistic
 combinations of guards and exits based on the state of the Tor network
 at a given time. TorPS is based on Tor stable release version 0.2.4.23. 
 For each sample, 
-it uses one guard which expires after 270 days. We use TorPS to emulate
+it uses one guard; this guard selection expires after 270 days. We use TorPS to emulate
 the behavior of a Tor client for the month of March 2016.  As in
 previous work, we perform 100,000 samples in the TorPS Monte Carlo
 simulation.  
 
-For our simulation, we had each client visit several websites every day for
-March 2016.  We modeled our client behavior off of the ``Typical'' model 
-used in~\cite{Johnson2013a}.  At 9am we have the client visit Gmail and Twitter.  
-At 12pm the client visits Google Calendar and Google Docs. At 3pm the client 
-visits Facebook and Instagram. Finally, at 6pm and 6:20pm the client visits Google, 
-Startpage, and Ixquick.  (Note: For our chosen websites and port (443), 
-Torps provided a new circuit every 10 minutes.  It did not provide a new circuit 
-for different websites if the client visited them within the same 10-minute windows. 
-This is in contrast to how the latest Tor Browser works where it will provide a new 
-circuit every time you visit a different website even if 10 minutes have not passed.  
-Thus, our results will be conservative in this respect.)  Also, in our study each 
-client sample had 372 opportunities to be compromised in March because there are 31 
-days in March, and our client visits 12 sites per day.
+To select the location of the clients in the experiment We placed
+clients in major ISPs in the top-five most popular countries for Tor
+usage. For the United States, we chose Comcast (AS~7922); for Russia,
+Rostelecom (AS~42610); for Germany, Deutsche Telekom (AS~3320); for
+France, Orange (AS~3215); for Great Britain, British Telecom (AS~2856).
 
-Finally, we had to choose where to place our clients. That is, we had to choose 
-which ASes we wanted our sample clients to be using Tor from.  We first found 
-out what the most popular countries for Tor users were from~\cite{metrics-countries} 
-and chose the top five.  
-We then researched which ISPs seemed to be the biggest players in those markets, and 
-used those AS numbers for our client ASes.  For the United States, we chose Comcast 
-(AS 7922).  For Russia we chose Rostelecom (AS 42610).  For Germany we chose 
-Deutsche Telekom (AS 3320).  For France we chose Orange (AS 3215).  And for Great 
-Britain, we chose British Telecom (AS 2856).  
+Each client visited several websites every day in March 2016.  We
+modeled our client behavior off of the ``Typical'' model used
+in~\cite{Johnson2013a}.  At 9 a.m. \xxx{timezone?} the client visits
+{\tt gmail.com} and {\tt twitter.com}.  At 12 p.m., the client visits
+Google Calendar and Google Docs. At 3 p.m., the client visits {\tt
+  facebook.com} and {\tt instagram.com}. Finally, at 6 p.m. and 6:20
+p.m. the client visits Google, Startpage, and Ixquick.  Each client
+sample thus had 372 opportunities to be compromised (31 days, and 12
+sites per day). \xxx{the above text only lists nine sites.}  TorPS
+provided a new circuit every 10 minutes, regardless of how many distinct
+connections the client made to different sites; it did not provide a new
+circuit for different websites if the client visited the group of sites
+within the same ten-minute window.  This behavior differs from the
+latest Tor Browser, which provides new circuit for each distinct
+website, even within the same ten-minute time interval.  Thus, our
+results will be conservative in this respect.
 
-%Thus, each guard-exit pair had 744 opportunites to be
-%compromised (this assumes that the circuit changes for every visit to
-%{\tt domain.com}).
-% It is much better to use a tool like TorPS in order to
-%measure these chances instead of just using all permutations of guard and exits.
-
-%The paragraph changes a lot: Made our own model based off of UGR ``typical'' model.  
-%The sample user visits nine websites during the course of his day: mail.google.com, 
-%twitter.com, calendar.google.com, instagram.com, startpage.com, ixquick.com, docs.google.com, 
-%facebook.com, and google.com.  \fixme{Should we mention the fixes we made to TorPS? Should we mention 
-%the problem we found with their user models? YES. -- I don't think it's relevant here anymore 
-%because we're not doing the traditional (exit ip - website destiation) traceroutes, like they did.}
-
-
-
+We assume that one DNS request occurs every time the client visits a site. For example, 
+in our model 9am, DNS query occurs once.  6pm and 6:20pm?  DNS request
+once per timestamp for a  total of two requests.  \xxx{Shouldn't each
+  website actually result in hundreds of DNS lookups? This process could
+be more clear.} 
 
 \subsubsection{Inferring AS-level paths: traceroute + {\tt pyasn}}
 
@@ -137,20 +124,22 @@ Britain, we chose British Telecom (AS 2856).
 \end{table}
 
 
-The Internet-wide experiment requires inferring the AS-level paths from
+This experiment also requires inferring the AS-level paths from
 each exit relay to each destination. We decided against the (more
 commonly applied) AS path inference because Juen \ea showed that it can
 be quite inaccurate~\cite{Juen2015a}.  Using traceroute can yield more
 accurate paths.  Measuring traceroutes from client to guard notes is
-straightforward: we simply select a probe in a client AS and perform
-traceroutes to each respective guard. %Wow, nice story here! Thank you!
+straightforward: we select a probe in a client AS and perform
+traceroutes to each respective guard. 
 
 Measuring traceroutes from exit relay to destination is far more
 difficult because Tor does not implement a mechanism to facilitate
 traceroute~\cite{Murdoch2007a}.  One approach, used in previous
 work~\cite{Juen2015a}, is to ask relay operators to perform traceroutes.
 Unfortunately, this approach only yielded traceroutes from relays
-representing 26\% of exit bandwidth.  Instead, we observe that RIPE
+representing 26\% of exit bandwidth.  
+
+Instead, we observe that RIPE
 Atlas~\cite{atlas} has probes in many ASes that have Tor exit relays.
 We used this insight to design a measurement experiment to run
 traceroutes from RIPE Atlas probes that were located in the same ASes as
@@ -165,95 +154,46 @@ the relays.) We considered using PlanetLab to initiate traceroutes, but
 unfortunately most PlanetLab nodes are located in research and education
 networks~\cite{banerjee2004interdomain} and are thus not well-suited for
 performing these types of measurements.
+  
 
-%The traceroutes are from July 2016, and we applied these in our analysis of Tor 
-%in March 2016.  \xxx{don't understand what ``analysis of Tor in March
-%  2016'' means.  What's the Tor trace corresponding to this?} \xxx{The following sentence should 
-%explain it better, please, although now I'm thinking it doesn't matter as much as I thought it did 
-%because we're working at the AS level.
-%--The point is that although we're simulating the March 2016 Tor situation, the traceroutes themselves 
-%are from July 2016 because I had to rerun all the traceroutes and add a bunch because we were no longer 
-%using nymity nor 
-%the original client AS. We upgraded the model and made the client visit 9 different websites from 5 
-%different client ASes. We had to stick with March because we didn't have ``Status Quo'' information 
-%from July. Summary: The results would perhaps be even more accurate if 
-%all these brand new traceroutes had been 
-%run closer to March 2016. Do we need to mention this??}
-
-
-
-%In contrast to how TorPS is used in~\cite{Johnson2013a}, we do not ultimately run 
-%traceroutes from .
-
-%Traditional: ``Traditional'' represents the paths between all exit ASes that RIPE Atlas 
-%has coverage for and domain.com. That is, this measurement doesn't take DNS into account 
-%at all, as has been traditionally done.
-
-We conducted five different types of traceroutes which we discuss next.  For our experiment, 
-we assume that one DNS request occurs every time the client visits a site. For example, 
-in our model 9am, DNS query occurs once.  6pm and 6:20pm?  DNS request once per timestamp for a 
-total of two requests.  
-Additionally, we do not take caching into account, so our results are overly 
-pessimistic in this respect.  
-
+We performed traceroutes from the five client ASes above to all guard IP
+      addresses from the Tor consensus files. To measure the paths from
+      exit relays to DNS resolvers that DNS queries would traverse, we
+      performed the following traceroutes, emulating a number of
+      different DNS configurations:
 \begin{itemize}
-    \item \emph{Traceroutes from client ASes to Guard relays:} our chosen five to the parsed
-consensus files for the entire month of March and got all the guard relays out because this is 
-the same information that TorPS uses in order to determine the circuits.  With these IP addresses 
-in hand, we used RIPE Atlas probes in our five client ASes and performed traceroutes from those 
-to all of the guard IP addresses.
+    \item \emph{ISP DNS:} To measure the path from an exit relay to its
+      ISP's DNS resolver, we perform traceroutes from a RIPE Atlas node
+      in the ISP of the exit relay to the ISP's corresponding DNS resolver.
 
-    \item \emph{ISP DNS:} ``ISP DNS'' represents what would happen if all exit relays used their ISPs' DNS name 
-servers.  We choose to represent this by saying that the name server is in the same AS as the 
-exit relay.
+    \item \emph{Google DNS:} To measure the path from an exit relay to
+      Google public DNS, we perform traceroutes from a RIPE Atlas node
+      in the ISP of the exit relay to Google's public DNS resolver (\ie,
+      {\tt 8.8.8.8}).
 
-    \item \emph{Google DNS:} ``Google DNS'' represents what would happen if all exit relays used 
-Google's public DNS resolver ({\tt 8.8.8.8}) for resolution. We ran traceroutes from probes in all the exit 
-ASes that RIPE Atlas had coverage for to  {\tt 8.8.8.8}.
+    \item \emph{Local DNS:} To measure the paths that would result if an
+      exit relay were running its own local resolver (\eg, {\tt
+        unbound}, {\tt bind}), we used {\tt dig +trace} to emulate the
+      iterative DNS lookup that would take place. We tracked all IP
+      addresses from referrals at each level of the hierarchy and
+      performed traceroutes to those IP addresses.
 
-    \item \emph{Local DNS:} ``Local DNS'' represents what would happen if all exit relays ran their own name 
-servers locally (e.g., the use of unbound) on their own machines. In order to figure out 
-what ASes would be traversed on the way to resolve domain.com. In order to figure out the 
-DNS delegation path, we use the command line option \texttt{+trace} of the
-command line tool dig. Assuming no caching and assuming 
-iterative resolution, for domain.com the name server will have to visit three name servers:
-a root name server, a top level domain name server, and a second-level domain name server. 
-Note that we only concern ourselves with the root domains of the websites we chose for our 
-sample client to visit.  That is, if the client chose to visit facebook.com, we don't 
-take any embedded domains into account.  Those embedded domains could definitely be unique 
-to a site, though, and offer even more ways to deanonymize a site.  
-Thus, our analysis is conservative in this respect.
-
-    \item \emph{Status Quo:} ``Status Quo'' represents to the best of our ability the 
-type of name resolution 
-that exit relays perform, whether that be their own or the use of 3rd-party name servers, 
-which again includes public DNS name servers and their ISPs' name servers.  To figure this 
-out, we used the {\tt exitmap} tool, our own website, and our own authoritative name server 
-in order to figure out the IP addresses of the name servers that the exit relays were 
-using. We then performed traceroutes from the exit ASes to the appropriate IP addresses 
-in order to get the AS-level paths.
+    \item \emph{Status quo:} This experiment represents a combination of
+      the above configurations, which represents our estimate of how the
+      Tor networks' exit relays are currently configured. We used {\tt
+        exitmap}, a website that we control, and our own authoritative
+      name server to determine the IP addresses of the name servers that
+      the Tor exit relays are using.
 \end{itemize}
+\noindent
+We then mapped each IP address in every traceroute to a corresponding
+AS.  The python {\tt pyasn} module relies on BGP routing tables to
+perform these mappings; by using a routing table that coincides with the
+time when we performed our traceroutes, we can obtain accurate AS-level
+mappings.  This method is subject to inaccuracies due to BGP route
+hijacks or leaks, but we expect those events to be relatively unlikely
+for the time period and IP prefixes that we are concerned with.
 
-
-Given these traceroutes, we mapped each IP address in every traceroute
-to a corresponding AS.  The python {\tt pyasn} module relies on BGP
-routing tables to perform these mappings; by using a routing table that
-coincides with the time when we performed our traceroutes, we can obtain
-accurate AS-level mappings.  (This method of course is subject to
-inaccuracies in the event of BGP route hijacks or leaks, but we expect
-those events to be relatively unlikely for the time period and IP
-prefixes that we are concerned with.)  (Please note that although we're 
-analyzing Tor during the month of March 2016, we ended up using traceroutes from 
-July 2016 due to information we didn't have time to collect again.  We recognize 
-that it would have been better for our traceroutes to be closer in time to the 
-month we wanted to analyze, but we don't 
-believe that this should greatly affect our results, and spot checks confirm 
-this.)  
-
-Consider reminding the reader down here that we combined the traceroute data with the TorPS 
-data to get our results.
-
-% \fixme{Get the numbers from my data for the fan-out.}
 \subsection{Results}
 
 \begin{figure}[t]
