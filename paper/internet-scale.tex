@@ -233,10 +233,12 @@ looked for ASes that appeared in both the paths coming into Tor and those
 leaving Tor (the ``ingress'' and ``egress'' hops of Figure~\ref{fig:simulations}) 
 because those represent potential AS compromises.
 
-Exit IPs for which we did not have information (either because of a lack of a 
-RIPE Atlas probe or missing traceroute information) are , and if not, that 
-particular circuit is treated as having not been compromised in order to err on the 
-conservative side. 
+As stated earlier, some exit relays did not have associated AS-level paths to a particular 
+destination, either due to lack of a RIPE Atlas probe or because of missing 
+traceroute information. In these cases, we searched for AS compromises between the ingress 
+AS-level path and the AS of the exit relay (just like the \emph{ISP DNS} configuration 
+above) before treating that particular stream as having not been compromised in order 
+to err on the conservative side. 
 
 To get the number of compromised streams, we counted the streams that were compromised 
 for every simulated user out of a total possible of 372. To get the time-to-first compromise, 
@@ -288,7 +290,7 @@ a world in which all Tor exit relays perform their own DNS resolution.  And agai
 The figures show that \emph{ISP DNS only} fared much better than the other configurations. 
 This was expected, of course, because there is only one AS (the exit relay's AS) to contend 
 with on the egress side. \emph{Google DNS only} was next, and we believe this is because
- of Google's heavily \fixme{anycast/replicated} servers. 
+of Google's heavily anycast servers. 
 
 There is a potential tradeoff between the safety of using a well-managed 
 DNS resolver such as Google's vs. a potentially not-as-well-managed 

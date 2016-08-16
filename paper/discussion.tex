@@ -17,7 +17,7 @@ adhered to The Tor Project's ethics guidelines~\cite{ethics-guidelines}.
 Specifically, \first we ensured that we only collected data that is safe
 to publish, \second we only collected data we needed, and \third we
 limited the granularity of the data to minimize the likelihood of
-reidentification.  The risk to Tor users of this experiment negligible.
+reidentification.  The risk to Tor users of this experiment is negligible.
 As for the benefits, by conducting this experiment, we can improve our
 understanding of the risks that DNS poses to the anonymity of Tor users
 and use this understanding to improve protection for Tor users in the
@@ -45,6 +45,11 @@ in which \emph{all} exit relays use \first Google's DNS resolver;
 their ISP.  Table~\ref{tab:setup-comparison}
 summarizes the important tradeoffs for these three setups; the rest of
 this section discusses these design points in more detail.
+Table~\ref{tab:setup-comparison} shows three attributes for our hypothetical DNS
+setups.  ``Network-level Protection'' is achieved if AS-level adversaries cannot
+easily monitor traffic, ``Avoiding Centralization'' is achieved if there are
+many diverse resolvers instead of a few central ones, and ``Response Quality''
+is achieved if DNS responses arrive quickly and correctly.
 
 If all exit relays were to use Google's DNS resolver, the company would
 obtain metadata about the activity of all Tor users, which runs counter to
