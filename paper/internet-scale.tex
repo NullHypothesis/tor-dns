@@ -216,16 +216,33 @@ for the time period and IP prefixes that we are concerned with.
 
 \subsubsection{Putting it all together}
 Ultimately, we sought to get estimates for the number of compromises per 
-different DNS configurations for five client ASes and to get estimates for 
-the amount of time it would take for a compromise to take under the different 
-DNS configurations in order to understand which DNS configuration 
-might be more favorable for Tor exit relays. 
+simulated Tor user under different DNS configurations and to get estimates 
+for the amount of time it would take for the first compromise to occur 
+in order to understand which DNS configurations 
+might be more favorable for Tor exit relays to use. Again, we placed our users in 
+ASes in the five most popular countries for Tor usage.
 
-To get our numbers for the compromised streams, 
-we counted the intersections.  To get our numbers for the time to first compromise: for 
-sample users that were not compromised during the month of March, we assigned a maximum value 
-of 31 days . (Samples that were compromised immediately would have a value of 0--it was 
-compromised at the very beginning of March 1st.)
+The traceroutes described in the previous section gave us AS-level paths from 
+the Tor users' ASes to the guard relays and from approximately half of the exit 
+relays' ASes to the name server destinations that we wanted. TorPS then gave us plausible 
+circuits, namely, plausible guard relay and exit relay combinations. We then 
+looked for ASes that appeared in both the paths coming into Tor and those 
+leaving Tor (the ``ingress'' and ``egress'' hops of Figure~\ref{fig:simulations}) 
+because those represent potential AS compromises.
+
+Exit IPs for which we did not have information (either because of a lack of a 
+RIPE Atlas probe or missing traceroute information) are , and if not, that 
+particular circuit is treated as having not been compromised in order to err on the 
+conservative side. 
+
+To get the number of compromised streams, we counted the streams that were compromised 
+for every simulated user out of a total possible of 372. To get the time-to-first compromise, 
+we found the first stream in which the user was compromised, took that timestamp, and 
+calculated the offset from the beginning of March 1st, 2016. Note that for sample users 
+who were not compromised during the month of March, we assigned a maximum value 
+of 31 days as the time-to-first compromise, and that is reflected in the plots in our 
+next section. (Sample users who were compromised immediately would have a value of 0, 
+signifying that they were compromised at the very beginning of March 1st.)
 
 \subsection{Results}
 
@@ -275,4 +292,3 @@ We believe that the Status Quo results are significantly better than the
 Local results because only around 12\% of Tor exit relays actually do their own resolution.
 The differing results for the different client ASes shows that client AS needs to be 
 taken into account. 
-
