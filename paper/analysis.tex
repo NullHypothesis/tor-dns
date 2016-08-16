@@ -15,7 +15,7 @@ Alexa top (1k,101k]. We randomly distributed these measurement tasks
 to a Docker fleet; each download used a fresh circuit without
 guards and a fresh copy of TBB for up to 60 seconds,
 in line with the recommendations by Wang and Goldberg~\cite{Wang2013a}.
-The consensus was cached to not cause an excessive load on the network.
+We cached the consensus to avoid causing excessive load on the network.
 We considered the measurement to be successful if we managed to resolve
 the domain of the site;
 we did not prune our dataset further, neglecting issues like CloudFlare
@@ -58,11 +58,11 @@ better recall than \texttt{wf}. For \texttt{hp} the results suggest that:
 	\label{eq:hprecall}
 	\textnormal{recall}_{\texttt{hp}} = \textnormal{recall}_{\texttt{wf}} * \textnormal{pct}
 \end{equation}
-Note that the above relationship only holds when observing DNS requests gives
+The above relationship only holds when observing DNS requests gives
 a clear advantage to \texttt{hp} in terms of precision over \texttt{wf} (see
 following paragraph).
 For precision our attacks have an immediate gain over \texttt{wf} as soon as
-the attacker can observe \emph{any exit bandwidth}.
+the attacker can observe {any exit bandwidth}.
 Although the \texttt{hp} attack has near-perfect precision, the
 \texttt{ctw} attack benefits from observing increasingly more exit traffic,
 nearly reaching the same levels as \texttt{hp} at 100\% of the exit bandwidth.
@@ -73,7 +73,7 @@ nearly reaching the same levels as \texttt{hp} at 100\% of the exit bandwidth.
 	\includegraphics[width=0.465\linewidth]{figures/fpt/pct/1kx100+100k-recall-ggplot2}
 	\includegraphics[width=0.465\linewidth]{figures/fpt/pct/1kx100+100k-precision-ggplot2}
 \caption{Recall and precision for an open-world dataset with monitored sites
-at Alexa rank 10k and below. We compare our attacks (\texttt{ctw and
+at Alexa rank 10k and lower. We compare our attacks (\texttt{ctw and
  \texttt{hp}}) to a conventional website fingerprinting attack (\texttt{wf}) for different
  percentages of observed exit bandwidth. }
 \label{fig:fpt:torpct}
@@ -83,14 +83,14 @@ at Alexa rank 10k and below. We compare our attacks (\texttt{ctw and
 Figure~\ref{fig:fpt:alexa} shows recall and precision at 100\% of
 observed Tor exit bandwidth as a function of the starting Alexa rank of
 monitored sites (we still monitor 1,000 sites).
-For high Alexa ranks there are no difference between our attacks and the
+For high Alexa ranks there is no difference between our attacks and the
 \texttt{wf} attack. This is because, even with a window of only 60 seconds,
 it is almost certain that at least one user visited any of the most popular
 sites over Tor. For sites that rank 1,000 or lower (\ie, less popular),
 the \name attacks show a clear improvement in both recall and precision.
 These results paint a bleak picture: a small fraction of exit
 bandwidth provides a perfectly precise attack on relatively
-\emph{unpopular} sites such as \url{wikileaks.org}, which has Alexa rank
+{unpopular} sites such as \url{wikileaks.org}, which has Alexa rank
 10,808.
 
 \begin{figure}[t]

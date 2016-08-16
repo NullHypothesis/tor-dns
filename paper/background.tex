@@ -105,7 +105,6 @@ their DNS requests to the system resolver, which Linux systems read from
 \texttt{/etc/resolv.conf}.  Tor does not modify the system resolver and
 uses whatever the exit relay operator configured, such as the ISP's resolver,
 or public resolvers such as Google's {\tt 8.8.8.8} open public DNS resolver.
-As of August 2016, exit relays maintain a caching layer
-around the DNS resolution code to speed up repeated lookups.
+As of August 2016, exit relays cache DNS responses to speed up repeated lookups.
 The caching layer for Tor clients, however, is off by default to prevent tracking attacks
 due to modified DNS responses~\cite{nolocalcache}.
