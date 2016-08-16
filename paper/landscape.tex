@@ -75,7 +75,7 @@ Figure~\ref{fig:exposure} shows the empirical CDF of all 1,000~$\lambda$ values
 that we calculated for Alexa's Top 1,000 sites.  In total, this experiment
 traversed 350 unique ASes for DNS requests and 339 unique ASes for web requests.
 The figure shows that for half of Alexa's Top 1,000 domains, DNS-only ASes
-account for around 70\% of all traversed ASes.  This result
+account for 60\% or more of all traversed ASes.  This result
 only applies to exit relays that do their own DNS resolution; for relays that
 use a third-party resolver, the ASes that are traversed between
 the exit relay and its DNS resolver is the metric of interest.  We conclude that adversaries that are
@@ -85,16 +85,17 @@ DNS resolvers such as Google and OpenDNS, (\emph{ii}) DNS root servers, and
 (\emph{iii}) network adversaries located on the path to the previous two
 entities.
 
-% d1 <- read.csv("top-1k-ddptr-2016-04-19-ovh.csv")
-% ecdf(d1$exposure)(0.5)
-% 0.3050672
+% d <- read.csv("top-1k-ddptr-2016-04-19-ovh.csv")
+%> quantile(d$exposure)
+%  0%   25%   50%   75%  100% 
+%  0.000 0.500 0.600 0.667 0.909
 
 \begin{figure}[t]
 	\centering
 	\includegraphics[width=0.75\linewidth]{figures/dns-exposure.pdf}
 	\caption{Our AS exposure metric $\lambda$ for Alexa's Top 1,000 web sites.
-	For half of all sites, 70\% of ASes are only traversed for DNS resolution,
-	but not for subsequent web traffic.}
+	For half of all sites, 60\% of ASes or more are only traversed for DNS
+	resolution, but not for subsequent web traffic.}
 	\label{fig:exposure}
 \end{figure}
 
