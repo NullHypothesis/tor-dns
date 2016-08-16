@@ -211,7 +211,7 @@ the anonymity of Tor users.
 To impede cache poisoning attacks, DNS resolvers should use random source ports
 instead of always using UDP port 53.  Our data allows for verifying if a given
 resolver randomizes its source ports.  We classify a resolver as ``uses
-randomization'' if the source port does not equal 53.  Note that this method
+randomization'' if the source port does not equal 53.  This method
 causes a small number of false positives because a randomizing resolver could
 use port 53 simply by chance.  The probability of that happening is
 only $\frac{1}{65535}$.

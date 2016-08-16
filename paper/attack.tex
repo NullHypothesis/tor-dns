@@ -79,8 +79,8 @@ When varying the fitting parameter $x_{min}$ that determines beyond which
 minimum value the power-law behavior should hold in the provided data, we can
 get different $\alpha$ values. We made a conservative choice of picking this
 smaller $\alpha$ value as it underestimates the popularity of popular websites
-and therefore is worse for the attacker.\footnote{Note that pageview numbers as
-collected by Alexa ignore multiple visits by the same user on the same day (see
+and therefore is worse for the attacker.\footnote{Alexa's page-view numbers
+ignore multiple visits by the same user on the same day (see
 \url{https://support.alexa.com/hc/en-us/articles/200449744}), so the ranking
 might be slightly off when modelling website visit patterns.}
 Thus, we use a power-law distribution to model which websites are
@@ -323,12 +323,12 @@ recall of 0.947 for a precision of 0.984.  By accounting for the order
 of requests, per-exit partitioning of DNS requests, TTLs, and website
 popularity, we expect that classifying website visits from DNS requests
 might be made even more accurate.
-Further, note that a closed world is a realistic setting:
+Further, a closed world is a realistic setting:
 gathering requests made by all 173 million active websites on the
 Internet is practical with modest resources.
 We use the conservative open world results when simulating the Tor network and
 the attacker's success in mapping DNS requests to websites.
-Note that our results indicate that observing DNS requests in Tor is
+Our results indicate that observing DNS requests in Tor is
 largely equivallent to observing sites visited over Tor.
 
 \subsection{Classifiers for \name attacks}
