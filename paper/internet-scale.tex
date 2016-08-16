@@ -50,14 +50,14 @@ relay is querying.
 For Tor exits that rely on a third-party for DNS resolution, an
 adversary might be on the path between a Tor client and a
 Tor guard and on the path between a Tor exit and the third-party name
-server.  \fixme{In addition, the DNS queries will look like they are coming
+server.  \fixme{QUESTION: ``In addition, the DNS queries will look like they are coming
 from the IP address of the name server and not the IP address of the
-exit relay.--This new wording seems unclear to me now--wanted to say 
+exit relay.''--This new wording seems unclear to me now--wanted to say 
 that ASes on the path from the 3rd-party to the DNS servers will see that 
 the queries are coming from the 3rd-party and not the exit IP, which is 
 why we ignore them . . .}
 
-\subsubsection{Simulating Tor user activity: TorPS}
+\subsubsection{Simulating Tor user activity with TorPS}
 
 To measure the likelihood that an AS can be in a position to perform a
 \name attack, we use TorPS, the Tor Path Simulator, which mimics how the
@@ -166,22 +166,6 @@ unfortunately most PlanetLab nodes are located in research and education
 networks~\cite{banerjee2004interdomain} and are thus not well-suited for
 performing these types of measurements.
 
-Given these traceroutes, we mapped each IP address in every traceroute
-to a corresponding AS.  The Python {\tt pyasn} module relies on BGP
-routing tables to perform these mappings; by using a routing table that
-coincides with the time when we performed our traceroutes, we can obtain
-accurate AS-level mappings.  (This method of course is subject to
-inaccuracies in the event of BGP route hijacks or leaks, but we expect
-those events to be relatively unlikely for the time period and IP
-prefixes that we are concerned with.)  (Please note that although we're 
-analyzing Tor during the month of March 2016, we ended up using traceroutes from 
-July 2016 due to information we didn't have time to collect again.  We recognize 
-that it would have been better for our traceroutes to be closer in time to the 
-month we wanted to analyze, but we don't 
-believe that this should greatly affect our results, and spot checks confirm 
-this.)  
-
-
 %The traceroutes are from July 2016, and we applied these in our analysis of Tor 
 %in March 2016.  \xxx{don't understand what ``analysis of Tor in March
 %  2016'' means.  What's the Tor trace corresponding to this?} \xxx{The following sentence should 
@@ -204,10 +188,12 @@ opening sentence:
 Describe the four scenarios in the graph here: 1) ISPs, 2) Google, 3) Local, and 
 4) Status Quo.
 
+we only concern ourselves with root domain, that is, if facebook.com, we don't 
+take the embedded URLs into account.
+
 %Traditional: ``Traditional'' represents the paths between all exit ASes that RIPE Atlas 
 %has coverage for and domain.com. That is, this measurement doesn't take DNS into account 
 %at all, as has been traditionally done.
-\fixme{change to Definition latex syntax}
 
 \begin{itemize}
     \item \emph{ISPs:} ``ISPs'' represents what would happen if all exit relays used their ISPs' DNS name 
@@ -215,8 +201,8 @@ servers.  We choose to represent this by saying that the name server is in the s
 exit relay.
 
     \item \emph{Google DNS:} ``Google DNS'' represents what would happen if all exit relays used 
-Google's public DNS resolver for resolution. We ran traceroutes from probes in all the exit 
-ASes that RIPE Atlas had coverage for to 8.8.8.8.
+Google's public DNS resolver ({\tt 8.8.8.8}) for resolution. We ran traceroutes from probes in all the exit 
+ASes that RIPE Atlas had coverage for to  {\tt 8.8.8.8}.
 
     \item \emph{Local:} ``Local'' represents what would happen if all exit relays ran their own name 
 servers locally (e.g., the use of unbound) on their own machines. In order to figure out 
@@ -226,14 +212,33 @@ command line tool dig. Assuming no caching and assuming
 iterative resolution, for domain.com the name server will have to visit three name servers:
 a root name server, a top level domain name server, and a second-level domain name server. 
 
-    \item \emph{Status Quo:} ``Status Quo'' represents to the best of our ability the type of name resolution 
+    \item \emph{Status Quo:} ``Status Quo'' represents to the best of our ability the 
+type of name resolution 
 that exit relays perform, whether that be their own or the use of 3rd-party name servers, 
-which again includes public DNS name servers and their ISPs' name servers. To figure this 
+which again includes public DNS name servers and their ISPs' name servers.  To figure this 
 out, we used the exitmap tool, our own website, and our own authoritative name server 
 in order to figure out the IP addresses of the name servers that the exit relays were 
 using. We then performed traceroutes from the exit ASes to the appropriate IP addresses 
 in order to get the AS-level paths.
 \end{itemize}
+
+
+Given these traceroutes, we mapped each IP address in every traceroute
+to a corresponding AS.  The Python {\tt pyasn} module relies on BGP
+routing tables to perform these mappings; by using a routing table that
+coincides with the time when we performed our traceroutes, we can obtain
+accurate AS-level mappings.  (This method of course is subject to
+inaccuracies in the event of BGP route hijacks or leaks, but we expect
+those events to be relatively unlikely for the time period and IP
+prefixes that we are concerned with.)  (Please note that although we're 
+analyzing Tor during the month of March 2016, we ended up using traceroutes from 
+July 2016 due to information we didn't have time to collect again.  We recognize 
+that it would have been better for our traceroutes to be closer in time to the 
+month we wanted to analyze, but we don't 
+believe that this should greatly affect our results, and spot checks confirm 
+this.)  
+
+
 
 % \fixme{Get the numbers from my data for the fan-out.}
 \subsection{Results}
@@ -260,21 +265,24 @@ and~\ref{fig:time-until-compromise} show that
 looking better than Google's will be fixed, too (figured out why that was happening)}
 ISPs fared much better than the other situations. Google was next. There is a potential 
 tradeoff between the safety of using a well-managed DNS resolver such as Google's vs. 
-a potentially not as well-managed DNS resolver from the ISP.
+a potentially not as well-managed DNS resolver from the ISP.  
+
+We believe that the Status Quo results are significantly better than the 
+Local results because only around 12\% of Tor exit relays actually do their own resolution.
+The differing results for the different client ASes shows that client AS needs to be 
+taken into account. 
+
+Limitations \fixme{Are we not including limitations?  Looks like that section was removed?}:
+In this analysis, we ignore caching of any type, so our results are overly 
+pessimistic in this respect. 
+%\fixme{Mention that these results apply
+%  only to what we had data for: about half--However, this is already stated in the RIPE Atlas 
+%coverage table . . .}
+
+
 %Google fared much better than the other situations. This might lead you to believe that 
 %Tor exit relays should use 8.8.8.8 for all of their name resolution needs, but then you've 
 %given Google A LOT of power. It might actually be better to tell Tor exit relay operators 
 %to use their ISPs' default name servers because the ISPs get to see the Tor destinations 
 %anyway! (Actually, the ISPs fared the best now that we actually measure this
 %--need to update this paragraph)
-We believe that the Status Quo results are significantly better than the 
-Local results because only around 12\% 
-of Tor exit relays actually do their own resolution.
-The differing results for the different client ASes shows that client AS needs to be 
-taken into account 
-
-Limitations \fixme{Are we not including limitations?  Looks like that section was removed?}:
-In this analysis, we ignore caching of any type, so our results are overly 
-pessimistic in this respect. \fixme{Mention that these results apply
-  only to what we had data for: about half--However, this is already stated in the RIPE Atlas 
-coverage table . . .}
