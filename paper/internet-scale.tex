@@ -69,8 +69,9 @@ at a given time. TorPS is based on Tor stable release version 0.2.4.23.
 For each sample, 
 it uses one guard; this guard selection expires after 270 days. We use TorPS to emulate
 the behavior of a Tor client for the month of March 2016.  As in
-previous work, we perform 100,000 Monte Carlo simulations in order to 
-analyze this.
+previous work, \fixme{Wording, please: ``we perform 100,000 samples in the TorPS Monte Carlo 
+simulation'' or ``we perform 100,000 Monte Carlo simulations in order to 
+analyze this.''}
 %potential Tor users and how the Tor client would have behaved.
 %we perform 100,000 samples in the TorPS Monte Carlo
 %simulation.  
@@ -218,7 +219,7 @@ for the time period and IP prefixes that we are concerned with.
 	\includegraphics[width=0.465\linewidth]{figures/time-until-compromised.pdf}
     \label{fig:time-until-compromise}
 }
-\caption{Two emulations for the Tor network in March 2016 show the
+\caption{\fixme{from which client AS?}Two emulations for the Tor network in March 2016 show the
   number of compromised streams and the time until the first compromised
   stream.} 
 \label{fig:compromise-stream-time}
