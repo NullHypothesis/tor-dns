@@ -176,8 +176,9 @@ We performed traceroutes from the five client ASes above to all guard IP
       different DNS configurations:
 \begin{itemize}
     \item \emph{ISP DNS:} To investigate the scenario in which an exit 
-      relay uses the DNS 
-
+      relay uses its ISP's DNS resolver, we chose to represent this as 
+      the DNS resolver's being in the same AS as the exit relay. 
+      Thus, no traceroutes were necesssary for this experiment. 
       %To measure the path from an exit relay to its
       %ISP's DNS resolver, we perform traceroutes from a RIPE Atlas node
       %in the ISP of the exit relay to the ISP's corresponding DNS resolver.
@@ -214,10 +215,12 @@ hijacks or leaks, but we expect those events to be relatively unlikely
 for the time period and IP prefixes that we are concerned with.
 
 \subsubsection{Putting it all together}
-Ultimately, what we did was .  
-We sought to get estimates for the number of compromises per different DNS configurations 
-and the amount of time it would take to compromise in order to understand which 
-DNS configuration might be more favorable for Tor exit ASes. 
+Ultimately, we sought to get estimates for the number of compromises per 
+different DNS configurations for five client ASes and to get estimates for 
+the amount of time it would take for a compromise to take under the different 
+DNS configurations in order to understand which DNS configuration 
+might be more favorable for Tor exit relays. 
+
 To get our numbers for the compromised streams, 
 we counted the intersections.  To get our numbers for the time to first compromise: for 
 sample users that were not compromised during the month of March, we assigned a maximum value 
