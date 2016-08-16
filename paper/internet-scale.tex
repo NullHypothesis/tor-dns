@@ -189,9 +189,20 @@ performing these types of measurements.
 %has coverage for and domain.com. That is, this measurement doesn't take DNS into account 
 %at all, as has been traditionally done.
 
-We conducted five different types of traceroutes which we discuss next.
+We conducted five different types of traceroutes which we discuss next.  For our experiment, 
+we assume that one DNS request occurs every time the client visits a site. For example, 
+in our model 9am, DNS query occurs once.  6pm and 6:20pm?  DNS request once per timestamp for a 
+total of two requests.  
+Additionally, we do not take caching into account, so our results are overly 
+pessimistic in this respect.  
 
 \begin{itemize}
+    \item \emph{Traceroutes from client ASes to Guard relays:} our chosen five to the parsed
+consensus files for the entire month of March and got all the guard relays out because this is 
+the same information that TorPS uses in order to determine the circuits.  With these IP addresses 
+in hand, we used RIPE Atlas probes in our five client ASes and performed traceroutes from those 
+to all of the guard IP addresses.
+
     \item \emph{ISP DNS:} ``ISP DNS'' represents what would happen if all exit relays used their ISPs' DNS name 
 servers.  We choose to represent this by saying that the name server is in the same AS as the 
 exit relay.
@@ -239,7 +250,8 @@ month we wanted to analyze, but we don't
 believe that this should greatly affect our results, and spot checks confirm 
 this.)  
 
-
+Consider reminding the reader down here that we combined the traceroute data with the TorPS 
+data to get our results.
 
 % \fixme{Get the numbers from my data for the fan-out.}
 \subsection{Results}
@@ -274,8 +286,8 @@ The differing results for the different client ASes shows that client AS needs t
 taken into account. 
 
 Limitations \fixme{Are we not including limitations?  Looks like that section was removed?}:
-In this analysis, we ignore caching of any type, so our results are overly 
-pessimistic in this respect. 
+%In this experiment, we ignore caching of any type, so our results are overly 
+%pessimistic in this respect. 
 %\fixme{Mention that these results apply
 %  only to what we had data for: about half--However, this is already stated in the RIPE Atlas 
 %coverage table . . .}
