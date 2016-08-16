@@ -228,18 +228,24 @@ compromised at the very beginning of March 1st.)
 
 \begin{figure}[t]
 \centering
-\subfigure[Number of compromised streams.]{
-	\includegraphics[width=0.465\linewidth]{figures/num-compromised-streams.pdf}
-    \label{fig:compromised-streams}
-}
-\subfigure[Time to first compromise.]{
-	\includegraphics[width=0.465\linewidth]{figures/time-until-compromised.pdf}
-    \label{fig:time-until-compromise}
-}
-\caption{\fixme{from which client AS?}Two emulations for the Tor network in March 2016 show the
-  number of compromised streams and the time until the first compromised
-  stream.} 
-\label{fig:compromise-stream-time}
+\includegraphics[width=0.75\linewidth]{figures/differences-comp-streams.pdf}
+\caption{The fraction of compromised streams for the status quo and three
+hypothetical DNS configurations for all exit relays.  We removed outliers, so
+the box plot only shows the distributions' quartiles.  The safest configuration
+is ``ISP DNS only,'' \ie have all exit relays use their ISP's DNS resolver.  The
+median of compromised streams for this configuration is 0.005.}
+\label{fig:compromised-streams}
+\end{figure}
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.75\linewidth]{figures/differences-time-comp.pdf}
+\caption{The time until first stream compromise for the status quo and three
+hypothetical DNS configurations for all exit relays.  We removed outliers, so
+the box plot only shows the distributions' quartiles.  Again, the safest
+configuration is ``ISP DNS only;'' the median of the distribution is
+close to 16 days.}
+\label{fig:time-until-compromise}
 \end{figure}
 
 Figures~\ref{fig:compromised-streams}
