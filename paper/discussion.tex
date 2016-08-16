@@ -35,7 +35,7 @@ work (Section~\ref{sec:long-term}).
 \subsubsection{Short-term solutions}
 \label{sec:short-term}
 
-Operators of exit relays face a dilemma: they must either operate own
+Operators of exit relays face a dilemma: they must either operate their own
 resolver, which exposes DNS queries to network adversaries; or, they
 must use a third-party DNS resolver, which exposes DNS queries to a
 third party.  Clearly, the goal is to minimize exposure of DNS requests,
@@ -53,13 +53,13 @@ Tor's design goal of distributing trust.  We clearly should avoid this
 scenario. Unfortunately, some of Tor's pluggable transports
 have {\em already} made this design choice and should likely be updated
 to mitigate user risk.  For example, Fifield \ea's~\cite{Fifield2015a}
-Meek used Google's cloud infrastructure 
+Meek used Google's cloud infrastructure
 to reach the Tor network up until May 2016.
 % died May 13, 2006. See https://lists.torproject.org/pipermail/tor-talk/2016-June/041699.html
 Thousands of Meek clients
 will thus select exit relays that use Google's DNS resolver, which means that Google
 gets to see both traffic entering and, partially, exiting the Tor
-network. 
+network.
 
 Next, consider a Tor network that only uses local resolvers.  In this
 case, Tor is fully independent of third-party resolvers, at the cost of
@@ -74,15 +74,15 @@ between DNS requests from exit relays and unrelated ISP customers.  This
 setup introduces the possibility of misconfigured and censored DNS
 resolvers~\cite[\S~4.1]{Winter2014b}.  Besides, just a few ASes---OVH, for
 example---host a disproportionate amount of exit relays, turning them into the
-centralized data sinks that Tor aims to avoid.   
+centralized data sinks that Tor aims to avoid.
 
 Considering the above, we believe that exit relay operators should avoid
 public resolvers such as Google and OpenDNS.  Instead, they should
 either use the resolvers provided by their ISP, or run their own,
-particularly of the operator's 
+particularly of the operator's
 ISP already hosts many other exit relays.  Local
 resolvers can further be optimized to minimize information leakage,
-by (for example) enabling QNAME minimization~\cite{qname-minimization}. 
+by (for example) enabling QNAME minimization~\cite{qname-minimization}.
 
 \begin{table}[t]
   \renewcommand{\tabcaptext}{A comparison between three design points for DNS
@@ -128,9 +128,9 @@ notable negative detriment to user experience.
 
 Additional practical defenses are on the horizon.  Zhu \ea~\cite{Zhu2015a} proposed
 T-DNS, which employs several TCP optimizations to transport the DNS protocol
-over TLS and TCP.  Since T-DNS is based on TCP, Tor can transport tehse queries.
+over TLS and TCP.  Since T-DNS is based on TCP, Tor can transport these queries.
 The TLS layer provides confidentiality between exit relays and their resolvers.
-Finally, site operators whose users are particularly concerned about 
+Finally, site operators whose users are particularly concerned about
 safety should offer an onion service as an alternative.  Facebook, for example,
 set up \url{facebookcorewwwi.onion}.  When
 connecting to the onion service, Tor users never leave the Tor network, and
@@ -138,10 +138,10 @@ hence no not need DNS.
 
 Deploying defenses against website fingerprinting attacks in Tor should be an
 important long-term goal, as well.
-Although growing the Tor network will help defend against website
-fingerprinting attacks to some degree, the most important change is to
-deploy defenses against these attacks in the first place.  Since website
-fingerprinting attacks significantly increase precision, defenses should
-be designed to significantly reduce the recall of these attacks, even at
-the expense of precision.
-
+Although growing the Tor network will help defend against \name attacks to some
+degree, the most important change is to
+deploy defenses against these attacks in the first place.  Since \name attacks
+significantly increase precision of website fingerprinting attacks, defenses
+should be designed to significantly reduce the recall of website fingerprinting
+attacks, even when the website fingerprinting attack is configured to sacrifice
+precision for recall.
