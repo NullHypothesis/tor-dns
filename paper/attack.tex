@@ -120,18 +120,17 @@ Figure~\ref{fig:dns-reqs} shows this timeseries.
 
 We then interpolate these numbers to all Tor exit relays based on the published
 bandwidth statistics of all Tor exit relays. We found our exit relay to have an
-average of 119.3 outgoing DNS requests per five minutes during a two-week period.
+average of 238.6 outgoing DNS requests per ten minutes during a two-week period.
 We configured the exit relay to only allow port 80 and 443 during the time
 of the measurements to avoid counting DNS requests from protocols other than
-HTTP and HTTPS.
+HTTP and HTTPS. % was mentioned above already, should we remove that here or keep for clarity?
 From DNS statistics of the Alexa top one million websites (see
-Section~\ref{sec:dns2site}) we know that one website visit causes about
-10.3 outgoing DNS requests for unqiue domains on average
+Section~\ref{sec:dns2site}) we know that one website visit causes outgoing DNS requests for about 10.3 unqiue domains on average
 (assuming a power-law distribution of site popularity as described above and
 taking into account tor caching pending DNS requests, ensuring that multiple
-requests sent by TBB for the same domain name only results in one request
+requests sent by clients for the same domain name only result in one outgoing request
 by the exit).
-This means that we had an average of about 11.6 website visits per five
+This means that we had an average of about 23.2 website visits per ten 
 minutes on our exit relay. We can scale this number up to the whole Tor
 network using the self-reported bandwidth information from Tor exit
 relays collected in the ``extra-info'' descriptors available on
