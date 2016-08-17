@@ -62,7 +62,7 @@ page requests all come from the same site.  The authors used an open-world
 setting for their evaluation.  Wang and Goldberg~\cite{Wang2013a} proposed an
 improved attack that employed a new method for data gathering.  In 2014, Wang
 \ea~\cite{Wang2014a} further improved on their results with a
-k-nearest neighbour classifier Wa-kNN and a custom weight-learning algorithm
+k-nearest neighbor classifier Wa-kNN and a custom weight-learning algorithm
 (WLLCC~\cite{WangThesis}) that in several rounds determine the optimal weights
 for features extracted from traffic traces.
 Cai \ea~\cite{Cai2014b}
@@ -101,6 +101,6 @@ improves precision for web\emph{site} fingerprinting.
 The two \name attacks that we present have implications
 for the design of website fingerprinting defenses:
 to mitigate \name attacks, open-world evaluations of the website fingerprinting
-defense should minimise recall even when the website fingerprinting attack is
+defense should minimize recall even when the website fingerprinting attack is
 tuned to sacrifice precision for recall.  In the case of Wa-kNN, this means
 a low $k$: our results are based on $k=2$.

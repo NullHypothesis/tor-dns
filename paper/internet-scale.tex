@@ -125,7 +125,7 @@ not take embedded requests or caching into account.
 % - Atlas ASes cover 73.59% of Tor guard bandwidth.
 
 \begin{table}[t]
-	\renewcommand{\tabcaptext}{The coverage of RIPE Atlas nodes that are colocated with Tor guard and exit
+	\renewcommand{\tabcaptext}{The coverage of RIPE Atlas nodes that are co-located with Tor guard and exit
 	relays.}
       \topcap{\tabcaptext}
 	\centering
@@ -180,7 +180,7 @@ different DNS configurations:
     \item \emph{ISP DNS:} To investigate the scenario in which an exit 
       relay uses its ISP's DNS resolver, we chose to represent this as 
       the DNS resolver being in the same AS as the exit relay. 
-      Thus, no traceroutes were necesssary for this experiment. 
+      Thus, no traceroutes were necessary for this experiment. 
       We acknowledge that this is not necessarily the case, but assume that it
       holds for the majority of exit relays.
       %To measure the path from an exit relay to its
@@ -218,8 +218,8 @@ hijacks or leaks, but we expect those events to be relatively unlikely
 for the time period and IP prefixes that we are concerned with.
 
 \subsubsection{Putting it all together}
-We aim to estimate (1) the number of compromises per simulated 
-Tor user under different DNS configurations; and (2) the amount of 
+We aim to estimate \first the number of compromises per simulated 
+Tor user under different DNS configurations; and \second the amount of 
 time it would take for the first compromise to occur 
 in order to understand which DNS configurations 
 might be more favorable for Tor exit relays to use. As in previous 
@@ -248,14 +248,15 @@ err on the conservative side.
 %particular stream as having not been compromised in order 
 %to err on the conservative side. 
 
-To compute the number of compromised streams, we counted the streams that were compromised 
-for every simulated user out of a possible 372. To compute the time-to-first compromise, 
-we found the first stream in which the user was compromised, took that timestamp, and 
-calculated the offset from the beginning of March 1st, 2016. Note that for sample users 
-who were not compromised during the month of March, we assigned a maximum value 
-of 31 days as the time-to-first compromise, and that is reflected in the plots in our 
-next section. (Sample users who were compromised immediately would have a value of 0, 
-signifying that they were compromised at the very beginning of March 1st.)
+To compute the number of compromised streams, we counted the streams that were
+compromised for every simulated user out of a possible maximum of 372. To
+compute the time-to-first compromise, we found the first stream in which the
+user was compromised, took that timestamp, and calculated the offset from the
+beginning of March 1, 2016. Note that for sample users who were not compromised
+during the month of March, we assigned a maximum value of 31 days as the
+time-to-first compromise, and that is reflected in the plots in our next
+section. (Sample users who were compromised immediately would have a value of 0,
+signifying that they were compromised at the very beginning of March 1.)
 
 \subsection{Results}
 
@@ -302,7 +303,7 @@ if all exit relays use their ISP's resolvers, there is only one AS to contend
 with on the egress side---the exit relay's.  The Google setup fares similarly
 well (most likely because of Google's heavily anycast infrastructure), followed
 by the status quo, and finally the ``Local DNS only,'' which is by far the
-least safe setup according to our experiment.  The ``Status Quo'' results are
+least safe setup according to our experiment.  The ``Status quo'' results are
 significantly better than the ``Local DNS'' results, presumably because only
 around 12\% of Tor exit relays actually do their own resolution.  The wide
 variance observed in Figure~\ref{fig:time-until-compromise} for ``ISP DNS'' and
