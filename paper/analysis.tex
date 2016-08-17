@@ -182,7 +182,7 @@ designed and discussed for deployment in Tor~\cite{adapativepadding}.
 The defenses produce bandwidth and/or latency overhead, with a significant
 increase in overhead the stronger the defense. For example, Juarez \ea
 observe an exponential increase in bandwidth overhead for increasing protection
-with WTF-PAD~\cite{DBLP:journals/corr/JuarezIPDW15}.
+with WTF-PAD~\cite{Juarez2016a}.
 This leads to the goal of finding an optimal with ``good enough''
 protection and minimal overhead.
 As a first attempt to approximate the effect of fingerprinting
@@ -190,7 +190,7 @@ defenses on \name attacks, we use Wa-kNN with
 random weights and no weight-learning: this significantly reduces the
 effectiveness of the attack since some features (like indices of outgoing
 packets) are several orders of magnitude more useful
-than others~\cite{DBLP:journals/corr/JuarezIPDW15}.
+than others~\cite{Juarez2016a}.
 
 Figure~\ref{fig:fpt:var:rounds} shows the effects of between 0 and 3000
 rounds of weight-learning. At few to no rounds, the precision for the
@@ -296,7 +296,7 @@ attacks with four different website distributions:
 	\item[pr] A realistic power-law distribution
 	(with $\alpha=1.98$)
 	that is the best fit according to
-	the Python {\tt powerlaw} library by Alstott~\ea~\cite{power-law} for the Alexa
+	the Python {\tt powerlaw} library by Alstott~\ea~\cite{Alstott2014a} for the Alexa
 	top 10,000 data.
 	\item[uc] A conservative uniformly random distribution that
 	only considers one million active websites browsed over Tor.

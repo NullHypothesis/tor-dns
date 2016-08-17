@@ -68,12 +68,12 @@ gives insights into their popularity based on the browsing behavior of
 a sample of all Internet users. The distribution of the popularity of
 these websites has previously been fit to a power-law distribution based
 on the rank of the
-website~\cite{DBLP:journals/network/MahantiCMAW13,ClausetSN09,AliS07}.
+website~\cite{Mahanti2013a,Clauset2009a,Ali2007a}.
 For the pageview numbers of the Alexa top 10,000 websites, we found a
 power-law distribution to be a good fit as neither a log-normal nor a
 power-law distribution with exponential cutoff (truncated power-law
 distribution) offered significantly better fits.
-We used the Python {\tt powerlaw} package~\cite{power-law} for fitting and
+We used the Python {\tt powerlaw} package~\cite{Alstott2014a} for fitting and
 picked a power-law distribution with an $\alpha$ parameter of about $1.13$.
 When varying the fitting parameter $x_{min}$ that determines beyond which
 minimum value the power-law behavior should hold in the provided data, we can
@@ -139,7 +139,7 @@ each of the about 1,200 exit relays active at that time. The resulting average
 total number of websites visited through the Tor network is about 536,000
 websites per ten minutes.
 
-Recently, Jansen and Johnson~\cite{jansen-ccs2016} measured the average
+Recently, Jansen and Johnson~\cite{Jansen2016a} measured the average
 number of active web (port 80 and 443) circuits in Tor to about 700,000 per ten
 minutes.\footnote{This number comes from a preprint kindly
 shared by the authors and might change in the final version.}
@@ -358,6 +358,6 @@ a custom weight-learning run---training only on observed sites---but our initial
 results noted little to no gain, despite significant increases in
 testing time.
 We expect that this is due to the fact that some features of traffic traces are
-more useful than others, regardless of the training data~\cite{kfingerprinting}.
+more useful than others, regardless of the training data~\cite{Hayes2016a}.
 The \texttt{hp} attack only produces a positive classification if both ingress
 and egress traffic are consistent, simple but effective.

@@ -63,7 +63,7 @@ setting for their evaluation.  Wang and Goldberg~\cite{Wang2013a} proposed an
 improved attack that employed a new method for data gathering.  In 2014, Wang
 \ea~\cite{Wang2014a} further improved on their results with a
 k-nearest neighbor classifier Wa-kNN and a custom weight-learning algorithm
-(WLLCC~\cite{WangThesis}) that in several rounds determine the optimal weights
+(WLLCC~\cite{Wang2015a}) that in several rounds determine the optimal weights
 for features extracted from traffic traces.
 Cai \ea~\cite{Cai2014b}
 determined which traffic features provide the most predictive power to detect
@@ -78,7 +78,7 @@ operating system differences, page changes, and background traffic.
 Recently, in 2016, Wang and Goldberg addressed many practical
 roadblocks to website fingerprinting, such as noisy data and maintaining a training set,
 further highlighting the need for website fingerprinting defenses in
-Tor~\cite{taoianreally}.
+Tor~\cite{Wang2016a}.
 
 Panchenko \ea~\cite{Panchenko2016a} showed that web\emph{page}
 fingerprinting (\ie, fingerprinting of any page on a site) is
@@ -86,9 +86,9 @@ significantly harder than web\emph{site} fingerprinting (\ie,
 fingerprinting of only the start page of a site).  Hayes and Danezis
 proposed k-fingerprinting, an attack with notably better performance
 than Wa-kNN even in the face of defenses
-\cite{kfingerprinting}. Their attack retains 30\% accuracy in a
+\cite{Hayes2016a}. Their attack retains 30\% accuracy in a
 closed-world setting against the WTF-PAD defense by Juarez et
-al.~\cite{DBLP:journals/corr/JuarezIPDW15}---a prime candidate for
+al.~\cite{Juarez2016a}---a prime candidate for
 deployment in Tor~\cite{adapativepadding}---at the cost of 50\% bandwidth
 overhead. Juarez \ea used Wa-kNN to evaluate WTF-PAD and set $k=5$, as
 recommended by Wang \ea for an optimal trade-off between recall and the

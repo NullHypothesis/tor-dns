@@ -47,11 +47,11 @@ visit by the user to a monitored site will be detected, and half of the
 classifications by the classifier will be wrong. Errors can
 either classify a monitored site as
 unmonitored (lowering recall) or vice versa (lowering precision).
-Mistaking one monitored site for another is less likely~\cite{WangThesis}.
+Mistaking one monitored site for another is less likely~\cite{Wang2015a}.
 
 Wa-kNN is a website fingerprinting attack by Wang \ea~\cite{Wang2014a}
 that uses a k-nearest neighbor classifier with a custom weight-learning
-algorithm, WLLCC~\cite{WangThesis}.  From {packet traces}
+algorithm, WLLCC~\cite{Wang2015a}.  From {packet traces}
 between a Tor client and its guard, Wa-kNN extracts a number of {features}
 to classify each website.  Useful features include
 the number of outgoing packets and bursts of packets in the same direction.
@@ -73,7 +73,7 @@ its guard; other anonymity networks could use a similar technique.
 Unfortunately, the Tor network's limited spare capacity does not
 allow for such a throughput-intensive defense, but some research has
 worked on making this type of defense
-more efficient~\cite{Cai2014a,DBLP:journals/corr/JuarezIPDW15,WangThesis,adapativepadding}.
+more efficient~\cite{Cai2014a,Juarez2016a,Wang2015a,adapativepadding}.
 
 \paragraph{How Tor resolves DNS requests}
 Tor clients must send DNS requests over Tor to prevent DNS {leakage}
