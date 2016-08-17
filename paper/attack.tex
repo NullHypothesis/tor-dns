@@ -96,17 +96,16 @@ implications of our model for browsing behavior later.
 Next, we determined how many websites Tor users visit in a certain time span.
 We approximated this number by setting up an exit relay whose exit policy
 included only ports 80 and 443, so our relay would only forward web traffic.  We
-then used tshark to capture the timestamps of DNS requests---but no DNS
-responses.  We made sure that our tshark filter did not capture packet payloads
-or headers, so we were unable to learn what websites Tor users were visiting.
-In addition, we patched {\tt tshark} to log timestamps at a five-minute
-granularity. The coarse timing granularity allows us to publish this
-dataset with minimal privacy implications;
-Section~\ref{sec:ethics} discusses the ethical implications of this
-experiment in more detail.  We ran the experiment for approximately two weeks
-from May 15, 2016 to May 31, 2016, which allowed us to determine the number of
-DNS requests for 4,832 five-minute intervals.
-Figure~\ref{fig:dns-reqs} shows this timeseries.
+then used the tool {\tt tshark} to capture the timestamps of DNS requests---but
+no DNS responses.  We made sure that our {\tt tshark} filter did not capture
+packet payloads or headers, so we were unable to learn what websites Tor users
+were visiting.  In addition, we patched {\tt tshark} to log timestamps at a
+five-minute granularity. The coarse timing granularity allows us to publish this
+dataset with minimal privacy implications; Section~\ref{sec:ethics} discusses
+the ethical implications of this experiment in more detail.  We ran the
+experiment for approximately two weeks from May 15, 2016 to May 31, 2016, which
+allowed us to determine the number of DNS requests for 4,832 five-minute
+intervals.  Figure~\ref{fig:dns-reqs} shows this timeseries.
 
 \begin{figure}[t]
 	\centering
