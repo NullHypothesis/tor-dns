@@ -218,30 +218,38 @@ hijacks or leaks, but we expect those events to be relatively unlikely
 for the time period and IP prefixes that we are concerned with.
 
 \subsubsection{Putting it all together}
-Ultimately, we sought to get estimates for the number of compromises per 
-simulated Tor user under different DNS configurations and to get estimates 
-for the amount of time it would take for the first compromise to occur 
+We aim to estimate (1) the number of compromises per simulated 
+Tor user under different DNS configurations; and (2) the amount of 
+time it would take for the first compromise to occur 
 in order to understand which DNS configurations 
-might be more favorable for Tor exit relays to use. Again, we placed our users in 
-ASes in the five most popular countries for Tor usage.
+might be more favorable for Tor exit relays to use. As in previous 
+experiments, we placed our users in ASes in the five most popular 
+countries for Tor usage.
 
-The traceroutes described in the previous section gave us AS-level paths from 
+The traceroutes described in the previous section yielded AS-level paths from 
 the Tor users' ASes to the guard relays and from approximately half of the exit 
-relays' ASes to the name server destinations that we wanted. TorPS then gave us plausible 
-circuits, namely, plausible guard relay and exit relay combinations. We then 
-looked for ASes that appeared in both the paths coming into Tor and those 
+relays' ASes to the different destinations we discussed above, which depend on the exit  
+relays' DNS configurations. TorPS then gave us plausible 
+circuits, namely, plausible guard relay and exit relay combinations for our 
+streams. We then looked for ASes that appeared in both the paths coming into Tor and those 
 leaving Tor (the ``ingress'' and ``egress'' hops of Figure~\ref{fig:simulations}) 
-because those represent potential AS compromises.
+because those represent cases where an AS could potentially launch a name attack. 
+Streams that have ASes that can potentially launch these attacks are called 
+``compromised'' streams.
 
 As stated earlier, some exit relays did not have associated AS-level paths to a particular 
 destination, either due to lack of a RIPE Atlas probe or because of missing 
-traceroute information. In these cases, we searched for AS compromises between the ingress 
-AS-level path and the AS of the exit relay (just like the \emph{ISP DNS} configuration 
-above) before treating that particular stream as having not been compromised in order 
-to err on the conservative side. 
+traceroute information. In these cases, we checked if the exit AS had the potential 
+to launch an attack, and if not, the stream was considered to be uncompromised in order to 
+err on the conservative side. 
+%we first searched for AS compromises between the ingress 
+%AS-level path and the AS of the exit relay (just like the \emph{ISP DNS} configuration 
+%above), and if there was no compromise, the stream is considered  before treating that 
+%particular stream as having not been compromised in order 
+%to err on the conservative side. 
 
-To get the number of compromised streams, we counted the streams that were compromised 
-for every simulated user out of a total possible of 372. To get the time-to-first compromise, 
+To compute the number of compromised streams, we counted the streams that were compromised 
+for every simulated user out of a possible 372. To compute the time-to-first compromise, 
 we found the first stream in which the user was compromised, took that timestamp, and 
 calculated the offset from the beginning of March 1st, 2016. Note that for sample users 
 who were not compromised during the month of March, we assigned a maximum value 
