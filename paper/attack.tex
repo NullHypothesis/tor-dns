@@ -175,9 +175,7 @@ minimum TTL of 60 seconds and a maximum TTL of 30 minutes.\footnote{See
 \texttt{dns\_clip\_ttl} in
 \url{https://gitweb.torproject.org/tor.git/tree/src/or/dns.c}.}  We
 refer to this as Tor's \emph{TTL clipping}. Due to a
-bug in Tor that we identified\footnote{We redacted the link to the bug report to anonymize our paper
-submission.},
-% \url{https://bugs.torproject.org/19025}}
+bug in Tor that we identified\footnote{See \url{https://bugs.torproject.org/19025}.}
 the TTL of all DNS responses are set to 60 seconds, which determines
 the duration the responses are cached.
 

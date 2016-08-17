@@ -33,9 +33,8 @@ authoritative DNS servers, such as the authoritative server for {\tt .com}
 pointing to the authoritative server of {\tt example.com}, which in turn points
 to the authoritative server responsible for {\tt www.example.com}.  We also ran
 UDP traceroutes to each server in the delegation path, targeting port 53 to
-mimic DNS resolution.\footnote{We published the tool that we developed for this
-experiment, but we redacted the URL to preserve our anonymity.}
-
+mimic DNS resolution.\footnote{The tool we developed for this purpose is
+available online at \url{https://github.com/NullHypothesis/ddptr}.}
 For both experiments, we then mapped all IP addresses in the traceroutes to AS
 numbers~\cite{ipasn}, generating both a set of traversed ASes for DNS traceroutes
 ($\mathcal{D}$) and a set of traversed ASes for web traceroutes

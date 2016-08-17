@@ -65,13 +65,30 @@
 \newcommand{\bottomcap}[1]{\caption{#1}}
 }
 
-
+\makeatletter
+\def\blfootnote{\xdef\@thefnmark{}\@footnotetext}
+\makeatother
 
 \begin{document}
 
 \title{FingerprinTor: DNS Fingerprinting Attacks on Tor}
 
-\author{Anonymous}
+\author{
+\IEEEauthorblockN{Benjamin Greschbach$^*$}
+\IEEEauthorblockA{KTH}
+\and
+\IEEEauthorblockN{Tobias Pulls$^*$}
+\IEEEauthorblockA{Karlstad University}
+\and
+\IEEEauthorblockN{Laura M.  Roberts$^*$}
+\IEEEauthorblockA{Princeton University}
+\and
+\IEEEauthorblockN{Philipp Winter$^*$}
+\IEEEauthorblockA{Princeton University}
+\and
+\IEEEauthorblockN{Nick Feamster}
+\IEEEauthorblockA{Princeton University}
+}
 
 % \IEEEoverridecommandlockouts
 % \makeatletter\def\@IEEEpubidpullup{9\baselineskip}\makeatother
@@ -92,6 +109,8 @@
 \maketitle
 
 \input{abstract}
+
+\blfootnote{$^*$All four authors contributed substantially, and share first authorship.}
 
 \input{introduction}
 
