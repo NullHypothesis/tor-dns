@@ -192,7 +192,7 @@ effectiveness of the attack since some features (like indices of outgoing
 packets) are several orders of magnitude more useful
 than others~\cite{Juarez2016a}.
 
-Figure~\ref{fig:fpt:var:rounds} shows the effects of between 0 and 3000
+Figure~\ref{fig:fpt:var:rounds} shows the effects of between 0 and 3,000
 rounds of weight-learning. At few to no rounds, the precision for the
 \texttt{wf} attack is below 50\%---the classification is more likely to be wrong
 than right---while there is no impact on the \texttt{hp} attack and a relatively
@@ -219,17 +219,17 @@ website.}
 \textbf{TTLs} & \textbf{Median TTL (sec)} & \textbf{Mean TTL (sec)} \\
 \midrule
 % 2016/04/28 15:52:39 DNS records TTL mean 9780.0, std 42930.5, median 255.0, min 0.0, max 604800.0
-raw & \multirow{ 2}{*}{255} & $9780.0\pm42930.5$ \\ % & 0 & 604800 \\
+raw & \multirow{ 2}{*}{255} & $9{,}780.0\pm42{,}930.5$ \\ % & 0 & 604800 \\
 % 2016/04/28 15:44:05 DNS records TTL mean 701.5, std 755.3, median 255.0, min 60.0, max 1800.0
-Tor &  & $701.5\pm\phantom{00}755.3$ \\ %& 60 & 1800 \\
+Tor &  & $701.5\pm\phantom{00{,}}755.3$ \\ %& 60 & 1800 \\
 % 2016/04/28 15:52:39 	unique domain TTL mean 13022.2, std 35054.4, median 900.0, min 0.0, max 604800.0
-unique raw & \multirow{ 2}{*}{900} & $13022.2\pm35054.4$ \\ %& 0 & 604800 \\
+unique raw & \multirow{ 2}{*}{900} & $13{,}022.2\pm35{,}054.4$ \\ %& 0 & 604800 \\
 % 2016/04/28 15:44:05 	unique domain TTL mean 1005.3, std 789.6, median 900.0, min 60.0, max 1800.0
-unique Tor &  & $1005.3\pm\phantom{00}789.6$ \\ %& 60 & 1800 \\
+unique Tor &  & $1{,}005.3\pm\phantom{00{,}}789.6$ \\ %& 60 & 1800 \\
 % 2016/04/28 15:52:39 	unique domain _min_ TTL mean 3833.9, std 11073.6, median 60.0, min 0.0, max 604800.0
-min unique raw & \multirow{ 2}{*}{60} & $3833.9\pm11073.6$ \\ % & 0 & 604800 \\
+min unique raw & \multirow{ 2}{*}{60} & $3{,}833.9\pm11{,}073.6$ \\ % & 0 & 604800 \\
 % 2016/04/28 15:44:05 	unique domain _min_ TTL mean 644.2, std 763.8, median 60.0, min 60.0, max 1800.0
-min unique Tor & & $644.2\pm\phantom{00}763.8$ \\ %& 60 & 1800 \\
+min unique Tor & & $644.2\pm\phantom{00{,}}763.8$ \\ %& 60 & 1800 \\
 \bottomrule
 \end{tabular}
 \bottomcap{\tabcaptext}
