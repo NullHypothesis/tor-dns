@@ -77,8 +77,8 @@ selection expires after 270 days. We use TorPS to emulate the behavior of
 
 For the Internet-scale analysis, we also need to place simulated Tor clients
 into an AS.  We selected clients in major ISPs in the top-five most popular
-countries of Tor usage according to Tor Metrics.\footnote{URL available at
-\url{https://metrics.torproject.org/userstats-relay-table.html}.} As of August
+countries of Tor usage according to Tor Metrics~\cite{metrics-countries}.
+As of August
 2016, the top five countries are the U.S., Russia, Germany, France, and the U.K.
 For the U.S., we chose Comcast (AS~7922); for Russia, Rostelecom (AS~42610); for
 Germany, Deutsche Telekom (AS~3320); for France, Orange (AS~3215); and for Great
@@ -285,29 +285,34 @@ close to 16 days.}
 \label{fig:time-until-compromise}
 \end{figure}
 
-Figures~\ref{fig:compromised-streams}
-and~\ref{fig:time-until-compromise} the results of our experiments for 100,000 
-simulated Tor users located in AS 7922 (United States, Comcast). (For the results 
-of our experiments for users located in the other four countries, please see our Appendix. 
-\emph{ISP DNS only} represents a world in which all exit relays use 
-their ISPs' name servers. \emph{Google DNS only} represents a world in which all 
-Tor exit relays use {\tt 8.8.8.8} for DNS resolution.  \emph{Local DNS only} represents 
-a world in which all Tor exit relays perform their own DNS resolution.  And again, 
-\emph{Status quo} represents our estimate of the current world of exit relay resolution.  
+Figures~\ref{fig:compromised-streams} and~\ref{fig:time-until-compromise} show
+the results of our experiment for simulated Tor clients located in AS 7922,
+owned by the U.S. ISP Comcast.  We focus only on AS 7922 because, according to Tor
+Metrics~\cite{metrics-countries}, most Tor users are currently coming from the
+U.S.  We found that the results for our four other client ASes differ, but not
+significantly.\footnote{Due to space constraints we could not plot all figures,
+but plan to publish them on our project web page.}  We therefore believe that
+the location of Tor clients matters and this location diversity should be
+considered in traffic correlation studies.
 
-The figures show that \emph{ISP DNS only} fared much better than the other configurations. 
-This was expected, of course, because there is only one AS (the exit relay's AS) to contend 
-with on the egress side. \emph{Google DNS only} was next, and we believe this is because
-of Google's heavily anycast servers. 
+Both figures show that the ``ISP DNS only'' setup is the safest for Tor users,
+\ie, it exhibits on average the least number of compromised streams while also
+on average counting the most days until compromise.  This is expected because
+if all exit relays use their ISP's resolvers, there is only one AS to contend
+with on the egress side---the exit relay's.  The Google setup fares similarly
+well (most likely because of Google's heavily anycast infrastructure), followed
+by the status quo, and finally the ``Local DNS only,'' which is by far the
+least safe setup according to our experiment.  The ``Status Quo'' results are
+significantly better than the ``Local DNS'' results, presumably because only
+around 12\% of Tor exit relays actually do their own resolution.  The wide
+variance observed in Figure~\ref{fig:time-until-compromise} for ``ISP DNS'' and
+``Google DNS'' is due to using 31 days as a placeholder for simulated clients
+who were never compromised.
 
-There is a potential tradeoff between the safety of using a well-managed 
-DNS resolver such as Google's vs. a potentially not-as-well-managed 
-DNS resolver from the ISP.  
-
-Please note that the wide variance observed in Figure~\ref{fig:time-until-compromise} is 
-due to using 31 days as a placeholder for sample users who were never compromised.
-
-We believe that the \emph{Status Quo} results are significantly better than the 
-\emph{Local dns only} results because only around 12\% of Tor exit relays 
-actually do their own resolution. Additionally, the differing results for the 
-different client ASes shows that client AS needs to be taken into account. 
+However, the safest configuration against AS-level adversaries, which our
+figures capture, is not necessarily the best choice for Tor exit relay
+operators.  For example, ISP-provided DNS resolvers can be misconfigured,
+subject to censorship, or simply be a forwarder to Google's resolver, which
+already serves numerous exit relays and whose centralization poses a threat to
+the anonymity of Tor users.  We will explore this trade-off in great detail in
+Section~\ref{sec:discussion}.
