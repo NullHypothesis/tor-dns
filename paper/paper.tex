@@ -4,17 +4,27 @@
 \usepackage[T1]{fontenc}
 \usepackage[scaled=0.8]{beramono} % For a pretty monospaced font.
 \usepackage[pdftex]{graphicx}
-\usepackage{booktabs}        % For pretty tables.
-\usepackage{multirow}        % For pretty tables.
-\usepackage{xcolor}          % For colorful links.
-\usepackage{xspace}          % For reasonable spacing in custom commands.
-\usepackage{hyperref}        % For clickable links.
-\usepackage{cite}            % For reasonably sorting citations.
-\usepackage{balance}         % Balance columns on last page.
-\usepackage{wasysym}         % For \Circle, ...
-\usepackage{listings}        % For source code listings.
+\usepackage{booktabs} % For pretty tables.
+\usepackage{multirow} % Also for pretty tables.
+\usepackage{xcolor} % For colourful links.
+\usepackage{xspace} % For reasonable spacing in custom commands.
+\usepackage[pagebackref=true]{hyperref} % For clickable links.
+\usepackage{balance} % Balance columns on last page.
+\usepackage{wasysym} % For \Circle, ...
+\usepackage{listings} % For source code listings.
 \usepackage{ifthen}
 \usepackage[tight,footnotesize]{subfigure}
+
+% Add custom text right before backreferences in literature.
+\renewcommand*{\backref}[1]{}
+\renewcommand*{\backrefalt}[4]{
+   \ifcase #1
+      No cited.
+   \or
+      (Cited on p.~#2)
+   \else
+      (Cited on pp.~#2)
+   \fi}
 
 \definecolor{darkblue}{rgb}{0,0,0.5}
 \definecolor{lightgray}{rgb}{0.93,0.93,0.93}
