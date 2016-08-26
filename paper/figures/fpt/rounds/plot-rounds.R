@@ -40,6 +40,7 @@ ggplot(df, aes(x, y, colour = Attack,
           legend.key = element_rect(colour = "transparent", fill = "transparent"),
           legend.background = element_rect(colour = "gray", fill = "white", size = 0.3),
           legend.position = c(1.05, -0.05)) +
-    scale_color_brewer(palette = "Set1")
+    scale_color_brewer(palette = "Set1") +
+    scale_x_continuous(labels = comma)
 
 dev.off()
