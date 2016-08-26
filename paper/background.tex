@@ -6,14 +6,15 @@ attacks, as well as how the Tor network implements DNS resolution.
 \paragraph{The Tor network}
 The Tor network is an overlay network that anonymizes TCP streams such as web
 traffic.  As of August 2016, it comprises approximately 7,000 relays and about two
-million users.  Clients send data over the Tor network by randomly selecting
-three relays---typically called the guard, middle, and exit relay---that then
-form a virtual tunnel called a \emph{circuit}.  The guard relay learns the
-client's IP address, but not its web activity, while the exit relay gets to
-learn the client's web activity, but not its IP address.  Relays and clients
-talk to each other using the Tor protocol, which uses 512-byte \emph{cells}.
-Finally, each relay is uniquely identified by its fingerprint---a hash over its
-public key.
+million users.  The hourly published network consensus summarizes all relays
+that are currently online.  Clients send data over the Tor network by randomly
+selecting three relays---typically called the guard, middle, and exit
+relay---that then form a virtual tunnel called a \emph{circuit}.  The guard
+relay learns the client's IP address, but not its web activity, while the exit
+relay gets to learn the client's web activity, but not its IP address.  Relays
+and clients talk to each other using the Tor protocol, which uses 512-byte
+\emph{cells}.  Finally, each relay is uniquely identified by its fingerprint---a
+hash over its public key.
 
 \paragraph{Website fingerprinting attacks}
 The Tor network encrypts relayed traffic as it travels from the client
