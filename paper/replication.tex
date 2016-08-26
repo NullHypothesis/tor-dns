@@ -1,32 +1,97 @@
-\appendix
+\documentclass{article}
 
-We provide details on how to replicate our results.  Each
-subsection discusses the replication of a specific experiment, providing both
-code and data necessary to replicate.
+\usepackage[T1]{fontenc}
+\usepackage[backend=bibtex,backref=true,maxbibnames=100]{biblatex}
+\usepackage[scaled=0.8]{roboto} % For a pretty sans-serif font.
+\usepackage[scaled=0.8]{beramono} % For a pretty monospaced font.
+\usepackage{mathptmx} % Use times for serif font.
+\usepackage{xcolor} % For colourful links.
+\usepackage{listings} % For source code listings.
+\usepackage{xspace} % For reasonable spacing in custom commands.
+\usepackage{hyperref} % For clickable links.
+\usepackage{upquote} % No curly quotes in listings.
 
-\subsection{Replicating AS exposure of DNS}
-Here is how you can replicate the results of Subsection~\ref{sec:as-exposure}.
-First, obtain the Python 2 tool ddptr that we have developed for this
-measurement task:
+\bibliography{references}
+
+\urlstyle{sf} % Nice-looking URLs.
+
+\definecolor{darkblue}{rgb}{0,0,0.5}
+\definecolor{lightgray}{rgb}{0.93,0.93,0.93}
+
+\lstset{
+	backgroundcolor=\color{lightgray},
+	basicstyle=\small\ttfamily,
+	keepspaces=true,
+	breakatwhitespace=true,
+	breaklines=true,
+	numbers=left,
+	numbersep=3pt,
+	numberstyle=\scriptsize\color{gray},
+}
+
+\hypersetup{
+	pdftitle={Instructions on replicating our experiments},
+	pdfauthor={Benjamin Greschbach, Tobias Pulls, Laura M. Roberts, Philipp Winter, Nick Feamster},
+	colorlinks=true,
+	urlcolor=darkblue,
+	linkcolor=darkblue,
+	citecolor=darkblue
+}
+
+\newcommand{\name}{DefecTor\xspace}
+\newcommand{\first}{(\emph{i})\xspace}
+\newcommand{\second}{(\emph{ii})\xspace}
+\newcommand{\third}{(\emph{iii})\xspace}
+\newcommand{\fourth}{(\emph{iv})\xspace}
+\newcommand{\fifth}{(\emph{v})\xspace}
+
+\title{Instructions on replicating our experiments}
+
+\author{%
+	Benjamin Greschbach --- \href{mailto:bgre@kth.se}{\nolinkurl{bgre@kth.se}} \\
+	Tobias Pulls --- \href{mailto:tobias.pulls@kau.se}{\nolinkurl{tobias.pulls@kau.se}} \\
+	Laura M. Roberts --- \href{mailto:laurar@princeton.edu}{\nolinkurl{laurar@princeton.edu}} \\
+	Philipp Winter --- \href{mailto:pwinter@cs.princeton.edu}{\nolinkurl{pwinter@cs.princeton.edu}} \\
+	Nick Feamster --- \href{mailto:feamster@cs.princeton.edu}{\nolinkurl{feamster@cs.princeton.edu}}
+}
+
+\begin{document}
+
+\maketitle
+
+In this document, we provide instructions on how to replicate the results from
+our research paper ``The Impact of DNS on Tor's Anonymity''.\footnote{Available
+online at \url{https://nymity.ch/tor-dns/dns-tor.pdf}.} Each section discusses
+the replication of a specific experiment, providing both code and data necessary
+to replicate.  Our project page is available online at
+\url{https://nymity.ch/tor-dns/}.
+
+\tableofcontents
+
+\newpage
+
+\section{Replicating AS exposure of DNS requests}
+Here is how you can replicate the results of Subsection~IV.A.  First, obtain the
+Python 2 tool ddptr that we have developed for this measurement task:
 
 \begin{lstlisting}
 git clone https://github.com/NullHypothesis/ddptr.git
 \end{lstlisting}
 
 Next, you need two files to continue; \first a list of websites such as the
-AlexaTop 1,000~\cite{alexatop1k}, which you should save as top-1k.csv; \second a
-file ipasn.dat, which enables looking up AS numbers for given IP addresses.  The
-library pyasn documents how you can generate this file~\cite{pyasn}.  After
-having fetched top-1k.csv, ipasn.dat and ddptr.py, you are ready to run it as
-follows:
+Alexa top 1,000~\cite{alexatop1k}, which you should save as {\tt top-1k.csv};
+\second a file {\tt ipasn.dat}, which enables looking up AS numbers for given IP
+addresses.  The library pyasn documents how you can generate this
+file~\cite{pyasn}.  After having fetched {\tt top-1k.csv}, {\tt ipasn.dat} and
+{\tt ddptr.py}, you are ready to run it as follows:
 
 \begin{lstlisting}
 sudo ./ddptr.py --fqdn-file top-1k.csv ipasn.dat 2>&1 | tee top-1k-ddptr.log
 \end{lstlisting}
 
 The resulting log files contains plenty of information, but only the lines
-``Exposure is \ldots'' are necessary to create Figure~\ref{fig:exposure}.  You
-can extract all exposure values from the log files by running:
+``Exposure is \ldots'' are necessary to create Figure~2.  You can extract all
+exposure values from the log files by running:
 
 \begin{lstlisting}
 echo exposure > exposures.csv
@@ -37,23 +102,20 @@ The file exposures.csv then contains all exposure values, one per line,
 including a header line.  It is easy to take the file and plot it with a tool of
 your choice.
 
-\subsection{Replicating DNS resolver mapping}
-Here is how you can replicate the results of
-Subsection~\ref{sec:mapping-resolvers}.  First, you need to set up an
-authoritative DNS server for a domain that is under your control.  We set up
-a bind9 instance that was responsible for the zone *.tor.nymity.ch.  We
-configured bind9 to return the same IP address for any request under
-tor.nymity.ch.
-
-Next, you need the Python 2 exitmap scanner~\cite{exitmap}:
+\section{Replicating DNS resolver mapping}
+Here is how you can replicate the results of Subsection~IV.B.  First, you need
+to set up an authoritative DNS server for a domain that is under your control.
+We set up a bind9 instance that was responsible for the zone *.tor.nymity.ch.
+We configured bind9 to return the same IP address for any request for
+*.tor.nymity.ch.  Next, you need the Python 2 exitmap scanner~\cite{exitmap}:
 
 \begin{lstlisting}
 git clone https://github.com/NullHypothesis/exitmap.git
 \end{lstlisting}
 
-We developed a special module for exitmap that is part of the following git
-repository.  You can clone it, and then copy the module to exitmap's modules
-directory as follows:
+Exitmap is a module-based scanning framework.  We developed a new module for
+exitmap that is part of the following git repository.  You can clone it, and
+then copy the module to exitmap's modules directory as follows:
 
 \begin{lstlisting}
 git clone https://github.com/NullHypothesis/tor-dns-tools.git
@@ -61,7 +123,7 @@ cp tor-dns-tools/exit-resolvers/dnsenum.py /path/to/exitmap/src/modules/
 \end{lstlisting}
 
 You are now ready to start the experiment.  On the machine running bind9, you
-have to run tcpdump to capture all DNS requests going to bind9:
+need to run tcpdump, to capture all DNS requests going to bind9:
 
 \begin{lstlisting}
 tcpdump -n "udp and port 53" -w dns-requests.pcap
@@ -71,11 +133,14 @@ Bind9 is now ready to serve DNS requests and tcpdump is capturing them to a
 file.  You can now run exitmap to generate the data:
 
 \begin{lstlisting}
-
+exitmap --build-delay 0.5 dnsenum
 \end{lstlisting}
 
-We set up a cronjob to run exitmap automatically every six hours.
-First, edit your crontab:
+There are various flags for exitmap that can improve the reliability of your
+experiment.  You might be particularly interested in {\tt ---first-hop}.
+
+We set up a cronjob to run exitmap automatically, every six hours.  First, edit
+your crontab:
 \begin{lstlisting}
 crontab -u "$USER" -e
 \end{lstlisting}
@@ -84,8 +149,8 @@ Then, add the following line to the crontab file:
 0 */6 * * * /path/to/exitmap -f /path/to/exitmaprc dnsenum
 \end{lstlisting}
 
-The file exitmaprc had the following content.  The key \texttt{first\_hop} is
-not necessary, but it makes scanning more reliable.  We set it to the
+The file {\tt exitmaprc} had the following content.  The key \texttt{first\_hop}
+is not necessary, but it makes scanning more reliable.  We set it to the
 fingerprint of a Tor relay under our control.
 \begin{lstlisting}
 [Defaults]
@@ -97,19 +162,21 @@ tor_dir = /path/to/tor_directory/
 
 Having set up cron, exitmap will now run periodically, and the data you need
 will be captured in the pcap file that is created on the machine running bind9.
-Once you are ready to analyze the data, the README file of the following GitHub
-repository discusses how you can turn the pcap file into visualizations:
-\url{https://github.com/NullHypothesis/tor-dns-tools/tree/master/exit-resolvers}.
+Once you are ready to analyze the data, the {\tt README} file of our GitHub
+repository\footnote{Available online at
+\url{https://github.com/NullHypothesis/tor-dns-tools/tree/master/exit-resolvers}.}
+discusses how you can turn the pcap file into visualizations:
 
-\subsection{Replicating number of DNS requests on exit relays}
+\section{Replicating number of DNS requests on exit relays}
 Because of the ethical issues of recording data on exit relays, we developed a
 patch for tshark that allows us to reduce the granularity of timestamps.  That
 way, we are able to record the number of DNS requests in a given time period
 without payload or further information.
 
-\begin{lstlisting}
-sudo ./tshark -n -f 'udp port 53' -T fields -e frame.time_epoch -Y 'dns.qry.type == 1 and dns.flags.response == 0'
-\end{lstlisting}
+The following listing contains that patch.  It only modifies two lines of
+tshark's code.  Save it to the file {\tt tshark-binned-timestamps.patch}, and
+then obtain the source code of wireshark in version 1.12.1, and place it in the
+same directory as the patch file.
 
 \begin{lstlisting}
 diff -Naur wireshark-1.12.1.orig/epan/frame_data.c wireshark-1.12.1/epan/frame_data.c
@@ -128,34 +195,43 @@ diff -Naur wireshark-1.12.1.orig/epan/frame_data.c wireshark-1.12.1/epan/frame_d
    fdata->frame_ref_num = 0;
 \end{lstlisting}
 
+Finally, you can apply the patch as follows.
+
 \begin{lstlisting}
 patch -p0 < tshark-binned-timestamps.patch
 \end{lstlisting}
 
-The output of the command is coarse timestamps, one per line, of when tshark
-captured a DNS request.
+After compiling tshark (which is part of wireshark), you can now run our
+modified version as follows.  The command does not resolve IP addresses; only
+captures UDP traffic on port 53; only prints timestamps, and no payload; and
+only prints DNS requests, and no responses.  The output of the command is coarse
+timestamps, one per line, of when tshark captured a DNS request.
 
-\subsection{Replicating DNS requests stats}
-This is how you replicate the DNS-related statistics from
-Section~\ref{sec:dns2site}.  First download and extract the Alexa top one
-million websites dataset with extracted DNS requests:
+\begin{lstlisting}
+sudo ./tshark -n -f 'udp port 53' -T fields -e frame.time_epoch -Y 'dns.qry.type == 1 and dns.flags.response == 0'
+\end{lstlisting}
+
+\section{Replicating DNS requests stats}
+This is how you replicate the DNS-related statistics from Section~V.B.  First
+download and extract the Alexa top one million websites dataset with extracted
+DNS requests:
 
 \begin{lstlisting}
 wget FIXME/alexa1mx5-extracted.tar.gz
 tar -zxf alexa1mx5-extracted.tar.gz
 \end{lstlisting}
 
-Get the Alexa file we used when gathering the data~\cite{alexatop1k} and
-the CloudFlare IPv4
-addresses\footnote{\url{https://www.cloudflare.com/ips-v4}} at the time of
-gathering:
+Get the Alexa file we used when gathering the data~\cite{alexatop1k} and the
+CloudFlare IPv4 addresses\footnote{Available online at
+\url{https://www.cloudflare.com/ips-v4}.} at the time of gathering:
 
 \begin{lstlisting}
 wget FIXME/top-1m.csv
 wget FIXME/ips-v4
 \end{lstlisting}
 
-Get and install our dnsstats tool using Go\footnote{\url{https://golang.org/}}:
+Get and install our dnsstats tool using Go\footnote{Available online at
+\url{https://golang.org/}.}:
 
 \begin{lstlisting}
 go get github.com/pylls/fingerprintor/cmd/dnsstats
@@ -167,14 +243,12 @@ Finally, run dnsstats on the downloaded data:
 dnsstats alexa1mx5-extracted/
 \end{lstlisting}
 
-This produces a large number of statistics, including those used in
- Section~\ref{sec:dns2site}.
+This produces a large number of statistics, including those used in Section~V.B.
 
-\subsection{Replicating DNS to website classification}
-This is how you replicate the DNS to website classification from
-Section~\ref{sec:dns2site}.
-First download and extract the Alexa top one
-million websites dataset with extracted DNS requests:
+\section{Replicating DNS to website classification}
+This is how you replicate the DNS to website classification from Section~V.B.
+First download and extract the Alexa top one million websites dataset with
+extracted DNS requests:
 
 \begin{lstlisting}
 wget FIXME/alexa1mx5-extracted.tar.gz
@@ -203,11 +277,9 @@ Without the \texttt{-open} parameter, the dns2site tool determines a reasonable
 open world size based on our conservative power-law distribution,
 which should be around 433,000.
 
-\subsection{Replicating \name attacks}
-This is how you replicate the \name results figures from
-Section~\ref{sec:analysis}.
-First download and extract the traffic traces from our
-1,000x100+100,000 WF dataset:
+\section{Replicating \name attacks}
+This is how you replicate the \name results figures from Section~VI.  First
+download and extract the traffic traces from our 1,000x100+100,000 WF dataset:
 
 \begin{lstlisting}
 wget FIXME/alexa1kx100+100k-extracted.tar.gz
@@ -220,7 +292,7 @@ Get and install our fpt tool using Go:
 go get github.com/pylls/fingerprintor/cmd/fpt
 \end{lstlisting}
 
-To generate data for Figure~\ref{fig:fpt:torpct}, run:
+To generate data for Figure~8, run:
 
 \begin{lstlisting}
 fpt -sites 1000 -instances 100 -open 100000 -pmin 0 -pmax 100 -pstep 5 -alexa 10000
@@ -230,7 +302,7 @@ The result is written to stdout and three files: one CSV file for precision,
 one CSV file for recall, and a log of all output. All filenames capture relevant
 parameters and are only created upon experiment completion.
 
-To generate data for Figure~\ref{fig:fpt:alexa}, run as a shellscript:
+To generate data for Figure~9, run as a shellscript:
 
 \begin{lstlisting}
 for i in 1 10 100 1000 10000 100000 1000000 10000000 100000000
@@ -239,10 +311,8 @@ do
 done
 \end{lstlisting}
 
-Manual assembly of the CSV files needed. For
-Figures~\ref{fig:fpt:var:rounds},~\ref{fig:fpt:var:window},~\ref{fig:fpt:var:scale},
-and~\ref{fig:fpt:var:dist}, run
-as a shellscript:
+Manual assembly of the CSV files is needed. For Figures~10a,~10b,~10c, and~10d,
+run as a shellscript:
 
 \begin{lstlisting}
 # rounds
@@ -276,14 +346,13 @@ do
 done
 \end{lstlisting}
 
-Manual assembly of the CSV files needed.
+Manual assembly of the CSV files is needed.
 Generating the figures takes \emph{days} on modern
 hardware: we spent well over a CPU core-year in total on the figures.
 
-\subsection{Replicating the DNS Alexa top 1,000,000 dataset}
+\section{Replicating the DNS Alexa top 1,000,000 data\-set}
 This is how you replicate the steps we used to gather the Alexa top 1,000,000
-dataset used in Section~\ref{sec:dns2site}.
-First, get and install three tools using Go:
+dataset used in Section~V.B.  First, get and install three tools using Go:
 
 \begin{lstlisting}
 go get github.com/pylls/fingerprintor/cmd/{server,tbbdnsw}
@@ -376,10 +445,9 @@ Build the docker container and start a worker:
 docker build -t pulls/worker  .
 docker run --privileged -d pulls/worker ./tbbdnsw <IP:port>
 \end{lstlisting}
-The worker will repeatedly try to connect to the server at <IP:port>. We
-successfully ran 120 workers each 1U blades
-with Intel(R) Xeon(R) CPU E5-2650 0 @ 2.00GHz with 62GB RAM. The server was
-hosted on a laptop with SSD storage.
+The worker will repeatedly try to connect to the server at {\tt <IP:port>}. We
+successfully ran 120 workers each 1U blades with Intel(R) Xeon(R) CPU E5-2650 0
+@ 2.00GHz with 62GB RAM. The server was hosted on a laptop with SSD storage.
 
 Finally, to extract the DNS data from the resulting pcaps use the
 extractdns tool:
@@ -390,9 +458,9 @@ extractdns -o results/ data/
 Where data is the folder the server stored the data in and results is the folder
 to store the extracted data in.
 
-\subsection{Replicating the WF dataset}
-To replicate our WF dataset used in Section~\ref{sec:analysis}, get and
-install the following four tools using Go:
+\section{Replicating the WF dataset}
+To replicate our WF dataset used in Section~VI, get and install the following
+four tools using Go:
 % server
 \begin{lstlisting}
 go get github.com/pylls/fingerprintor/cmd/{server,tbbw}
@@ -410,9 +478,9 @@ and store the results in the data folder with the suffix \texttt{.torlog}.
 By default, the server listens on port 55555 on all interfaces.
 
 % configure Tor
-Download a fresh copy of Tor Browser from \url{https://torproject.org} and extract it.
-Open Browser/TorBrowser/Data/Browser/profile.default/preferences/
-and put the
+Download a fresh copy of Tor Browser from \url{https://torproject.org} and
+extract it.  Open {\tt
+Browser/TorBrowser/Data/Browser/profile.default/preferences/} and put the
 following \emph{at the bottom} of \texttt{extension-overrides.js}:
 
 \begin{lstlisting}
@@ -427,7 +495,7 @@ user_pref("extensions.torbutton.versioncheck_url", "");
 user_pref("extensions.torbutton.versioncheck_enabled", false);
 \end{lstlisting}
 
-Open Browser/TorBrowser/Data/Tor/torrc and add:
+Open {\tt Browser/TorBrowser/Data/Tor/torrc} and add:
 
 \begin{lstlisting}
 LogTimeGranularity 1
@@ -435,14 +503,15 @@ UseEntryGuards 0
 \end{lstlisting}
 
 % build custom tor
-Next we need to build a custom tor for Tor Browser that logs all incoming and outgoing
-cells using Tor's logging framework. First, get the tor source code:
+Next, we need to build a custom tor binary for Tor Browser that logs all
+incoming and outgoing cells using Tor's logging framework. First, get the tor
+source code:
 
 \begin{lstlisting}
 git clone https://git.torproject.org/tor.git
 \end{lstlisting}
-Follow the instructions in the INSTALL file. Once you can build tor,
-apply the below patch to src/or/relay.c and run make:
+Follow the instructions in the {\tt INSTALL} file. Once you can build tor,
+apply the below patch to {\tt src/or/relay.c} and run make:
 % clients
 \begin{lstlisting}
 diff -Naur tor/src/or/relay.c relay.c
@@ -470,7 +539,7 @@ diff -Naur tor/src/or/relay.c relay.c
    /* either conn is NULL, in which case we've got a control cell, or else
     * conn points to the recognized stream. */
 \end{lstlisting}
-Copy src/or/tor to Browser/TorBrowser/tor.
+Copy {\tt src/or/tor} to {\tt Browser/TorBrowser/tor}.
 
 Download the latest release of dumb-init from
 \url{https://github.com/Yelp/dumb-init/releases}.
@@ -532,3 +601,7 @@ fext results
 \end{lstlisting}
 The torlogext file generates cell-files with the format used by
 Wang et al.~\cite{Wang2014a}, and the fext tool extracts features for Wa-kNN.
+
+\printbibliography
+
+\end{document}
