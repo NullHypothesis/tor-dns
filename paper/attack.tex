@@ -259,15 +259,15 @@ requests. The dataset contains 2,260,534 domains that are unique to a particular
 website, \ie, are not embedded on any other top million site; we call these
 domains {\em unique domains}. Unique domains are particularly interesting
 because they reveal to the adversary what sites among the top million the user
-has visited.  This is not possible for domains such as YouTube, simply because
-many websites embed YouTube videos.  Figure~\ref{fig:unique-domains} shows the
-fraction of sites with unique domains for websites up to Alexa top one million.
-For 96.8\% of all sites on the Alexa top one million there exists at least one
-unique domain.  Interestingly, more popular websites are less likely to have a
-unique domain associated with them: 43\% of Alexa's top 100 have a unique domain
-compared to 96.8\% for the top one million. After Alexa's top 100, the fraction
-is erratic between 27\% to 41\%---why is not apparent---but for less popular
-sites from Alexa 100 and downwards the trend is clear.
+has visited.  This is not possible for domains such as {\tt youtube.com}, simply
+because many websites embed YouTube videos.  Figure~\ref{fig:unique-domains}
+shows the fraction of sites with unique domains for websites up to Alexa's top
+one million.  We grouped all domains into 1,000 non-overlapping bins of size
+1,000.  For 96.8\% of all sites on the Alexa top one million there exists at
+least one unique domain.  Interestingly, more popular websites are less likely
+to have a unique domain associated with them: only 77\% of the first bin---the
+most popular 1,000 domains---contain at least one unique domain, significantly
+less than the rest of the data.
 
 Table~\ref{tab:dns-domains} shows summary statistics for the number of domains
 per website. At least half of the sites have ten domains per website, two of
@@ -276,11 +276,11 @@ by observing a single unique DNS request.
 
 \begin{figure}[t]
 	\centering
-	\includegraphics[width=0.9\linewidth]{figures/dns-unique-domains.pdf}
-	\caption{The fraction of websites on Alexa top one million that have at least
-	one unique domain. The vast majority of sites (96.8\%) have
-        unique domains.
-}
+	\includegraphics[width=0.75\linewidth]{figures/dns-unique-domains.pdf}
+	\caption{The fraction of websites in Alexa's top one million that have at
+	least one unique domain.  We grouped all domains into 1,000 non-overlapping
+	bins of size 1,000.  The vast majority of sites (96.8\%) have unique
+	domains.}
 	\label{fig:unique-domains}
 \end{figure}
 
