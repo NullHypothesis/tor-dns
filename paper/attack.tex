@@ -106,11 +106,12 @@ dataset with minimal privacy implications; Section~\ref{sec:ethics} discusses
 the ethical implications of this experiment in more detail.  We ran the
 experiment for approximately two weeks from May 15, 2016 to May 31, 2016, which
 allowed us to determine the number of DNS requests for 4,832 five-minute
-intervals.  Figure~\ref{fig:dns-reqs} shows this time series.  The
-distribution's median is 105, illustrated by the red horizontal line.  The time
-series features several spikes; the most significant one counts 1,410 DNS
-requests.  We repeated the same experiment with the so-called \emph{reduced exit
-policy}\footnote{The reduced exit policy is available online at
+intervals.  Figure~\ref{fig:dns-reqs} shows this time series, but for clarity we
+only plot May 25, 2016.  The distribution's median is 105, illustrated by the
+red horizontal line.  The time series features several spikes; the most
+significant one counts 1,410 DNS requests.  We repeated the same experiment with
+the so-called \emph{reduced exit policy}\footnote{The reduced exit policy is
+	available online at
 \url{https://trac.torproject.org/projects/tor/wiki/doc/ReducedExitPolicy}.}
 because it contains several dozen more ports and it is more popular among Tor
 relay operators; as of August 2016, it is used by 7.8\% of exit relays by
@@ -123,9 +124,9 @@ DNS requests.
 	\centering
 	\includegraphics[width=\linewidth]{figures/dns-reqs.pdf}
 	\caption{The number of DNS requests per five-minute interval on our
-	exit relay.  Using a privacy-preserving measurement method, we only
-	determined approximate timestamps and no content.  The red line at $y = 105$
-	illustrates the distribution median.}
+	exit relay for May 25, 2016.  Using a privacy-preserving measurement method,
+	we only determined approximate timestamps and no content.  The red line at
+	$y = 105$ illustrates the distribution median.}
 	\label{fig:dns-reqs}
 \end{figure}
 
