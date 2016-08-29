@@ -603,6 +603,23 @@ fext results
 The torlogext file generates cell-files with the format used by
 Wang et al.~\cite{Wang2014a}, and the fext tool extracts features for Wa-kNN.
 
+
+\section{Replicating TorPS Simulations}
+There are two main components you need in order to recreate the work of Section VII: 
+\first~TorPS and \second~traceroutes between clients and Tor guards and between Tor 
+exits and destinations.
+
+The command I used to run TorPS was 
+\begin{lstlisting}
+python pathsim.py simulate --nsf_dir out/network-state-2016-03 --num_samples 100000 
+--trace_file here.pickle --user_model typical --format normal --num_guards 1 
+--guard_expiration 270 tor > torps_typical_my_final_model_1_guard_100000_samples.txt
+\end{lstlisting}
+
+This was after following the instructions in the TorPS readme on their website. 
+
+
+
 \printbibliography
 
 \end{document}
