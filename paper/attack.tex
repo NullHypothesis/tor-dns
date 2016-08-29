@@ -263,12 +263,12 @@ because they reveal to the adversary what sites among the top million the user
 has visited.  This is not possible for domains such as {\tt youtube.com}, simply
 because many websites embed YouTube videos.  Figure~\ref{fig:unique-domains}
 shows the fraction of sites with unique domains for websites up to Alexa's top
-one million.  We grouped all domains into 1,000 non-overlapping bins of size
-1,000.  For 96.8\% of all sites on the Alexa top one million there exists at
-least one unique domain.  Interestingly, more popular websites are less likely
-to have a unique domain associated with them: only 77\% of the first bin---the
-most popular 1,000 domains---contain at least one unique domain, significantly
-less than the rest of the data.
+one million.  We grouped all domains into 1,000 consecutive, non-overlapping
+bins of size 1,000.  For 96.8\% of all sites on the Alexa top one million there
+exists at least one unique domain.  Interestingly, more popular websites are
+less likely to have a unique domain associated with them: only 77\% of the first
+bin---the most popular 1,000 domains---contain at least one unique domain,
+significantly less than the rest of the data.
 
 Table~\ref{tab:dns-domains} shows summary statistics for the number of domains
 per website. At least half of the sites have ten domains per website, two of
@@ -279,9 +279,9 @@ by observing a single unique DNS request.
 	\centering
 	\includegraphics[width=0.75\linewidth]{figures/dns-unique-domains.pdf}
 	\caption{The fraction of websites in Alexa's top one million that have at
-	least one unique domain.  We grouped all domains into 1,000 non-overlapping
-	bins of size 1,000.  The vast majority of sites (96.8\%) have unique
-	domains.}
+	least one unique domain.  We grouped all domains into 1,000 consecutive,
+	non-overlapping bins of size 1,000.  The vast majority of sites (96.8\%)
+	have unique domains.}
 	\label{fig:unique-domains}
 \end{figure}
 
