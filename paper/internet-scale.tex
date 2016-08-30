@@ -262,28 +262,22 @@ signifying that they were compromised at the very beginning of March 1.)
 
 \begin{figure}[t]
 \centering
-\includegraphics[width=0.75\linewidth]{figures/differences-comp-streams.pdf}
-\caption{The fraction of compromised streams for the status quo and three
-hypothetical DNS configurations for all exit relays (these simulated Tor users 
-are in AS 7922).  
-We removed outliers, so 
-the box plot only shows the distributions' quartiles.  The safest configuration
-is ``ISP DNS only,'' \ie have all exit relays use their ISP's DNS resolver.  The
-median of compromised streams for this configuration is 0.005.}
-\label{fig:compromised-streams}
-\end{figure}
-
-\begin{figure}[t]
-\centering
-\includegraphics[width=0.75\linewidth]{figures/differences-time-comp.pdf}
-\caption{The time until first stream compromise for the status quo and three
-hypothetical DNS configurations for all exit relays (these simulated Tor users 
-are in AS 7922).  
-We removed outliers, so 
-the box plot only shows the distributions' quartiles.  Again, the safest
-configuration is ``ISP DNS only;'' the median of the distribution is
-close to 16 days.}
-\label{fig:time-until-compromise}
+\subfigure[The fraction of compromised streams of simulated Tor clients.]{
+	\includegraphics[width=\linewidth]{figures/differences-comp-streams.pdf}
+    \label{fig:compromised-streams}
+}
+\subfigure[The time until simulated Tor clients got first compromised.]{
+	\includegraphics[width=\linewidth]{figures/differences-time-comp.pdf}
+    \label{fig:time-until-compromise}
+}
+\caption{The fraction of compromised streams and the time until first compromise
+for our simulated Tor clients.  We placed these clients in five popular client
+ASes in the U.S., the U.K., Russia, France, and Germany.  For exit relays, we
+consider the status quo (on the very right) plus three hypothetical DNS
+configurations for all exit relays.  We do not plot outliers beyond the box
+plots' whiskers.  In both experiments, the safest configuration is ``ISP DNS
+only,'' \ie have all exit relays use their ISP's DNS resolver.}
+\label{fig:fpt:var}
 \end{figure}
 
 Figures~\ref{fig:compromised-streams} and~\ref{fig:time-until-compromise} show
