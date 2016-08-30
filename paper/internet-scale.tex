@@ -125,9 +125,7 @@ running traceroutes from Tor relays, we leverage the RIPE Atlas~\cite{atlas}
 platform, a volunteer-run network measurement platform consisting of thousands
 of lightweight and geographically spread \emph{probes} that can be used as
 vantage points for traceroutes.  Our key observation is that RIPE Atlas has
-probes in many ASes that also have Tor relays.  
-
-We leverage this observation by
+probes in many ASes that also have Tor relays.  We leverage this observation by
 designing measurements to run traceroutes from Atlas probes that are located in
 the same AS as exit relays, to each of the destinations in question.
 
@@ -136,11 +134,12 @@ RIPE Atlas had probes in 52\% of ASes that contain exit relays, and in 51\% of
 ASes that contain Tor guard relays.  More importantly, we found that Atlas ASes
 cover 58\% of exit \emph{bandwidth} and 74\% of guard bandwidth.  This statistic
 is important given that Tor clients select relays weighted by their bandwidth,
-and the bandwidth of Tor relays is not uniformly distributed.  In addition to
-Atlas, we also considered using PlanetLab~\cite{planetlab} to initiate
-traceroutes, but unfortunately most PlanetLab nodes are located in research and
-education networks~\cite{Banerjee2004a}, and are thus not well-suited for
-performing our measurements.
+and the bandwidth of Tor relays is not uniformly distributed.  Given the growth
+of both Tor and Atlas, we expect these numbers to increase in the future.  In
+addition to Atlas, we also considered using PlanetLab~\cite{planetlab} to
+initiate traceroutes, but unfortunately most PlanetLab nodes are located in
+research and education networks~\cite{Banerjee2004a}, and are thus not
+well-suited for performing our measurements.
 
 % - 197 out of all 377 (52%) Tor exit ASes have Atlas probes.
 % - 220 out of all 434 (51%) Tor guard ASes have Atlas probes.
@@ -148,7 +147,7 @@ performing our measurements.
 % - Atlas ASes cover 73.59% of Tor guard bandwidth.
 \begin{table}[t]
 	\renewcommand{\tabcaptext}{The coverage of RIPE Atlas nodes that are
-	co-located with Tor guard and exit relays.}
+	co-located with Tor guard and exit relays as of May 2016.}
 	\topcap{\tabcaptext}
 	\centering
 	\begin{tabular}{l|r r}
