@@ -118,12 +118,12 @@ exit relay, to a DNS server under our control.  Figure~\ref{fig:dnsenum}
 illustrates this experiment.  To improve reliability, we configured {\tt
 exitmap} to use two-hop circuits instead of the standard three-hop circuits.
 The first hop was a guard relay under our control.  Over each exit relay, we
-resolved a unique domain {\tt PREFIX.tor.domain.com}.  The prefix consisted of
+resolved a unique domain {\tt PREFIX.tor.nymity.ch}.  The prefix consisted of
 the relay's unique 160-bit fingerprint, concatenated to a random 40-bit string
 whose purpose is to prevent caching, so exit relays indeed resolve each query
 instead of responding with a cached element.  We controlled the authoritative
-DNS server of {\tt tor.domain.com}, so we could capture both the IP address and
-packet content of every single query for {\tt tor.domain.com}.
+DNS server of {\tt tor.nymity.ch}, so we could capture both the IP address and
+packet content of every single query for {\tt tor.nymity.ch}.
 
 \begin{figure}[t]
 	\centering
