@@ -109,12 +109,15 @@ git clone https://github.com/NullHypothesis/tor-dns-tools.git
 We maintain a project page on the
 <a href="https://osf.io/52nrp/">Open Science Framework</a>
 to make available data fragments such as code patches.
+</p>
 
 <h3>Exit resolver dataset</h3>
+<p>
 The following dataset is a collection of .pcap files that we captured on the
 authoritative DNS server for tor.nymity.ch.  We used this dataset to identify
 the DNS resolvers of Tor exit relays.  The tarball contains a README file that
 provides more details.
+</p>
 <ul>
 	<li>
 	<a href="data/tor-dns-pcaps.tar.xz">tor-dns-pcaps.tar.xz</a> (53.7 MiB)<br>
@@ -123,10 +126,12 @@ provides more details.
 </ul>
 
 <h3>DNS exposure dataset</h3>
+<p>
 The following dataset contains the output of the tool
 <a href="https://github.com/NullHypothesis/ddptr">ddptr</a>, which we ran
 on a VPS operated by OVH.  The tarball contains a README file that provides more
 details.
+</p>
 <ul>
 	<li>
 	<a href="data/dns-exposure.tar.xz">dns-exposure.tar.xz</a> (1.5 MiB) <br>
@@ -134,7 +139,20 @@ details.
 	</li>
 </ul>
 
+<h3>DNS request number dataset</h3>
+<p>
+The following dataset contains the number of DNS requests per five minute
+interval as recorded on our exit relay.  The dataset contains two files, one for
+a
+<a href="https://trac.torproject.org/projects/tor/wiki/doc/ReducedExitPolicy">reduced exit policy</a>,
+and one for an exit policy containing only port 80 and 443.
 </p>
+<ul>
+	<li>
+	<a href="data/number-dns-requests.tar.xz">number-dns-requests.tar.xz</a> (19.2 KiB) <br>
+	SHA-1: <tt>daa0a5bf77f3425a3635f0e6fcd8f768ff2da1c6</tt>
+	</li>
+</ul>
 
 <h2><a name="contact">Contact</a></h2>
 <p>
@@ -162,7 +180,7 @@ At <a href="https://www.kth.se/en/csc">KTH</a>:
 
 <hr/>
 <p>
-<i>Last update: 2016-07-27</i>
+<i>Last update: 2016-08-31</i>
 </p>
 </body>
 
