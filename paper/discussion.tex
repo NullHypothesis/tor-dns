@@ -104,15 +104,15 @@ further be optimized to minimize information leakage, by (for example) enabling
 QNAME minimization~\cite{Bortzmeyer2016a}.
 
 In addition to making recommendations to exit relay operators, we can remotely
-influence the cache of each exit relay's resolver.  For example, using exitmap,
-we can continuously resolve potentially sensitive domains over each exit relay,
-right before its TTL is about to expire.  In such a setup, an attacker gains no
-advantage from observing DNS traffic from the exit relays because the domain is
-always in every exit relay's resolver cache.  This approach scales poorly,
-considering the potentially large number of domain names that would need to be
-cached (recall that the long tail of unpopular sites are most vulnerable to
-\name attacks), but it allows us to eliminate DNS-based correlation attacks for
-a select number of sites.
+influence the cache of each exit relay's resolver.  For example, using {\tt
+exitmap}, we can continuously resolve potentially sensitive domains over each
+exit relay, right before its TTL is about to expire.  In such a setup, an
+attacker gains no advantage from observing DNS traffic from the exit relays
+because the domain is always in every exit relay's resolver cache.  This
+approach scales poorly, considering the potentially large number of domain names
+that would need to be cached (recall that the long tail of unpopular sites are
+most vulnerable to \name attacks), but it allows us to eliminate DNS-based
+correlation attacks for a select number of sites.
 
 Finally, Tor can fix the Tor clipping bug we discovered and consider
 significantly increasing the minimum TTL for the DNS cache at exit relays to

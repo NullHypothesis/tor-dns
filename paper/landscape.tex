@@ -109,21 +109,21 @@ we only had anecdotal evidence (\eg, from OpenDNS-powered error
 messages~\cite[\S~4.1]{Winter2014b}) that some exit relays would occasionally
 show.
 
-We identify the DNS resolver of all exit relays by using
-exitmap~\cite{exitmap}, a scanner for Tor exit relays.  Exitmap automates
+We identify the DNS resolver of all exit relays by using {\tt
+exitmap}~\cite{exitmap}, a scanner for Tor exit relays.  {\tt Exitmap} automates
 running a task such as fetching a webpage over all one thousand exit relays,
-making it possible to see the Internet through the ``eyes'' of every single
-exit relay.  Using exitmap, we resolve unique, relay-specific domains over
-each exit relay, to a DNS server under our control.
-Figure~\ref{fig:dnsenum} illustrates this experiment.  To improve reliability, we configured
-exitmap to use two-hop circuits instead of the standard three-hop circuits.
+making it possible to see the Internet through the ``eyes'' of every single exit
+relay.  Using {\tt exitmap}, we resolve unique, relay-specific domains over each
+exit relay, to a DNS server under our control.  Figure~\ref{fig:dnsenum}
+illustrates this experiment.  To improve reliability, we configured {\tt
+exitmap} to use two-hop circuits instead of the standard three-hop circuits.
 The first hop was a guard relay under our control.  Over each exit relay, we
-resolved a unique domain {\tt PREFIX.tor.domain.com}.  The prefix consisted of the
-relay's unique 160-bit fingerprint, concatenated to a random 40-bit string
+resolved a unique domain {\tt PREFIX.tor.domain.com}.  The prefix consisted of
+the relay's unique 160-bit fingerprint, concatenated to a random 40-bit string
 whose purpose is to prevent caching, so exit relays indeed resolve each query
 instead of responding with a cached element.  We controlled the authoritative
-DNS server of {\tt tor.domain.com}, so we could capture both the IP address and packet
-content of every single query for {\tt tor.domain.com}.
+DNS server of {\tt tor.domain.com}, so we could capture both the IP address and
+packet content of every single query for {\tt tor.domain.com}.
 
 \begin{figure}[t]
 	\centering
@@ -162,10 +162,10 @@ On Linux systems, DNS resolution is controlled by the file
 that are queried in order.  If the primary resolver does not respond within a
 time limit, the system falls back to the second, and finally the third
 resolver.  Our data suggests that several exit relays used
-different resolvers in subsequent exitmap scans---one relay, for example, used
-both Google's DNS resolver and one provided by its ISP.  For our visualization,
-we only consider the first resolver we observed for an exit relay, which might
-not be the primary resolver.
+different resolvers in subsequent {\tt exitmap} scans---one relay, for example,
+used both Google's DNS resolver and one provided by its ISP.  For our
+visualization, we only consider the first resolver we observed for an exit
+relay, which might not be the primary resolver.
 \end{itemize}
 \noindent
 Figure~\ref{fig:exit-resolvers} illustrates the fraction of DNS requests that
