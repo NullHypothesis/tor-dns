@@ -170,7 +170,7 @@ FUNCTION {default.name.latex.cmd}{ "" }
 
 
 % The default URL prefix.
-FUNCTION {default.name.url.prefix}{ "[Online]. Available:" }
+FUNCTION {default.name.url.prefix}{ "Available:" }
 
 
 % Other controls that cannot be accessed via IEEEtranBSTCTL entry type.
