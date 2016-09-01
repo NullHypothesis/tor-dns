@@ -61,7 +61,12 @@ Online S.A.S.) that sees $9.33\%$ of exit traffic.  The experiment resulted in
 institution, achieving similar results: while a two-sample Kolmogorov-Smirnov
 test determined a statistically significant difference between both
 distributions ($p \ll 0.01$), the medians (0.590 and 0.584) and standard
-deviations (0.149 and 0.118) are similar.
+deviations (0.149 and 0.118) are similar.  Nevertheless, we believe that relays
+in regions other than Western Europe or North America are likely to witness
+significantly different exposure of DNS queries because many websites
+outsource their DNS setup to providers such as CloudFlare whose points of
+presence are centered around Western Europe and North America.
+
 % > ks.test(d1$exposure, d2$exposure)
 %
 %   Two-sample Kolmogorov-Smirnov test
