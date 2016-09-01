@@ -131,7 +131,7 @@ DNS requests.
 \end{figure}
 
 We then interpolate these numbers to all Tor exit relays based on their
-published bandwidth statistics.  While we measured a median of 105, 
+published bandwidth statistics.  While we measured a median of 105,
 the mean of the distribution was 119.3 per five minutes during a two-week period.
 From DNS statistics of the Alexa top one million websites (see
 Section~\ref{sec:dns2site}) we know that one website visit causes outgoing DNS requests for 10.3 domains on average
@@ -158,19 +158,21 @@ minutes.\footnote{This number comes from a preprint kindly
 shared by the authors and might change in the final version.}
 Tor Browser, The Tor Project's fork of Firefox, builds one circuit per
 website entered in the URL bar. How long the circuit remains active depends on
-Tor Browser settings (primarily {\tt MaxCircuitDirtiness} currently set to ten minutes) and how
-long TCP streams in the circuit are active: as long as at least one stream is
-active, the circuit remains active. The number of active circuits serves as an
+Tor Browser settings (primarily {\tt MaxCircuitDirtiness} currently set to ten
+minutes) and how long TCP streams in the circuit are active: as long as at
+least one stream is active, the circuit remains active.  Each time a new stream
+is attached to a circuit, the circuit's dirtiness timeout is reset.
+The number of active circuits serves as an
 upper bound for the number of websites visited over Tor: visiting different
 pages of a website will use the same circuit, and visiting a new website will
-construct a new circuit. Users visiting several pages of a website and websites
-with long-lived connections, like Twitter and Facebook with continuously
-updating feeds,
+construct a new circuit.  Users visiting several pages of a website and websites
+with long-lived reoccuring connections, like Twitter and Facebook with
+continuously updating feeds,
 all lower the number of websites visited in Tor relative to the number of active
 circuits. In later sections we revisit the implications of our estimates by
 scaling the Tor network to ten-times its estimated size.
 
-\subsubsection{Modeling the effects of DNS caching}
+\subsubsection{Modeling the effects of DNS caching at Tor exits}
 To analyze which DNS requests the adversary can see, we need to
 take caching of DNS responses into account. We ignore client-side DNS
 caching since it is disabled by default, as described in
@@ -191,19 +193,17 @@ source code that we identified,%
 \footnote{The bug report is available online at \url{https://bugs.torproject.org/19025}.}
 the TTL of all DNS responses is set to 60 seconds.
 
-%\subsubsection{Sliding window approach to compensate for DNS caching}
-% we ignore caching by having a window of X minutes
-If a Tor client attempts to resolve a domain that the exit relay already has in
+If a Tor client attempts to resolve a domain that an exit relay already has in
 its cache, the adversary will be unable to observe this request.  However, the
-adversary can record all DNS requests of the exit relay over the past $x$
+adversary can record all observed DNS requests over the past $x$
 seconds, where $x$ is the maximum TTL value (\ie, maintain a sliding window of
-length $x$), to obtain a lower bound of requested domain names.  If a Tor client
+length $x$).  If a Tor client
 is attempting to resolve a domain name, the request is either cached or not.  If
 it is not cached, the adversary will see it as a new, outgoing DNS request from
 the exit relay. If it is cached, it must have been resolved by the exit relay in
 the last $x$ seconds, and will therefore be in the sliding window.  The sliding
 window technique allows the attacker to observe all DNS requests, regardless of
-if they are cached or not.
+if they are cached or not at Tor exits.
 
 We assume that an adversary applies this sliding window technique and models the
 observable DNS data accordingly.  The attacker observes a fraction of Tor's exit
