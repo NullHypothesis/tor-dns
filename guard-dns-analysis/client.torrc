@@ -1,5 +1,0 @@
-EntryNodes 9B94CD0B7B8057EAF21BA7F023B7A1C8CA9CE645
-DataDirectory /tmp/guard-dns-analysis
-SOCKSPort 6666
-ControlPort 6667
-Log notice stdout
