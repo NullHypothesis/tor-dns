@@ -18,7 +18,7 @@ for (dir_name in c("2856", "3215", "3320", "7922", "42610")) {
 
         # Construct path and read CSV.
         file_name <- paste(base_name, dir_name, ".txt", sep = "")
-        csv <- read.csv(paste(dir_name, file_name, sep = "/"), header = TRUE)
+        csv <- read.csv(paste("internet-scale-simulation-data", dir_name, file_name, sep = "/"), header = TRUE)
 
         # Add data to our data frame.
         data <- rbind(data, data.frame(x = csv$compromised / (csv$compromised + csv$noncompromised),
