@@ -107,8 +107,8 @@ the ethical implications of this experiment in more detail.  We ran the
 experiment for approximately two weeks from May 15, 2016 to May 31, 2016, which
 allowed us to determine the number of DNS requests for 4,832 five-minute
 intervals.  Figure~\ref{fig:dns-reqs} shows this time series, but for clarity we
-only plot May 25, 2016.  The distribution's median is 105, illustrated by the
-red horizontal line.  The time series features several spikes; the most
+only plot May 25, 2016.  The distribution's median is 105.
+The time series features several spikes; the most
 significant one counts 1,410 DNS requests.  We repeated the same experiment with
 the so-called \emph{reduced exit policy}\footnote{The reduced exit policy is
 	available online at
@@ -122,11 +122,10 @@ DNS requests.
 
 \begin{figure}[t]
 	\centering
-	\includegraphics[width=\linewidth]{figures/dns-reqs.pdf}
+	\includegraphics[width=\linewidth]{figures/dns-requests.pdf}
 	\caption{The number of DNS requests per five-minute interval on our
 	exit relay for May 25, 2016.  Using a privacy-preserving measurement method,
-	we only determined approximate timestamps and no content.  The red line at
-	$y = 105$ illustrates the distribution median.}
+    we only determined approximate timestamps and no content.}
 	\label{fig:dns-reqs}
 \end{figure}
 

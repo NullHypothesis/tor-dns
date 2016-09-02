@@ -37,7 +37,7 @@ ggplot(df, aes(x, y, colour = Attack,
                      shape = Attack)) +
     geom_point(size=2.5) +
     geom_line() +
-    theme_bw() +
+    theme_minimal() +
     labs(x = "Window size (minutes)") +
     labs(y = "Precision") +
     ylim(0.65, 1) +
@@ -46,7 +46,11 @@ ggplot(df, aes(x, y, colour = Attack,
           legend.position = c(1.03, -0.05),
           legend.key.height = unit(0.8, "line"),
           legend.background = element_rect(colour = "gray", fill = "white", size = 0.3),
-          legend.key = element_rect(colour = "transparent", fill = "transparent")) +
+          legend.key = element_rect(colour = "transparent", fill = "transparent"),
+          axis.text = element_text(colour = "gray50"),
+          axis.ticks = element_line(colour = "gray90"),
+          axis.ticks.x = element_line(size = 0.25),
+          axis.ticks.y = element_line(size = 0.25)) +
     scale_color_brewer(palette = "Dark2") +
     guides(col=guide_legend(ncol=2))
 
