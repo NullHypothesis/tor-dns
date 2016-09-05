@@ -1,0 +1,13 @@
+--- wireshark-1.12.1+g01b65bf/epan/frame_data.c	2016-03-07 16:23:36.699718724 -0500
++++ wireshark-1.12.1+g01b65bf.orig/epan/frame_data.c	2016-03-07 16:10:34.040126637 -0500
+@@ -310,8 +310,8 @@
+   fdata->flags.has_phdr_comment = (phdr->opt_comment != NULL);
+   fdata->flags.has_user_comment = 0;
+   fdata->color_filter = NULL;
+-  fdata->abs_ts.secs = phdr->ts.secs - (phdr->ts.secs % 3600);
+-  fdata->abs_ts.nsecs = 0;
++  fdata->abs_ts.secs = phdr->ts.secs;
++  fdata->abs_ts.nsecs = phdr->ts.nsecs;
+   fdata->shift_offset.secs = 0;
+   fdata->shift_offset.nsecs = 0;
+   fdata->frame_ref_num = 0;
