@@ -914,23 +914,7 @@ configurations. \path{command_100k.sh} in the directory
 \begin{lstlisting}[basicstyle=\scriptsize\ttfamily]
 #!/bin/bash
 
-python intersect_whole_enchilada.py 
-../../../traceroutes/clients_to_all_guards_forward/results/clients_to_all_guards_forward_dict.pickle 
-../../../traceroutes/exit_ases_to_third_party_status_quo/results/exit_ases_to_third_party.pickle 
-../../../../fresh/fresh_measurements/forward_exit_ases_to_3rd_party_resolvers/final_exit_ip_to_one_resolver_list_dict.pickle 
-../../../traceroutes/exit_ases_to_8888/results/exit_ases_to_8888.pickle 
-../../../traceroutes/exit_ases_to_calendar_google/ddptr/results/exit_ases_to_calendar_google_ddptr.pickle 
-../../../traceroutes/exit_ases_to_docs_google/ddptr/results/exit_ases_to_docs_google_ddptr.pickle 
-../../../traceroutes/exit_ases_to_facebook/ddptr/results/exit_ases_to_facebook_ddptr.pickle 
-../../../traceroutes/exit_ases_to_google/ddptr/results/exit_ases_to_google_ddptr.pickle 
-../../../traceroutes/exit_ases_to_instagram/ddptr/results/exit_ases_to_instagram_ddptr.pickle 
-../../../traceroutes/exit_ases_to_ixquick/ddptr/results/exit_ases_to_ixquick_ddptr.pickle 
-../../../traceroutes/exit_ases_to_mail_google/ddptr/results/exit_ases_to_mail_google_ddptr.pickle 
-../../../traceroutes/exit_ases_to_startpage/ddptr/results/exit_ases_to_startpage_ddptr.pickle 
-../../../traceroutes/exit_ases_to_twitter/ddptr/results/exit_ases_to_twitter_ddptr.pickle 
-compromises_1guard_100K_7922 7922 ../../../../fresh/forPyASN/ipasn_20160729.dat 
-< ../../torps_typical_my_final_model_1_guard_100000_samples.txt 
-> output_dict_1guard_100K_7922.txt
+python intersect_whole_enchilada.py ../../../traceroutes/clients_to_all_guards_forward/results/clients_to_all_guards_forward_dict.pickle ../../../traceroutes/exit_ases_to_third_party_status_quo/results/exit_ases_to_third_party.pickle ../../../../fresh/fresh_measurements/forward_exit_ases_to_3rd_party_resolvers/final_exit_ip_to_one_resolver_list_dict.pickle ../../../traceroutes/exit_ases_to_8888/results/exit_ases_to_8888.pickle ../../../traceroutes/exit_ases_to_calendar_google/ddptr/results/exit_ases_to_calendar_google_ddptr.pickle ../../../traceroutes/exit_ases_to_docs_google/ddptr/results/exit_ases_to_docs_google_ddptr.pickle ../../../traceroutes/exit_ases_to_facebook/ddptr/results/exit_ases_to_facebook_ddptr.pickle ../../../traceroutes/exit_ases_to_google/ddptr/results/exit_ases_to_google_ddptr.pickle ../../../traceroutes/exit_ases_to_instagram/ddptr/results/exit_ases_to_instagram_ddptr.pickle ../../../traceroutes/exit_ases_to_ixquick/ddptr/results/exit_ases_to_ixquick_ddptr.pickle ../../../traceroutes/exit_ases_to_mail_google/ddptr/results/exit_ases_to_mail_google_ddptr.pickle ../../../traceroutes/exit_ases_to_startpage/ddptr/results/exit_ases_to_startpage_ddptr.pickle ../../../traceroutes/exit_ases_to_twitter/ddptr/results/exit_ases_to_twitter_ddptr.pickle compromises_1guard_100K_7922 7922 ../../../../fresh/forPyASN/ipasn_20160729.dat < ../../torps_typical_my_final_model_1_guard_100000_samples.txt > output_dict_1guard_100K_7922.txt
 . . .
 \end{lstlisting}
 This script 
@@ -955,59 +939,35 @@ Here's the {\tt command.sh} for client AS 2856:
 #!/bin/bash
 
 # 8888 ##########
-python ../../../../fresh/numbers/number_of_compromised_streams_per_sample.py 
-../../../intersections/AS_Analysis_March_2016/8888/compromises_1guard_100K_2856.pickle 
-> 8888_comp_streams_2856.txt
+python ../../../../fresh/numbers/number_of_compromised_streams_per_sample.py ../../../intersections/AS_Analysis_March_2016/8888/compromises_1guard_100K_2856.pickle > 8888_comp_streams_2856.txt
 
-python ../../../../fresh/numbers/time_to_first_compromise_per_sample_only_for_comp.py 
-../../../intersections/AS_Analysis_March_2016/8888/compromises_1guard_100K_2856.pickle 
-> 8888_time_first_comp_2856.txt
+python ../../../../fresh/numbers/time_to_first_compromise_per_sample_only_for_comp.py ../../../intersections/AS_Analysis_March_2016/8888/compromises_1guard_100K_2856.pickle > 8888_time_first_comp_2856.txt
 
-python ../../../../fresh/numbers/popular_ASes_or_IXPs.py 
-../../../intersections/AS_Analysis_March_2016/8888/compromises_1guard_100K_2856.pickle 
-> 8888_culprits_2856.txt
+python ../../../../fresh/numbers/popular_ASes_or_IXPs.py ../../../intersections/AS_Analysis_March_2016/8888/compromises_1guard_100K_2856.pickle > 8888_culprits_2856.txt
 
 
 # ddptr ##########
-python ../../../../fresh/numbers/number_of_compromised_streams_per_sample.py 
-../../../intersections/AS_Analysis_March_2016/ddptr/compromises_1guard_100K_2856.pickle 
-> ddptr_comp_streams_2856.txt
+python ../../../../fresh/numbers/number_of_compromised_streams_per_sample.py ../../../intersections/AS_Analysis_March_2016/ddptr/compromises_1guard_100K_2856.pickle > ddptr_comp_streams_2856.txt
 
-python ../../../../fresh/numbers/time_to_first_compromise_per_sample_only_for_comp.py 
-../../../intersections/AS_Analysis_March_2016/ddptr/compromises_1guard_100K_2856.pickle 
-> ddptr_time_first_comp_2856.txt
+python ../../../../fresh/numbers/time_to_first_compromise_per_sample_only_for_comp.py ../../../intersections/AS_Analysis_March_2016/ddptr/compromises_1guard_100K_2856.pickle > ddptr_time_first_comp_2856.txt
 
-python ../../../../fresh/numbers/popular_ASes_or_IXPs.py 
-../../../intersections/AS_Analysis_March_2016/ddptr/compromises_1guard_100K_2856.pickle 
-> ddptr_culprits_2856.txt
+python ../../../../fresh/numbers/popular_ASes_or_IXPs.py ../../../intersections/AS_Analysis_March_2016/ddptr/compromises_1guard_100K_2856.pickle > ddptr_culprits_2856.txt
 
 
 # isps ##########
-python ../../../../fresh/numbers/number_of_compromised_streams_per_sample.py 
-../../../intersections/AS_Analysis_March_2016/isps/compromises_1guard_100K_2856.pickle 
-> isps_comp_streams_2856.txt
+python ../../../../fresh/numbers/number_of_compromised_streams_per_sample.py ../../../intersections/AS_Analysis_March_2016/isps/compromises_1guard_100K_2856.pickle > isps_comp_streams_2856.txt
 
-python ../../../../fresh/numbers/time_to_first_compromise_per_sample_only_for_comp.py 
-../../../intersections/AS_Analysis_March_2016/isps/compromises_1guard_100K_2856.pickle 
-> isps_time_first_comp_2856.txt
+python ../../../../fresh/numbers/time_to_first_compromise_per_sample_only_for_comp.py ../../../intersections/AS_Analysis_March_2016/isps/compromises_1guard_100K_2856.pickle > isps_time_first_comp_2856.txt
 
-python ../../../../fresh/numbers/popular_ASes_or_IXPs.py 
-../../../intersections/AS_Analysis_March_2016/isps/compromises_1guard_100K_2856.pickle 
-> isps_culprits_2856.txt
+python ../../../../fresh/numbers/popular_ASes_or_IXPs.py ../../../intersections/AS_Analysis_March_2016/isps/compromises_1guard_100K_2856.pickle > isps_culprits_2856.txt
 
 
 # status_quo ##########
-python ../../../../fresh/numbers/number_of_compromised_streams_per_sample.py 
-../../../intersections/AS_Analysis_March_2016/status_quo/compromises_1guard_100K_2856.pickle 
-> status_quo_comp_streams_2856.txt
+python ../../../../fresh/numbers/number_of_compromised_streams_per_sample.py ../../../intersections/AS_Analysis_March_2016/status_quo/compromises_1guard_100K_2856.pickle > status_quo_comp_streams_2856.txt
 
-python ../../../../fresh/numbers/time_to_first_compromise_per_sample_only_for_comp.py 
-../../../intersections/AS_Analysis_March_2016/status_quo/compromises_1guard_100K_2856.pickle 
-> status_quo_time_first_comp_2856.txt
+python ../../../../fresh/numbers/time_to_first_compromise_per_sample_only_for_comp.py ../../../intersections/AS_Analysis_March_2016/status_quo/compromises_1guard_100K_2856.pickle > status_quo_time_first_comp_2856.txt
 
-python ../../../../fresh/numbers/popular_ASes_or_IXPs.py 
-../../../intersections/AS_Analysis_March_2016/status_quo/compromises_1guard_100K_2856.pickle 
-> status_quo_culprits_2856.txt
+python ../../../../fresh/numbers/popular_ASes_or_IXPs.py ../../../intersections/AS_Analysis_March_2016/status_quo/compromises_1guard_100K_2856.pickle > status_quo_culprits_2856.txt
 \end{lstlisting}
 
 The results are 
