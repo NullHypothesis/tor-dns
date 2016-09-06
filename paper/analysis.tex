@@ -70,8 +70,8 @@ nearly reaching the same levels as \texttt{hp} at 100\% of the exit bandwidth.
 
 \begin{figure}[t]
 \centering
-	\includegraphics[width=0.465\linewidth]{figures/fpt/pct/1kx100+100k-recall-ggplot2}
-	\includegraphics[width=0.465\linewidth]{figures/fpt/pct/1kx100+100k-precision-ggplot2}
+\includegraphics[width=0.465\linewidth]{figures/pct-1kx100+100k-recall}
+\includegraphics[width=0.465\linewidth]{figures/pct-1kx100+100k-precision}
 \caption{Recall and precision for an open-world dataset with monitored sites
 at Alexa rank 10k and lower. We compare our \name attacks (\texttt{ctw and
  \texttt{hp}}) to a conventional website fingerprinting attack (\texttt{wf}) for different
@@ -98,8 +98,8 @@ bandwidth provides a perfectly precise attack on relatively
 
 \begin{figure}[t]
 \centering
-	\includegraphics[width=0.465\linewidth]{figures/fpt/alexa/1kx100+100k-recall-ggplot2}
-	\includegraphics[width=0.465\linewidth]{figures/fpt/alexa/1kx100+100k-precision-ggplot2}
+\includegraphics[width=0.465\linewidth]{figures/alexa-1kx100+100k-recall}
+\includegraphics[width=0.465\linewidth]{figures/alexa-1kx100+100k-precision}
 \caption{The recall and precision when varying the starting Alexa rank of
 monitored sites for 100 percentage of exit bandwidth.}
 \label{fig:fpt:alexa}
@@ -107,52 +107,22 @@ monitored sites for 100 percentage of exit bandwidth.}
 
 \subsection{Sensitivity analysis}
 
-
-\if 0
-\begin{figure}[t]
-\centering
-\includegraphics[width=0.7\linewidth]{figures/fpt/rounds/1kx100+100k-ggplot2}
-\caption{Estimating the effect of website fingerprinting defenses.}
-\label{fig:fpt:var:rounds}
-\end{figure}
-
-\begin{figure}[t]
-\centering
-    \includegraphics[width=0.95\linewidth]{figures/fpt/window/1kx100+100k-ggplot2}
-\caption{Effect of increasing the analysis time window due to TTL clipping.}
-    \label{fig:fpt:var:window}
-\end{figure}
-
-\begin{figure}[t]
-\centering    \includegraphics[width=0.95\linewidth]{figures/fpt/scale/1kx100+100k-ggplot2}
-\caption{Effect of Tor network scale for Alexa ranks 10k and 100k.}
-    \label{fig:fpt:var:scale}
-\end{figure}
-
-
-\begin{figure}[t]
-\centering    \includegraphics[width=0.95\linewidth]{figures/fpt/dist/1kx100+100k-ggplot2}
-\caption{Effect of different website popularity distributions.}   \label{fig:fpt:var:dist}
-\end{figure}
-\fi
-
-
 \begin{figure}[t]
 \centering
 \subfigure[Estimating the effect of website fingerprinting defenses.]{
-	\includegraphics[width=0.465\linewidth]{figures/fpt/rounds/1kx100+100k-ggplot2}
+	\includegraphics[width=0.465\linewidth]{figures/rounds-1kx100+100k}
     \label{fig:fpt:var:rounds}
 }
 \subfigure[Effect of increasing the analysis time window due to TTL clipping.]{
-	\includegraphics[width=0.465\linewidth]{figures/fpt/window/1kx100+100k-ggplot2}
+	\includegraphics[width=0.465\linewidth]{figures/window-1kx100+100k}
     \label{fig:fpt:var:window}
 }
 \subfigure[Effect of Tor network scale for Alexa ranks 10k and 100k.]{
-	\includegraphics[width=0.465\linewidth]{figures/fpt/scale/1kx100+100k-ggplot2}
+	\includegraphics[width=0.465\linewidth]{figures/scale-1kx100+100k}
     \label{fig:fpt:var:scale}
 }
 \subfigure[Effect of different website popularity distributions.]{
-	\includegraphics[width=0.465\linewidth]{figures/fpt/dist/1kx100+100k-ggplot2}
+	\includegraphics[width=0.465\linewidth]{figures/dist-1kx100+100k}
     \label{fig:fpt:var:dist}
 }
 \caption{The effect on attack precision. The defaults are: Alexa from top 10,000,
