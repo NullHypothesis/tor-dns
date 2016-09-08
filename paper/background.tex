@@ -35,8 +35,9 @@ realistic: the user can browse to {unmonitored} sites in addition to the
 monitored sites. Unmonitored sites are, per definition, not known to the
 attacker; thus, the attacker's traffic classifier cannot train on unmonitored
 sites the user visits. The attacker's classifier can train on
-whatever unmonitored sites it chooses, as long as during testing, the
-classifier has not trained on an unmonitored site. Two relevant metrics
+whatever unmonitored sites it chooses, as long as the
+classifier has not trained on an unmonitored site used for testing.
+Two relevant metrics
 in the open-world
 setting are \emph{recall} and \emph{precision}.
 Recall measures the probability that
@@ -86,12 +87,12 @@ Using the
 SOCKS protocol, applications can instruct the Tor client to establish a circuit to a
 given domain and port.\footnote{SOCKS versions 4a and 5 support connection
 initiation using domain names in addition to IP addresses.}
-After the user types in a domain, say {\tt foo.com}, the Tor browser establishes
+After the user types in a domain, say {\tt example.com}, the Tor browser establishes
 a connection to the SOCKS proxy exposed by the local Tor client.
 The Tor client then
-selects an exit relay whose exit policy supports {\tt foo.com} and port 443.
+selects an exit relay whose exit policy supports {\tt example.com} and port 443.
 Next, the client sends a \texttt{RELAY\_BEGIN} Tor cell to the exit relay,
-instructing it to first resolve {\tt foo.com}, and then establish a TCP
+instructing it to first resolve {\tt example.com}, and then establish a TCP
 connection to the resolved
 address at port 443~\cite[\S~6.2]{tor-spec}.  After successfully establishing a
 connection, the exit relay responds with a \texttt{RELAY\_CONNECTED}

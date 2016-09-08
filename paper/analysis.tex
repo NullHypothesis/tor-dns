@@ -21,7 +21,7 @@ resolve the domain of the site; we did not prune our dataset further, neglecting
 issues like CloudFlare CAPTCHAs, outliers, control cells, and localized
 domains~\cite{Juarez2014a}.  Presumably, this means that we will underestimate
 the effectiveness of our attack, but we are primarily interested in the
-difference between recent website fingerprinting attacks and \name
+difference between website fingerprinting attacks and \name
 attacks~\cite{Wang2013a}.
 
 We perform ten-fold cross-validation for all of our experiments in the open
@@ -61,8 +61,8 @@ better recall than \texttt{wf}. For \texttt{hp} the results suggest that:
 The above relationship only holds when observing DNS requests gives
 a clear advantage to \texttt{hp} in terms of precision over \texttt{wf} (see
 the following paragraph).
-For precision our attacks have an immediate gain over \texttt{wf} as soon as
-the attacker can observe {any exit bandwidth}.
+For precision the \texttt{hp} attack has an immediate gain over \texttt{wf} as
+soon as the attacker can observe {any exit bandwidth}.
 Although the \texttt{hp} attack has near-perfect precision, the
 \texttt{ctw} attack benefits from observing increasingly more exit traffic,
 nearly reaching the same levels as \texttt{hp} at 100\% of the exit bandwidth.
@@ -94,7 +94,7 @@ bandwidth, as shown in Figure~\ref{fig:fpt:torpct}.
 These results paint a bleak picture: a small fraction of exit
 bandwidth provides a perfectly precise attack on relatively
 {unpopular} sites such as wikileaks.org, which had Alexa rank
-10,808 on April 15th 2016. 
+10,808 on April 15th 2016.
 
 \begin{figure}[t]
 \centering
@@ -216,16 +216,17 @@ fraction of observed Tor exit bandwidth, and mapping DNS requests to sites).
 
 Table~\ref{tab:ttls} shows the TTL of DNS records in our Alexa top one million
 sites dataset from Section~\ref{sec:dns2site} for the
-TTL as-is (raw) and when clipped by Tor.  For each of these cases, we
+TTL as-is (raw) and when clipped by Tor.
+(We emulate what the correct TTL values
+would be due to TTL clipping supposing that Tor eventually fixes the
+aforementioned bug.)  For each of these cases, we
 also consider TTLs for all unique domains, and for only the unique
 domain for each website with the lowest TTL.  About half of the sites on
 Alexa top one million has a unique domain with a TTL of 60 seconds or
-shorter; 48\% of the raw unique TTLs are below 60 seconds and only 26\%
+less; 48\% of the raw unique TTLs are below 60 seconds and only 26\%
 above 30 minutes. Fixing the Tor clipping bug is therefore not
 sufficient; to mitigate \name attacks, the minimum TTL should be
-significantly increased.  We also emulate what the correct TTL values
-would be due to TTL clipping supposing that Tor eventually fixes the
-aforementioned bug.  In this case, we find that Tor's TTL clipping has
+significantly increased.  .  In this case, we find that Tor's TTL clipping has
 no effect on the median TTL, but significantly reduces the mean TTL.
 
 Suppose that Tor eventually fixes the DNS TTL bug, requiring the
@@ -245,7 +246,7 @@ Figure~\ref{fig:fpt:var:scale} scales the size of the Tor network with
 respect to site
 visits from the status quo to ten times its size, for Alexa starting rank 10,000 and
 100,000. At twice its current size, the impact on \name attacks is smaller than
-increasing the minimum TTL for DNS caching to 180 seconds as shown in
+increasing the minimum TTL for DNS caching to three minutes as shown in
 Figure~\ref{fig:fpt:var:window}. These results indicate that \name
 attacks will remain
 practical for many sites in the Alexa top one million, even as the Tor network grows.

@@ -42,9 +42,9 @@ relays that rely on third-party resolvers, the adversary instead has to be on
 the path between the exit relay and its DNS resolver.
 %)\fixme{QUESTION: ``In addition, the DNS queries will look like they are coming
 %from the IP address of the name server and not the IP address of the
-%exit relay.''--This new wording seems unclear to me now--wanted to say 
-%that ASes on the path from the 3rd-party to the DNS servers will see that 
-%the queries are coming from the 3rd-party and not the exit IP, which is 
+%exit relay.''--This new wording seems unclear to me now--wanted to say
+%that ASes on the path from the 3rd-party to the DNS servers will see that
+%the queries are coming from the 3rd-party and not the exit IP, which is
 %why we ignore them . . .}
 
 \subsubsection{Simulating Tor user activity with TorPS}
@@ -61,12 +61,12 @@ For each simulated client, TorPS uses one guard; this guard selection expires
 after 270 days.  We use TorPS to simulate the behavior of 100,000 Tor clients
 for the entire month of March 2016.
 
-% \fixme{Wording, please: ``we perform 100,000 samples in the TorPS Monte Carlo 
-% simulation'' or ``we perform 100,000 Monte Carlo simulations in order to 
+% \fixme{Wording, please: ``we perform 100,000 samples in the TorPS Monte Carlo
+% simulation'' or ``we perform 100,000 Monte Carlo simulations in order to
 % analyze this.''}
 %potential Tor users and how the Tor client would have behaved.
 %we perform 100,000 samples in the TorPS Monte Carlo
-%simulation.  
+%simulation.
 
 We need to place our simulated Tor clients into an AS (see ``Client models'' in
 Figure~\ref{fig:simulations}).  We selected clients in major ISPs in the
@@ -108,9 +108,9 @@ embedded requests (\ie for embedded website content such as YouTube videos) or
 caching into account.
 %\xxx{Shouldn't each
 %  website actually result in hundreds of DNS lookups? This process could
-%be more clear.} 
+%be more clear.}
 
-\subsubsection{Inferring AS-level paths: traceroute + {\tt pyasn}}
+\subsubsection{Inferring AS-level paths using traceroutes and {\tt pyasn}}
 
 Our Internet-scale analysis also requires learning the AS-level paths from each
 client to its guard, and from its exit to the destination (see ``RIPE Atlas
@@ -229,11 +229,11 @@ either due to a lack of co-located RIPE Atlas probes, or because of missing
 traceroute information.  In these cases, we checked if the exit AS had the
 potential to launch an attack, and if not, the stream was considered to be
 uncompromised in order to err on the conservative side.
-%we first searched for AS compromises between the ingress 
-%AS-level path and the AS of the exit relay (just like the \emph{ISP DNS} configuration 
-%above), and if there was no compromise, the stream is considered  before treating that 
-%particular stream as having not been compromised in order 
-%to err on the conservative side. 
+%we first searched for AS compromises between the ingress
+%AS-level path and the AS of the exit relay (just like the \emph{ISP DNS} configuration
+%above), and if there was no compromise, the stream is considered  before treating that
+%particular stream as having not been compromised in order
+%to err on the conservative side.
 
 To compute the fraction of compromised streams, we counted the streams that were
 compromised for every simulated user out of a possible maximum of 372. To
