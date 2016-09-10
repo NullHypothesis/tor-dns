@@ -2,7 +2,7 @@
 
 \usepackage[T1]{fontenc}
 \usepackage[backend=biber,backref=true,maxbibnames=100]{biblatex}
-\usepackage[scaled=0.8]{roboto} % For a pretty sans-serif font.
+%\usepackage[scaled=0.8]{roboto} % For a pretty sans-serif font.
 \usepackage[scaled=0.8]{beramono} % For a pretty monospaced font.
 \usepackage{mathptmx} % Use times for serif font.
 \usepackage{xcolor} % For colourful links.
@@ -709,7 +709,9 @@ the entire measurement will not be
 scheduled, and you can't tell which AS was the culprit. Thus, we made a script 
 called \path{getProbeASSetFromRIPE.py} that outputs a pickle set with the 
 ASes that we believe have active probes based on the output from RIPE Atlas's 
-official command-line tool. Here's how we used that tool:
+official command-line tool called Magellan.\footnote{Available online at
+\url{https://github.com/RIPE-NCC/ripe-atlas-tools}.} 
+Here's how we used that tool:
 \begin{lstlisting}
 ~/.local/bin/ripe-atlas probe-search --all > allprobes.txt
 \end{lstlisting}
@@ -978,6 +980,17 @@ Doing {\tt wc -l} on your time-to-first-compromise files will reveal the number
 of samples out of 100,000 that were compromised. For our graphs, we set the 
 time-to-first-compromise number for the samples that were uncompromised to 
 April 1, 2016 as a placeholder as further explained in our paper.
+
+The format for the compromised streams per sample file is:
+Sample \#, \# of compromised streams for month of March, \# of non-compromised streams, \# of streams 
+that I had (at least partial) traceroute info for out of 372 possible streams, 372
+
+The format for the time-to-compromise file is:
+Sample \#, number of seconds till the first compromised stream 
+(Sample \#'s not in the file are samples that weren't compromised in March.)
+
+The format for the ``culprit'' AS file is:
+AS \#: \# of times it appeared in compromised streams for March 2016.
 
 \printbibliography
 
