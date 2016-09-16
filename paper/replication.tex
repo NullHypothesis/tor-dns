@@ -235,7 +235,7 @@ Get and install our dnsstats tool using Go\footnote{Available online at
 \url{https://golang.org/}.}:
 
 \begin{lstlisting}
-go get github.com/pylls/fingerprintor/cmd/dnsstats
+go get github.com/pylls/defector/cmd/dnsstats
 \end{lstlisting}
 
 Finally, run dnsstats on the downloaded data:
@@ -259,7 +259,7 @@ tar -zxf alexa1mx5-extracted.tar.gz
 Get and install our dns2site tool using Go:
 
 \begin{lstlisting}
-go get github.com/pylls/fingerprintor/cmd/dns2site
+go get github.com/pylls/defector/cmd/dns2site
 \end{lstlisting}
 
 For the closed world metrics, run:
@@ -287,16 +287,16 @@ wget FIXME/alexa1kx100+100k-extracted.tar.gz
 tar -zxf alexa1kx100+100k-extracted.tar.gz
 \end{lstlisting}
 
-Get and install our fpt tool using Go:
+Get and install our defector tool using Go:
 
 \begin{lstlisting}
-go get github.com/pylls/fingerprintor/cmd/fpt
+go get github.com/pylls/defector/cmd/defector
 \end{lstlisting}
 
 To generate data for Figure~8, run:
 
 \begin{lstlisting}
-fpt -sites 1000 -instances 100 -open 100000 -pmin 0 -pmax 100 -pstep 5 -alexa 10000
+defector -sites 1000 -instances 100 -open 100000 -pmin 0 -pmax 100 -pstep 5 -alexa 10000
 \end{lstlisting}
 
 The result is written to stdout and three files: one CSV file for precision,
@@ -308,7 +308,7 @@ To generate data for Figure~9, run as a shellscript:
 \begin{lstlisting}
 for i in 1 10 100 1000 10000 100000 1000000 10000000 100000000
 do
-  fpt -sites 1000 -instances 100 -open 100000 -pmin 100 -alexa $i
+  defector -sites 1000 -instances 100 -open 100000 -pmin 100 -alexa $i
 done
 \end{lstlisting}
 
@@ -319,14 +319,14 @@ run as a shellscript:
 # rounds
 for i in 0 300 600 900 1200 1500 1800 2100 2400 2700 3000
 do
-  fpt -sites 1000 -instances 100 -open 100000 -pmin 33 -pmax 33 -alexa 10000 -r $i
+  defector -sites 1000 -instances 100 -open 100000 -pmin 33 -pmax 33 -alexa 10000 -r $i
 done
 # window size
 for i in 90 180 360 540 720 900 1080 1260 1440 1620 1800
 do
   for j in 10000 100000
   do
-  fpt -sites 1000 -instances 100 -open 100000 -pmin 33 -pmax 33 -window $i -alexa $j
+  defector -sites 1000 -instances 100 -open 100000 -pmin 33 -pmax 33 -window $i -alexa $j
   done
 done
 # Tor network scale
@@ -334,7 +334,7 @@ for i in 1.0 2.0 3.0 4.0 5.0 6.0 7.0 8.0 9.0 10.0
 do
   for j in 10000 100000
   do
-  fpt -sites 1000 -instances 100 -open 100000 -pmin 33 -pmax 33 -scaletor $i -alexa $j
+  defector -sites 1000 -instances 100 -open 100000 -pmin 33 -pmax 33 -scaletor $i -alexa $j
   done
 done
 # different distributions
@@ -342,7 +342,7 @@ for i in conpl realpl conuni realuni
 do
   for j in 0 10 100 1000 10000 100000 1000000 10000000 100000000
   do
-    fpt -sites 1000 -instances 100 -open 100000 -pmin 33 -pmax 33 -simdist $i -alexa $j
+    defector -sites 1000 -instances 100 -open 100000 -pmin 33 -pmax 33 -simdist $i -alexa $j
   done
 done
 \end{lstlisting}
@@ -356,8 +356,8 @@ This is how you replicate the steps we used to gather the Alexa top 1,000,000
 dataset used in Section~V.B.  First, get and install three tools using Go:
 
 \begin{lstlisting}
-go get github.com/pylls/fingerprintor/cmd/{server,tbbdnsw}
-go get github.com/pylls/fingerprintor/cmd/extractdns
+go get github.com/pylls/defector/cmd/{server,tbdnsw}
+go get github.com/pylls/defector/cmd/extractdns
 \end{lstlisting}
 
 We use a worker-server model, where a server instructs workers to browse to a
@@ -428,12 +428,12 @@ ENV LANG C.UTF-8
 # create user (start-tor-browser.sh prevents us from running as root)
 RUN useradd --create-home --home-dir $HOME user
 
-COPY tbbdnsw $HOME/
+COPY tbdnsw $HOME/
 COPY tor-browser_en-US $HOME/tor-browser_en-US
 
 RUN chown -R user:user $HOME \
-	&& chmod +x $HOME/tbbdnsw \
-  && setcap 'CAP_NET_RAW+eip CAP_NET_ADMIN+eip' $HOME/tbbdnsw
+	&& chmod +x $HOME/tbdnsw \
+  && setcap 'CAP_NET_RAW+eip CAP_NET_ADMIN+eip' $HOME/tbdnsw
 
 WORKDIR $HOME
 USER user
@@ -444,11 +444,12 @@ Build the docker container and start a worker:
 
 \begin{lstlisting}
 docker build -t pulls/worker  .
-docker run --privileged -d pulls/worker ./tbbdnsw <IP:port>
+docker run --privileged -d pulls/worker ./tbdnsw <IP:port>
 \end{lstlisting}
 The worker will repeatedly try to connect to the server at {\tt <IP:port>}. We
-successfully ran 120 workers each 1U blades with Intel(R) Xeon(R) CPU E5-2650 0
-@ 2.00GHz with 62GB RAM. The server was hosted on a laptop with SSD storage.
+successfully ran 120 workers each on several 1U blades with an Intel(R) Xeon(R)
+CPU E5-2650@ 2.00GHz and 62GiB RAM.
+The server was hosted on a laptop with SSD storage.
 
 Finally, to extract the DNS data from the resulting pcaps use the
 extractdns tool:
@@ -464,8 +465,8 @@ To replicate our WF dataset used in Section~VI, get and install the following
 four tools using Go:
 % server
 \begin{lstlisting}
-go get github.com/pylls/fingerprintor/cmd/{server,tbbw}
-go get github.com/pylls/fingerprintor/cmd/{torlogext,fext}
+go get github.com/pylls/defector/cmd/{server,tbw}
+go get github.com/pylls/defector/cmd/{torlogext,fext}
 \end{lstlisting}
 
 Download an Alexa file with top sites~\cite{alexatop1k} and run:
@@ -574,12 +575,12 @@ ENV LANG C.UTF-8
 # create user (start-tor-browser.sh prevents us from running as root)
 RUN useradd --create-home --home-dir $HOME user
 
-COPY tbbw $HOME/
+COPY tbw $HOME/
 COPY tor-browser_en-US $HOME/tor-browser_en-US
 
 RUN chown -R user:user $HOME \
-	&& chmod +x $HOME/tbbw \
-  && setcap 'CAP_NET_RAW+eip CAP_NET_ADMIN+eip' $HOME/tbbdnsw
+	&& chmod +x $HOME/tbw \
+  && setcap 'CAP_NET_RAW+eip CAP_NET_ADMIN+eip' $HOME/tbw
 
 WORKDIR $HOME
 USER user
@@ -590,7 +591,7 @@ Build the docker container and start a worker:
 
 \begin{lstlisting}
 docker build -t pulls/worker  .
-docker run --privileged -d pulls/worker ./tbbw <IP:port>
+docker run --privileged -d pulls/worker ./tbw <IP:port>
 \end{lstlisting}
 
 Finally, to extract the data from the resulting torlog-files use the
@@ -611,17 +612,17 @@ Wang et al.~\cite{Wang2014a}, and the fext tool extracts features for Wa-kNN.
 %
 %
 \section{Replicating Our TorPS Simulations}
-There are two main components you need in order to recreate the work of Section VII: 
-\first~TorPS and \second~traceroutes between client ASes and Tor guards and between Tor 
-exits and destinations. (The scripts we mention below have ``usage'' comments at the 
+There are two main components you need in order to recreate the work of Section VII:
+\first~TorPS and \second~traceroutes between client ASes and Tor guards and between Tor
+exits and destinations. (The scripts we mention below have ``usage'' comments at the
 top of their files.)
 
 \subsection{TorPS}
 Grab the code for TorPS from the repository \url{https://github.com/torps/torps}.
-Make sure you run TorPS on a computer 
-that has enough memory. Otherwise, you will encounter an out-of-memory segfault (e.g., 4GB of 
-memory is not enough). In order to run TorPS, go to their github page, and follow 
-their instructions for processing Tor consesuses and descriptors. Here's the command 
+Make sure you run TorPS on a computer
+that has enough memory. Otherwise, you will encounter an out-of-memory segfault (e.g., 4GB of
+memory is not enough). In order to run TorPS, go to their github page, and follow
+their instructions for processing Tor consesuses and descriptors. Here's the command
 we ran for that step:
 \begin{lstlisting}
 python pathsim.py process --start_year 2016 --start_month 3 --end_year 2016 --end_month 3 --in_dir in --out_dir out --initial_descriptor_dir in/server-descriptors-2013-02
@@ -631,105 +632,105 @@ After that you can run your desired simulations. Here's the command we used:
 \begin{lstlisting}
 python pathsim.py simulate --nsf_dir out/network-state-2016-03 --num_samples 100000 --trace_file here.pickle --user_model typical --format normal --num_guards 1 --guard_expiration 270 tor > torps_typical_my_final_model_1_guard_100000_samples.txt
 \end{lstlisting}
-In this command, a 100,000-sample simulation is run in which a client has ``typical'' 
-behavior as given by our modified trace\textunderscore file (called {\tt ``here.pickle''}). 
-The number of 
-guards used is one, and guards expire sometime after 270 days. The file 
+In this command, a 100,000-sample simulation is run in which a client has ``typical''
+behavior as given by our modified trace\textunderscore file (called {\tt ``here.pickle''}).
+The number of
+guards used is one, and guards expire sometime after 270 days. The file
 \path{torps_typical_my_final_model_1_guard_100000_samples.txt}
-will contain your 
-simulations for the 100,000 samples who visit our chosen websites. 
+will contain your
+simulations for the 100,000 samples who visit our chosen websites.
 
-To make our modified trace file, we unpickled their included trace file 
-(used {\tt unpickled.py} on \path{in/users2-processed.traces.pickle}) and 
+To make our modified trace file, we unpickled their included trace file
+(used {\tt unpickled.py} on \path{in/users2-processed.traces.pickle}) and
 modified it so that it would visit our desired websites.
 
-Because we were interested in only DNS resolution, we used the trace file as an 
-indication of when a client had visited a website and with what Tor circuit 
-(or ``path'' as TorPS calls it), but we were not worried about any further 
-website communications. 
-See \path{final_model.py} to see how we have the 
-client visit Facebook, Instagram, Google, Google Mail, Google Docs, 
-Google Calendar, Startpage, Twitter, and Ixquick for our new trace 
-file for the TorPS ``Typical'' model to use. 
+Because we were interested in only DNS resolution, we used the trace file as an
+indication of when a client had visited a website and with what Tor circuit
+(or ``path'' as TorPS calls it), but we were not worried about any further
+website communications.
+See \path{final_model.py} to see how we have the
+client visit Facebook, Instagram, Google, Google Mail, Google Docs,
+Google Calendar, Startpage, Twitter, and Ixquick for our new trace
+file for the TorPS ``Typical'' model to use.
 
 \subsection{Traceroutes}
-We use the RIPE Atlas platform to perform our traceroutes and use RIPE 
+We use the RIPE Atlas platform to perform our traceroutes and use RIPE
 Atlas's Cousteau Python wrapper.\footnote{Available online at
 \url{https://github.com/RIPE-NCC/ripe-atlas-cousteau}.}
 
 \subsubsection{Traceroutes from client ASes to Tor Guards}
-\emph{Source of traceroutes:} One RIPE Atlas probes in each of our five, chosen 
+\emph{Source of traceroutes:} One RIPE Atlas probes in each of our five, chosen
 Tor client ASes.
 
-\emph{Destination of traceroutes:} All Tor guards listed in the consensus 
+\emph{Destination of traceroutes:} All Tor guards listed in the consensus
 files for March 2016.
 
-The {\tt getGuardsAndExitsFromConsensusMonthDir.py} script parses consensuses 
-and produces two text files: one that contains all of the guard IP addresses 
-used in a particular month and one that contains all of the exit IP addresses 
+The {\tt getGuardsAndExitsFromConsensusMonthDir.py} script parses consensuses
+and produces two text files: one that contains all of the guard IP addresses
+used in a particular month and one that contains all of the exit IP addresses
 used in that month.
 
 The \path{do_udp_traceroutes.py} file in the directory
 \path{clients_to_all_guards_forward}
-will perform the traceroutes, and 
-it takes as stdin the IP addresses you want to traceroute to. The script has 
-our five client ASes hard-coded as the sources for our traceroutes. For each 
-of these five ASes, the script will schedule traceroutes to all of the guard IPs 
-found by parsing the consensuses for March 2016 above. The script sleeps for 
+will perform the traceroutes, and
+it takes as stdin the IP addresses you want to traceroute to. The script has
+our five client ASes hard-coded as the sources for our traceroutes. For each
+of these five ASes, the script will schedule traceroutes to all of the guard IPs
+found by parsing the consensuses for March 2016 above. The script sleeps for
 15 minutes when we approach RIPE Atlas's rate limits. Here's how to use it:
 \begin{lstlisting}
 python do_udp_traceroutes.py < guardIPSet_Mar_2016.txt > mIDs.txt
 \end{lstlisting}
 
 \subsubsection{Traceroutes from exit ASes to Destinations}
-\emph{Source of all the following traceroutes:} One RIPE Atlas probe in each of the ASes of the 
-exit relays in the consensus files for March 2016. (Please note that RIPE Atlas does not 
+\emph{Source of all the following traceroutes:} One RIPE Atlas probe in each of the ASes of the
+exit relays in the consensus files for March 2016. (Please note that RIPE Atlas does not
 have probes in \emph{all} of the exit relay ASes.)
 
-As mentioned earlier, use {\tt getGuardsAndExitsFromConsensusMonthDir.py} to get a 
-list of all of the exit relays' IP addresses for March 2016. 
-Then use {\tt getASSetFromIPList.py} 
-in order to convert those IP addresses into a pickle set 
+As mentioned earlier, use {\tt getGuardsAndExitsFromConsensusMonthDir.py} to get a
+list of all of the exit relays' IP addresses for March 2016.
+Then use {\tt getASSetFromIPList.py}
+in order to convert those IP addresses into a pickle set
 of their corresponding ASes. Here's an example:
 \begin{lstlisting}
 python getASSetFromIPList.py exit_AS_set_Mar_2016 ipasn_20160729.dat < exitIPSet_Mar_2016.txt
 \end{lstlisting}
-{\tt ipasn\textunderscore 20160729.dat} is an IP/ASN lookup database that you can build 
+{\tt ipasn\textunderscore 20160729.dat} is an IP/ASN lookup database that you can build
 by following the instructions at \url{https://pypi.python.org/pypi/pyasn}.
 \path{exit_AS_set_Mar_2016} will contain your output set.
 
-RIPE Atlas allows you to schedule traceroutes to one destination IP address 
-like 8.8.8.8 from multiple different source ASes (e.g., 200 source ASes), and these 
-traceroutes will all fall under one RIPE Atlas measurement ID (vs. 200 IDs, which 
-you could have if you scheduled all of the traceroutes separately), which is very 
-convenient. However, when you go to schedule such a measurement, if just one of your 
-source ASes does not have a RIPE Atlas probe in it (because as we mentioned above, 
+RIPE Atlas allows you to schedule traceroutes to one destination IP address
+like 8.8.8.8 from multiple different source ASes (e.g., 200 source ASes), and these
+traceroutes will all fall under one RIPE Atlas measurement ID (vs. 200 IDs, which
+you could have if you scheduled all of the traceroutes separately), which is very
+convenient. However, when you go to schedule such a measurement, if just one of your
+source ASes does not have a RIPE Atlas probe in it (because as we mentioned above,
 RIPE Atlas does not have probes in all of the exit relays' autonomous systems),
-the entire measurement will not be 
-scheduled, and you can't tell which AS was the culprit. Thus, we made a script 
-called \path{getProbeASSetFromRIPE.py} that outputs a pickle set with the 
-ASes that we believe have active probes based on the output from RIPE Atlas's 
+the entire measurement will not be
+scheduled, and you can't tell which AS was the culprit. Thus, we made a script
+called \path{getProbeASSetFromRIPE.py} that outputs a pickle set with the
+ASes that we believe have active probes based on the output from RIPE Atlas's
 official command-line tool called Magellan.\footnote{Available online at
-\url{https://github.com/RIPE-NCC/ripe-atlas-tools}.} 
+\url{https://github.com/RIPE-NCC/ripe-atlas-tools}.}
 Here's how we used that tool:
 \begin{lstlisting}
 ~/.local/bin/ripe-atlas probe-search --all > allprobes.txt
 \end{lstlisting}
-Then we supply \path{allprobes.txt} to \path{getProbeASSetFromRIPE.py} which 
+Then we supply \path{allprobes.txt} to \path{getProbeASSetFromRIPE.py} which
 parses it. We then use \path{get_covered_ripe_ASes_set.py}
-to find the intersection 
-between RIPE Atlas's active AS set and our desired exit relay AS set, and 
+to find the intersection
+between RIPE Atlas's active AS set and our desired exit relay AS set, and
 we use that intersection for our traceroutes.
 
-Recall that to measure the paths from exit relays to DNS resolvers, we 
+Recall that to measure the paths from exit relays to DNS resolvers, we
 emulated a number of different exit relay DNS configurations.
-% We used 
+% We used
 %the RIPE Atlas measurement platform to obtain our traceroutes.
 \begin{itemize}
 
-\item \emph{ISP DNS:} No additional traceroutes were necessary for this experiment. 
+\item \emph{ISP DNS:} No additional traceroutes were necessary for this experiment.
 
-\item \emph{Google DNS:} 
+\item \emph{Google DNS:}
 
 \emph{Destination of traceroutes:} 8.8.8.8 (Google's public DNS resolver)
 
@@ -737,27 +738,27 @@ Run the following command:
 \begin{lstlisting}
 python do_udp_traceroutes_from_exit_ases.py exit_AS_set_pickle_file 8.8.8.8 > 8888_mIDs.txt
 \end{lstlisting}
-{\tt exit\textunderscore AS\textunderscore set\textunderscore pickle\textunderscore file} 
-is a pickle file with the set of all exit relays ASes. 
-{\tt 8888\textunderscore mIDs.txt} is an output text file that will contain IDs that RIPE Atlas 
-assigns to your measurements, and it'll contain ``True'' if a measurement 
-was scheduled or ``False'' if it was not. Make sure you check it at the end 
-to make sure that the measurements were carried out successfully. If they were 
-not, then you'll have to redo them. Measurements can be unsuccessful if you picked 
-an AS that doesn't contain a RIPE Atlas probe or if you've gone over your 
-measurement limits. See the RIPE Atlas website for the rate limits 
+{\tt exit\textunderscore AS\textunderscore set\textunderscore pickle\textunderscore file}
+is a pickle file with the set of all exit relays ASes.
+{\tt 8888\textunderscore mIDs.txt} is an output text file that will contain IDs that RIPE Atlas
+assigns to your measurements, and it'll contain ``True'' if a measurement
+was scheduled or ``False'' if it was not. Make sure you check it at the end
+to make sure that the measurements were carried out successfully. If they were
+not, then you'll have to redo them. Measurements can be unsuccessful if you picked
+an AS that doesn't contain a RIPE Atlas probe or if you've gone over your
+measurement limits. See the RIPE Atlas website for the rate limits
 (\url{https://atlas.ripe.net/docs/udm/\#rate-limits}).
 
 \item \emph{Local DNS:}
 
-\emph{Destination of traceroutes:} The IP addresses of the name servers on the delegation 
-paths for resolving www.facebook.com, www.instagram.com, www.google.com, 
-mail.google.com, docs.google.com, calendar.google.com, www.startpage.com, 
-www.twitter.com, and www.ixquick.com. 
+\emph{Destination of traceroutes:} The IP addresses of the name servers on the delegation
+paths for resolving www.facebook.com, www.instagram.com, www.google.com,
+mail.google.com, docs.google.com, calendar.google.com, www.startpage.com,
+www.twitter.com, and www.ixquick.com.
 
-We modified {\tt ddptr.py} to create {\tt dd.py} and get 
-the name servers. With these IP addresses in hand, you can use 
-\path{do_udp_traceroutes_from_exit_ases_ddptr.py} in order 
+We modified {\tt ddptr.py} to create {\tt dd.py} and get
+the name servers. With these IP addresses in hand, you can use
+\path{do_udp_traceroutes_from_exit_ases_ddptr.py} in order
 to schedule your traceroutes. Here's an example of a command we ran:
 \begin{lstlisting}
 python do_udp_traceroutes_from_exit_ases_ddptr.py < facebook > facebook_ddptr_mIDs.txt
@@ -772,44 +773,44 @@ This script doesn't contain any rate limiting because you won't reach the limits
 
 \item \emph{Status quo:}
 
-\emph{Destination of traceroutes:} The current resolvers of the exit relays based on 
-the exitmap tool. 
+\emph{Destination of traceroutes:} The current resolvers of the exit relays based on
+the exitmap tool.
 
-The mapping tool was used to provide a mapping from exit relays to the resolvers they used 
-during March 2016. Some exit relays had several resolver IP addresses associated with them, 
-so we randomly assigned one IP address to those relays and worked with that. In the 
-mapping file, those relays that had their own IP address listed as the resolver are those 
-that performed their own DNS resolution. Use 
-{\tt map\textunderscore exit\textunderscore ip\textunderscore 
-to\textunderscore one\textunderscore resolver\textunderscore randomly.py} to output a 
-pickle dictionary where the key is the exit relay's IP address as a string and the 
-value is its randomly chosen resolver's IP address as a string. Use {\tt group\textunderscore 
-resolvers\textunderscore by\textunderscore dest\textunderscore n\textunderscore 
-convert\textunderscore exit\textunderscore ips\textunderscore to\textunderscore ASes.py} 
-in order to make efficient use of RIPE Atlas. This script will produce a pickle 
-dictionary where the key is the resolver IP address and the value is the set of 
-exit relay ASes that need to perform traceroutes to that resolver IP address. This 
-script ignores exit relays that do their own resolution and those that use 
-8.8.8.8 as their resolver because these traceroutes are covered by our other 
-traceroutes for the different configurations above. Finally, use 
-{\tt do\textunderscore udp\textunderscore traceroutes.py} in the 
-{\tt forward\textunderscore exit\textunderscore ases\textunderscore 
-to\textunderscore 3rd\textunderscore party\textunderscore resolvers} 
-directory to perform the RIPE Atlas 
-traceroutes according to the contents of the pickle dictionary file that you 
-just made. 
+The mapping tool was used to provide a mapping from exit relays to the resolvers they used
+during March 2016. Some exit relays had several resolver IP addresses associated with them,
+so we randomly assigned one IP address to those relays and worked with that. In the
+mapping file, those relays that had their own IP address listed as the resolver are those
+that performed their own DNS resolution. Use
+{\tt map\textunderscore exit\textunderscore ip\textunderscore
+to\textunderscore one\textunderscore resolver\textunderscore randomly.py} to output a
+pickle dictionary where the key is the exit relay's IP address as a string and the
+value is its randomly chosen resolver's IP address as a string. Use {\tt group\textunderscore
+resolvers\textunderscore by\textunderscore dest\textunderscore n\textunderscore
+convert\textunderscore exit\textunderscore ips\textunderscore to\textunderscore ASes.py}
+in order to make efficient use of RIPE Atlas. This script will produce a pickle
+dictionary where the key is the resolver IP address and the value is the set of
+exit relay ASes that need to perform traceroutes to that resolver IP address. This
+script ignores exit relays that do their own resolution and those that use
+8.8.8.8 as their resolver because these traceroutes are covered by our other
+traceroutes for the different configurations above. Finally, use
+{\tt do\textunderscore udp\textunderscore traceroutes.py} in the
+{\tt forward\textunderscore exit\textunderscore ases\textunderscore
+to\textunderscore 3rd\textunderscore party\textunderscore resolvers}
+directory to perform the RIPE Atlas
+traceroutes according to the contents of the pickle dictionary file that you
+just made.
 Here's how to use it:
 \begin{lstlisting}
 python do_udp_traceroutes.py resolver_ip_to_exit_AS_set_dict_pickle_fname ripe_as_set_pickle_path > third_party_mIDs.txt
 \end{lstlisting}
-This script also takes in a pickle set ({\tt ripe\textunderscore as\textunderscore 
-set\textunderscore pickle\textunderscore path}) 
-that contains the ASes that 
-currently have active RIPE Atlas probes in them so that your measurements won't 
-fail due to attempting to schedule a traceroute from an exit AS that doesn't contain 
-a RIPE Atlas probe. This script sleeps for 20 minutes when we start reaching 
-RIPE Atlas's rate limits. The script outputs a text file that provides you with 
-RIPE Atlas's measurement IDs for your traceroutes and whether they were 
+This script also takes in a pickle set ({\tt ripe\textunderscore as\textunderscore
+set\textunderscore pickle\textunderscore path})
+that contains the ASes that
+currently have active RIPE Atlas probes in them so that your measurements won't
+fail due to attempting to schedule a traceroute from an exit AS that doesn't contain
+a RIPE Atlas probe. This script sleeps for 20 minutes when we start reaching
+RIPE Atlas's rate limits. The script outputs a text file that provides you with
+RIPE Atlas's measurement IDs for your traceroutes and whether they were
 successfully scheduled or not. Here's an example of an output file:
 \begin{lstlisting}
 True
@@ -822,26 +823,26 @@ False
 
 \end{itemize}
 
-Looking back on this traceroute process, the first thing to do 
+Looking back on this traceroute process, the first thing to do
 would really be to run TorPS and \emph{then}
-do your traceroutes based on the guard IPs and exit IPs that your simulations 
-actually use! That way, you don't end up performing unnecessary traceroutes. 
-(Note: We only consider the forward direction for all of our 
+do your traceroutes based on the guard IPs and exit IPs that your simulations
+actually use! That way, you don't end up performing unnecessary traceroutes.
+(Note: We only consider the forward direction for all of our
 traceroutes for now.)
 
 \subsubsection{Processing the traceroutes:}
 We use RIPE Atlas's Sagan library\footnote{Available online at
-\url{https://github.com/RIPE-NCC/ripe.atlas.sagan}.} to parse the traceroute results. Use the 
-{\tt processAtlasTraceroutes.py} script under the \path{traceroutes} directory 
-to parse all of your traceroutes. The purpose of this script is to produce 
-Python dictionaries where the key is the source AS of the traceroute as an 
-integer and the value is another dictionary where the key is the traceroute's 
-destination IP address as a string and the value is the set of ASNs as ints that 
-are along the path from that source AS to the destination IP address. 
+\url{https://github.com/RIPE-NCC/ripe.atlas.sagan}.} to parse the traceroute results. Use the
+{\tt processAtlasTraceroutes.py} script under the \path{traceroutes} directory
+to parse all of your traceroutes. The purpose of this script is to produce
+Python dictionaries where the key is the source AS of the traceroute as an
+integer and the value is another dictionary where the key is the traceroute's
+destination IP address as a string and the value is the set of ASNs as ints that
+are along the path from that source AS to the destination IP address.
 
-This script takes in as input the name 
-you'd like to give your output dictionary pickle file, your IP/ASN lookup database, 
-and the RIPE Atlas measurement IDs associated with your traceroutes. It'll output 
+This script takes in as input the name
+you'd like to give your output dictionary pickle file, your IP/ASN lookup database,
+and the RIPE Atlas measurement IDs associated with your traceroutes. It'll output
 the pickle dictionary and a text version of that dictionary.
 
 Here's an example of a command you might run:
@@ -849,69 +850,69 @@ Here's an example of a command you might run:
 python processAtlasTraceroutes.py exit_ases_to_8888 ipasn_20160729.dat < 8888_mIDs_only.txt > dict_text.txt
 \end{lstlisting}
 
-In order to get a list of isolated, new-line separated measurement IDs from your result 
-output files from running your traceroutes above, use {\tt mIDs\textunderscore 
-to\textunderscore text\textunderscore file.py} to get a text file that you can 
+In order to get a list of isolated, new-line separated measurement IDs from your result
+output files from running your traceroutes above, use {\tt mIDs\textunderscore
+to\textunderscore text\textunderscore file.py} to get a text file that you can
 input to {\tt processAtlasTraceroutes.py} above.
 
 \subsection{How we translate IP addresses to ASes}
-We use the {\tt pyasn} library to translate IP addresses to ASes. The instructions 
+We use the {\tt pyasn} library to translate IP addresses to ASes. The instructions
 on their website are straightforward.
 
 \subsection{Finding Intersections}
-After you've collected all of your traceroutes, the next step is to find ASes that 
-appear on both the ingress and egress Tor AS paths. We treat the ingress AS path 
-as a set of ASes and the egress AS path as a set of ASes. The ASes that appear 
-in the intersection of these sets are the ASes that can potentially compromise 
-the anonymity of Tor users. Note: If there are missing sets, we assume that 
+After you've collected all of your traceroutes, the next step is to find ASes that
+appear on both the ingress and egress Tor AS paths. We treat the ingress AS path
+as a set of ASes and the egress AS path as a set of ASes. The ASes that appear
+in the intersection of these sets are the ASes that can potentially compromise
+the anonymity of Tor users. Note: If there are missing sets, we assume that
 there was no compromise for that particular circuit.
 
 \subsubsection{Finding Intersections for ISP DNS}
-Use {\tt intersect\textunderscore isps.py} to get the intersections (compromising ASes) for 
-this exit relay configuration. {\tt command\textunderscore 100k.sh} in the {\tt isps} 
-directory contains the commands we used. This script takes as input your pickle dictionary of 
-guard AS sets from your traceroutes, the Tor client AS of interest, the name of your 
-output pickle 
-dictionary, and your IP/ASN lookup database. It also takes in your TorPS simulation 
-text file. It outputs a pickle dictionary with the intersections it found and also 
-a text version of it. 
+Use {\tt intersect\textunderscore isps.py} to get the intersections (compromising ASes) for
+this exit relay configuration. {\tt command\textunderscore 100k.sh} in the {\tt isps}
+directory contains the commands we used. This script takes as input your pickle dictionary of
+guard AS sets from your traceroutes, the Tor client AS of interest, the name of your
+output pickle
+dictionary, and your IP/ASN lookup database. It also takes in your TorPS simulation
+text file. It outputs a pickle dictionary with the intersections it found and also
+a text version of it.
 
-Starting from the beginning of the TorPS simulation text file, 
-the script will pick out the guard IP address and the exit IP address that 
-Tor chose for that particular circuit. It will use the guard IP address to find 
-the ingress AS path set in the input dictionary your provided. It will take the 
-exit IP address, convert it to an AS, use that AS to create a set of one, and 
-look for an intersection between the ingress set and that set of one. It will 
+Starting from the beginning of the TorPS simulation text file,
+the script will pick out the guard IP address and the exit IP address that
+Tor chose for that particular circuit. It will use the guard IP address to find
+the ingress AS path set in the input dictionary your provided. It will take the
+exit IP address, convert it to an AS, use that AS to create a set of one, and
+look for an intersection between the ingress set and that set of one. It will
 output your results.
 
 \subsubsection{Finding Intersections for Google DNS}
-Use {\tt intersect\textunderscore 8888.py} to get the intersections for 
+Use {\tt intersect\textunderscore 8888.py} to get the intersections for
 this exit relay configuration. {\tt command\textunderscore 100k.sh} in the
-\path{8888} directory contains the commands we used. This script takes the same inputs as the ISP 
-DNS script above 
-plus a pickle dictionary of the egress AS paths from the exit relay ASes to 8.8.8.8. 
-This time the exit IP address from the TorPS simulation will be converted to an 
-AS and the exit AS will be used as a key 
-into that egress dictionary to find the appropriate AS path set for that exit relay's 
+\path{8888} directory contains the commands we used. This script takes the same inputs as the ISP
+DNS script above
+plus a pickle dictionary of the egress AS paths from the exit relay ASes to 8.8.8.8.
+This time the exit IP address from the TorPS simulation will be converted to an
+AS and the exit AS will be used as a key
+into that egress dictionary to find the appropriate AS path set for that exit relay's
 path to 8.8.8.8. The script will output your results.
 
 \subsubsection{Finding Intersections for Local DNS}
-Use {\tt intersect\textunderscore ddptr.py} to get the intersections for this 
-exit relay configuration. {\tt command\textunderscore 100k.sh} in the {\tt ``ddptr''} 
-directory contains the commands we used. This script takes the same inputs as the ISP 
-DNS script above plus nine pickle dictionaries of the egress AS paths from the 
-exit relay ASes to mail.google.com, www.google.com, calendar.google.com, 
-docs.google.com, www.facebook.com, www.instagram.com, www.ixquick.com, www.twitter.com, 
-and www.startpage.com. The exit IP address from the TorPS simulation will be used 
-to identify which of the nine dictionaries should be used for the egress path, and 
-it will be converted to an AS and used as a key into the correct dictionary to get 
+Use {\tt intersect\textunderscore ddptr.py} to get the intersections for this
+exit relay configuration. {\tt command\textunderscore 100k.sh} in the {\tt ``ddptr''}
+directory contains the commands we used. This script takes the same inputs as the ISP
+DNS script above plus nine pickle dictionaries of the egress AS paths from the
+exit relay ASes to mail.google.com, www.google.com, calendar.google.com,
+docs.google.com, www.facebook.com, www.instagram.com, www.ixquick.com, www.twitter.com,
+and www.startpage.com. The exit IP address from the TorPS simulation will be used
+to identify which of the nine dictionaries should be used for the egress path, and
+it will be converted to an AS and used as a key into the correct dictionary to get
 the AS path. The script will output your results.
 
 \subsubsection{Finding Intersections for Status Quo}
-Use \path{intersect_whole_enchilada.py} to get the 
-intersections for our appromixation of the ``status quo'' Tor exit relay 
+Use \path{intersect_whole_enchilada.py} to get the
+intersections for our appromixation of the ``status quo'' Tor exit relay
 configurations. \path{command_100k.sh} in the directory
-\path{status_quo} contains the commands we used: 
+\path{status_quo} contains the commands we used:
 
 \begin{lstlisting}[basicstyle=\scriptsize\ttfamily]
 #!/bin/bash
@@ -919,23 +920,23 @@ configurations. \path{command_100k.sh} in the directory
 python intersect_whole_enchilada.py ../../../traceroutes/clients_to_all_guards_forward/results/clients_to_all_guards_forward_dict.pickle ../../../traceroutes/exit_ases_to_third_party_status_quo/results/exit_ases_to_third_party.pickle ../../../../fresh/fresh_measurements/forward_exit_ases_to_3rd_party_resolvers/final_exit_ip_to_one_resolver_list_dict.pickle ../../../traceroutes/exit_ases_to_8888/results/exit_ases_to_8888.pickle ../../../traceroutes/exit_ases_to_calendar_google/ddptr/results/exit_ases_to_calendar_google_ddptr.pickle ../../../traceroutes/exit_ases_to_docs_google/ddptr/results/exit_ases_to_docs_google_ddptr.pickle ../../../traceroutes/exit_ases_to_facebook/ddptr/results/exit_ases_to_facebook_ddptr.pickle ../../../traceroutes/exit_ases_to_google/ddptr/results/exit_ases_to_google_ddptr.pickle ../../../traceroutes/exit_ases_to_instagram/ddptr/results/exit_ases_to_instagram_ddptr.pickle ../../../traceroutes/exit_ases_to_ixquick/ddptr/results/exit_ases_to_ixquick_ddptr.pickle ../../../traceroutes/exit_ases_to_mail_google/ddptr/results/exit_ases_to_mail_google_ddptr.pickle ../../../traceroutes/exit_ases_to_startpage/ddptr/results/exit_ases_to_startpage_ddptr.pickle ../../../traceroutes/exit_ases_to_twitter/ddptr/results/exit_ases_to_twitter_ddptr.pickle compromises_1guard_100K_7922 7922 ../../../../fresh/forPyASN/ipasn_20160729.dat < ../../torps_typical_my_final_model_1_guard_100000_samples.txt > output_dict_1guard_100K_7922.txt
 . . .
 \end{lstlisting}
-This script 
-takes the same inputs as the Local DNS script above plus the 8.8.8.8 egress 
-pickle dictionary, the status quo egress pickle dictionary, and the pickle 
-dictionary you produced in the traceroutes phase when you mapped a resolver to an 
-exit relay. The script will use the exit relay IP address to figure out what type of 
-resolution should be used. If, according to the mapping, an exit relay does its own 
-resolution, the script will use the Local DNS dictionary for the egress path. If, 
-according to the mapping, the exit relay uses 8.8.8.8 for resolution, the script will 
-use our 8.8.8.8 dictionary for the egress path. If, according to the mapping, the exit 
-relay uses another resolver, the script will use the status quo egress dictionary. For 
-all of these dictionaries, the exit relay's IP address will be converted to an AS before 
+This script
+takes the same inputs as the Local DNS script above plus the 8.8.8.8 egress
+pickle dictionary, the status quo egress pickle dictionary, and the pickle
+dictionary you produced in the traceroutes phase when you mapped a resolver to an
+exit relay. The script will use the exit relay IP address to figure out what type of
+resolution should be used. If, according to the mapping, an exit relay does its own
+resolution, the script will use the Local DNS dictionary for the egress path. If,
+according to the mapping, the exit relay uses 8.8.8.8 for resolution, the script will
+use our 8.8.8.8 dictionary for the egress path. If, according to the mapping, the exit
+relay uses another resolver, the script will use the status quo egress dictionary. For
+all of these dictionaries, the exit relay's IP address will be converted to an AS before
 being used as a key into those dictionaries. The script will output your results.
 
 \subsection{Getting the Results}
-Use {\tt command.sh} under the directories 
+Use {\tt command.sh} under the directories
 \path{numbers/AS_Numbers_March_2016/}\emph{X}
-to get your results, where \emph{X} represents the five client AS numbers. 
+to get your results, where \emph{X} represents the five client AS numbers.
 Here's the {\tt command.sh} for client AS 2856:
 \begin{lstlisting}
 #!/bin/bash
@@ -972,21 +973,21 @@ python ../../../../fresh/numbers/time_to_first_compromise_per_sample_only_for_co
 python ../../../../fresh/numbers/popular_ASes_or_IXPs.py ../../../intersections/AS_Analysis_March_2016/status_quo/compromises_1guard_100K_2856.pickle > status_quo_culprits_2856.txt
 \end{lstlisting}
 
-The results are 
-the number of compromised streams per sample, the time-to-first-compromise, and a count 
-of the compromising ASes so you can see which ASes were the most popular ``culprits.'' 
+The results are
+the number of compromised streams per sample, the time-to-first-compromise, and a count
+of the compromising ASes so you can see which ASes were the most popular ``culprits.''
 
-Doing {\tt wc -l} on your time-to-first-compromise files will reveal the number 
-of samples out of 100,000 that were compromised. For our graphs, we set the 
-time-to-first-compromise number for the samples that were uncompromised to 
+Doing {\tt wc -l} on your time-to-first-compromise files will reveal the number
+of samples out of 100,000 that were compromised. For our graphs, we set the
+time-to-first-compromise number for the samples that were uncompromised to
 April 1, 2016 as a placeholder as further explained in our paper.
 
 The format for the compromised streams per sample file is:
-Sample \#, \# of compromised streams for month of March, \# of non-compromised streams, \# of streams 
+Sample \#, \# of compromised streams for month of March, \# of non-compromised streams, \# of streams
 that I had (at least partial) traceroute info for out of 372 possible streams, 372
 
 The format for the time-to-compromise file is:
-Sample \#, number of seconds till the first compromised stream 
+Sample \#, number of seconds till the first compromised stream
 (Sample \#'s not in the file are samples that weren't compromised in March.)
 
 The format for the ``culprit'' AS file is:
