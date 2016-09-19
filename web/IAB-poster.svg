@@ -1926,9 +1926,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.24748737"
-     inkscape:cx="2193.2233"
-     inkscape:cy="943.59932"
+     inkscape:zoom="0.49497474"
+     inkscape:cx="808.78697"
+     inkscape:cy="1558.1587"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -1967,22 +1967,21 @@
          y="-1713.6377"
          style="font-size:131.25px">The Impact of DNS on Tor's Anonymity</tspan></text>
     <g
-       id="g16018"
-       transform="translate(0,140.97464)">
+       id="g7158">
       <text
          sodipodi:linespacing="125%"
          id="text4958"
-         y="-1547.6377"
+         y="-1406.6631"
          x="290.76633"
          style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
          xml:space="preserve"><tspan
            style="font-size:77.5px;fill:#990000;fill-opacity:1"
-           y="-1547.6377"
+           y="-1406.6631"
            x="290.76633"
            id="tspan4960"
            sodipodi:role="line">End-to-end correlation attacks</tspan></text>
       <g
-         transform="translate(129.85602,-240)"
+         transform="translate(129.85602,-99.025213)"
          id="g9689">
         <text
            id="text24"
@@ -2015,7 +2014,7 @@
              style="font-size:45px">low-latency anonymity network, like Tor</tspan></text>
       </g>
       <g
-         transform="translate(140.59446,-223.38379)"
+         transform="translate(140.59446,-94.290838)"
          id="g9697">
         <text
            id="text24-6"
@@ -2048,7 +2047,7 @@
    id="tspan9645">deanonymization</tspan></tspan></text>
       </g>
       <g
-         transform="translate(155.94043,-240)"
+         transform="translate(155.94043,-99.025335)"
          id="g9705">
         <text
            id="text24-6-9"
