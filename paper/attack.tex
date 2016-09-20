@@ -148,8 +148,14 @@ self-reported bandwidth information from Tor exit
 relays collected in the so-called extra-info descriptors available on
 CollecTor~\cite{collector}, and estimate the number of website visits on
 each of the about 1,200 exit relays active at that time. The resulting average
-total number of websites visited through the Tor network is about 536,000
-websites per ten minutes.
+total number of websites visited through the Tor network is about 288,000
+websites per ten minutes. This number can, however, only be considered
+to be a rough estimate, as the interpolation is based on only one exit
+relay and the bandwidth data of the other exit relays is self-reported
+and might therefore be incorrect or incomplete. For instance, the result
+might under-estimate the size of the Tor network if not all exit relays
+published their complete bandwidth statistics for the considered
+two-week period.
 
 Recently, Jansen and Johnson~\cite{Jansen2016a} measured the average
 number of active web (port 80 and 443) circuits in Tor to about 700,000 per ten
@@ -168,8 +174,16 @@ construct a new circuit.  Users visiting several pages of a website and websites
 with long-lived reoccuring connections, like Twitter and Facebook with
 continuously updating feeds,
 all lower the number of websites visited in Tor relative to the number of active
-circuits. In later sections we revisit the implications of our estimates by
-scaling the Tor network to ten-times its estimated size.
+circuits. 
+For our model we consider the upper bound of 700,000 to be the number
+of websites visited through the Tor network per ten minutes. This is a
+conservative choice as more website visits increase the anonymity set of
+websites possibly visited by a Tor user---and therefore reduces the
+information an attacker can gain from observed DNS data. 
+In later sections we revisit the implications of our choice by both
+scaling the Tor network up to ten-times its estimated size, and scaling
+it down to the size of 288,000 website visits per ten minutes that we
+got from our own interpolation described above. 
 
 \subsubsection{Modeling the effects of DNS caching at Tor exits}
 To analyze which DNS requests the adversary can see, we need to
