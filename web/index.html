@@ -235,6 +235,70 @@ sites.  We obtained the data from the respective
 	</li>
 </ul>
 
+<h3>DNS requests for Alexa top 1,000,000 domains</h3>
+<p>
+The following datasets contain all DNS requests recorded by Tor Browser 5.5.4 
+when configured to not to browse over Tor for Alexa top 1,000,00 on April 15th 2016. 
+The data was collected using <a href="https://github.com/pylls/defector/tree/master/cmd/tbdnsw">tbdnsw</a>
+as part of the <a href="https://github.com/pylls/defector">DefecTor toolset</a>. 
+</p>
+<ul>
+	<li>
+	PCAPs: <a href="https://dart.cse.kau.se/defector/alexa1mx5.tar.gz">alexa1mx5.tar.gz</a> (7.4 GiB) <br/>
+	SHA-256: <tt>100b2081ca194571206ba02d88459982baf7b0584b3dd3246c0c0413048ddb5e</tt>
+	</li>
+	<li>
+	Extracted textfiles: <a href="https://dart.cse.kau.se/defector/alexa1mx5-extracted.tar.gz">alexa1mx5-extracted.tar.gz</a> (590 MiB) <br/>
+	SHA-256: <tt>7361a816f24b34b1f8d9f26e9fa5a403622ce3b4b401a101f4b41cf1d6705ffc</tt>
+	</li>
+	<li>
+	Alexa top 1,000,000 file: <a href="https://dart.cse.kau.se/defector/top-1m.csv">top-1m.csv</a> (22 MiB) <br/>
+	SHA-256: <tt>65f8d31a61164825900d50296de35bfbeaac405c9227abf5680ff61c404aa933</tt>
+	</li>
+	<li>
+	IPv4 addresses for <a href="https://www.cloudflare.com/">CloudFlare</a>: <a href="https://dart.cse.kau.se/defector/ips-v4">ips-v4</a> (0.2 KiB) <br/>
+	SHA-256: <tt>3a69b705b18bd630e748165183a8158220b755fa9026b7db967cd9769410e606</tt>
+	</li>
+</ul>
+
+
+<h3>Website fingerprinting dataset for Alexa top 9,000x100 + Alexa 909,000x1</h3>
+<p>
+The following datasets contain a website fingerprinting dataset with 100 samples of Alexa top 9,000
+(monitored sites) and one sample each of Alexa top 909,000 (unmonitored) collected with Tor Browser 5.5.4. 
+The data was collected using <a href="https://github.com/pylls/defector/tree/master/cmd/tbw">tbw</a>
+as part of the <a href="https://github.com/pylls/defector">DefecTor toolset</a>. The toolset also 
+contains tools for extracting data. We use the same format for cells and extracted features as 
+<a href="https://crysp.uwaterloo.ca/software/webfingerprint/">Wang et al.</a>
+</p>
+<ul>
+	<li>
+	Raw logfiles: <a href="https://dart.cse.kau.se/defector/alexa9kx100+900k.tar.gz">alexa9kx100+900k.tar.gz</a> (15 GiB) <br/>
+	SHA-256: <tt>c137074752143f893dba8857b0be1544ba12a6c08d4b296e7f63089e365fcf19</tt>
+	</li>
+	<li>
+	Extracted cells, features and DNS requests: <a href="https://dart.cse.kau.se/defector/alexa9kx100+900k-dns+cells+feat.tar.gz">alexa9kx100+900k-dns+cells+feat.tar.gz</a> (4.1 GiB) <br/>
+	SHA-256: <tt>2719475968afda4f36694fe9f84f9c1b1915db9ca440cf05b9a8361be55b8b05</tt>
+	</li>
+	<li>
+	Extracted features: <a href="https://dart.cse.kau.se/defector/alexa9kx100+900k-feat.tar.gz">alexa9kx100+900k-feat.tar.gz</a> (817 MiB) <br/>
+	SHA-256: <tt>4cfb258d4d1b12698cfa4aa56114692c646ee59dc7dbb3eecdde988336c16970</tt>
+	</li>
+	<li>
+	Extracted features used in our paper: <a href="https://dart.cse.kau.se/defector/alexa1kx100+100k-feat.tar.gz">alexa1kx100+100k-feat.tar.gz</a> (94 MiB) <br/>
+	SHA-256: <tt>b7be02065cf20537683697cd083b26c2f299bb4ae5e089a58a2ba823132e8358</tt>
+	</li>
+	<li>
+	Alexa top 1,000,000 file: <a href="https://dart.cse.kau.se/defector/top-1m.csv">top-1m.csv</a> (22 MiB) <br/>
+	SHA-256: <tt>65f8d31a61164825900d50296de35bfbeaac405c9227abf5680ff61c404aa933</tt>
+	</li>
+	<li>
+	IPv4 addresses for <a href="https://www.cloudflare.com/">CloudFlare</a>: <a href="https://dart.cse.kau.se/defector/ips-v4">ips-v4</a> (0.2 KiB) <br/>
+	SHA-256: <tt>3a69b705b18bd630e748165183a8158220b755fa9026b7db967cd9769410e606</tt>
+	</li>
+</ul>
+
+
 <h2><a name="contact">Contact</a></h2>
 <p>
 We are a team of five researchers from three universities.  Feel free to copy
