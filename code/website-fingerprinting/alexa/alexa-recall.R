@@ -38,7 +38,7 @@ ggplot(df, aes(x, y, colour = Attack,
           axis.ticks = element_line(colour = "gray90"),
           axis.ticks.x = element_line(size = 0.25),
           axis.ticks.y = element_line(size = 0.25)) +
-    ylim(0.52, 0.65) +
+    ylim(0.51, 0.65) +
     scale_color_brewer(palette = "Set1") +
     scale_x_continuous(trans = "log10",
                        breaks = trans_breaks("log10", function(x) 10^x),
