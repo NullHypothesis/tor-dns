@@ -170,7 +170,7 @@ FUNCTION {default.name.latex.cmd}{ "" }
 
 
 % The default URL prefix.
-FUNCTION {default.name.url.prefix}{ "Available:" }
+FUNCTION {default.name.url.prefix}{ "{\scriptsize URL}:" }
 
 
 % Other controls that cannot be accessed via IEEEtranBSTCTL entry type.
