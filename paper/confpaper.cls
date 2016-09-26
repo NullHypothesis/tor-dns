@@ -19,7 +19,7 @@
 %%%  Custom variables to be set appropriately.
 %%%
 \newcommand{\AUTHORS}{Anonymous}
-\newcommand{\TITLE}{The Impact of DNS on Tor's Anonymity}
+\newcommand{\TITLE}{The Effect of DNS on Tor's Anonymity}
 \newcommand{\KEYWORDS}{Keywords}
 \newcommand{\CONFERENCE}{Conference}
 \newcommand{\PAGENUMBERS}{yes} % "yes" or "no"
