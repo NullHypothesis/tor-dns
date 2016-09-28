@@ -5,14 +5,14 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
-  <title>The Impact of DNS on Tor&rsquo;s Anonymity</title>
+  <title>The Effect of DNS on Tor&rsquo;s Anonymity</title>
   <link rel="stylesheet" type="text/css" href="../article.css"/>
 </head>
 
 <body>
 
 <div class="centered">
-<h1>The Impact of DNS on Tor&rsquo;s Anonymity</h1>
+<h1>The Effect of DNS on Tor&rsquo;s Anonymity</h1>
 
 <a href="#overview">Overview</a>&nbsp;&nbsp;&bull;&nbsp;
 <a href="#writing">Writing</a>&nbsp;&nbsp;&bull;&nbsp;
@@ -58,16 +58,16 @@ with simple techniques, and correlating the observed websites with a website
 fingerprinting attack greatly improves the precision when monitoring relatively
 unpopular websites.  Our results show that DNS requests from Tor exit relays
 traverse numerous autonomous systems that subsequent web traffic does not
-traverse.  We also find that a set of exit relays comprising 40% of Tor&rsquo;s
-exit bandwidth use Google&rsquo;s public DNS servers&mdash;an alarmingly high
-number for a single organization.  We believe that Tor relay operators should
-take steps to ensure that the network maintains more diversity into how exit
-relays resolve DNS domains.
+traverse.  We also find that a set of exit relays, at times comprising 40% of
+Tor&rsquo;s exit bandwidth, uses Google&rsquo;s public DNS servers&mdash;an
+alarmingly high number for a single organization.  We believe that Tor relay
+operators should take steps to ensure that the network maintains more diversity
+into how exit relays resolve DNS domains.
 </p>
 
 <p>
 What does our work mean for Tor users?  As we outline in
-<a href="">our blog post</a>,
+<a href="https://freedom-to-tinker.com/2016/09/26/the-effect-of-dns-on-tors-anonymity/">our blog post</a>,
 we don&rsquo;t believe that there is any immediate cause for concern.  While our
 attacks work well in simulations, not many entities are in a position to mount
 them.  Besides, they require non-trivial engineering effort to be reliable, and
@@ -89,16 +89,15 @@ to make it easier to reproduce our results.  All our writing is listed below.
 <ul>
 	<li>
 	<a href="tor-dns.pdf"><img alt="Paper thumbnail" style="float:right;border:1px solid black" src="img/paper-thumb.png"/></a>
-	<a href="">The Impact of DNS on Tor&rsquo;s Anonymity</a><br/>
-	Benjamin Greschbach, Tobias Pulls, Laura M. Roberts, Philipp Winter, and Nick Feamster<br/>
-	<a href="">arXiv report</a>, September 2016<br/>
-	<a href="">Bibliography</a> &bull; <a href="">LaTeX source</a> &bull; <a href="tor-dns.bib">BibTeX</a>
+	<a href="tor-dns.pdf">The Effect of DNS on Tor&rsquo;s Anonymity</a><br/>
+	B. Greschbach, T. Pulls, L. M. Roberts, P. Winter, and N. Feamster<br/>
+	<a href="http://arxiv.org/abs/1609.08187">arXiv report</a>, September 2016<br/>
+	<a href="bibliography/index.html">Bibliography</a> &bull; <a href="https://github.com/NullHypothesis/tor-dns">LaTeX source</a> &bull; <a href="tor-dns.bib">BibTeX</a>
 	</li>
 
-    <li><a href="">Technical report</a> with instructions on how to replicate our experiments</li>
+    <li><a href="replication.pdf">Technical report</a> with instructions on how to replicate our experiments</li>
 
-	<li>Blog post on <a href="https://freedom-to-tinker.com/">Freedom to Tinker</a>:
-		<a href="">The Impact of DNS on Tor&rsquo;s Anonymity</a></li>
+	<li>Blog post: <a href="https://freedom-to-tinker.com/2016/09/26/the-effect-of-dns-on-tors-anonymity/">The Effect of DNS on Tor&rsquo;s Anonymity</a></li>
 
 	<li>Miscellaneous
 	<ul>
@@ -306,12 +305,12 @@ all of us if you have any questions or remarks.
 </p>
 
 <p>
-At <a href="https://cs.princeton.edu/">Princeton University</a>:
+At <a href="https://www.cs.princeton.edu/">Princeton University</a>:
 </p>
 <ul>
-	<li><a href="https://cs.princeton.edu/~feamster/">Nick Feamster</a> &mdash; <img alt="Nick" src="img/nick.png"/></li>
+	<li><a href="https://www.cs.princeton.edu/~feamster/">Nick Feamster</a> &mdash; <img alt="Nick" src="img/nick.png"/></li>
 	<li>Laura M. Roberts &mdash; <img alt="Laura" src="img/laura.png"/></li>
-	<li><a href="https://cs.princeton.edu/~pwinter/">Philipp Winter</a> &mdash; <img alt="Philipp" src="img/philipp.png"/></li>
+	<li><a href="https://www.cs.princeton.edu/~pwinter/">Philipp Winter</a> &mdash; <img alt="Philipp" src="img/philipp.png"/></li>
 </ul>
 
 <p>
@@ -330,7 +329,7 @@ At <a href="https://www.kth.se/en/csc">KTH Royal Institute of Technology</a>:
 
 <hr/>
 <p>
-<i>Last update: 2016-09-06</i>
+<i>Last update: 2016-09-28</i>
 </p>
 </body>
 
