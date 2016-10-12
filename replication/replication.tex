@@ -356,8 +356,7 @@ This is how you replicate the steps we used to gather the Alexa top 1,000,000
 dataset used in Section~V.B.  First, get and install three tools using Go:
 
 \begin{lstlisting}
-go get github.com/pylls/defector/cmd/{server,tbdnsw}
-go get github.com/pylls/defector/cmd/extractdns
+go get github.com/pylls/defector/cmd/{server,tbdnsw,extractdns}
 \end{lstlisting}
 
 We use a worker-server model, where a server instructs workers to browse to a
@@ -394,6 +393,8 @@ user_pref("network.proxy.socks_port", 0);
 user_pref("network.proxy.socks_remote_dns", false);
 \end{lstlisting}
 
+Follow the guide from Mozilla on how to stop Firefox from making automatic
+connections\footnote{\url{https://support.mozilla.org/en-US/kb/how-stop-firefox-making-automatic-connections}}.
 Download the latest release of dumb-init from
 \url{https://github.com/Yelp/dumb-init/releases}. We need a minimal init system
 to clean up the many processes we will be creating in Docker.
@@ -465,17 +466,32 @@ To replicate our WF dataset used in Section~VI, get and install the following
 four tools using Go:
 % server
 \begin{lstlisting}
-go get github.com/pylls/defector/cmd/{server,tbw}
-go get github.com/pylls/defector/cmd/{torlogext,fext}
+go get github.com/pylls/defector/cmd/{server,tbw,torlogext,fext}
 \end{lstlisting}
 
 Download an Alexa file with top sites~\cite{alexatop1k} and run:
 
 \begin{lstlisting}
-server -f data -s 5 -t 60 -o .torlog top-1m.csv
+head -n 9000 top-1m.csv > top9k.csv
+head -n 909000 top-1m.csv > top909k.csv
 \end{lstlisting}
+
+This creates two files for our monitored and unmonitored data.  For collecting
+the monitored data, run:
+
+\begin{lstlisting}
+server -f data -s 100 -t 60 -o .torlog top9k.csv
+\end{lstlisting}
+
+For collecting the unmonitored data, run:
+
+\begin{lstlisting}
+server -f data -s 1 -t 60 -o .torlog top909k.csv
+\end{lstlisting}
+
 The server will instruct workers to collect in total
-five samples of the sites in \path{top-1m.csv}, using 60 seconds per site visit,
+five samples of the sites in the specified file like \path{top1k.csv},
+using 60 seconds per site visit,
 and store the results in the data folder with the suffix \texttt{.torlog}.
 By default, the server listens on port 55555 on all interfaces.
 
@@ -504,6 +520,8 @@ LogTimeGranularity 1
 UseEntryGuards 0
 \end{lstlisting}
 
+Follow the guide from Mozilla on how to stop Firefox from making automatic
+connections\footnote{\url{https://support.mozilla.org/en-US/kb/how-stop-firefox-making-automatic-connections}}.
 % build custom tor
 Next, we need to build a custom tor binary for Tor Browser that logs all
 incoming and outgoing cells using Tor's logging framework. First, get the tor
