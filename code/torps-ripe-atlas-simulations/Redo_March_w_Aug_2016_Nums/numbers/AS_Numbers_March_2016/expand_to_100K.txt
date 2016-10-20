@@ -1,0 +1,3 @@
+sed -i.bak 's/.*,//' status_quo_time_first_comp_7922.txt
+
+for i in `seq 1053`; do echo "100000,2678400";done >> status_quo_time_first_comp_7922.txt

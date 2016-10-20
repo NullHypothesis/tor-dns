@@ -1,0 +1,44 @@
+True
+{u'measurements': [4486602]}
+True
+{u'measurements': [4486603]}
+True
+{u'measurements': [4486604]}
+True
+{u'measurements': [4486605]}
+True
+{u'measurements': [4486606]}
+True
+{u'measurements': [4486607]}
+True
+{u'measurements': [4486608]}
+True
+{u'measurements': [4486609]}
+True
+{u'measurements': [4486610]}
+True
+{u'measurements': [4486611]}
+True
+{u'measurements': [4486612]}
+True
+{u'measurements': [4486613]}
+True
+{u'measurements': [4486614]}
+True
+{u'measurements': [4486615]}
+True
+{u'measurements': [4486616]}
+True
+{u'measurements': [4486617]}
+True
+{u'measurements': [4486618]}
+True
+{u'measurements': [4486619]}
+True
+{u'measurements': [4486620]}
+True
+{u'measurements': [4486621]}
+True
+{u'measurements': [4486622]}
+True
+{u'measurements': [4486623]}

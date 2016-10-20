@@ -1,0 +1,3 @@
+python pathsim.py simulate --nsf_dir out/network-state-2016-03 --num_samples 50000 --trace_file here.pickle --user_model typical --format normal --num_guards 1 --guard_expiration 270 tor > torps_typical_my_final_model_1_guard_50000_samples.txt
+
+changed to 100000 samples actually

@@ -1,0 +1,1394 @@
+212.7.208.57 set([43289, 16276, 8972, 48031])
+True
+{u'measurements': [4490159]}
+202.180.65.32 set([9790])
+True
+{u'measurements': [4490160]}
+185.52.183.114 set([28908])
+True
+{u'measurements': [4490161]}
+193.227.235.9 set([250])
+True
+{u'measurements': [4490163]}
+80.3.64.148 set([5089])
+True
+{u'measurements': [4490164]}
+195.50.140.51 set([3209])
+True
+{u'measurements': [4490165]}
+195.50.140.53 set([3209])
+True
+{u'measurements': [4490166]}
+200.40.53.100 set([6057])
+True
+{u'measurements': [4490167]}
+78.87.0.162 set([6866])
+True
+{u'measurements': [4490169]}
+12.121.117.96 set([46562])
+True
+{u'measurements': [4490170]}
+77.37.251.7 set([42610])
+True
+{u'measurements': [4490171]}
+77.37.251.6 set([42610])
+True
+{u'measurements': [4490172]}
+78.94.31.172 set([6830])
+True
+{u'measurements': [4490174]}
+45.33.37.143 set([6939])
+True
+{u'measurements': [4490175]}
+194.221.84.195 set([31078])
+True
+{u'measurements': [4490176]}
+213.228.58.24 set([12322])
+True
+{u'measurements': [4490177]}
+213.228.58.25 set([12322])
+True
+{u'measurements': [4490179]}
+213.228.58.23 set([12322])
+True
+{u'measurements': [4490180]}
+192.117.235.90 set([8551])
+True
+{u'measurements': [4490181]}
+213.228.58.21 set([12322])
+True
+{u'measurements': [4490182]}
+95.211.188.3 set([2856])
+True
+{u'measurements': [4490184]}
+85.17.96.69 set([60781])
+True
+{u'measurements': [4490185]}
+213.228.58.152 set([12322])
+True
+{u'measurements': [4490186]}
+83.82.194.61 set([3265])
+True
+{u'measurements': [4490187]}
+213.120.234.42 set([6871])
+True
+{u'measurements': [4490189]}
+91.51.236.147 set([3320])
+True
+{u'measurements': [4490190]}
+45.33.58.84 set([6939])
+True
+{u'measurements': [4490191]}
+194.186.84.195 set([3216])
+True
+{u'measurements': [4490193]}
+217.23.11.95 set([49981])
+True
+{u'measurements': [4490195]}
+85.17.150.123 set([60781])
+True
+{u'measurements': [4490196]}
+178.255.84.39 set([7018])
+True
+{u'measurements': [4490197]}
+89.107.230.230 set([43260])
+True
+{u'measurements': [4490198]}
+62.149.2.52 set([15497])
+True
+{u'measurements': [4490199]}
+176.10.104.240 set([51395])
+True
+{u'measurements': [4490201]}
+163.22.2.1 set([1659])
+True
+{u'measurements': [4490202]}
+27.122.15.15 set([55536])
+True
+{u'measurements': [4490203]}
+8.33.137.129 set([16276])
+True
+{u'measurements': [4490204]}
+61.220.9.176 set([3462])
+True
+{u'measurements': [4490206]}
+71.242.0.148 set([701])
+True
+{u'measurements': [4490207]}
+192.114.75.57 set([8551])
+True
+{u'measurements': [4490208]}
+8.0.18.14 set([34224])
+True
+{u'measurements': [4490210]}
+83.149.80.123 set([60781])
+True
+{u'measurements': [4490211]}
+68.87.78.132 set([7922])
+True
+{u'measurements': [4490212]}
+217.23.7.25 set([49981])
+True
+{u'measurements': [4490213]}
+67.215.95.16 set([1659])
+True
+{u'measurements': [4490215]}
+81.2.237.32 set([12695])
+True
+{u'measurements': [4490216]}
+217.237.150.145 set([3320])
+True
+{u'measurements': [4490217]}
+195.70.224.45 set([8437])
+True
+{u'measurements': [4490218]}
+77.66.84.233 set([12741])
+True
+{u'measurements': [4490220]}
+217.237.150.149 set([3320])
+True
+{u'measurements': [4490221]}
+61.220.10.37 set([3462])
+True
+{u'measurements': [4490222]}
+195.215.95.7 set([3292])
+True
+{u'measurements': [4490223]}
+195.215.95.6 set([3292])
+True
+{u'measurements': [4490224]}
+61.220.9.87 set([3462])
+True
+{u'measurements': [4490226]}
+213.228.58.20 set([12322])
+True
+{u'measurements': [4490227]}
+192.117.235.114 set([8551])
+True
+{u'measurements': [4490228]}
+61.220.9.89 set([3462])
+True
+{u'measurements': [4490229]}
+192.117.235.110 set([8551])
+True
+{u'measurements': [4490231]}
+192.117.235.111 set([8551])
+True
+{u'measurements': [4490232]}
+61.220.11.83 set([3462])
+True
+{u'measurements': [4490233]}
+212.33.34.91 set([12605])
+True
+{u'measurements': [4490234]}
+79.99.4.103 set([43948])
+True
+{u'measurements': [4490236]}
+5.135.183.146 set([9143])
+True
+{u'measurements': [4490237]}
+208.69.32.15 set([20115])
+True
+{u'measurements': [4490238]}
+200.40.53.106 set([6057])
+True
+{u'measurements': [4490239]}
+195.238.24.57 set([5432])
+True
+{u'measurements': [4490241]}
+18.70.0.160 set([3])
+True
+{u'measurements': [4490242]}
+195.238.24.59 set([5432])
+True
+{u'measurements': [4490243]}
+62.210.18.16 set([12876])
+True
+{u'measurements': [4490244]}
+61.220.9.12 set([3462])
+True
+{u'measurements': [4490246]}
+185.56.187.149 set([18881])
+True
+{u'measurements': [4490247]}
+195.140.255.40 set([24971])
+True
+{u'measurements': [4490248]}
+194.90.3.2 set([1680])
+True
+{u'measurements': [4490249]}
+106.184.4.157 set([2516])
+True
+{u'measurements': [4490251]}
+141.8.174.63 set([6789])
+True
+{u'measurements': [4490252]}
+212.101.0.10 set([9044])
+True
+{u'measurements': [4490253]}
+95.45.189.12 set([5466])
+True
+{u'measurements': [4490254]}
+212.186.211.27 set([6830])
+True
+{u'measurements': [4490256]}
+217.12.192.2 set([15626])
+True
+{u'measurements': [4490257]}
+217.12.202.7 set([59729, 46562])
+True
+{u'measurements': [4490258]}
+194.50.85.50 set([39608])
+True
+{u'measurements': [4490259]}
+200.28.4.130 set([7418])
+True
+{u'measurements': [4490261]}
+150.145.0.2 set([137])
+True
+{u'measurements': [4490262]}
+195.251.128.5 set([5408])
+True
+{u'measurements': [4490263]}
+94.230.128.24 set([48642])
+True
+{u'measurements': [4490264]}
+87.98.175.85 set([12322, 16276])
+True
+{u'measurements': [4490265]}
+37.9.72.211 set([8402])
+True
+{u'measurements': [4490267]}
+195.14.22.13 set([41653])
+True
+{u'measurements': [4490268]}
+94.230.128.22 set([48642])
+True
+{u'measurements': [4490269]}
+94.126.178.9 set([57860, 12695])
+True
+{u'measurements': [4490270]}
+210.157.3.6 set([7506])
+True
+{u'measurements': [4490272]}
+84.235.57.196 set([25019])
+True
+{u'measurements': [4490273]}
+84.235.57.195 set([25019])
+True
+{u'measurements': [4490274]}
+84.235.57.194 set([25019])
+True
+{u'measurements': [4490275]}
+77.109.148.137 set([51395])
+True
+{u'measurements': [4490277]}
+200.153.149.102 set([27699])
+True
+{u'measurements': [4490418]}
+78.47.11.107 set([8437])
+True
+{u'measurements': [4490419]}
+74.207.242.5 set([6939])
+True
+{u'measurements': [4490420]}
+220.233.0.34 set([10143])
+True
+{u'measurements': [4490421]}
+208.69.34.19 set([5432, 1267])
+True
+{u'measurements': [4490422]}
+213.95.26.133 set([12337])
+True
+{u'measurements': [4490423]}
+84.116.34.200 set([6830])
+True
+{u'measurements': [4490424]}
+84.208.15.147 set([41164])
+True
+{u'measurements': [4490425]}
+62.141.38.230 set([6805])
+True
+{u'measurements': [4490426]}
+192.166.192.2 set([6724])
+True
+{u'measurements': [4490427]}
+192.221.151.0 set([11051, 209, 6939, 36352])
+True
+{u'measurements': [4490428]}
+46.233.0.7 set([42431])
+True
+{u'measurements': [4490429]}
+208.69.33.19 set([13301, 12695])
+True
+{u'measurements': [4490430]}
+109.122.130.196 set([49902])
+True
+{u'measurements': [4490431]}
+109.122.130.197 set([49902])
+True
+{u'measurements': [4490432]}
+208.69.34.11 set([1267])
+True
+{u'measurements': [4490433]}
+82.211.31.248 set([16276])
+True
+{u'measurements': [4490434]}
+62.8.64.6 set([15399])
+True
+{u'measurements': [4490435]}
+208.69.34.17 set([1267])
+True
+{u'measurements': [4490436]}
+87.216.0.170 set([12715])
+True
+{u'measurements': [4490437]}
+208.69.33.15 set([30722])
+True
+{u'measurements': [4490438]}
+208.69.34.15 set([2856, 5432, 1267])
+True
+{u'measurements': [4490439]}
+208.69.33.11 set([3269, 6830])
+True
+{u'measurements': [4490440]}
+50.7.124.238 set([174])
+True
+{u'measurements': [4490441]}
+46.246.46.46 set([37560])
+True
+{u'measurements': [4490442]}
+8.0.22.0 set([209, 6939])
+True
+{u'measurements': [4490443]}
+80.90.43.162 set([5577, 5578])
+True
+{u'measurements': [4490444]}
+88.77.212.186 set([3209])
+True
+{u'measurements': [4490445]}
+61.220.9.8 set([3462])
+True
+{u'measurements': [4490446]}
+185.73.44.4 set([8943])
+True
+{u'measurements': [4490447]}
+201.47.96.227 set([18881])
+True
+{u'measurements': [4490448]}
+201.47.96.228 set([18881])
+True
+{u'measurements': [4490449]}
+201.47.96.229 set([18881])
+True
+{u'measurements': [4490450]}
+68.114.44.231 set([20115])
+True
+{u'measurements': [4490451]}
+107.150.40.234 set([16276])
+True
+{u'measurements': [4490452]}
+212.73.128.181 set([34224])
+True
+{u'measurements': [4490453]}
+65.19.175.2 set([6939])
+True
+{u'measurements': [4490454]}
+212.1.244.42 set([12714])
+True
+{u'measurements': [4490455]}
+37.58.58.137 set([28753])
+True
+{u'measurements': [4490456]}
+213.228.58.19 set([12322])
+True
+{u'measurements': [4490457]}
+208.69.32.21 set([10796])
+True
+{u'measurements': [4490458]}
+198.51.75.9 set([18451])
+True
+{u'measurements': [4490459]}
+8.0.14.4 set([20115])
+True
+{u'measurements': [4490460]}
+84.161.106.166 set([3320])
+True
+{u'measurements': [4490461]}
+129.132.128.224 set([559])
+True
+{u'measurements': [4490462]}
+185.117.82.130 set([200533])
+True
+{u'measurements': [4490463]}
+81.228.9.200 set([3301])
+True
+{u'measurements': [4490464]}
+80.69.100.205 set([6830])
+True
+{u'measurements': [4490465]}
+8.0.18.2 set([8473])
+True
+{u'measurements': [4490466]}
+62.6.40.178 set([2856])
+True
+{u'measurements': [4490467]}
+219.76.104.204 set([4760])
+True
+{u'measurements': [4490468]}
+62.149.2.60 set([15497])
+True
+{u'measurements': [4490469]}
+72.14.176.5 set([36351])
+True
+{u'measurements': [4490470]}
+88.77.191.101 set([3209])
+True
+{u'measurements': [4490471]}
+195.238.25.52 set([5432])
+True
+{u'measurements': [4490472]}
+208.69.35.21 set([16276, 16086])
+True
+{u'measurements': [4490473]}
+217.25.208.59 set([47165])
+True
+{u'measurements': [4490474]}
+206.248.184.126 set([5645])
+True
+{u'measurements': [4490475]}
+162.150.206.66 set([7922])
+True
+{u'measurements': [4490476]}
+178.255.84.6 set([12714, 12695])
+True
+{u'measurements': [4490477]}
+178.255.84.7 set([12714])
+True
+{u'measurements': [4490478]}
+195.20.206.34 set([43948])
+True
+{u'measurements': [4490479]}
+79.136.119.6 set([8473])
+True
+{u'measurements': [4490480]}
+153.128.51.69 set([4713])
+True
+{u'measurements': [4490481]}
+8.33.137.136 set([16276])
+True
+{u'measurements': [4490482]}
+8.33.137.135 set([16276])
+True
+{u'measurements': [4490483]}
+8.33.137.134 set([16276])
+True
+{u'measurements': [4490484]}
+8.33.137.133 set([16276])
+True
+{u'measurements': [4490485]}
+204.194.238.17 set([7922])
+True
+{u'measurements': [4490486]}
+8.33.137.131 set([16276])
+True
+{u'measurements': [4490487]}
+8.33.137.130 set([16276])
+True
+{u'measurements': [4490488]}
+79.219.220.223 set([3320])
+True
+{u'measurements': [4490489]}
+140.78.2.63 set([1853])
+True
+{u'measurements': [4490490]}
+217.70.186.196 set([29169])
+True
+{u'measurements': [4490491]}
+212.159.6.118 set([6871])
+True
+{u'measurements': [4490492]}
+82.103.133.23 set([2856])
+True
+{u'measurements': [4490493]}
+61.220.8.79 set([3462])
+True
+{u'measurements': [4490494]}
+61.220.9.93 set([3462])
+True
+{u'measurements': [4490495]}
+212.159.6.117 set([6871])
+True
+{u'measurements': [4490496]}
+66.220.18.42 set([46562])
+True
+{u'measurements': [4490497]}
+212.159.6.114 set([6871])
+True
+{u'measurements': [4490498]}
+178.17.160.11 set([43289])
+True
+{u'measurements': [4490499]}
+62.129.252.252 set([12824])
+True
+{u'measurements': [4490500]}
+128.30.2.126 set([3])
+True
+{u'measurements': [4490501]}
+192.221.134.0 set([8100])
+True
+{u'measurements': [4490502]}
+88.77.212.11 set([3209])
+True
+{u'measurements': [4490503]}
+62.102.148.66 set([51815])
+True
+{u'measurements': [4490504]}
+195.54.106.106 set([2119])
+True
+{u'measurements': [4490505]}
+195.50.140.87 set([3209])
+True
+{u'measurements': [4490506]}
+85.31.185.60 set([35366])
+True
+{u'measurements': [4490507]}
+45.63.117.198 set([20473])
+True
+{u'measurements': [4490508]}
+199.175.55.215 set([30633, 16276])
+True
+{u'measurements': [4490509]}
+67.215.83.15 set([36351])
+True
+{u'measurements': [4490510]}
+162.150.16.167 set([7922])
+True
+{u'measurements': [4490511]}
+62.212.64.122 set([60781])
+True
+{u'measurements': [4490512]}
+88.151.100.170 set([12301])
+True
+{u'measurements': [4490524]}
+62.142.228.249 set([719])
+True
+{u'measurements': [4490525]}
+172.81.176.146 set([133752, 394362, 7922])
+True
+{u'measurements': [4490526]}
+62.142.228.247 set([719])
+True
+{u'measurements': [4490527]}
+91.219.236.2 set([56322])
+True
+{u'measurements': [4490528]}
+5.39.111.23 set([16276])
+True
+{u'measurements': [4490529]}
+5.39.111.22 set([16276])
+True
+{u'measurements': [4490530]}
+5.39.111.21 set([16276])
+True
+{u'measurements': [4490531]}
+5.39.111.20 set([16276])
+True
+{u'measurements': [4490532]}
+72.235.70.66 set([36149])
+True
+{u'measurements': [4490533]}
+5.39.111.26 set([16276])
+True
+{u'measurements': [4490534]}
+5.39.111.25 set([16276])
+True
+{u'measurements': [4490535]}
+5.39.111.24 set([16276])
+True
+{u'measurements': [4490536]}
+195.169.124.124 set([1101, 8334])
+True
+{u'measurements': [4490537]}
+91.121.58.181 set([35540])
+True
+{u'measurements': [4490538]}
+68.237.161.140 set([701])
+True
+{u'measurements': [4490539]}
+82.119.240.3 set([29208])
+True
+{u'measurements': [4490540]}
+192.170.150.10 set([6327])
+True
+{u'measurements': [4490541]}
+81.196.14.134 set([8708])
+True
+{u'measurements': [4490542]}
+68.87.77.131 set([7922])
+True
+{u'measurements': [4490543]}
+77.67.54.132 set([15557])
+True
+{u'measurements': [4490544]}
+212.92.23.5 set([29278])
+True
+{u'measurements': [4490545]}
+217.237.149.214 set([3320])
+True
+{u'measurements': [4490546]}
+79.98.109.15 set([197216])
+True
+{u'measurements': [4490547]}
+94.221.125.192 set([3209])
+True
+{u'measurements': [4490548]}
+76.96.5.203 set([7922])
+True
+{u'measurements': [4490549]}
+5.9.49.12 set([12322])
+True
+{u'measurements': [4490550]}
+217.237.150.213 set([3320])
+True
+{u'measurements': [4490551]}
+71.252.0.218 set([701])
+True
+{u'measurements': [4490552]}
+212.88.128.10 set([9063])
+True
+{u'measurements': [4490553]}
+79.219.204.154 set([3320])
+True
+{u'measurements': [4490554]}
+91.203.4.179 set([25229])
+True
+{u'measurements': [4490555]}
+88.76.31.168 set([3209])
+True
+{u'measurements': [4490556]}
+78.37.77.86 set([8997])
+True
+{u'measurements': [4490557]}
+88.77.186.44 set([3209])
+True
+{u'measurements': [4490558]}
+85.25.128.128 set([8972])
+True
+{u'measurements': [4490559]}
+128.153.5.249 set([92])
+True
+{u'measurements': [4490560]}
+178.255.84.8 set([12714])
+True
+{u'measurements': [4490561]}
+84.235.6.43 set([25019])
+True
+{u'measurements': [4490562]}
+108.61.127.247 set([20473])
+True
+{u'measurements': [4490563]}
+208.69.34.21 set([1267])
+True
+{u'measurements': [4490564]}
+153.149.215.200 set([4713])
+True
+{u'measurements': [4490565]}
+153.149.215.201 set([4713])
+True
+{u'measurements': [4490566]}
+193.41.60.9 set([15895])
+True
+{u'measurements': [4490567]}
+31.31.72.3 set([197019])
+True
+{u'measurements': [4490568]}
+77.37.251.68 set([42610])
+True
+{u'measurements': [4490569]}
+178.33.222.139 set([16276])
+True
+{u'measurements': [4490570]}
+198.60.22.73 set([6315])
+True
+{u'measurements': [4490571]}
+178.33.222.133 set([16276])
+True
+{u'measurements': [4490572]}
+178.33.222.134 set([16276])
+True
+{u'measurements': [4490573]}
+198.60.22.75 set([6315])
+True
+{u'measurements': [4490574]}
+212.23.6.85 set([13037])
+True
+{u'measurements': [4490575]}
+91.214.71.181 set([12695])
+True
+{u'measurements': [4490576]}
+111.87.4.81 set([2516])
+True
+{u'measurements': [4490577]}
+85.88.19.10 set([12605])
+True
+{u'measurements': [4490578]}
+62.179.14.196 set([6830])
+True
+{u'measurements': [4490579]}
+94.19.255.3 set([35807])
+True
+{u'measurements': [4490580]}
+213.147.96.51 set([35549])
+True
+{u'measurements': [4490581]}
+178.17.170.67 set([12695])
+True
+{u'measurements': [4490582]}
+108.59.15.5 set([30633])
+True
+{u'measurements': [4490583]}
+81.89.0.195 set([6830])
+True
+{u'measurements': [4490584]}
+109.0.64.8 set([15557])
+True
+{u'measurements': [4490585]}
+61.220.9.61 set([3462])
+True
+{u'measurements': [4490586]}
+217.110.227.34 set([8220])
+True
+{u'measurements': [4490587]}
+151.100.4.13 set([137])
+True
+{u'measurements': [4490588]}
+212.202.215.34 set([20676])
+True
+{u'measurements': [4490589]}
+208.69.33.13 set([8473])
+True
+{u'measurements': [4490590]}
+61.81.63.132 set([4766])
+True
+{u'measurements': [4490591]}
+208.69.34.13 set([1267])
+True
+{u'measurements': [4490592]}
+195.215.95.12 set([3292])
+True
+{u'measurements': [4490593]}
+195.50.140.71 set([3209])
+True
+{u'measurements': [4490594]}
+213.140.228.190 set([25515])
+True
+{u'measurements': [4490595]}
+146.66.232.102 set([59702])
+True
+{u'measurements': [4490596]}
+157.7.180.135 set([7506])
+True
+{u'measurements': [4490597]}
+108.61.96.193 set([20473])
+True
+{u'measurements': [4490598]}
+91.224.149.254 set([197422])
+True
+{u'measurements': [4490599]}
+62.253.181.25 set([5089])
+True
+{u'measurements': [4490600]}
+212.71.0.2 set([9031])
+True
+{u'measurements': [4490601]}
+46.166.166.46 set([16125])
+True
+{u'measurements': [4490602]}
+219.76.104.195 set([4760])
+True
+{u'measurements': [4490603]}
+185.83.217.248 set([202018, 60781])
+True
+{u'measurements': [4490604]}
+219.76.104.193 set([4760])
+True
+{u'measurements': [4490605]}
+193.33.216.3 set([197999])
+True
+{u'measurements': [4490606]}
+93.94.226.236 set([25151])
+True
+{u'measurements': [4490607]}
+217.237.149.222 set([3320])
+True
+{u'measurements': [4490608]}
+195.238.24.117 set([5432])
+True
+{u'measurements': [4490609]}
+217.31.204.130 set([29208])
+True
+{u'measurements': [4490610]}
+208.81.7.14 set([18451])
+True
+{u'measurements': [4490611]}
+61.220.3.51 set([3462])
+True
+{u'measurements': [4490612]}
+89.233.43.73 set([5432])
+True
+{u'measurements': [4490613]}
+217.25.208.43 set([47165])
+True
+{u'measurements': [4490614]}
+88.76.20.122 set([3209])
+True
+{u'measurements': [4490615]}
+196.43.34.229 set([37457])
+True
+{u'measurements': [4490616]}
+83.209.138.6 set([44581])
+True
+{u'measurements': [4490617]}
+62.212.65.123 set([28753, 60781])
+True
+{u'measurements': [4490618]}
+91.51.236.72 set([3320])
+True
+{u'measurements': [4490721]}
+194.132.32.23 set([37560])
+True
+{u'measurements': [4490722]}
+200.40.53.99 set([6057])
+True
+{u'measurements': [4490723]}
+192.221.144.3 set([2119])
+True
+{u'measurements': [4490724]}
+211.125.92.252 set([7506])
+True
+{u'measurements': [4490725]}
+217.237.150.148 set([3320])
+True
+{u'measurements': [4490726]}
+85.237.225.250 set([15962])
+True
+{u'measurements': [4490727]}
+91.198.47.9 set([8426])
+True
+{u'measurements': [4490728]}
+195.234.128.16 set([35244])
+True
+{u'measurements': [4490729]}
+62.109.121.36 set([3320])
+True
+{u'measurements': [4490730]}
+62.109.121.37 set([3320])
+True
+{u'measurements': [4490731]}
+87.117.234.71 set([57858, 12876, 29405, 43289, 16125, 48031])
+True
+{u'measurements': [4490732]}
+61.220.10.159 set([3462])
+True
+{u'measurements': [4490733]}
+101.98.11.150 set([9790])
+True
+{u'measurements': [4490734]}
+195.218.2.38 set([8632])
+True
+{u'measurements': [4490735]}
+69.252.98.137 set([7922])
+True
+{u'measurements': [4490736]}
+87.117.237.100 set([20860])
+True
+{u'measurements': [4490737]}
+212.47.225.165 set([12876])
+True
+{u'measurements': [4490738]}
+88.134.229.40 set([31334])
+True
+{u'measurements': [4490739]}
+80.90.45.15 set([9008])
+True
+{u'measurements': [4490740]}
+61.220.11.22 set([3462])
+True
+{u'measurements': [4490741]}
+212.202.215.74 set([20676])
+True
+{u'measurements': [4490742]}
+88.77.186.82 set([3209])
+True
+{u'measurements': [4490743]}
+82.212.62.39 set([29562])
+True
+{u'measurements': [4490744]}
+201.17.128.103 set([28573])
+True
+{u'measurements': [4490745]}
+94.142.242.81 set([8283])
+True
+{u'measurements': [4490746]}
+91.123.193.222 set([42695])
+True
+{u'measurements': [4490747]}
+213.228.58.146 set([12322])
+True
+{u'measurements': [4490748]}
+213.228.58.147 set([12322])
+True
+{u'measurements': [4490749]}
+75.114.89.225 set([33363])
+True
+{u'measurements': [4490750]}
+149.202.98.173 set([5577, 16276, 43289])
+True
+{u'measurements': [4490751]}
+176.31.119.140 set([16276])
+True
+{u'measurements': [4490752]}
+62.55.128.40 set([6805])
+True
+{u'measurements': [4490753]}
+81.31.33.19 set([24971])
+True
+{u'measurements': [4490754]}
+91.51.233.11 set([3320])
+True
+{u'measurements': [4490755]}
+24.25.2.104 set([11426])
+True
+{u'measurements': [4490756]}
+5.135.183.75 set([3209])
+True
+{u'measurements': [4490757]}
+217.237.151.45 set([3320])
+True
+{u'measurements': [4490758]}
+151.164.109.167 set([7018])
+True
+{u'measurements': [4490759]}
+87.118.114.9 set([31103])
+True
+{u'measurements': [4490760]}
+217.237.150.92 set([3320])
+True
+{u'measurements': [4490761]}
+85.214.20.141 set([133752])
+True
+{u'measurements': [4490762]}
+91.51.230.77 set([3320])
+True
+{u'measurements': [4490763]}
+88.77.203.122 set([3209])
+True
+{u'measurements': [4490764]}
+188.65.64.14 set([39102])
+True
+{u'measurements': [4490765]}
+202.7.172.86 set([7545])
+True
+{u'measurements': [4490766]}
+217.237.148.87 set([3320])
+True
+{u'measurements': [4490767]}
+217.237.148.81 set([3320])
+True
+{u'measurements': [4490768]}
+217.237.148.83 set([3320])
+True
+{u'measurements': [4490769]}
+217.237.148.82 set([3320])
+True
+{u'measurements': [4490770]}
+8.0.116.3 set([56322])
+True
+{u'measurements': [4490771]}
+8.0.116.7 set([8220])
+True
+{u'measurements': [4490772]}
+106.187.36.20 set([2516])
+True
+{u'measurements': [4490773]}
+84.161.102.162 set([3320])
+True
+{u'measurements': [4490774]}
+213.151.222.34 set([15962])
+True
+{u'measurements': [4490775]}
+69.252.98.141 set([7922])
+True
+{u'measurements': [4490776]}
+192.221.158.0 set([27176, 6079])
+True
+{u'measurements': [4490777]}
+212.54.35.233 set([9143])
+True
+{u'measurements': [4490778]}
+193.183.98.154 set([12578])
+True
+{u'measurements': [4490779]}
+219.76.104.224 set([4760])
+True
+{u'measurements': [4490780]}
+95.154.58.62 set([39642])
+True
+{u'measurements': [4490781]}
+62.149.128.111 set([31034])
+True
+{u'measurements': [4490782]}
+202.238.95.3 set([2527])
+True
+{u'measurements': [4490783]}
+62.149.128.113 set([31034])
+True
+{u'measurements': [4490784]}
+62.149.128.112 set([24806])
+True
+{u'measurements': [4490785]}
+219.76.104.228 set([4760])
+True
+{u'measurements': [4490786]}
+37.140.137.10 set([44068])
+True
+{u'measurements': [4490787]}
+178.33.222.136 set([16276])
+True
+{u'measurements': [4490788]}
+195.27.183.36 set([31078])
+True
+{u'measurements': [4490789]}
+84.161.100.177 set([3320])
+True
+{u'measurements': [4490790]}
+79.219.255.170 set([3320])
+True
+{u'measurements': [4490791]}
+217.237.150.123 set([3320])
+True
+{u'measurements': [4490792]}
+217.237.150.121 set([3320])
+True
+{u'measurements': [4490793]}
+84.200.70.40 set([8473, 55])
+True
+{u'measurements': [4490794]}
+80.10.201.119 set([3215])
+True
+{u'measurements': [4490795]}
+77.37.251.75 set([42610])
+True
+{u'measurements': [4490796]}
+77.37.251.74 set([42610])
+True
+{u'measurements': [4490797]}
+84.2.42.18 set([5483])
+True
+{u'measurements': [4490798]}
+88.77.187.209 set([3209])
+True
+{u'measurements': [4490799]}
+81.228.10.200 set([3301])
+True
+{u'measurements': [4490800]}
+81.228.10.202 set([3301])
+True
+{u'measurements': [4490801]}
+217.116.119.2 set([15594])
+True
+{u'measurements': [4490802]}
+213.228.58.17 set([12322])
+True
+{u'measurements': [4490803]}
+195.197.193.121 set([719])
+True
+{u'measurements': [4490804]}
+178.33.222.129 set([16276])
+True
+{u'measurements': [4490806]}
+195.197.193.122 set([719])
+True
+{u'measurements': [4490807]}
+194.228.92.38 set([5610])
+True
+{u'measurements': [4490809]}
+74.207.241.5 set([6939])
+True
+{u'measurements': [4490811]}
+74.122.198.101 set([20278])
+True
+{u'measurements': [4490813]}
+77.247.181.161 set([43350])
+True
+{u'measurements': [4490815]}
+77.247.176.115 set([43350])
+True
+{u'measurements': [4490817]}
+77.247.176.114 set([43350])
+True
+{u'measurements': [4490818]}
+219.88.186.151 set([4771])
+True
+{u'measurements': [4490820]}
+193.90.12.2 set([2116])
+True
+{u'measurements': [4490822]}
+85.113.62.228 set([34533])
+True
+{u'measurements': [4490824]}
+217.237.151.154 set([3320])
+True
+{u'measurements': [4491003]}
+88.77.128.168 set([3209])
+True
+{u'measurements': [4491004]}
+188.255.24.219 set([42610])
+True
+{u'measurements': [4491005]}
+79.98.105.20 set([197216])
+True
+{u'measurements': [4491006]}
+87.253.152.184 set([16276])
+True
+{u'measurements': [4491007]}
+217.110.99.78 set([8220])
+True
+{u'measurements': [4491008]}
+61.220.11.18 set([3462])
+True
+{u'measurements': [4491009]}
+192.117.235.107 set([8551])
+True
+{u'measurements': [4491010]}
+205.171.25.244 set([209])
+True
+{u'measurements': [4491011]}
+5.196.14.201 set([16276])
+True
+{u'measurements': [4491012]}
+85.24.152.242 set([8473])
+True
+{u'measurements': [4491013]}
+62.169.70.193 set([2860])
+True
+{u'measurements': [4491014]}
+191.33.78.221 set([18881])
+True
+{u'measurements': [4491015]}
+203.80.96.21 set([9269])
+True
+{u'measurements': [4491016]}
+83.233.79.37 set([29518])
+True
+{u'measurements': [4491017]}
+93.93.135.21 set([44684])
+True
+{u'measurements': [4491018]}
+217.237.151.157 set([3320])
+True
+{u'measurements': [4491019]}
+217.237.151.155 set([3320])
+True
+{u'measurements': [4491020]}
+217.237.151.151 set([3320])
+True
+{u'measurements': [4491021]}
+194.146.224.102 set([13193])
+True
+{u'measurements': [4491022]}
+93.115.92.252 set([9009])
+True
+{u'measurements': [4491023]}
+89.39.67.1 set([8708])
+True
+{u'measurements': [4491024]}
+81.31.33.3 set([24971])
+True
+{u'measurements': [4491025]}
+202.123.2.17 set([23889])
+True
+{u'measurements': [4491026]}
+94.221.121.163 set([3209])
+True
+{u'measurements': [4491027]}
+85.25.128.15 set([8972])
+True
+{u'measurements': [4491028]}
+93.95.228.87 set([16276])
+True
+{u'measurements': [4491029]}
+85.25.128.12 set([8972])
+True
+{u'measurements': [4491030]}
+61.220.9.208 set([3462])
+True
+{u'measurements': [4491031]}
+212.72.53.209 set([12695])
+True
+{u'measurements': [4491032]}
+61.220.10.179 set([3462])
+True
+{u'measurements': [4491033]}
+62.210.17.3 set([12876])
+True
+{u'measurements': [4491034]}
+5.135.66.222 set([24961, 16276, 20857])
+True
+{u'measurements': [4491035]}
+208.69.33.21 set([680, 42730, 3269])
+True
+{u'measurements': [4491036]}
+195.238.24.109 set([5432])
+True
+{u'measurements': [4491037]}
+193.41.63.180 set([15895])
+True
+{u'measurements': [4491038]}
+192.221.139.0 set([7922])
+True
+{u'measurements': [4491039]}
+136.0.2.130 set([2856])
+True
+{u'measurements': [4491040]}
+212.1.244.38 set([12714])
+True
+{u'measurements': [4491041]}
+109.247.114.10 set([37560])
+True
+{u'measurements': [4491042]}
+193.75.110.130 set([2116])
+True
+{u'measurements': [4491043]}
+93.158.156.133 set([8551])
+True
+{u'measurements': [4491044]}
+88.70.71.57 set([3209])
+True
+{u'measurements': [4491045]}
+37.8.214.2 set([29314])
+True
+{u'measurements': [4491046]}
+94.103.175.82 set([48039])
+True
+{u'measurements': [4491047]}
+61.220.9.147 set([3462])
+True
+{u'measurements': [4491048]}
+91.51.231.138 set([3320])
+True
+{u'measurements': [4491049]}
+85.214.7.22 set([6724])
+True
+{u'measurements': [4491050]}
+18.71.0.151 set([3])
+True
+{u'measurements': [4491051]}
+195.234.128.12 set([35244])
+True
+{u'measurements': [4491052]}
+203.80.210.57 set([9269])
+True
+{u'measurements': [4491053]}
+84.235.57.207 set([25019])
+True
+{u'measurements': [4491054]}
+84.235.57.206 set([25019])
+True
+{u'measurements': [4491055]}
+84.235.57.204 set([25019])
+True
+{u'measurements': [4491056]}
+84.235.57.202 set([25019])
+True
+{u'measurements': [4491057]}
+84.235.57.201 set([25019])
+True
+{u'measurements': [4491058]}
+84.235.57.200 set([25019])
+True
+{u'measurements': [4491059]}
+46.165.228.93 set([28753])
+True
+{u'measurements': [4491060]}
+217.70.184.239 set([29169])
+True
+{u'measurements': [4491061]}
+217.237.150.151 set([3320])
+True
+{u'measurements': [4491062]}
+5.199.160.160 set([16125])
+True
+{u'measurements': [4491063]}
+217.70.184.236 set([29169])
+True
+{u'measurements': [4491064]}
+45.32.235.229 set([20473])
+True
+{u'measurements': [4491065]}
+12.121.117.154 set([7018])
+True
+{u'measurements': [4491066]}
+61.220.11.53 set([3462])
+True
+{u'measurements': [4491067]}
+194.85.129.13 set([3216])
+True
+{u'measurements': [4491068]}
+213.95.21.43 set([12337])
+True
+{u'measurements': [4491069]}
+62.58.153.203 set([13127])
+True
+{u'measurements': [4491070]}
+87.106.14.253 set([8560])
+True
+{u'measurements': [4491071]}
+111.69.16.19 set([23655])
+True
+{u'measurements': [4491072]}
+219.88.186.152 set([4771])
+True
+{u'measurements': [4491073]}
+46.165.228.106 set([28753])
+True
+{u'measurements': [4491074]}
+178.21.23.150 set([2586])
+True
+{u'measurements': [4491075]}
+62.55.128.39 set([6805])
+True
+{u'measurements': [4491076]}
+72.14.188.5 set([36351])
+True
+{u'measurements': [4491077]}
+128.2.0.68 set([9])
+True
+{u'measurements': [4491078]}
+93.158.156.132 set([8551, 12695])
+True
+{u'measurements': [4491079]}
+61.220.8.85 set([3462])
+True
+{u'measurements': [4491080]}
+93.158.156.136 set([8551])
+True
+{u'measurements': [4491081]}
+95.211.188.225 set([2856])
+True
+{u'measurements': [4491082]}
+84.161.102.61 set([3320])
+True
+{u'measurements': [4491083]}
+212.202.215.18 set([20676, 6830])
+True
+{u'measurements': [4491084]}
+195.228.75.149 set([5483])
+True
+{u'measurements': [4491085]}
+88.77.206.8 set([3209])
+True
+{u'measurements': [4491086]}
+663
+464

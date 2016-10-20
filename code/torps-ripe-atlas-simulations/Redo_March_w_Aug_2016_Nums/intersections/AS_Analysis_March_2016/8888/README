@@ -1,0 +1,7 @@
+Here I have to remove the ".0" or ".X" after the timestamp!
+Apparently those represent fractions of seconds. Definitely going to throw it out.
+Nope, just convert it to a float
+
+
+--IMPORTANT:
+For missing info, at least try to see if the exit AS has a match
