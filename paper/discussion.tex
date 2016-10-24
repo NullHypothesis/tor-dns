@@ -102,7 +102,10 @@ resolvers such as Google and OpenDNS.  Instead, they should either use the
 resolvers provided by their ISP, or run their own, particularly if the
 operator's ISP already hosts many other exit relays.  Local resolvers can
 further be optimized to minimize information leakage, by (for example) enabling
-QNAME minimization~\cite{Bortzmeyer2016a}.
+QNAME minimization~\cite{Bortzmeyer2016a}.  There likely is a measurable
+performance difference between a local and Google's resolver, but we believe
+that this difference pales in comparison to other performance issues in Tor such
+as head-of-line blocking.
 
 In addition to making recommendations to exit relay operators, we can remotely
 influence the cache of each exit relay's resolver.  For example, using {\tt
