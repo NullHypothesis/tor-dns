@@ -85,10 +85,12 @@ ignore multiple visits by the same user on the same day (see
 \url{https://support.alexa.com/hc/en-us/articles/200449744}), so the ranking
 might be slightly off when modeling website visit patterns.}
 Thus, we use a power-law distribution to model what websites Tor users visit.
-This might overestimate the popularity of higher-ranked websites such as
-Facebook and YouTube because we believe that Tor users---who tend to be
-privacy-conscious---are more likely to seek out alternatives than the typical
-Internet user.  We will discuss the implications of our model for browsing
+On the one hand, this might overestimate the popularity of higher-ranked
+websites such as Facebook and YouTube because we believe that Tor users---who
+tend to be privacy-conscious---are more likely to seek out alternatives than
+the typical Internet user.
+On the other hand, highly sensitive sites tend to be offered as onion services.
+We will discuss the implications of our model for browsing
 behavior later.
 
 \subsubsection{Modeling how often Tor users visit each site}
