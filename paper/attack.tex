@@ -180,7 +180,7 @@ For our model we consider the upper bound of 700,000 to be the number
 of websites visited through the Tor network per ten minutes. This is a
 conservative choice as more website visits increase the anonymity set of
 websites possibly visited by a Tor user---and therefore reduces the
-information an attacker can gain from observed DNS data.
+information an attacker can gain from observed DNS traffic.
 In later sections we revisit the implications of our choice by both
 scaling the Tor network up to ten-times its estimated size, and scaling
 it down to the size of 288,000 website visits per ten minutes that we
@@ -220,7 +220,7 @@ window technique allows the attacker to account for all potentially relevant
 DNS requests, regardless of if they are cached or not at Tor exits.
 
 We assume that an adversary applies this sliding window technique and models the
-observable DNS data accordingly.  The attacker observes a fraction of Tor's exit
+observable DNS traffic accordingly.  The attacker observes a fraction of Tor's exit
 bandwidth for a specific window length, and together with our website visit
 frequency estimation, this triggers a number of website visits in our
 simulation.  For each visit event, we randomly draw a website using the
@@ -363,7 +363,7 @@ observing DNS requests to implement two \name attacks:
 	observed sites when calculating the $k$-nearest neighbors.
 	The classifier still considers the distance to all unmonitored sites.
 	\item[\texttt{hp}] When Wa-kNN classifies a trace as a monitored site, confirm
-	that we observed the same site in the DNS data (ensuring {\em high
+	that we observed the same site in the DNS traffic (ensuring {\em high
 	precision}). If not, make the final classification unmonitored.
 \end{description}
 \noindent
