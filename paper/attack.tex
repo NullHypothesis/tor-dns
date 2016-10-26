@@ -214,8 +214,8 @@ is attempting to resolve a domain name, the request is either cached or not.  If
 it is not cached, the adversary will see it as a new, outgoing DNS request from
 the exit relay. If it is cached, it must have been resolved by the exit relay in
 the last $x$ seconds, and will therefore be in the sliding window.  The sliding
-window technique allows the attacker to observe all DNS requests, regardless of
-if they are cached or not at Tor exits.
+window technique allows the attacker to account for all potentially relevant
+DNS requests, regardless of if they are cached or not at Tor exits.
 
 We assume that an adversary applies this sliding window technique and models the
 observable DNS data accordingly.  The attacker observes a fraction of Tor's exit
