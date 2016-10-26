@@ -1,0 +1,110 @@
+\pdfoutput=1
+\documentclass[10pt,twocolumn]{confpaper}
+
+%%%%%%%%%%%%%%%%%%%%  INCLUDES  %%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%\graphicspath{ {./figures/} }
+
+\usepackage[T1]{fontenc}
+\usepackage[pdftex]{graphicx}
+\usepackage{booktabs}        % For pretty tables.
+\usepackage{xcolor}          % For colorful links.
+\usepackage{wasysym}         % For \Circle, ...
+\usepackage{listings}        % For source code listings.
+\usepackage[tight,footnotesize]{subfigure}
+\usepackage[scaled=0.8]{beramono} % For a pretty monospaced font.
+
+
+\definecolor{darkblue}{rgb}{0,0,0.5}
+\definecolor{lightgray}{rgb}{0.93,0.93,0.93}
+
+\lstset{
+	backgroundcolor=\color{lightgray},
+	basicstyle=\footnotesize\ttfamily,
+	keepspaces=true,
+	breakatwhitespace=true,
+	breaklines=true,
+	numbers=left,
+	numbersep=3pt,
+	numberstyle=\scriptsize\color{gray},
+}
+
+\hypersetup{
+	pdftitle={\TITLE},
+	pdfauthor={\AUTHORS},
+	pdfkeywords={Tor, DNS, anonymity, traffic correlation, website fingerprinting},
+	colorlinks=true,
+	urlcolor=darkblue,
+	linkcolor=darkblue,
+	citecolor=darkblue
+}
+
+
+%%%%%%%%%%%%%%%%%%%%  LOCALS  %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\fixme}[1]{\textcolor{red}{{\bf FIXME:} #1}\xspace}
+\newcommand{\first}{(\emph{i})\xspace}
+\newcommand{\second}{(\emph{ii})\xspace}
+\newcommand{\third}{(\emph{iii})\xspace}
+\newcommand{\fourth}{(\emph{iv})\xspace}
+\newcommand{\fifth}{(\emph{v})\xspace}
+
+\renewcommand{\name}{DefecTor\xspace}
+
+%%%%%%%%%%%%%%%%%%%%  TITLE/AUTHORS  %%%%%%%%%%%%%%%%%%%%%
+
+\date{}
+\title{\LARGE{
+\TITLE}}
+\author{
+{\AUTHORS} \\
+}
+
+%%%%%%%%%%%%%%%%%%%%  START OF DOCUMENT  %%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+\maketitle
+
+%\AcmCopyright
+%\ToAppear
+
+\begin{sloppypar}
+
+\thispagestyle{empty}
+
+\ifthenelse{\equal{\onlyAbstract}{no}}{% !onlyAbstract
+
+
+\begin{footnotesize}
+\textbf{
+\input{abstract}
+}
+\end{footnotesize}
+
+\input{introduction}
+\input{background}
+\input{related}
+\input{landscape}
+\input{attack}
+\input{analysis}
+\input{internet-scale}
+\input{discussion}
+\balance\input{conclusion}\label{lastpage}
+
+%\bibliographystyle{abbrv}
+\bibliographystyle{IEEEtranS}
+\setlength{\parskip}{-1pt}
+\setlength{\itemsep}{-10pt}
+ \footnotesize % SPACE
+\balance\bibliography{references-alt}
+%\bibliographystyle{abbrvnat_noaddr} % SPACE
+%\theendnotes % ENDNOTES
+}{% onlyAbstract
+}
+
+\end{sloppypar}
+
+\end{document}
+
+%%%%%%%%%%%%%%%%%%%%  END OF DOCUMENT  %%%%%%%%%%%%%%%%%%%%

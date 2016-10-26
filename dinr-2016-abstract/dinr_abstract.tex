@@ -1,0 +1,135 @@
+\documentclass[9pt,conference]{IEEEtran}
+\pagestyle{plain}
+
+\usepackage[T1]{fontenc}
+\usepackage[scaled=0.8]{beramono} % For a pretty monospaced font.
+\usepackage[pdftex]{graphicx}
+\usepackage{booktabs} % For pretty tables.
+\usepackage{multirow} % Also for pretty tables.
+\usepackage{xcolor} % For colourful links.
+\usepackage{xspace} % For reasonable spacing in custom commands.
+\usepackage[pagebackref=false]{hyperref} % For clickable links.
+\usepackage{balance} % Balance columns on last page.
+\usepackage{wasysym} % For \Circle, ...
+\usepackage{listings} % For source code listings.
+\usepackage{ifthen}
+\usepackage{mathptmx} % Use times in math font.
+\usepackage[tight,footnotesize]{subfigure}
+
+% Add custom text right before backreferences in literature.
+%\renewcommand*{\backref}[1]{}
+%\renewcommand*{\backrefalt}[4]{
+%   \ifcase #1
+%      No cited.
+%   \or
+%      (Cited on p.~#2)
+%   \else
+%      (Cited on pp.~#2)
+%   \fi}
+
+\definecolor{darkblue}{rgb}{0,0,0.5}
+\definecolor{lightgray}{rgb}{0.93,0.93,0.93}
+
+\lstset{
+	backgroundcolor=\color{lightgray},
+	basicstyle=\footnotesize\ttfamily,
+	keepspaces=true,
+	breakatwhitespace=true,
+	breaklines=true,
+	numbers=left,
+	numbersep=3pt,
+	numberstyle=\scriptsize\color{gray},
+}
+
+\hypersetup{
+	pdftitle={The Effect of DNS on Tor's Anonymity},
+	pdfauthor={Benjamin Greschbach, Tobias Pulls, Laura M. Roberts, Philipp Winter, Nick Feamster},
+	pdfkeywords={Tor, DNS, anonymity, traffic correlation, website fingerprinting},
+	colorlinks=true,
+	urlcolor=darkblue,
+	linkcolor=darkblue,
+	citecolor=darkblue
+}
+
+\newcommand{\xxx}[1]{\textcolor{red}{#1}}
+\newcommand{\fixme}[1]{\textcolor{red}{{\bf FIXME:} #1}\xspace}
+\newcommand{\ie}{{\it i.e.}\xspace}
+\newcommand{\eg}{{\it e.g.}\xspace}
+\newcommand{\ea}{{\it et al.}\xspace}
+\newcommand{\etc}{{\it etc.}\xspace}
+\newcommand{\first}{(\emph{i})\xspace}
+\newcommand{\second}{(\emph{ii})\xspace}
+\newcommand{\third}{(\emph{iii})\xspace}
+\newcommand{\fourth}{(\emph{iv})\xspace}
+\newcommand{\fifth}{(\emph{v})\xspace}
+
+\newcommand{\name}{DefecTor\xspace}
+
+
+\newcommand{\TABLECAPTIONS}{top} % "top" or "bottom". Silly IEEE formatting
+\newcommand{\tabcaptext}{}
+\ifthenelse{\equal{\TABLECAPTIONS}{top}}{%
+\newcommand{\topcap}[1]{\caption{#1}}
+\newcommand{\bottomcap}[1]{}
+}
+{
+\newcommand{\topcap}[1]{}
+\newcommand{\bottomcap}[1]{\caption{#1}}
+}
+
+\makeatletter
+\def\blfootnote{\xdef\@thefnmark{}\@footnotetext}
+\makeatother
+
+\begin{document}
+
+%\title{The Effect of DNS on Tor's Anonymity$^{\textdagger}$}
+\title{The Effect of DNS on Tor's Anonymity\textsuperscript{\textdagger}}
+%
+\author{
+\IEEEauthorblockN{Benjamin Greschbach$^*$}
+\IEEEauthorblockA{\emph{KTH Royal Institute of Technology}}
+\and
+\IEEEauthorblockN{Tobias Pulls$^*$}
+\IEEEauthorblockA{\emph{Karlstad University}}
+\and
+\IEEEauthorblockN{Laura M.  Roberts$^*$}
+\IEEEauthorblockA{\emph{Princeton University}}
+\and
+\IEEEauthorblockN{Philipp Winter$^*$}
+\IEEEauthorblockA{\emph{Princeton University}}
+\and
+\IEEEauthorblockN{Nick Feamster}
+\IEEEauthorblockA{\emph{Princeton University}}
+}
+
+% \IEEEoverridecommandlockouts
+% \makeatletter\def\@IEEEpubidpullup{9\baselineskip}\makeatother
+% \IEEEpubid{\parbox{\columnwidth}{Permission to freely reproduce all or part
+%     of this paper for noncommercial purposes is granted provided that
+%     copies bear this notice and the full citation on the first
+%     page. Reproduction for commercial purposes is strictly prohibited
+%     without the prior written consent of the Internet Society, the
+%     first-named author (for reproduction of an entire paper only), and
+%     the author's employer if the paper was prepared within the scope
+%     of employment.  \\
+%     NDSS '16, 21-24 February 2016, San Diego, CA, USA\\
+%     Copyright 2016 Internet Society, ISBN 1-891562-41-X\\
+%     http://dx.doi.org/10.14722/ndss.2016.23xxx
+% }
+% \hspace{\columnsep}\makebox[\columnwidth]{}}
+
+\maketitle
+
+%\input{abstract}
+%
+\blfootnote{\textsuperscript{\textdagger}This paper will appear in NDSS 2017.}%~\cite{greschbach2016effect}}
+%
+\blfootnote{$^*$All four authors contributed substantially and share first authorship.}
+
+\input{introduction}
+\bibliographystyle{IEEEtranS}
+\bibliography{references}
+\balance
+
+\end{document}
