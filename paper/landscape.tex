@@ -28,9 +28,9 @@ web sites as estimated by Alexa.  For each site, we conducted two
 experiments.  First, we ran a TCP traceroute to the site, targeting port 80 to
 mimic web traffic.  Second, we determined the DNS delegation path for the
 website's DNS name using the {\tt dig} command's \texttt{+trace} feature.  The
-delegation path of a domain name, say {\tt www.example.com}, is a list of
+delegation path of a domain name, say {\tt www.example.com}, is a hierarchy of
 authoritative DNS servers, such as the authoritative server for {\tt .com}
-pointing to the authoritative server of {\tt example.com}, which in turn points
+pointing to the authoritative server for {\tt example.com}, which in turn points
 to the authoritative server responsible for {\tt www.example.com}.  We also ran
 UDP traceroutes to each server in the delegation path, targeting port 53 to
 mimic DNS resolution.\footnote{The tool we developed for this purpose is
@@ -51,57 +51,44 @@ traversed for DNS traffic, but \emph{not} for web traffic ($\lambda$):
 \noindent
 The metric approaches 1 as the number of ASes that are only traversed for DNS
 increases.  For example, if $\mathcal{D} = \{1,2,3\}$ and $\mathcal{W} =
-\{2,3,4\}$, then $\lambda = \frac{|\{1\}|}{|\{1,2,3,4\}|} = \frac{1}{4} =
-0.25$.  We determined $\lambda$ for each site in the Alexa Top 1,000.  We ran
-the experiment on a French VPS in AS 16276, owned by OVH SAS.  We chose this AS
-because, as of August 2016, it is the most popular AS by exit bandwidth, seeing
-$10.98\%$ of exit traffic, closely followed by AS 12876 (owned by the French
-Online S.A.S.) that sees $9.33\%$ of exit traffic.  The experiment resulted in
-1,000~$\lambda$ values.  We repeated the experiment on a vantage point at our
-institution, achieving similar results: while a two-sample Kolmogorov-Smirnov
-test determined a statistically significant difference between both
-distributions ($p \ll 0.01$), the medians (0.590 and 0.584) and standard
-deviations (0.149 and 0.118) are similar.  Nevertheless, we believe that relays
-in regions other than Western Europe or North America are likely to witness
-significantly different exposure of DNS queries because many websites
-outsource their DNS setup to providers such as CloudFlare whose points of
-presence are centered around Western Europe and North America.
-
-% > ks.test(d1$exposure, d2$exposure)
-%
-%   Two-sample Kolmogorov-Smirnov test
-%
-% data:  d1$exposure and d2$exposure
-% D = 0.1245, p-value = 6.218e-07
-% alternative hypothesis: two-sided
-
-Figure~\ref{fig:exposure} shows the empirical CDF of all 1,000~$\lambda$ values
-that we calculated for Alexa's Top 1,000 sites.  In total, this experiment
-traversed 350 unique ASes for DNS requests and 339 unique ASes for web requests.
-The figure shows that for half of Alexa's Top 1,000 domains, DNS-only ASes
-account for 60\% or more of all traversed ASes.  This result
-only applies to exit relays that do their own DNS resolution; for relays that
-use a third-party resolver, the ASes that are traversed between
-the exit relay and its DNS resolver is the metric of interest.  We conclude that adversaries that are
-unable to observe a Tor user's TCP connection still have many opportunities to
-see a TCP connection's corresponding DNS request.  Such adversaries include (\emph{i}) popular open
-DNS resolvers such as Google and OpenDNS, (\emph{ii}) DNS root servers, and
-(\emph{iii}) network adversaries located on the path to the previous two
-entities.
-
-% d <- read.csv("top-1k-ddptr-2016-04-19-ovh.csv")
-%> quantile(d$exposure)
-%  0%   25%   50%   75%  100% 
-%  0.000 0.500 0.600 0.667 0.909
+\{2,3,4\}$, then $\lambda =
+\frac{|\{1,2,3\} \setminus \{2,3,4\}|}{|\{1,2,3\} \cup \{2,3,4\}|} =
+\frac{|\{1\}|}{|\{1,2,3,4\}|} =
+\frac{1}{4} =
+0.25$.  We determined $\lambda$ for each site in the Alexa Top 1,000 from five
+autonomous systems in three countries.\footnote{The ASes are: OVH (France),
+Gandi (France), Karlstad University (Sweden), Princeton University (U.S.), and
+Comcast (U.S.).} One of our vantage points, the French OVH, is the most popular
+AS by exit bandwidth as of August 2016.  It sees $10.98\%$ of exit traffic,
+closely followed by AS 12876 (owned by the French Online) that sees $9.33\%$ of
+exit traffic.  Our experiment consisted of 5,000 runs, 4,773 (95.5\%) of which
+succeeded, and 227 (4.5\%) failed.
 
 \begin{figure}[t]
 	\centering
-	\includegraphics[width=0.67\linewidth]{figures/dns-exposure.pdf}
-	\caption{Our AS exposure metric $\lambda$ for Alexa's Top 1,000 web sites.
-	For half of all sites, 60\% of ASes or more are only traversed for DNS
-	resolution, but not for subsequent web traffic.}
+	\includegraphics[width=0.75\linewidth]{figures/dns-exposure.pdf}
+	\caption{Five box plots capturing the AS exposure metric $\lambda$ for
+		Alexa's Top 1,000 web sites.  The box plots represent five autonomous
+		systems in three countries.}
 	\label{fig:exposure}
 \end{figure}
+
+The result is illustrated in Figure~\ref{fig:exposure}, which shows five box
+plots capturing $\lambda$ values for Alexa's Top 1,000 sites.  The median of
+all 4,773 $\lambda$ values is 0.571, so for half of all runs, DNS-only ASes
+account for 57\% or more of all traversed ASes.  This result only applies to
+exit relays that do their own DNS resolution; for relays that use a third-party
+resolver, the ASes that are traversed between the exit relay and its DNS
+resolver is the metric of interest.  We further believe that relays in regions
+other than Western Europe or North America are likely to witness significantly
+different exposure of DNS queries because many websites outsource their DNS
+setup to providers such as CloudFlare whose points of presence are centered
+around Western Europe and North America.  We conclude that adversaries that are
+unable to observe a Tor user's TCP connection still have many opportunities to
+see a TCP connection's corresponding DNS request.  Such adversaries include
+(\emph{i}) popular open DNS resolvers such as Google and OpenDNS, (\emph{ii})
+DNS root servers, and (\emph{iii}) network adversaries located on the path to
+the previous two entities.
 
 \subsection{Determining how Tor exit relays resolve DNS queries}
 \label{sec:mapping-resolvers}
