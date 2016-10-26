@@ -62,7 +62,7 @@ The above relationship only holds when observing DNS requests gives
 a clear advantage to \texttt{hp} in terms of precision over \texttt{wf} (see
 the following paragraph).
 For precision the \texttt{hp} attack has an immediate gain over \texttt{wf} as
-soon as the attacker can observe {any exit bandwidth}.
+soon as the attacker can observe {\it any exit bandwidth}.
 Although the \texttt{hp} attack has near-perfect precision, the
 \texttt{ctw} attack benefits from observing increasingly more exit traffic,
 nearly reaching the same levels as \texttt{hp} at 100\% of the exit bandwidth.
@@ -91,10 +91,14 @@ sites over Tor. For sites that rank 1,000 or lower (\ie, less popular sites),
 both \name attacks show a clear improvement in precision while
 \texttt{ctw} also shows improved recall---but only at 100\% observed exit
 bandwidth, as shown in Figure~\ref{fig:fpt:torpct}.
-These results paint a bleak picture: a small fraction of exit
-bandwidth provides a perfectly precise attack on relatively
-{unpopular} sites such as wikileaks.org, which had Alexa rank
-10,808 on April 15th 2016.
+These results paint a bleak picture: an attacker that observes the
+vast majority of exit bandwidth can use the \texttt{ctw} attack as a perfectly
+precise attack with increased recall over a traditional \texttt{wf} attack.
+On the other hand, an attacker that can observe a small fraction of exit
+bandwidth can use the \texttt{hp} attack as a perfectly precise attack on
+relatively {unpopular} sites such as wikileaks.org, which had Alexa rank 10,808
+on April 15th 2016.  However, the recall will be low as observed in
+\ref{eq:hprecall}.
 
 \begin{figure}[t]
 \centering
@@ -138,7 +142,11 @@ TTL clipping, the growth of the Tor network, and website popularity
 distribution.  In this section, we assume that an adversary can observe Tor
 exit relays representing 33\% of exit bandwidth (as observed on average
 by Google) and consider only precision (where we see clear gain from both our
-attacks).  Unless stated otherwise, we perform our evaluation on
+attacks).  Note that the following results largely apply also for weaker
+attackers that observe a smaller fraction of exit bandwidth for the \texttt{hp}
+attack, but that the \texttt{ctw} attack is more sensitive in terms of precision
+to different bandwidth fractions, as shown previously.
+Unless stated otherwise, we perform our evaluation on
 websites starting at Alexa rank 10,000 and proceeding through less
 popular websites, use 2,500 weight-learning rounds, have a 60-second window
 size, a Tor network scale of 1.0, and use the conservative power-law
