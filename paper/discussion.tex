@@ -42,36 +42,7 @@ the goal is to minimize exposure of DNS requests, but there are several
 dimensions to this.  In lieu of substantial DNS protocol improvements, we can
 envision three extreme design points, in which \emph{all} exit relays use \first
 Google's DNS resolver; \second their own, local resolver; or \third the resolver
-provided by their ISP.  Table~\ref{tab:setup-comparison} summarizes the
-important trade-offs for these three setups; the rest of this section discusses
-these design points in more detail.  Table~\ref{tab:setup-comparison} shows
-three attributes for our hypothetical DNS setups.  ``Network-level Protection''
-is achieved if AS-level adversaries cannot easily monitor traffic, ``Avoiding
-Centralization'' is achieved if there are many diverse resolvers instead of a
-few central ones, and ``Response Quality'' is achieved if DNS responses arrive
-quickly and correctly.
-
-\begin{table}[t]
-	\renewcommand{\tabcaptext}{A comparison between three design points for DNS
-	resolver configuration, assuming all Tor exit relays use the setup in
-	question.  Solid black circles are most desirable.}
-	\topcap{\tabcaptext}
-	\centering
-	\begin{tabular}{l c c c}
-	\toprule
-	\textbf{Setup} &
-	\begin{tabular}{@{}c@{}}\textbf{Network-level}\\\textbf{Protection}\end{tabular} &
-	\begin{tabular}{@{}c@{}}\textbf{Avoiding}\\\textbf{Centralization}\end{tabular} &
-	\begin{tabular}{@{}c@{}}\textbf{Response}\\\textbf{Quality}\end{tabular} \\
-	\midrule
-	All Google & \RIGHTcircle & \Circle & \CIRCLE \\
-	All Local & \Circle & \CIRCLE & \CIRCLE\\
-	All ISP & \CIRCLE & \RIGHTcircle & \RIGHTcircle \\
-	\bottomrule
-	\end{tabular}
-	\bottomcap{\tabcaptext}
-	\label{tab:setup-comparison}
-\end{table}
+provided by their ISP.
 
 If all exit relays were to use Google's public resolver, the company would
 obtain metadata about the activity of all Tor users, which runs counter to Tor's
@@ -82,12 +53,10 @@ until May 2016~\cite{meek-shutdown}.  While the system was operational,
 thousands of meek clients selected exit relays that use Google's public
 resolver, which means that Google saw both traffic entering and, partially,
 exiting the Tor network, allowing the company to mount \name attacks.
-
 Next, consider a Tor network that only uses local resolvers.  In this case, Tor
 is fully independent of third-party resolvers, at the cost of each iterative DNS
 query being exposed to a diverse set of ASes in the network, allowing several
 parties to learn the DNS queries of Tor users.
-
 Finally, all exit relays could simply use their ISP-provided resolver.  This
 would minimize the network exposure of DNS requests as resolvers are frequently
 in the same AS as exit relays, and AS-level adversaries would be unable to
@@ -107,6 +76,7 @@ performance difference between a local and Google's resolver, but we believe
 that this difference pales in comparison to other performance issues in Tor such
 as head-of-line blocking.
 
+\iffalse
 In addition to making recommendations to exit relay operators, we can remotely
 influence the cache of each exit relay's resolver.  For example, using {\tt
 exitmap}, we can continuously resolve potentially sensitive domains over each
@@ -117,6 +87,7 @@ approach scales poorly, considering the potentially large number of domain names
 that would need to be cached (recall that the long tail of unpopular sites are
 most vulnerable to \name attacks), but it allows us to eliminate DNS-based
 correlation attacks for a select number of sites.
+\fi
 
 Finally, Tor can fix the Tor clipping bug we discovered and consider
 significantly increasing the minimum TTL for the DNS cache at exit relays to

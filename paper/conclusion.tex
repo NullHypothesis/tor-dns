@@ -1,44 +1,22 @@
 \section{Conclusion}
 \label{sec:conclusion}
 
-In this paper, we have demonstrated how AS-level adversaries can use DNS
-traffic from Tor exit relays to launch more effective correlation
-attacks, which link the sender and receiver of traffic in the Tor
-network.  We show how an attacker can use DNS query traffic to mount
-perfectly precise \name attacks: Mapping DNS traffic to websites is highly
-accurate even with simple techniques, and correlating the observed websites
-with a website fingerprinting attack greatly improves the precision when
-monitoring relatively unpopular websites. 
-
-Given this more powerful fingerprinting method, we showed that the
-threat of \name attacks against the Tor network is clear and present. We
-first developed a method to identify the DNS resolver for each Tor exit relay,
-and found that a set of exit relays comprising 40\% of all Tor exit
-relay bandwidth use the Google public DNS servers. Although this
-concentration of DNS query traffic reduces the expanse of ASes that can
-see DNS query traffic emanating from exit nodes, this configuration
-nonetheless gives a single administrative entity considerable visibility
-into the traffic that is exiting the Tor network. Tor relay operators should
-take steps to ensure that the network maintains more diversity into how
-exit relays resolve DNS domains.
-
-On the other hand, iterative DNS resolution from a Tor exit relay allows
-a greater number of ASes to observe DNS queries from Tor exit relays.
-For the Alexa most popular 1,000 websites, about 60\% of the DNS lookups
-required to resolve the website's DNS domain name traversed ASes that
-were {\em not} on the end-to-end network path between the client and the
-resolved IP address for the webserver.  To mitigate the risk of
-correlation attacks in light of this finding, we suggest that local DNS
-resolvers on Tor exit relays implement privacy-preserving techniques
-such as DNS QNAME minimization, which minimizes the amount of
-information about the domain name that each iterative query contains.
-
-Website fingerprinting attacks have long been a concern for the Tor
-network. The attacks that we present in this paper show that, when
-incorporating DNS query traffic, these attacks become even more accurate
-and powerful. We hope these findings underscore the urgency of
-eventually deploying strong defenses against fingerprinting attacks on
-the Tor network.
-
-We publish all our code, data, and replication instructions on our project page,
-which is available online at \url{https://nymity.ch/tor-dns/}.
+In this paper, we have demonstrated how AS-level adversaries can use DNS traffic
+from Tor exit relays to launch more effective website fingerprinting attacks, to
+learn what websites Tor users are visiting.  Mapping DNS traffic to websites is
+highly accurate even with simple techniques, and improves the precision when
+monitoring relatively unpopular websites.  We further developed a method to
+identify the DNS resolver for each Tor exit relay, and found that a set of exit
+relays comprising 40\% of all Tor exit relay bandwidth use the Google public DNS
+servers.  Although this concentration of DNS query traffic reduces the expanse
+of ASes that can see DNS query traffic emanating from exit nodes, this
+configuration nonetheless gives a single administrative entity considerable
+visibility into the traffic that is exiting the Tor network. Tor relay operators
+should take steps to ensure that the network maintains more diversity into how
+exit relays resolve DNS domains.  To mitigate the risk of website fingerprinting
+attacks in light of our work, we suggest that local DNS resolvers on Tor exit
+relays implement privacy-preserving techniques such as DNS QNAME minimization,
+which minimizes the amount of information about the domain name that each
+iterative query contains.  We publish all our code, data, and replication
+instructions on our project page, which is available online at
+\url{https://nymity.ch/tor-dns/}.

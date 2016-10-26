@@ -135,7 +135,11 @@ the exit relay's IP address, but if an exit relay uses a third-party resolver,
 we expect to receive a request from an unrelated IP address.  Having encoded
 relay-specific fingerprints in the query names, we are able to map queries to
 exit relays in such cases.  We ran this experiment from September 2015 to May
-2016, at least once a day.  Once we started to analyze our data, we identified
+2016, at least once a day.
+% The following section takes up too much space, so it's commented out for now.
+% We should include it in an extended version of our work, though.
+\iffalse
+Once we started to analyze our data, we identified
 the following two challenges:
 
 \begin{itemize}
@@ -160,6 +164,8 @@ visualization, we only consider the first resolver we observed for an exit
 relay, which might not be the primary resolver.
 \end{itemize}
 \noindent
+\fi
+
 Figure~\ref{fig:exit-resolvers} illustrates the fraction of DNS requests that
 four of the most popular organizations could observe.  Google averages at 33\%,
 but at times saw more than 40\% of all DNS requests exiting the Tor network---an
