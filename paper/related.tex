@@ -98,9 +98,16 @@ In this paper, we show how to correlate and use observed DNS requests in
 concert with website fingerprinting attacks,
 which significantly
 improves precision for web\emph{site} fingerprinting.
-The two \name attacks that we present have implications
+In scenarios where precision is paramount\footnote{For example, the
+Snowden leaks revealed SKYNET, an NSA program
+using machine learning to detect couriers in Pakistan
+\url{https://theintercept.com/document/2015/05/08/skynet-courier/}.}, \name
+attacks pose an even bigger threat than website fingerprinting attacks from
+attackers that can observe even a modest fraction of DNS traffic from the Tor
+network.
+Mitigating the two \name attacks that we present have implications
 for the design of website fingerprinting defenses:
-to mitigate \name attacks, open-world evaluations of the website fingerprinting
+open-world evaluations of the website fingerprinting
 defense should minimize recall even when the website fingerprinting attack is
 tuned to sacrifice precision for recall.  In the case of Wa-kNN, this means
 a low $k$: our results are based on $k=2$.
