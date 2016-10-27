@@ -36,7 +36,7 @@ that prior work~\cite{Johnson2013a,Feamster2004a} used to estimate the threat of
 correlation attacks.  The authors compared AS path predictions to millions of
 traceroutes, initiated from 25\% of Tor relays by bandwidth at the
 AS level, and found that
-only 20\% of predicted paths matched the paths observed in traceroute.
+only 20\% of predicted paths matched the paths observed in traceroutes.
 Juen \ea could not consider the reverse path in traceroutes.  In 2015,
 Sun \ea~\cite{Sun2015a} addressed this shortcoming; although past work treated
 routing as static, Sun \ea showed that the dynamic nature of Internet
@@ -63,14 +63,14 @@ setting for their evaluation.  Wang and Goldberg~\cite{Wang2013a} proposed an
 improved attack that employed a new method for data gathering.  In 2014, Wang
 \ea~\cite{Wang2014a} further improved on their results with a
 k-nearest neighbor classifier Wa-kNN and a custom weight-learning algorithm
-(WLLCC~\cite{Wang2015a}) that in several rounds determine the optimal weights
+(WLLCC~\cite[\S~3.2.5]{Wang2015a}) that in several rounds determine the optimal weights
 for features extracted from traffic traces.
 Cai \ea~\cite{Cai2014b}
 determined which traffic features provide the most predictive power to detect
 websites, proved a lower bound of any defense that achieves a certain level of
 security, and provided a framework to investigate the performance of
 website fingerprinting attacks.
-Juarez~\cite{Juarez2014a} showed that all previous attacks
+Juarez \ea~\cite{Juarez2014a} showed that all previous attacks
 made several simplifying
 assumptions; the work suggested that attacks are still
 difficult to run outside a lab setting as an attacker will have to consider
@@ -87,25 +87,22 @@ fingerprinting of only the start page of a site).  Hayes and Danezis
 proposed k-fingerprinting, an attack with notably better performance
 than Wa-kNN even in the face of defenses
 \cite{Hayes2016a}. Their attack retains 30\% accuracy in a
-closed-world setting against the WTF-PAD defense by Juarez et
-al.~\cite{Juarez2016a}---a prime candidate for
+closed-world setting against the WTF-PAD defense by Juarez
+\ea~\cite{Juarez2016a}---a prime candidate for
 deployment in Tor~\cite{adapativepadding}---at the cost of 50\% bandwidth
 overhead. Juarez \ea used Wa-kNN to evaluate WTF-PAD and set $k=5$, as
 recommended by Wang \ea for an optimal trade-off between recall and the
 false positive rate.
 
-We show how to correlate and use observed DNS requests in
+In our work, we show how to correlate and use observed DNS requests in
 concert with website fingerprinting attacks,
 which significantly
 improves precision for web\emph{site} fingerprinting.
-In scenarios where precision is paramount\footnote{For example, the
-Snowden leaks revealed SKYNET, an NSA program
-using machine learning to detect couriers in Pakistan
-\url{https://theintercept.com/document/2015/05/08/skynet-courier/}.}, \name
+In scenarios where precision is paramount, \name
 attacks pose an even bigger threat than website fingerprinting attacks from
 attackers that can observe even a modest fraction of DNS traffic from the Tor
 network.
-Mitigating the two \name attacks that we present have implications
+Mitigating the two \name attacks that we present has implications
 for the design of website fingerprinting defenses:
 open-world evaluations of the website fingerprinting
 defense should minimize recall even when the website fingerprinting attack is

@@ -61,12 +61,12 @@ Gandi (France), Karlstad University (Sweden), Princeton University (U.S.), and
 Comcast (U.S.).} One of our vantage points, the French OVH, is the most popular
 AS by exit bandwidth as of August 2016.  It sees $10.98\%$ of exit traffic,
 closely followed by AS 12876 (owned by the French Online) that sees $9.33\%$ of
-exit traffic.  Our experiment consisted of 5,000 runs, 4,773 (95.5\%) of which
-succeeded, and 227 (4.5\%) failed.
+exit traffic.  Our experiment consisted of 5,000 traceroute runs, 4,773 (95.5\%)
+of which succeeded, and 227 (4.5\%) failed.
 
 \begin{figure}[t]
 	\centering
-	\includegraphics[width=0.75\linewidth]{figures/dns-exposure.pdf}
+	\includegraphics[width=0.7\linewidth]{figures/dns-exposure.pdf}
 	\caption{Five box plots capturing the AS exposure metric $\lambda$ for
 		Alexa's Top 1,000 web sites.  The box plots represent five autonomous
 		systems in three countries.}
@@ -122,7 +122,7 @@ packet content of every single query for {\tt tor.nymity.ch}.
 	\includegraphics[width=0.6\linewidth]{figures/resolver-identification.pdf}
 	\caption{Our method to identify the DNS resolvers of exit relays.  Over
 	each exit relay, we resolve relay-specific domain names that are under our
-	control.  Inspecting our DNS server logs, we can then identify the IP
+	control.  By inspecting our DNS server logs, we can then identify the IP
 	address of all exit relay resolvers.}
 	\label{fig:dnsenum}
 \end{figure}

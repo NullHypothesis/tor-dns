@@ -1,6 +1,6 @@
 \section{Background}
 \label{sec:background}
-We provide an introduction to the Tor network, website fingerprinting
+We now provide an introduction to the Tor network, website fingerprinting
 attacks, as well as how the Tor network implements DNS resolution.
 
 \paragraph{The Tor network}
@@ -53,7 +53,7 @@ Mistaking one monitored site for another is less likely~\cite{Wang2015a}.
 
 Wa-kNN is a website fingerprinting attack by Wang \ea~\cite{Wang2014a}
 that uses a k-nearest neighbor classifier with a custom weight-learning
-algorithm, WLLCC~\cite{Wang2015a}.  From {packet traces}
+algorithm, WLLCC~\cite[\S~3.2.5]{Wang2015a}.  From {packet traces}
 between a Tor client and its guard, Wa-kNN extracts a number of {features}
 to classify each website.  Useful features include
 the number of outgoing packets and bursts of packets in the same direction.
@@ -85,7 +85,7 @@ itself).  Tor does not transport UDP
 traffic, but it implements a workaround to wrap DNS requests into Tor cells.
 Using the
 SOCKS protocol, applications can instruct the Tor client to establish a circuit to a
-given domain and port.\footnote{SOCKS versions 4a and 5 support connection
+given domain and port.\footnote{The SOCKS versions 4a and 5 support connection
 initiation using domain names in addition to IP addresses.}
 After the user types in a domain, say {\tt example.com}, the Tor browser establishes
 a connection to the SOCKS proxy exposed by the local Tor client.
@@ -106,7 +106,7 @@ Exit relays send
 their DNS requests to the system resolver, which Linux systems read from
 \texttt{/etc/resolv.conf}.  Tor does not modify the system resolver and
 uses whatever the exit relay operator configured, such as the ISP's resolver,
-or public resolvers such as Google's {\tt 8.8.8.8} open public DNS resolver.
+or public resolvers such as Google's public DNS resolver {\tt 8.8.8.8}.
 As of August 2016, exit relays cache DNS responses to speed up repeated lookups.
 The caching layer for Tor clients, however, is off by default to prevent tracking attacks
 due to modified DNS responses~\cite{nolocalcache}.
