@@ -33,11 +33,12 @@ following building blocks:
 		attacker must also observe egress DNS traffic.  We expect the adversary
 		either to be on the path between exit relay
 		and a DNS server or to run a malicious DNS
-		resolver or server.  An attacker may also run an exit relay,
-		but in this case conventional end-to-end correlation
-		attacks~\cite{Murdoch2007a} are at least as effective as those we
-		describe here.
+		resolver or server.  We do not expect an attacker to run an exit relay
+		because in this case conventional end-to-end correlation
+		attacks are at least as effective as those we
+		describe here~\cite{Murdoch2007a}.
 \end{itemize}
+
 We combine a conventional website fingerprinting attack operating on traffic
 from ingress sniffing with
 DNS traffic observed by egress sniffing, creating \name attacks. Our attacks
