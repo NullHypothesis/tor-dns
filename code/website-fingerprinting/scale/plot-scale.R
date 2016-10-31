@@ -40,10 +40,12 @@ ggplot(df, aes(x, y, colour = Attack,
     theme_minimal() +
     ylim(0.63, 1) +
     labs(x = "Tor network scale") +
+	scale_x_continuous(breaks=c(0,1,2,4,6,8,10)) +
+    geom_vline(xintercept = 1, alpha=0.5) +
     labs(y = "Precision") +
     theme(legend.key.width = unit(2, "line"),
           legend.justification = c(1, 0),
-          legend.position = c(1.03, -0.05),
+          legend.position = c(1.04, -0.05),
           legend.key.height = unit(0.8, "line"),
           legend.background = element_rect(colour = "gray", fill = "white", size = 0.3),
           legend.key = element_rect(colour = "transparent", fill = "transparent"),

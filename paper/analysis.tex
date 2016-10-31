@@ -252,12 +252,15 @@ fingerprinting precision, even with the larger window size.
 \subsubsection{Effect of Tor network growth}
 Figure~\ref{fig:fpt:var:scale} scales the size of the Tor network with
 respect to site
-visits from the status quo to ten times its size, for Alexa starting rank 10,000 and
+visits from the estimated status quo to ten times its size, for Alexa starting rank 10,000 and
 100,000. At twice its current size, the impact on \name attacks is smaller than
 increasing the minimum TTL for DNS caching to three minutes as shown in
 Figure~\ref{fig:fpt:var:window}. These results indicate that \name
 attacks will remain
 practical for many sites in the Alexa top one million, even as the Tor network grows.
+In case we overestimated the current Tor network size in the analysis described
+in Section~\ref{sec:load-freq}, the \name attacks would have even higher
+precision, as shown by the values for scaling factors below 1.
 
 % limitation: webSITES, not wePAGES in our analysis + what we get from DNS.
 
