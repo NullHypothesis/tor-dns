@@ -87,12 +87,12 @@ Using the
 SOCKS protocol, applications can instruct the Tor client to establish a circuit to a
 given domain and port.\footnote{The SOCKS versions 4a and 5 support connection
 initiation using domain names in addition to IP addresses.}
-After the user types in a domain, say {\tt example.com}, the Tor browser establishes
+After the user types in a domain, say example.com, the Tor browser establishes
 a connection to the SOCKS proxy exposed by the local Tor client.
 The Tor client then
-selects an exit relay whose exit policy supports {\tt example.com} and port 443.
+selects an exit relay whose exit policy supports example.com and port 443.
 Next, the client sends a \texttt{RELAY\_BEGIN} Tor cell to the exit relay,
-instructing it to first resolve {\tt example.com}, and then establish a TCP
+instructing it to first resolve example.com, and then establish a TCP
 connection to the resolved
 address at port 443~\cite[\S~6.2]{tor-spec}.  After successfully establishing a
 connection, the exit relay responds with a \texttt{RELAY\_CONNECTED}
@@ -106,7 +106,7 @@ Exit relays send
 their DNS requests to the system resolver, which Linux systems read from
 \texttt{/etc/resolv.conf}.  Tor does not modify the system resolver and
 uses whatever the exit relay operator configured, such as the ISP's resolver,
-or public resolvers such as Google's public DNS resolver {\tt 8.8.8.8}.
+or public resolvers such as Google's public DNS resolver 8.8.8.8.
 As of August 2016, exit relays cache DNS responses to speed up repeated lookups.
 The caching layer for Tor clients, however, is off by default to prevent tracking attacks
 due to modified DNS responses~\cite{nolocalcache}.

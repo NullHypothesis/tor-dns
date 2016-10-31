@@ -10,13 +10,13 @@ We modified Tor Browser to not generate network traffic on launch
 updates, extensions, \etc), and we modified
 Tor (bundled with Tor Browser) to log incoming and outgoing cells.
 We then performed 100 downloads for each site in the Alexa top
-1k and one download for each site in the
+1,000 and one download for each site in the
 Alexa top (1k,101k]. We randomly distributed these measurement tasks
 to a Docker fleet; each download used a fresh circuit without
 guard relay, and a fresh copy of Tor Browser for up to 60 seconds,
 in line with the recommendations by Wang and Goldberg~\cite[\S~4]{Wang2013a}.
-We cached Tor's network consensus to avoid causing excessive load on the
-network.  We considered the measurement to be successful if we managed to
+We cached Tor's network consensus to minimize load on the
+network.  We labeled a measurement as successful if we managed to
 resolve the domain of the site; we did not prune our dataset further, neglecting
 issues like CloudFlare CAPTCHAs, outliers, control cells, and localized
 domains~\cite{Juarez2014a}.  Presumably, this means that we will underestimate
@@ -27,8 +27,8 @@ attacks~\cite{Wang2013a}.
 We perform ten-fold cross-validation for all of our experiments in the open
 world setting, monitoring 1,000 sites with 100 instances each, and
 100,000 unmonitored sites.
-Note the 1:1 ratio between monitored traces and unmonitored traces,
-ensuring that for the classifier there is equal probability in the testing
+The 1:1 ratio between monitored traces and unmonitored traces is to
+ensure that for the classifier there is equal probability in the testing
 phase that a trace is a monitored or unmonitored site.
 In other words, the \emph{base rate} is 0.5 in our experiments.
 Furthermore, for all experiments we specify the starting Alexa rank of the
@@ -40,14 +40,14 @@ We always use the same sample data for website fingerprinting.
 %monitor Alexa from rank 100 means that Alexa sites [101,1100] are monitored,
 %and Alexa [1,100] and [1101,10100] unmonitored.
 %We never monitor an unmonitored site or vice versa.
-How popular monitored sites
-are is a key factor in the effectiveness of our attacks.
+The popularity of monitored sites
+is a key factor in the effectiveness of our attacks.
 % note: base rate is per user, while popularity in Alexa for DNS observations
 % is world-wide
 
-Figure~\ref{fig:fpt:torpct} shows the recall and precision for our \name
+Figure~\ref{fig:fpt:torpct} shows the recall and precision of our \name
 attacks as a function of the percentage of observed Tor exit bandwidth by the
-attacker monitoring Alexa sites for sites whose ranks are 10,000 or less.
+attacker monitoring Alexa sites for sites whose ranks is 10,000 or less.
 For recall, both \texttt{ctw} and \texttt{hp} are bound by the
 percentage of exit bandwidth observed by the attacker (the percentage is an
 upper bound).
@@ -56,12 +56,12 @@ the attacker does not see. At 100\% of exit bandwidth, \texttt{ctw} sees
 better recall than \texttt{wf}. For \texttt{hp} the results suggest that:
 \begin{equation}
 	\label{eq:hprecall}
-	\textnormal{recall}_{\texttt{hp}} = \textnormal{recall}_{\texttt{wf}} * \textnormal{pct}
+	\textnormal{recall}_{\texttt{hp}} = \textnormal{recall}_{\texttt{wf}} * \textnormal{pct}.
 \end{equation}
-The above relationship only holds when observing DNS requests gives
+This relationship only holds when observing DNS requests gives
 a clear advantage to \texttt{hp} in terms of precision over \texttt{wf} (see
 the following paragraph).
-For precision the \texttt{hp} attack has an immediate gain over \texttt{wf} as
+For precision, the \texttt{hp} attack has an immediate gain over \texttt{wf} as
 soon as the attacker can observe {\it any exit bandwidth}.
 Although the \texttt{hp} attack has near-perfect precision, the
 \texttt{ctw} attack benefits from observing increasingly more exit traffic,
@@ -97,8 +97,8 @@ precise attack with increased recall over a traditional \texttt{wf} attack.
 On the other hand, an attacker that can observe a small fraction of exit
 bandwidth can use the \texttt{hp} attack as a perfectly precise attack on
 relatively {unpopular} sites such as wikileaks.org, which had Alexa rank 10,808
-on April 15th 2016.  However, the recall will be low as observed in
-\ref{eq:hprecall}.
+on April 15, 2016.  However, Equation~\ref{eq:hprecall} suggests that 
+recall will be low.
 
 \begin{figure}[t]
 \centering
@@ -110,6 +110,42 @@ monitored sites for 100 percentage of exit bandwidth.}
 \end{figure}
 
 \subsection{Sensitivity analysis}
+
+To better understand the extent and limitations of our attacks, we
+now study the sensitivity of our \name attacks to website fingerprinting defenses,
+TTL clipping, the growth of the Tor network, and website popularity
+distribution.  In this section, we assume that an adversary can observe Tor
+exit relays representing 33\% of exit bandwidth (as observed on average
+by Google) and consider only precision (where we see clear gain from both our
+attacks).  Note that the following results largely also apply to weaker
+attackers that observe a smaller fraction of exit bandwidth for the \texttt{hp}
+attack, but that the \texttt{ctw} attack is more sensitive in terms of precision
+to different bandwidth fractions, as shown above.
+Unless stated otherwise, we \first perform our evaluation on websites starting
+from Alexa rank 10,000 upwards, \second use
+2,500 weight-learning rounds, \third have a 60-second window size, \fourth a Tor
+network scale of 1.0, and \fifth use the conservative power-law distribution
+from Section~\ref{sec:attack:pop}.
+
+
+
+\subsubsection{Effect of website fingerprinting defenses}
+
+The Tor Project is working on a website fingerprinting
+defense~\cite{adapativepadding}.
+Most defenses produce bandwidth and/or latency overhead, with a significant
+increase in overhead as the defense becomes stronger.
+For example, Juarez \ea
+observe an exponential increase in bandwidth overhead as the protection of the
+WTF-PAD defense increases~\cite[\S~4.3]{Juarez2016a}.
+The goal is to find an optimum that provides strong protection
+while keeping the overhead tolerable for Tor users.
+To approximate the effect of fingerprinting
+defenses on \name attacks, we use Wa-kNN with
+random weights and no weight-learning, which significantly reduces the
+effectiveness of the attack since some features (like indices of outgoing
+packets) are several orders of magnitude more useful
+than others~\cite{Juarez2016a}.
 
 \begin{figure}[t]
 \centering
@@ -136,53 +172,18 @@ power-law distribution (pc) with $\alpha=1.13$.}
 \label{fig:fpt:var}
 \end{figure}
 
-To better understand the extent and limitations of our attacks, we
-study the sensitivity of our results to website fingerprinting defenses,
-TTL clipping, the growth of the Tor network, and website popularity
-distribution.  In this section, we assume that an adversary can observe Tor
-exit relays representing 33\% of exit bandwidth (as observed on average
-by Google) and consider only precision (where we see clear gain from both our
-attacks).  Note that the following results largely apply also for weaker
-attackers that observe a smaller fraction of exit bandwidth for the \texttt{hp}
-attack, but that the \texttt{ctw} attack is more sensitive in terms of precision
-to different bandwidth fractions, as shown previously.
-Unless stated otherwise, we perform our evaluation on
-websites starting at Alexa rank 10,000 and proceeding through less
-popular websites, use 2,500 weight-learning rounds, have a 60-second window
-size, a Tor network scale of 1.0, and use the conservative power-law
-distribution from Section~\ref{sec:attack:pop}.
 
-
-
-\subsubsection{Effect of website fingerprinting defenses}
-
-Website fingerprinting defenses are being
-designed and discussed for deployment in Tor~\cite{adapativepadding}.
-The defenses produce bandwidth and/or latency overhead, with a significant
-increase in overhead as the defense becomes stronger.
-For example, Juarez \ea
-observe an exponential increase in bandwidth overhead as the protection of the
-defense WTF-PAD~\cite{Juarez2016a} increases.
-This leads to the goal of finding an optimum that provides strong protection
-while also keeping the overhead tolerable for Tor users.
-As a first attempt to approximate the effect of fingerprinting
-defenses on \name attacks, we use Wa-kNN with
-random weights and no weight-learning: this significantly reduces the
-effectiveness of the attack since some features (like indices of outgoing
-packets) are several orders of magnitude more useful
-than others~\cite{Juarez2016a}.
-
-Figure~\ref{fig:fpt:var:rounds} shows the effects of between 0 and 3,000
-rounds of weight-learning. At few to no rounds, the precision for the
+Figure~\ref{fig:fpt:var:rounds} shows the effect of weight-learning between 0
+and 3,000 rounds.  At few to no rounds, the precision for the
 \texttt{wf} attack is below 50\%---the classification is more likely to be wrong
 than right---while there is no impact on the \texttt{hp} attack and a relatively
 small decrease for the \texttt{ctw} attack.
-For recall (not shown in the figure), the bound and relationship is
+For recall, which is not shown in the figure, the bound and relationship is
 as in Equation~\ref{eq:hprecall}: for \texttt{wf}, at zero rounds, recall is
 0.055; for \texttt{hp} at zero rounds, recall is 0.019. These results suggest
 that for website fingerprinting defenses to be effective against \name attacks,
-the defense must be tuned to provide a low recall even when the parameters of
-website fingerprinting attacks are selected for high recall.
+the defense must be tuned to cause low recall even if the parameters of
+website fingerprinting attacks are optimized for high recall.
 
 \subsubsection{Effect of Tor's TTL clipping}
 
@@ -218,19 +219,19 @@ Min unique Tor & & $644.2\pm\phantom{00{,}}763.8$ \\ %& 60 & 1800 \\
 
 As discussed in Section~\ref{sec:attack:sim}, due to a bug in Tor, all exit
 relays cache DNS responses for 60 seconds, regardless of the DNS response's TTL.
-Therefore, a sliding window covering the last 60 seconds of all observed DNS
+Therefore, a sliding window covering the last 60 seconds of observed DNS
 requests suffices to capture all monitored sites through Tor (subject to the
 fraction of observed Tor exit bandwidth, and mapping DNS requests to sites).
 
 Table~\ref{tab:ttls} shows the TTL of DNS records in our Alexa top one million
-sites dataset from Section~\ref{sec:dns2site} for the
-TTL as-is (raw) and when clipped by Tor.
-(We emulate what the correct TTL values
-would be due to TTL clipping supposing that Tor eventually fixes the
-aforementioned bug.)  For each of these cases, we
+dataset from Section~\ref{sec:dns2site} both for the
+TTL as-is (raw) and when clipped (Tor).
+We calculate the intended values for TTL clipping, assuming that The Tor Project
+will fix the aforementioned bug.
+For each of these cases, we
 also consider TTLs for all unique domains, and for only the unique
-domain for each website with the lowest TTL.  About half of the sites on
-Alexa top one million has a unique domain with a TTL of 60 seconds or
+domain for each website with the lowest TTL.  About half of all sites on
+Alexa's top one million have a unique domain with a TTL of 60 seconds or
 less; 48\% of the raw unique TTLs are below 60 seconds and only 26\%
 above 30 minutes. Fixing the Tor clipping bug is therefore not
 sufficient; to mitigate \name attacks, the minimum TTL should be
@@ -242,7 +243,7 @@ attacker to monitor DNS lookups for a time interval equal to the maximum
 TTL of all unique domains for any monitored site.
 Figure~\ref{fig:fpt:var:window} shows the effect on precision for
 different time intervals from 60 seconds to 30 minutes (Tor's {\tt
-  MAX\_DNS\_ENTRY\_AGE} for keeping entries in an exit's DNS resolver
+MAX\_DNS\_ENTRY\_AGE} for keeping entries in an exit's DNS resolver
 cache), and for Alexa starting rank 10,000 and 100,000. For \texttt{ctw},
 the time interval has a significant effect on both Alexa starting ranks,
 while \texttt{hp} is only affected for sites ranked 10,000 or higher;
@@ -254,13 +255,14 @@ Figure~\ref{fig:fpt:var:scale} scales the size of the Tor network with
 respect to site
 visits from the estimated status quo to ten times its size, for Alexa starting rank 10,000 and
 100,000. At twice its current size, the impact on \name attacks is smaller than
-increasing the minimum TTL for DNS caching to three minutes as shown in
+increasing the minimum TTL for DNS caching to three minutes, as shown in
 Figure~\ref{fig:fpt:var:window}. These results indicate that \name
 attacks will remain
 practical for many sites in the Alexa top one million, even as the Tor network grows.
-In case we overestimated the current Tor network size in the analysis described
-in Section~\ref{sec:load-freq}, the \name attacks would have even higher
-precision, as shown by the values for scaling factors below 1.
+If we overestimated the current Tor network size in the analysis
+in Section~\ref{sec:load-freq}, our \name attacks would have even higher
+precision, as shown by the data points to the left of the gray line in
+Figure~\ref{fig:fpt:var:scale}.
 
 % limitation: webSITES, not wePAGES in our analysis + what we get from DNS.
 
@@ -294,5 +296,5 @@ The difference between the two power-law distributions is about one order of
 magnitude in terms of starting Alexa rank: the realistic distribution gets
 near perfect at 1,000 and the conservative at 10,000.
 We conclude that \name attacks are perfectly precise for unpopular sites
-where the probability that someone other than the target browses to a monitored
-site within the timeframe given by the window length is negligible.
+because it is unlikely that more than one person is browsing a monitored site
+within the timeframe determined by the window length.

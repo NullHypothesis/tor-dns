@@ -44,9 +44,9 @@ from ingress sniffing with
 DNS traffic observed by egress sniffing, creating \name attacks. Our attacks
 correlate the web\emph{sites} observed by the website fingerprinting attack in
 ingress traffic with
-the web\emph{sites} identified from DNS traffic.\footnote{Our work can be
-understood as DNS-enhanced traffic correlation attack, \emph{or} as DNS-enhanced
-website fingerprinting attack.}
+the web\emph{sites} identified from DNS traffic.%
+\footnote{Our work can be understood as DNS-enhanced traffic correlation attack,
+\emph{or} as DNS-enhanced website fingerprinting attack.}
 Next, we describe how we
 simulate the DNS traffic from Tor exits, how we map DNS requests to websites,
 and finally present our two \name attacks.
@@ -79,13 +79,14 @@ power-law distribution to be a good fit as neither a log-normal nor a
 power-law distribution with exponential cutoff (\ie, a truncated power-law
 distribution) offered significantly better fits.
 We used the Python {\tt powerlaw} package~\cite{Alstott2014a} for fitting and
-picked a power-law distribution with an $\alpha$ parameter of about $1.13$.
+picked a power-law distribution with an $\alpha$ parameter of $1.13$.
 When varying the fitting parameter $x_{min}$ that determines beyond which
 minimum value the power-law behavior should hold in the provided data, we can
 get different $\alpha$ values. We made a conservative choice of picking this
 smaller $\alpha$ value as it underestimates the popularity of popular websites
-and therefore is worse for the attacker.\footnote{Alexa's page-view numbers
-ignore multiple visits by the same user on the same day (see
+and therefore performs worse for the attacker.%
+\footnote{Alexa's page-view
+numbers ignore multiple visits by the same user on the same day (see
 \url{https://support.alexa.com/hc/en-us/articles/200449744}), so the ranking
 might be slightly off when modeling website visit patterns.}
 Thus, we use a power-law distribution to model what websites Tor users visit.
@@ -99,25 +100,24 @@ behavior later.
 
 \subsubsection{Modeling how often Tor users visit each site}
 \label{sec:load-freq}
-% phw's numbers extrapolated
-Next, we determine how many websites Tor users visit in a certain time span.
-We approximated this number by setting up an exit relay whose exit policy
-included only ports 80 and 443, so our relay would only forward web traffic.  We
-then used the tool {\tt tshark} to capture the timestamps of DNS requests---but
-no DNS responses.  We made sure that our {\tt tshark} filter did not capture
-packet payloads or headers, so we were unable to learn what websites Tor users
-were visiting.  In addition, we patched {\tt tshark} to log timestamps at a
+Next, we determine how many websites Tor users visit in a certain time span.  We
+approximated this number by setting up an exit relay whose exit policy included
+only the ports 80 and 443, so our relay would only forward web traffic.  We then
+used the tool {\tt tshark} to capture the timestamps of DNS requests---but no
+DNS responses.  We made sure that our {\tt tshark} filter did not capture packet
+payloads or headers, so we were unable to learn what websites Tor users were
+visiting.  In addition, we patched {\tt tshark} to log timestamps at a
 five-minute granularity. The coarse timing granularity allows us to publish this
 dataset with minimal privacy implications; Section~\ref{sec:ethics} discusses
 the ethical implications of this experiment in more detail.  We ran the
-experiment for approximately two weeks from May 15, 2016 to May 31, 2016, which
+experiment for two weeks, from May 15, 2016 to May 31, 2016, which
 allowed us to determine the number of DNS requests for 4,832 five-minute
 intervals.  Figure~\ref{fig:dns-reqs} shows this time series, but for clarity we
-only plot May 25, 2016.  The distribution's median is 105.
-The time series features several spikes; the most
-significant one counts 1,410 DNS requests.  We repeated the same experiment with
-the so-called \emph{reduced exit policy}\footnote{The reduced exit policy is
-	available online at
+only plot May 25, 2016.  The distribution's median is 105.  The time series
+features several spikes; the most significant one counts 1,410 DNS requests.  We
+repeated the same experiment with the so-called \emph{reduced exit
+policy}%
+\footnote{The reduced exit policy is available online at
 \url{https://trac.torproject.org/projects/tor/wiki/doc/ReducedExitPolicy}.}
 because it contains several dozen more ports and it is more popular among Tor
 relay operators; as of August 2016, it is used by 7.8\% of exit relays by
@@ -144,28 +144,24 @@ Section~\ref{sec:dns2site}) we know that one website visit causes outgoing DNS r
 taking into account Tor's caching of pending DNS requests, ensuring that multiple
 requests sent by clients for the same domain name only result in one outgoing request
 by the exit).
-This means that we had an average of about 23.2 website visits per ten
-minutes on our exit relay.  Assuming that the two main factors influencing the
-volume of DNS requests are a relay's \emph{bandwidth} and \emph{exit policy},
+This means that our exit relay saw an average of 23.2 website visits per ten
+minutes.  Assuming that the two main factors influencing the
+volume of DNS requests are a relay's \emph{bandwidth} and its \emph{exit policy},
 and having shown that the exit policy does not significantly impact
 the number of DNS requests, we can scale this number up to the whole Tor network
-using the provided bandwidth of exit relays.  In particular, we use the
-self-reported bandwidth information from Tor exit
-relays collected in the so-called extra-info descriptors available on
+using the self-reported bandwidth statistics of exit relays.  
+In particular, we use the
+bandwidth information reported in the extra-info descriptors that are available on
 CollecTor~\cite{collector} and estimate the number of website visits on
 each of the about 1,200 exit relays active at that time. The resulting average
-total number of websites visited through the Tor network is about 288,000
-websites per ten minutes. This number can, however, only be considered
-to be a rough estimate, as the interpolation is based on only one exit
-relay and the bandwidth data of the other exit relays is self-reported
-and might therefore be incorrect or incomplete. For instance, the result
-might under-estimate the size of the Tor network if not all exit relays
-published their complete bandwidth statistics for the considered
-two-week period.
+number of websites visited through the Tor network is 288,000
+per ten minutes. However, this number is merely an estimate because the
+interpolation is based on a single exit relay, and the bandwidth data of exit
+relays is self-reported and might therefore be incorrect.
 
-Recently, Jansen and Johnson~\cite{Jansen2016a} measured that the average number
+Recently, Jansen and Johnson measured that the average number
 of active web (port 80 and 443) circuits in Tor amounts to about 700,000 per ten
-minutes.
+minutes~\cite[\S~5.3]{Jansen2016a}.
 Tor Browser, The Tor Project's fork of Firefox, builds one circuit per
 website entered in the URL bar. How long the circuit remains active depends on
 Tor Browser settings (primarily {\tt MaxCircuitDirtiness} currently set to ten
@@ -185,34 +181,35 @@ of websites visited through the Tor network per ten minutes. This is a
 conservative choice as more website visits increase the anonymity set of
 websites possibly visited by a Tor user---and therefore reduces the
 information an attacker can gain from observed DNS traffic.
-In later sections we revisit the implications of our choice by both
-scaling the Tor network up to ten-times its estimated size, and scaling
-it down to the size of 288,000 website visits per ten minutes that we
+Later, we revisit the implications of our choice by both
+scaling the Tor network \emph{up} to ten times its estimated size, and scaling
+it \emph{down} to the size of 288,000 website visits per ten minutes that we
 got from our own interpolation described above.
 
 \subsubsection{Modeling the effects of DNS caching at Tor exits}
-To analyze which DNS requests the adversary can see, we need to
-take caching of DNS responses into account. We ignore client-side DNS
+To learn what DNS requests the adversary can see, we need to
+take into account caching of DNS responses.  We ignore client-side DNS
 caching since it is disabled by default, as described in
 Section~\ref{sec:background}.
 % From Tobias: I manually could not get Firefox to cache anything,
 % not even between pageloads on the same site (went to kau.se, waited 20s,
 % then clicked on a link: little tor client-side still got a DNS response
 % from the exit for kau.se.)
-On the exit relays, which perform DNS resolution on behalf of Tor clients,
-caching is relevant because all Tor clients using the same exit relay share its
-cache.  An exit relay maintains its own DNS cache%
+Exit relays, however, do cache DNS requests and we take it into account
+because all Tor clients using the same exit relay share its
+cache.  In addition to their resolver's cache, exit relays maintain their own
+DNS cache%
 \footnote{The code is available online at \url{https://gitweb.torproject.org/tor.git/tree/src/or/dns.c?id=tor-0.2.9.1-alpha}.}
-(in addition to the cache of its DNS resolver) and enforces a minimum TTL of 60
+and enforce a minimum TTL of 60
 seconds and a maximum TTL of 30 minutes.%
 \footnote{The code is available online at \url{https://gitweb.torproject.org/tor.git/tree/src/or/dns.c?id=tor-0.2.9.1-alpha\#n209}.}
-We refer to this as Tor's \emph{TTL clipping}. However, due to a bug in the
-source code that we identified,%
+We refer to this as Tor's \emph{TTL clipping}. However, due to a bug
+that we identified,%
 \footnote{The bug report is available online at \url{https://bugs.torproject.org/19025}.}
 the TTL of all DNS responses is set to 60 seconds.
 
-If a Tor client attempts to resolve a domain that an exit relay already has in
-its cache, the adversary will be unable to observe this request.  However, the
+If a Tor client attempts to resolve a domain that an exit relay has cached,
+the adversary will be unable to observe this request.  However, the
 adversary can record all observed DNS requests over the past $x$
 seconds, where $x$ is the maximum TTL value (\ie, maintain a sliding window of
 length $x$).  If a Tor client
@@ -220,9 +217,8 @@ is attempting to resolve a domain name, the request is either cached or not.  If
 it is not cached, the adversary will see it as a new, outgoing DNS request from
 the exit relay. If it is cached, it must have been resolved by the exit relay in
 the last $x$ seconds, and will therefore be in the sliding window.  The sliding
-window technique allows the attacker to account for all potentially relevant
-DNS requests, regardless of if they are cached or not at Tor exits.
-
+window technique allows the attacker to capture all relevant
+DNS requests, regardless of if they are cached or not.
 We assume that an adversary applies this sliding window technique and models the
 observable DNS traffic accordingly.  The attacker observes a fraction of Tor's exit
 bandwidth for a specific window length, and together with our website visit
@@ -236,34 +232,34 @@ to many different exits with individual caches.
 \subsection{Inferring website visits from DNS requests}
 \label{sec:dns2site}
 
-Given a sliding window of DNS requests, we investigate how this information can
+Given a sliding window full of DNS requests, we investigate how this information can
 help determine whether a user has visited a website of interest.  In April 2016,
 we visited the Alexa top one million websites five times, and collected all DNS
 requests that each visit of a website's frontpage generated.  We refer to the
 data collected for one visit as a \emph{sample}.  We performed these
-measurements in five rounds from a university network, where each round browsed
-all one million websites in a random order before visiting the same website
+measurements in five rounds from Karlstad University.  Each round browsed
+all one million websites in random order before visiting the same website
 again. We used Tor Browser~5.5.4 and configured it {\em not to browse over Tor}:
 Tor Browser ensures that the browser behavior is identical to a Tor Browser user
-over Tor. By not using Tor, we can bypass IP blacklists and CAPTCHAs that are
-triggered by IP addresses of exit relays~\cite{Khattak2016a}.
+over Tor. By not using Tor, we can bypass IP blacklists and CAPTCHAs that Tor
+users are frequently struggling with.
 Table~\ref{tab:dns-censor} shows the percentage of websites in our dataset that
 are hosted by CloudFlare or Akamai.  We might not be able to access these
-websites programatically over Tor as they block or filter exit relays, as
-identified by Khattak \ea~\cite{Khattak2016a}. We also include Google, which is
+websites programatically over Tor because they block or filter exit relays, as
+identified by Khattak \ea~\cite{Khattak2016a}.  We also include Google, which is
 prevalent in our dataset and restricts access to Tor users for Google's search.
 
 \begin{table}[t]
-	\renewcommand{\tabcaptext}{The percentage of websites on Alexa top-1 million websites using providers
-	involved in censoring or restricting access from
-        Tor~\protect\cite{Khattak2016a}.}
-      \topcap{\tabcaptext}
+	\renewcommand{\tabcaptext}{The percentage of websites in Alexa's top 1
+	million that use providers that restrict access from
+	Tor~\protect\cite{Khattak2016a}.}
+	\topcap{\tabcaptext}
 	\centering
 	\begin{tabular}{l r}
 	\toprule
 	\textbf{Description} & \textbf{Percentage} \\
 	\midrule
-	Website behind CloudFlare IP & 6.44 \\
+	Website behind CloudFlare IP address & 6.44 \\
 	Domain on website uses CloudFlare & 25.81 \\
 	Domain on website uses Akamai & 33.86 \\
 	Domain on website uses Google & 77.43 \\
@@ -278,15 +274,14 @@ requests. The dataset contains 2,260,534 domains that are unique to a particular
 website, \ie, are not embedded on any other top million site; we call these
 domains {\em unique domains}. Unique domains are particularly interesting
 because they reveal to the adversary what sites among the top million the user
-has visited.  This is not possible for domains such as {\tt youtube.com}, simply
+has visited.  This is not possible for domains such as youtube.com, simply
 because many websites embed YouTube videos.  Figure~\ref{fig:unique-domains}
 shows the fraction of sites with unique domains for websites up to Alexa's top
 one million.  We grouped all domains into 1,000 consecutive, non-overlapping
 bins of size 1,000.  For 96.8\% of all sites on the Alexa top one million there
 exists at least one unique domain.  Interestingly, more popular websites are
 less likely to have a unique domain associated with them: only 77\% of the first
-bin---the most popular 1,000 domains---contain at least one unique domain,
-significantly less than the rest of the data.
+bin---the most popular 1,000 domains---contain at least one unique domain.
 
 Table~\ref{tab:dns-domains} shows summary statistics for the number of domains
 per website. At least half of the sites have ten domains per website, two of
@@ -337,29 +332,30 @@ evaluation, we monitor the Alexa top 500,000 with five samples each and
 consider 433,000 unmonitored sites.  The number of unmonitored sites is
 determined by our power-law
 distribution to represent a realistic base rate (for the entire Tor network)
-for evaluating our classifier: on average, for sites on Alexa top 500,000
-to be visited 2.5 million times there will be about 433,000 visits to sites
-outside of Alexa top 500,000.  Our classifier does not take into account the
+for evaluating our classifier: on average, for sites in the Alexa top 500,000
+to be visited 2.5 million times, there will be about 433,000 visits to sites
+outside of Alexa's top 500,000.  Our classifier does not take into account the
 popularity of websites.
 The open-world evaluation yields a
-recall of 0.947 for a precision of 0.984.  By accounting for the order
-of requests, per-exit partitioning of DNS requests, TTLs, and website
+recall of 0.947 for a precision of 0.984.  By accounting for request order,
+per-exit partitioning of DNS requests, TTLs, and website
 popularity, we expect that classifying website visits from DNS requests
-might be made even more accurate.
-Further, a closed world is a realistic setting:
+can be made even more accurate.
+Further, a closed world is realistic in our setting:
 determining the DNS requests made by all 173 million active websites on the
 Internet is practical, even with modest resources.
 We use the conservative open world results when simulating the Tor network and
 the attacker's success in mapping DNS requests to websites.
-We conclude from our results that observing DNS requests coming out of Tor is
-almost as effective at identifying websites as observing the web traffic
-itself.
+We conclude that for the purpose of identifying websites,
+observing DNS requests coming out of Tor is almost as effective as observing the
+web traffic itself.
 
 \subsection{Classifiers for \name attacks}
 
-We use Wa-kNN from Wang \ea~\cite{Wang2014a} (described in
-Section~\ref{sec:background}) and a list of sites derived from
-observing DNS requests to implement two \name attacks:
+We extend Wa-kNN from Wang \ea~\cite{Wang2014a} (described in
+Section~\ref{sec:background}) by having it take as input a list of sites
+derived from observing DNS requests.  In particular, we implement two \name
+attacks:
 
 \begin{description}
 	\item[\texttt{ctw}] We ``close the world''
@@ -374,12 +370,12 @@ observing DNS requests to implement two \name attacks:
 These approaches apply to any website fingerprinting attack. The
 \texttt{ctw} attack increases the effectiveness of conventional website
 fingerprinting attacks by making them more akin to a closed-world setting,
-where websites have known fingerprints and often the world is of limited size.
+where websites have known fingerprints and the world is often of limited size.
 Conceptually, the attack could also include
 a custom weight-learning run---training only on observed sites---but our initial
-results noted little to no gain, despite significant increases in
+results showed little to no gain, despite significant increases in
 testing time.
-We expect that this is due to the fact that some features of traffic traces are
+We assume that this is due to the fact that some features of traffic traces are
 more useful than others, regardless of the training data~\cite{Hayes2016a}.
 The \texttt{hp} attack only produces a positive classification if both ingress
 and egress traffic are consistent, resulting in a simple but effective

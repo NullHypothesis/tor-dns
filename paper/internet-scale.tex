@@ -81,13 +81,13 @@ Having placed simulated Tor clients into ASes, we now model their activity over
 Tor (see ``Usage models'' in Figure~\ref{fig:simulations}).  We model each
 client to have visited several websites every day in March 2016.\footnote{We
 modeled our client behavior off of the ``Typical'' model that Johnson
-\ea~\cite[\S~5.1.2]{Johnson2013a} used.}  At 9 a.m. EST, the client visits {\tt
-mail.google.com} and {\tt www.twitter.com}.  At 12 p.m. EST, the client visits
-{\tt calendar.google.com} and {\tt docs.google.com}. At 3 p.m. EST, the client
-visits {\tt www.facebook.com} and {\tt www.instagram.com}.  Finally, at 6 p.m.
-EST, the client visits {\tt www.google.com}, {\tt www.startpage.com}, and {\tt
-www.ixquick.com}, and at 6:20 p.m. EST, the client visits {\tt www.google.com},
-{\tt www.startpage.com}, and {\tt www.ixquick.com} again. Each of the 100,000
+\ea~\cite[\S~5.1.2]{Johnson2013a} used.}  At 9 a.m. EST, the client visits
+mail.google.com and www.twitter.com.  At 12 p.m. EST, the client visits
+calendar.google.com and docs.google.com. At 3 p.m. EST, the client
+visits www.facebook.com and www.instagram.com.  Finally, at 6 p.m.
+EST, the client visits www.google.com, www.startpage.com, and
+www.ixquick.com, and at 6:20 p.m. EST, the client visits www.google.com,
+www.startpage.com, and www.ixquick.com again. Each of the 100,000
 simulated Tor clients thus had $12 \cdot 31 = 372$ opportunities to be
 compromised given 31 days and 12 site visits per day.  TorPS provided a new
 circuit every ten minutes, regardless of how many distinct connections the
@@ -101,8 +101,8 @@ window.
 
 For simplicity, we assume that only one DNS request occurs every time a client
 visits a site. For example, in our model, at 9 a.m. one DNS request will occur
-for {\tt mail.google.com} and one DNS request will occur for {\tt
-www.twitter.com}. At 6 p.m. three DNS requests will occur, and at 6:20 p.m.
+for mail.google.com and one DNS request will occur for
+www.twitter.com. At 6 p.m. three DNS requests will occur, and at 6:20 p.m.
 those same three DNS requests will occur again.   For now, we do not take
 embedded requests (\ie for embedded website content such as YouTube videos) or
 caching into account.
@@ -180,7 +180,7 @@ traceroutes, simulating four different DNS configurations:
 	\item \emph{Google DNS:} This scenario represents an exit relay using
 		Google's public resolver.  To measure the AS path, we perform
 		traceroutes from a RIPE Atlas node in the AS of the exit relay to
-		Google's public DNS resolver, \ie, {\tt 8.8.8.8}.
+		Google's public DNS resolver, \ie, 8.8.8.8.
 
 	\item \emph{Local DNS:} To measure the paths that would be traversed if an
 		exit relay were running its own, local resolver (\eg, the popular

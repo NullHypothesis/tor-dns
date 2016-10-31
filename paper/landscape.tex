@@ -23,22 +23,22 @@ number of ASes that DNS queries traverse versus the
 number of ASes subsequent web traffic traverses.
 
 We quantify the {\em exposure} of DNS traffic versus TCP traffic as follows.  We
-begin with Alexa's Top 1,000~\cite{alexatop1k}, a list of the 1,000 most popular
+begin with Alexa's top 1,000~\cite{alexatop1k}, a list of the 1,000 most popular
 web sites as estimated by Alexa.  For each site, we conducted two
 experiments.  First, we ran a TCP traceroute to the site, targeting port 80 to
 mimic web traffic.  Second, we determined the DNS delegation path for the
 website's DNS name using the {\tt dig} command's \texttt{+trace} feature.  The
-delegation path of a domain name, say {\tt www.example.com}, is a hierarchy of
-authoritative DNS servers, such as the authoritative server for {\tt .com}
-pointing to the authoritative server for {\tt example.com}, which in turn points
-to the authoritative server responsible for {\tt www.example.com}.  We also ran
+delegation path of a domain name, say www.example.com, is a hierarchy of
+authoritative DNS servers, such as the authoritative server for .com
+pointing to the authoritative server for example.com, which in turn points
+to the authoritative server responsible for www.example.com.  We also ran
 UDP traceroutes to each server in the delegation path, targeting port 53 to
 mimic DNS resolution.\footnote{The tool we developed for this purpose is
 available online at \url{https://github.com/NullHypothesis/ddptr}.}
 For both experiments, we then mapped all IP addresses in the traceroutes to AS
 numbers~\cite{ipasn}, generating both a set of traversed ASes for DNS traceroutes
 ($\mathcal{D}$) and a set of traversed ASes for web traceroutes
-($\mathcal{W}$).  Given these two sets for each of Alexa's Top
+($\mathcal{W}$).  Given these two sets for each of Alexa's top
 1,000, we compute the fraction of ASes that are \emph{only}
 traversed for DNS traffic, but \emph{not} for web traffic ($\lambda$):
 
@@ -55,7 +55,7 @@ increases.  For example, if $\mathcal{D} = \{1,2,3\}$ and $\mathcal{W} =
 \frac{|\{1,2,3\} \setminus \{2,3,4\}|}{|\{1,2,3\} \cup \{2,3,4\}|} =
 \frac{|\{1\}|}{|\{1,2,3,4\}|} =
 \frac{1}{4} =
-0.25$.  We determined $\lambda$ for each site in the Alexa Top 1,000 from five
+0.25$.  We determined $\lambda$ for each site in the Alexa top 1,000 from five
 autonomous systems in three countries.\footnote{The ASes are: OVH (France),
 Gandi (France), Karlstad University (Sweden), Princeton University (U.S.), and
 Comcast (U.S.).} One of our vantage points, the French OVH, is the most popular
@@ -68,13 +68,13 @@ of which succeeded, and 227 (4.5\%) failed.
 	\centering
 	\includegraphics[width=0.7\linewidth]{figures/dns-exposure.pdf}
 	\caption{Five box plots capturing the AS exposure metric $\lambda$ for
-		Alexa's Top 1,000 web sites.  The box plots represent five autonomous
+		Alexa's top 1,000 web sites.  The box plots represent five autonomous
 		systems in three countries.}
 	\label{fig:exposure}
 \end{figure}
 
 The result is illustrated in Figure~\ref{fig:exposure}, which shows five box
-plots capturing $\lambda$ values for Alexa's Top 1,000 sites.  The median of
+plots capturing $\lambda$ values for Alexa's top 1,000 sites.  The median of
 all 4,773 $\lambda$ values is 0.571, so for half of all runs, DNS-only ASes
 account for 57\% or more of all traversed ASes.  This result only applies to
 exit relays that do their own DNS resolution; for relays that use a third-party
@@ -110,12 +110,12 @@ exit relay, to a DNS server under our control.  Figure~\ref{fig:dnsenum}
 illustrates this experiment.  To improve reliability, we configured {\tt
 exitmap} to use two-hop circuits instead of the standard three-hop circuits.
 The first hop was a guard relay under our control.  Over each exit relay, we
-resolved a unique domain {\tt PREFIX.tor.nymity.ch}.  The prefix consisted of
+resolved a unique domain PREFIX.tor.nymity.ch.  The prefix consisted of
 the relay's unique 160-bit fingerprint, concatenated to a random 40-bit string
 whose purpose is to prevent caching, so exit relays indeed resolve each query
 instead of responding with a cached element.  We controlled the authoritative
-DNS server of {\tt tor.nymity.ch}, so we could capture both the IP address and
-packet content of every single query for {\tt tor.nymity.ch}.
+DNS server of tor.nymity.ch, so we could capture both the IP address and
+packet content of every single query for tor.nymity.ch.
 
 \begin{figure}[t]
 	\centering
@@ -146,7 +146,7 @@ the following two challenges:
 \item {\em DNS proxies:}
 We found that several exit relays used DNS
 proxies---machines that passed on DNS requests to an actual resolver
-instead of resolving it themselves.  Google's server {\tt 8.8.8.8} is a popular
+instead of resolving it themselves.  Google's server 8.8.8.8 is a popular
 example of a DNS proxy;
 several dozen machines perform resolution in the
 background~\cite{google-proxies}.  DNS proxies do
@@ -225,8 +225,8 @@ resolvers were located in the networks of Vodafone, Germany (95\%), MTNL, India
 \paragraph{0x20 encoding}
 Resolvers can further reduce the chance of cache poisoning by employing
 {\tt 0x20} encoding (\ie, randomizing the capitalization of domain
-names).  For example, to resolve {\tt foo.com}, a resolver would send a
-request for {\tt fOo.CoM}.  If the DNS response does not reflect the
+names).  For example, to resolve foo.com, a resolver would send a
+request for fOo.CoM.  If the DNS response does not reflect the
 randomly chosen capitalization, the resolver considers unauthentic.  We
 classify a resolver as ``uses {\tt 0x20}'' if it has at least one
 lowercase and one uppercase character.  Again, there is a chance of
@@ -242,8 +242,8 @@ query.  The top five resolvers were located in the networks of Google, U.S.
 \paragraph{DNSSEC validation}
 We can verify whether a resolver is validating DNSSEC-signed records by resolving a
 domain whose signature is deliberately malformed; 
-{\tt dnssec-failed.org} provides such a service.  A validating resolver
+dnssec-failed.org provides such a service.  A validating resolver
 would not return an {\tt A} record while
-a non-validating resolver would.  Therefore, we send an {\tt A} query {\tt dnssec-failed.org} via
+a non-validating resolver would.  Therefore, we send an {\tt A} query dnssec-failed.org via
 all exit relays and check whether we receive an response
 \fi
