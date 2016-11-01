@@ -1653,7 +1653,7 @@
 \def\refname{References}
 \def\indexname{Index}
 \def\figurename{Fig.}
-\def\tablename{TABLE}
+\def\tablename{Tab.}
 \@IEEEcompsocconfonly{\def\figurename{Figure}\def\tablename{Table}}
 \def\partname{Part}
 \def\appendixname{Appendix}
@@ -1848,7 +1848,7 @@
 \ifCLASSOPTIONcompsoc
 \def\thetable{\arabic{table}}
 \else
-\def\thetable{\@Roman\c@table}
+\def\thetable{\arabic{table}}
 \fi
 \def\fps@table{tbp}
 \def\ftype@table{2}
