@@ -118,7 +118,7 @@ traceroutes'' in Figure~\ref{fig:simulations}).  We decided against the commonly
 applied AS path inference because Juen \ea showed that it can be quite
 inaccurate~\cite{Juen2015a}.  Traceroutes, in contrast, yield significantly more
 accurate paths, but are difficult to run from Tor relays:  Past work involved
-asking relay operators to run traceroutes for the
+asking relay operators to run traceroutes on behalf of the
 researchers~\cite[\S~4]{Juen2015a}.  This approach yielded traceroutes from
 relays representing 26\% of exit bandwidth, but does not scale well.  Instead of
 running traceroutes from Tor relays, we leverage the RIPE Atlas~\cite{atlas}
@@ -132,14 +132,15 @@ the same AS as exit relays, to each of the destinations in question.
 Table~\ref{tab:atlas-coverage} shows that for a day in May 2016, we found that
 RIPE Atlas had probes in 52\% of ASes that contain exit relays, and in 51\% of
 ASes that contain Tor guard relays.  More importantly, we found that Atlas ASes
-cover 58\% of exit \emph{bandwidth} and 74\% of guard bandwidth.  This statistic
-is important given that Tor clients select relays weighted by their bandwidth,
-and the bandwidth of Tor relays is not uniformly distributed.  Given the growth
-of both Tor and Atlas, we expect these numbers to increase in the future.  In
-addition to Atlas, we also considered using PlanetLab~\cite{planetlab} to
-initiate traceroutes, but unfortunately most PlanetLab nodes are located in
-research and education networks~\cite{Banerjee2004a}, and are thus not
-well-suited for performing our measurements.
+cover 58\% of exit \emph{bandwidth} and 74\% of guard \emph{bandwidth}.  This
+statistic is important given that Tor clients select relays weighted by their
+bandwidth, and the bandwidth of Tor relays is not uniformly distributed.  Given
+the growth of both Tor and Atlas, we expect these numbers to increase in the
+future.  In addition to Atlas, we also considered using
+PlanetLab~\cite{planetlab} to initiate traceroutes, but unfortunately most
+PlanetLab nodes are located in research and education
+networks~\cite{Banerjee2004a}, and are thus not suited for performing our
+measurements.
 
 % - 197 out of all 377 (52%) Tor exit ASes have Atlas probes.
 % - 220 out of all 434 (51%) Tor guard ASes have Atlas probes.
@@ -190,7 +191,7 @@ traceroutes, simulating four different DNS configurations:
 		delegation path, and performed traceroutes to those IP addresses.
 
 	\item \emph{Status quo:} This scenario represents the state of the Tor
-		network as of March 2016, a combination of the above configurations.
+		network as of March 2016, a combination of the above three configurations.
 		Recall that in Section~\ref{sec:mapping-resolvers}, we determined
 		the IP addresses of the resolvers that exit relays use.  We ran
 		traceroutes to these very IP addresses.  For the exit relays that used
@@ -211,15 +212,16 @@ expect those events to be relatively unlikely for the time period and IP
 prefixes that we are concerned with.
 
 \subsubsection{Putting it all together}
-Like Johnson \ea~\cite[\S~4.2]{Johnson2013a}, we consider two security metrics;
+We consider the same two security metrics that Johnson
+\ea~\cite[\S~4.2]{Johnson2013a} originally proposed;
 we aim to estimate \first the fraction of compromised streams per simulated Tor
 user, and \second the amount of time it would take for the first compromise to
 occur.  For both metrics, we consider the four DNS configurations outlined
 above.  Our simulation can reveal the respective average threat that a given DNS
 configuration poses for Tor users.
 
-The traceroutes described in the previous section yielded two sets of ASes, one
-from the Tor users' ASes to their guard relays, and one from approximately half
+Each traceroutes run yielded two sets of ASes, one
+from the Tor clients' ASes to their guard relays, and one from approximately half
 of the exit relays' ASes to the different destinations, which depend on the exit
 relays' DNS configurations.  We intersect both AS sets (the ``ingress'' and
 ``egress'' hops of Figure~\ref{fig:simulations}) and classify a website visit as
@@ -227,8 +229,8 @@ compromised if the intersection is non-empty.  As stated earlier, for some exit
 relays we did not have associated AS-level paths to a particular destination,
 either due to a lack of co-located RIPE Atlas probes, or because of missing
 traceroute information.  In these cases, we checked if the exit AS had the
-potential to launch an attack, and if not, the stream was considered to be
-uncompromised in order to err on the conservative side.
+potential to launch an attack by itself, and if not, we labelled the stream
+as uncompromised to err on the conservative side.
 %we first searched for AS compromises between the ingress
 %AS-level path and the AS of the exit relay (just like the \emph{ISP DNS} configuration
 %above), and if there was no compromise, the stream is considered  before treating that
@@ -240,7 +242,7 @@ compromised for every simulated user out of a possible maximum of 372. To
 compute the time until first compromise, we determined the first stream in which
 the user was compromised, took its timestamp, and calculated the offset from the
 beginning of March 1, 2016.  For users that were not compromised during the
-month of March, we assigned a maximum value of 31 days as the time until first
+month of March, we assigned the maximum value of 31 days as the time until first
 compromise, which is reflected in the plots in our next section.  Users who were
 compromised immediately would have a value of 0, signifying that they were
 compromised at the very beginning of March 1.
@@ -270,17 +272,19 @@ Figures~\ref{fig:compromised-streams} and~\ref{fig:time-until-compromise}
 illustrate our results as box plots.  Each figure contains four subfigures, one
 for each DNS configuration.  Each box plot contains five rows, one for each Tor
 client AS.  For clarity, we did not plot any outliers beyond the box whiskers.
-Both figures show that the ``ISP DNS only'' setup is the safest for Tor users,
-\ie, it exhibits on average the least number of compromised streams while also
-on average counting the most days until compromise.  This setup is closely
-followed by ``Google DNS only,'' the status quo, and finally ``Local DNS only,''
-which fares worse than all other setups.  We expected ``ISP DNS only'' to do
-best because if all exit relays use their ISP's resolvers, there is only one AS
-to contend with on the egress side---the exit relay's.  The Google setup fares
-similarly well most likely because of Google's heavily anycast infrastructure
-which minimizes the number of AS hops.  The status quo does significantly better
-than the ``Local DNS'' results, presumably because only around 12\% of Tor exit
-relays actually do their own resolution.  The wide variance observed in
+For the fraction of compromised streams, an ideal setup has its median at 0.
+For the time until first compromise, an ideal median is 31.  Both figures show
+that the ``ISP DNS only'' setup is the safest for Tor users, \ie, it exhibits on
+average the least number of compromised streams while also on average counting
+the most days until compromise.  This setup is closely followed by ``Google DNS
+only,'' the status quo, and finally ``Local DNS only,'' which fares worse than
+all other setups.  We expected ``ISP DNS only'' to do best because if all exit
+relays use their ISP's resolvers, there is only one AS to contend with on the
+egress side---the exit relay's.  The Google setup fares similarly well; most
+likely because of Google's heavily anycast infrastructure which minimizes the
+number of AS hops.  The status quo does significantly better than the ``Local
+DNS'' results, presumably because only around 12\% of Tor exit relays actually
+do their own resolution.  The large variance observed in
 Figure~\ref{fig:time-until-compromise} for ``ISP DNS'' and ``Google DNS'' is due
 to using 31 days as a placeholder for simulated clients who were never
 compromised.  However, a safe configuration against AS-level adversaries, which
@@ -292,17 +296,11 @@ users.  We will explore this trade-off in greater detail in
 Section~\ref{sec:discussion}.
 
 Interestingly, we find differences in our five client ASes.  These differences
-are particularly striking in Figure~\ref{fig:time-until-compromise}.  %For
-%example, for ``Google DNS only'' and ``ISP DNS only,''  the median time until
-%compromise differs by more than 10 days between UK, and RU or FR.  In general,
-%UK and US users are doing better than users in RU, FR, and DE for these two
-%setups.  
-For example, for ``Google DNS only,'' the median time until compromise 
-differs by around 7 days between DE and UK and around 8 days between 
-DE and FR. For ``ISP DNS only,'' the median time until compromise differs by 
-around 6 days between US and DE and around 5 days between US and FR.  
-Also, we notice that DE fares worse than the others in the 
-``Google DNS only'' scenario 
-and better than the others in the ``ISP DNS only'' scenario.  
-We conclude that the location of Tor clients matters and should be
-considered in future traffic correlation studies.
+are particularly striking in Figure~\ref{fig:time-until-compromise}.  For
+``Google DNS only,'' the median time until compromise differs by around seven
+days between DE and UK, and around eight days between DE and FR.  For ``ISP DNS
+only,'' the median time until compromise differs by around six days between US
+and DE, and around five days between US and FR.  Also, we notice that DE fares
+worse than the others in the ``Google DNS only'' scenario and better than the
+others in the ``ISP DNS only'' scenario.  We conclude that the location of Tor
+clients matters and should be considered in future traffic correlation studies.

@@ -2,14 +2,14 @@
 \label{sec:discussion}
 
 In this section, we briefly discuss the ethics of our research and
-possible ways to defend against \name attacks.
+ways to defend against \name attacks.
 
 \subsection{Ethical considerations}
 \label{sec:ethics}
 
-Section~\ref{sec:load-freq} discusses how we set up an exit relay to
+In Section~\ref{sec:load-freq}, we discussed setting up an exit relay to
 determine the number of DNS requests per five minute interval.  Since
-our exit relay was forwarding traffic of real Tor users, we contacted Princeton
+our exit relay was forwarding traffic of Tor users, we contacted Princeton
 University's institutional review board (IRB) before running the
 experiment.  Our IRB deemed that this research did not fall within the
 realm of human subjects research.  In addition to contacting our IRB, we
@@ -35,11 +35,11 @@ not comprehensive, and we defer a more detailed analysis to future work.
 \subsubsection{Short-term solutions}
 \label{sec:short-term}
 
-Operators of exit relays face a dilemma: they must either operate their own
+Exit relay operators face a dilemma: they must either operate their own
 resolver, which exposes DNS queries to network adversaries; or, they must use a
 third-party DNS resolver, which exposes DNS queries to a third party.  Clearly,
 the goal is to minimize exposure of DNS requests, but there are several
-dimensions to this.  In lieu of substantial DNS protocol improvements, we can
+dimensions to this.  In lieu of substantial DNS protocol improvements, we
 envision three extreme design points, in which \emph{all} exit relays use \first
 Google's DNS resolver; \second their own, local resolver; or \third the resolver
 provided by their ISP.
@@ -61,20 +61,20 @@ Finally, all exit relays could simply use their ISP-provided resolver.  This
 would minimize the network exposure of DNS requests as resolvers are frequently
 in the same AS as exit relays, and AS-level adversaries would be unable to
 distinguish between DNS requests from exit relays and unrelated ISP customers.
-This setup introduces the possibility of misconfigured and censored DNS
+However, this setup introduces the possibility of misconfigured and censored DNS
 resolvers~\cite[\S~4.1]{Winter2014b}.  Besides, just a few ASes---OVH, for
 example---host a disproportionate amount of exit relays, turning them into the
-centralized data sinks that Tor aims to avoid.
+very centralized data sinks that Tor aims to avoid.
 
 Considering the above, we believe that exit relay operators should avoid public
 resolvers such as Google and OpenDNS.  Instead, they should either use the
 resolvers provided by their ISP, or run their own, particularly if the
 operator's ISP already hosts many other exit relays.  Local resolvers can
-further be optimized to minimize information leakage, by (for example) enabling
+further be configured to minimize information leakage, by enabling
 QNAME minimization~\cite{Bortzmeyer2016a}.  There likely is a measurable
-performance difference between a local and Google's resolver, but we believe
-that this difference pales in comparison to other performance issues in Tor such
-as head-of-line blocking.
+performance difference between a local resolver and Google's resolver, but we
+believe that this difference pales in comparison to other performance issues in
+Tor such as head-of-line blocking.
 
 \iffalse
 In addition to making recommendations to exit relay operators, we can remotely
@@ -106,14 +106,14 @@ relays and their resolvers.  Finally, site operators whose users are
 particularly concerned about safety should offer an onion service as an
 alternative.  Facebook, for example, set up facebookcorewwwi.onion.  When
 connecting to the onion service, Tor users never leave the Tor network, and
-hence do not need DNS (as long as the onion service does not embed non-onion
-service content).
+hence do not need DNS---as long as the onion service does not embed non-onion
+service content.
 
 Deploying defenses against website fingerprinting attacks in Tor should be an
 important long-term goal, as well.
 Although growing the Tor network will help defend against \name attacks to some
 degree, the most important change is to
-deploy defenses against these attacks in the first place.  Since \name attacks
+deploy defenses against these attacks.  Since \name attacks
 significantly increase precision of website fingerprinting attacks, defenses
 should be designed to significantly reduce the recall of website fingerprinting
 attacks, even when the website fingerprinting attack is configured to sacrifice
